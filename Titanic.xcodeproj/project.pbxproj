@@ -1,0 +1,595 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B52403D40000798E84 /* AppDelegate.swift */; };
+		2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B72403D40000798E84 /* SceneDelegate.swift */; };
+		2978B8BA2403D40000798E84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B92403D40000798E84 /* ViewController.swift */; };
+		2978B8BD2403D40000798E84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2978B8BB2403D40000798E84 /* Main.storyboard */; };
+		2978B8BF2403D40100798E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2978B8BE2403D40100798E84 /* Assets.xcassets */; };
+		2978B8C22403D40100798E84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2978B8C02403D40100798E84 /* LaunchScreen.storyboard */; };
+		2978B8CD2403D40100798E84 /* TitanicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8CC2403D40100798E84 /* TitanicTests.swift */; };
+		2978B8D82403D40100798E84 /* TitanicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8D72403D40100798E84 /* TitanicUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2978B8C92403D40100798E84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2978B8AA2403D40000798E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2978B8B12403D40000798E84;
+			remoteInfo = Titanic;
+		};
+		2978B8D42403D40100798E84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2978B8AA2403D40000798E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2978B8B12403D40000798E84;
+			remoteInfo = Titanic;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2978B8B22403D40000798E84 /* Titanic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Titanic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2978B8B52403D40000798E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2978B8B72403D40000798E84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2978B8B92403D40000798E84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2978B8BC2403D40000798E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2978B8BE2403D40100798E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2978B8C12403D40100798E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2978B8C32403D40100798E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2978B8C82403D40100798E84 /* TitanicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TitanicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2978B8CC2403D40100798E84 /* TitanicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicTests.swift; sourceTree = "<group>"; };
+		2978B8CE2403D40100798E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2978B8D32403D40100798E84 /* TitanicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TitanicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2978B8D72403D40100798E84 /* TitanicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicUITests.swift; sourceTree = "<group>"; };
+		2978B8D92403D40100798E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2978B8AF2403D40000798E84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2978B8C52403D40100798E84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2978B8D02403D40100798E84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2978B8A92403D40000798E84 = {
+			isa = PBXGroup;
+			children = (
+				2978B8B42403D40000798E84 /* Titanic */,
+				2978B8CB2403D40100798E84 /* TitanicTests */,
+				2978B8D62403D40100798E84 /* TitanicUITests */,
+				2978B8B32403D40000798E84 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2978B8B32403D40000798E84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2978B8B22403D40000798E84 /* Titanic.app */,
+				2978B8C82403D40100798E84 /* TitanicTests.xctest */,
+				2978B8D32403D40100798E84 /* TitanicUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2978B8B42403D40000798E84 /* Titanic */ = {
+			isa = PBXGroup;
+			children = (
+				2978B8B52403D40000798E84 /* AppDelegate.swift */,
+				2978B8B72403D40000798E84 /* SceneDelegate.swift */,
+				2978B8B92403D40000798E84 /* ViewController.swift */,
+				2978B8BB2403D40000798E84 /* Main.storyboard */,
+				2978B8BE2403D40100798E84 /* Assets.xcassets */,
+				2978B8C02403D40100798E84 /* LaunchScreen.storyboard */,
+				2978B8C32403D40100798E84 /* Info.plist */,
+			);
+			path = Titanic;
+			sourceTree = "<group>";
+		};
+		2978B8CB2403D40100798E84 /* TitanicTests */ = {
+			isa = PBXGroup;
+			children = (
+				2978B8CC2403D40100798E84 /* TitanicTests.swift */,
+				2978B8CE2403D40100798E84 /* Info.plist */,
+			);
+			path = TitanicTests;
+			sourceTree = "<group>";
+		};
+		2978B8D62403D40100798E84 /* TitanicUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2978B8D72403D40100798E84 /* TitanicUITests.swift */,
+				2978B8D92403D40100798E84 /* Info.plist */,
+			);
+			path = TitanicUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2978B8B12403D40000798E84 /* Titanic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2978B8DC2403D40100798E84 /* Build configuration list for PBXNativeTarget "Titanic" */;
+			buildPhases = (
+				2978B8AE2403D40000798E84 /* Sources */,
+				2978B8AF2403D40000798E84 /* Frameworks */,
+				2978B8B02403D40000798E84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Titanic;
+			productName = Titanic;
+			productReference = 2978B8B22403D40000798E84 /* Titanic.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2978B8C72403D40100798E84 /* TitanicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2978B8DF2403D40100798E84 /* Build configuration list for PBXNativeTarget "TitanicTests" */;
+			buildPhases = (
+				2978B8C42403D40100798E84 /* Sources */,
+				2978B8C52403D40100798E84 /* Frameworks */,
+				2978B8C62403D40100798E84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2978B8CA2403D40100798E84 /* PBXTargetDependency */,
+			);
+			name = TitanicTests;
+			productName = TitanicTests;
+			productReference = 2978B8C82403D40100798E84 /* TitanicTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2978B8D22403D40100798E84 /* TitanicUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2978B8E22403D40100798E84 /* Build configuration list for PBXNativeTarget "TitanicUITests" */;
+			buildPhases = (
+				2978B8CF2403D40100798E84 /* Sources */,
+				2978B8D02403D40100798E84 /* Frameworks */,
+				2978B8D12403D40100798E84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2978B8D52403D40100798E84 /* PBXTargetDependency */,
+			);
+			name = TitanicUITests;
+			productName = TitanicUITests;
+			productReference = 2978B8D32403D40100798E84 /* TitanicUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2978B8AA2403D40000798E84 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = maikdrop;
+				TargetAttributes = {
+					2978B8B12403D40000798E84 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					2978B8C72403D40100798E84 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 2978B8B12403D40000798E84;
+					};
+					2978B8D22403D40100798E84 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 2978B8B12403D40000798E84;
+					};
+				};
+			};
+			buildConfigurationList = 2978B8AD2403D40000798E84 /* Build configuration list for PBXProject "Titanic" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2978B8A92403D40000798E84;
+			productRefGroup = 2978B8B32403D40000798E84 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2978B8B12403D40000798E84 /* Titanic */,
+				2978B8C72403D40100798E84 /* TitanicTests */,
+				2978B8D22403D40100798E84 /* TitanicUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2978B8B02403D40000798E84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2978B8C22403D40100798E84 /* LaunchScreen.storyboard in Resources */,
+				2978B8BF2403D40100798E84 /* Assets.xcassets in Resources */,
+				2978B8BD2403D40000798E84 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2978B8C62403D40100798E84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2978B8D12403D40100798E84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2978B8AE2403D40000798E84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2978B8BA2403D40000798E84 /* ViewController.swift in Sources */,
+				2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */,
+				2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2978B8C42403D40100798E84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2978B8CD2403D40100798E84 /* TitanicTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2978B8CF2403D40100798E84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2978B8D82403D40100798E84 /* TitanicUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2978B8CA2403D40100798E84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2978B8B12403D40000798E84 /* Titanic */;
+			targetProxy = 2978B8C92403D40100798E84 /* PBXContainerItemProxy */;
+		};
+		2978B8D52403D40100798E84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2978B8B12403D40000798E84 /* Titanic */;
+			targetProxy = 2978B8D42403D40100798E84 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2978B8BB2403D40000798E84 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2978B8BC2403D40000798E84 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2978B8C02403D40100798E84 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2978B8C12403D40100798E84 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2978B8DA2403D40100798E84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2978B8DB2403D40100798E84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2978B8DD2403D40100798E84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7FESQ389Q;
+				INFOPLIST_FILE = Titanic/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.Titanic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2978B8DE2403D40100798E84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7FESQ389Q;
+				INFOPLIST_FILE = Titanic/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.Titanic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2978B8E02403D40100798E84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7FESQ389Q;
+				INFOPLIST_FILE = TitanicTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.TitanicTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Titanic.app/Titanic";
+			};
+			name = Debug;
+		};
+		2978B8E12403D40100798E84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7FESQ389Q;
+				INFOPLIST_FILE = TitanicTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.TitanicTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Titanic.app/Titanic";
+			};
+			name = Release;
+		};
+		2978B8E32403D40100798E84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7FESQ389Q;
+				INFOPLIST_FILE = TitanicUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.TitanicUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Titanic;
+			};
+			name = Debug;
+		};
+		2978B8E42403D40100798E84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7FESQ389Q;
+				INFOPLIST_FILE = TitanicUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.TitanicUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Titanic;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2978B8AD2403D40000798E84 /* Build configuration list for PBXProject "Titanic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2978B8DA2403D40100798E84 /* Debug */,
+				2978B8DB2403D40100798E84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2978B8DC2403D40100798E84 /* Build configuration list for PBXNativeTarget "Titanic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2978B8DD2403D40100798E84 /* Debug */,
+				2978B8DE2403D40100798E84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2978B8DF2403D40100798E84 /* Build configuration list for PBXNativeTarget "TitanicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2978B8E02403D40100798E84 /* Debug */,
+				2978B8E12403D40100798E84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2978B8E22403D40100798E84 /* Build configuration list for PBXNativeTarget "TitanicUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2978B8E32403D40100798E84 /* Debug */,
+				2978B8E42403D40100798E84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2978B8AA2403D40000798E84 /* Project object */;
+}
