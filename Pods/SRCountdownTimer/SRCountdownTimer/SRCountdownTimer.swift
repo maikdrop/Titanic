@@ -153,7 +153,7 @@ public class SRCountdownTimer: UIView {
         timer?.invalidate()
         timer = Timer(timeInterval: fireInterval, target: self, selector: #selector(SRCountdownTimer.timerFired(_:)), userInfo: nil, repeats: true)
 
-        RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
+        RunLoop.main.add(timer!, forMode: .commonModes)
 
         delegate?.timerDidStart?()
     }
