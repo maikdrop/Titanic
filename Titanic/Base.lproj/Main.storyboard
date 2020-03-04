@@ -47,7 +47,7 @@
                                 <segue destination="6mC-3C-6Iz" kind="show" id="4Hm-dY-c5K"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" image="list.number" catalog="system" id="Jel-ET-1Lu">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="list.number" catalog="system" id="Jel-ET-1Lu">
                             <connections>
                                 <segue destination="vdO-rH-npa" kind="show" id="kPb-IG-lzB"/>
                             </connections>
@@ -56,7 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BY-O0-m3X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1009" y="-40"/>
+            <point key="canvasLocation" x="1007" y="-84"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="hXp-qu-gis">
@@ -195,7 +195,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lcb-IO-m4b">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
