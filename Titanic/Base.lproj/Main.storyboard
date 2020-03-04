@@ -111,17 +111,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NJX-mp-ADV">
-                                <rect key="frame" x="369" y="93" width="25" height="24"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Je-TJ-jkZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="25" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="df9-26-EQo">
                                 <rect key="frame" x="20" y="93" width="77.5" height="86"/>
                                 <subviews>
@@ -149,30 +138,54 @@
                                 <rect key="frame" x="38" y="772" width="338" height="31"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCY-eq-eLJ" customClass="SRCountdownTimer" customModule="SRCountdownTimer">
+                                <rect key="frame" x="344" y="111" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="RWa-TS-BWO"/>
+                                    <constraint firstAttribute="height" constant="50" id="mcn-9d-faU"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trailLineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isLabelHidden" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="labelTextColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="timerFinishingText" value="End"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="df9-26-EQo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="08v-yp-r5G"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dCY-eq-eLJ" secondAttribute="trailing" constant="20" id="6Tl-Uz-cwL"/>
                             <constraint firstItem="9h6-Di-rMR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="9i9-54-5Eq"/>
-                            <constraint firstItem="NJX-mp-ADV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="E2K-ui-mid"/>
+                            <constraint firstItem="dCY-eq-eLJ" firstAttribute="centerY" secondItem="df9-26-EQo" secondAttribute="centerY" id="Skf-Td-94U"/>
                             <constraint firstItem="df9-26-EQo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="bYg-qo-71x"/>
                             <constraint firstItem="9h6-Di-rMR" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="nWm-ag-RAD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NJX-mp-ADV" secondAttribute="trailing" constant="20" id="vpH-Ip-qed"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9h6-Di-rMR" secondAttribute="bottom" constant="60" id="xd8-x7-WlM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Q4R-IL-1jI"/>
                     <connections>
+                        <outlet property="countdownTimerLabl" destination="dCY-eq-eLJ" id="Hbw-Rx-hav"/>
                         <outlet property="crashCounterLbl" destination="MGy-0C-31y" id="zdX-52-qLU"/>
                         <outlet property="knotsLbl" destination="jL4-DK-PVy" id="6Ku-to-DQB"/>
                         <outlet property="milesLbl" destination="SdQ-Kt-BJ3" id="7zd-ac-g3C"/>
-                        <outlet property="timerLbl" destination="3Je-TJ-jkZ" id="841-ct-hOV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="-26"/>
+            <point key="canvasLocation" x="1957.9710144927537" y="-26.116071428571427"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8wi-gQ-Bmx">

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SRCountdownTimer
 
 class GameViewController: UIViewController {
     
@@ -17,9 +18,8 @@ class GameViewController: UIViewController {
    
     @IBOutlet weak var crashCounterLbl: UILabel!
     
-    @IBOutlet weak var timerLbl: UILabel!
+    @IBOutlet weak var countdownTimerLabl: SRCountdownTimer!
     
- 
     private var game: Titanic! {
         didSet{
             updateViewFromModel()
