@@ -183,7 +183,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="countdownTimerLabl" destination="dCY-eq-eLJ" id="Hbw-Rx-hav"/>
+                        <outlet property="countdownTimerLabl" destination="dCY-eq-eLJ" id="hC9-1m-sqk"/>
                         <outlet property="crashCounterLbl" destination="MGy-0C-31y" id="zdX-52-qLU"/>
                         <outlet property="knotsLbl" destination="jL4-DK-PVy" id="6Ku-to-DQB"/>
                         <outlet property="milesLbl" destination="SdQ-Kt-BJ3" id="7zd-ac-g3C"/>

@@ -25,11 +25,11 @@
 import UIKit
 
 @objc public protocol SRCountdownTimerDelegate: class {
-    @objc optional func timerDidUpdateCounterValue(newValue: Int)
-    @objc optional func timerDidStart()
-    @objc optional func timerDidPause()
-    @objc optional func timerDidResume()
-    @objc optional func timerDidEnd()
+    @objc optional func timerDidUpdateCounterValue(sender: SRCountdownTimer, newValue: Int)
+    @objc optional func timerDidStart(sender: SRCountdownTimer)
+    @objc optional func timerDidPause(sender: SRCountdownTimer)
+    @objc optional func timerDidResume(sender: SRCountdownTimer)
+    @objc optional func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval)
 }
 
 public class SRCountdownTimer: UIView {
@@ -46,6 +46,7 @@ public class SRCountdownTimer: UIView {
     
     // use minutes and seconds for presentation
     public var useMinutesAndSecondsRepresentation = false
+    public var moveClockWise = true
 
     private var timer: Timer?
     private var beginingValue: Int = 1
@@ -78,12 +79,17 @@ public class SRCountdownTimer: UIView {
                     if useMinutesAndSecondsRepresentation {
                         counterLabel.text = getMinutesAndSeconds(remainingSeconds: currentCounterValue)
                     } else {
+                        // label and circle customization for the last ten seconds
+                        if currentCounterValue == 10 {
+                            lineColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+                            counterLabel.textColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+                        }
                         counterLabel.text = "\(currentCounterValue)"
                     }
                 }
             }
 
-            delegate?.timerDidUpdateCounterValue?(newValue: currentCounterValue)
+            delegate?.timerDidUpdateCounterValue?(sender: self, newValue: currentCounterValue)
         }
     }
 
@@ -108,8 +114,15 @@ public class SRCountdownTimer: UIView {
 
         let context = UIGraphicsGetCurrentContext()
         let radius = (rect.width - lineWidth) / 2
-        let currentAngle = CGFloat((.pi * 2 * elapsedTime) / totalTime)
-
+        
+        var currentAngle : CGFloat!
+        
+        if moveClockWise {
+            currentAngle = CGFloat((.pi * 2 * elapsedTime) / totalTime)
+        } else {
+            currentAngle = CGFloat(-(.pi * 2 * elapsedTime) / totalTime)
+        }
+    
         context?.setLineWidth(lineWidth)
 
         // Main line
@@ -153,9 +166,9 @@ public class SRCountdownTimer: UIView {
         timer?.invalidate()
         timer = Timer(timeInterval: fireInterval, target: self, selector: #selector(SRCountdownTimer.timerFired(_:)), userInfo: nil, repeats: true)
 
-        RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
+        RunLoop.main.add(timer!, forMode: .common)
 
-        delegate?.timerDidStart?()
+        delegate?.timerDidStart?(sender: self)
     }
 
     /**
@@ -164,7 +177,7 @@ public class SRCountdownTimer: UIView {
     public func pause() {
         timer?.fireDate = Date.distantFuture
 
-        delegate?.timerDidPause?()
+        delegate?.timerDidPause?(sender: self)
     }
 
     /**
@@ -173,7 +186,17 @@ public class SRCountdownTimer: UIView {
     public func resume() {
         timer?.fireDate = Date()
 
-        delegate?.timerDidResume?()
+        delegate?.timerDidResume?(sender: self)
+    }
+
+    /**
+     * Reset the timer
+     */
+    public func reset() {
+        self.currentCounterValue = 0
+        timer?.invalidate()
+        self.elapsedTime = 0
+        setNeedsDisplay()
     }
     
     /**
@@ -183,7 +206,7 @@ public class SRCountdownTimer: UIView {
         self.currentCounterValue = 0
         timer?.invalidate()
         
-        delegate?.timerDidEnd?()
+        delegate?.timerDidEnd?(sender: self, elapsedTime: elapsedTime)
     }
     
     /**
@@ -200,7 +223,7 @@ public class SRCountdownTimer: UIView {
     @objc private func timerFired(_ timer: Timer) {
         elapsedTime += fireInterval
 
-        if elapsedTime < totalTime {
+        if elapsedTime <= totalTime {
             setNeedsDisplay()
 
             let computedCounterValue = beginingValue - Int(elapsedTime / interval)

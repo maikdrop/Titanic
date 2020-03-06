@@ -58,6 +58,7 @@ class GameViewController: UIViewController, SRCountdownTimerDelegate {
         
     }
     
+   
     @IBOutlet weak var countdownTimerLabl: SRCountdownTimer!
     
     
@@ -73,6 +74,7 @@ class GameViewController: UIViewController, SRCountdownTimerDelegate {
         super.viewDidLoad()
         countdownTimerLabl.delegate = self
         countdownTimerLabl.start(beginingValue: 60)
+      
         //TODO
         setupIcebergs()
         //
@@ -92,11 +94,7 @@ class GameViewController: UIViewController, SRCountdownTimerDelegate {
     
      func timerDidUpdateCounterValue(newValue: Int) {
 //        print("TEST")
-//        if newValue == 55 {
-//            countdownTimerLabl.end()
-//            countdownTimerLabl.labelTextColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-//            countdownTimerLabl.start(beginingValue: 54)
-//        }
+
     }
     
    

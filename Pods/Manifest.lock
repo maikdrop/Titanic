@@ -2,15 +2,20 @@ PODS:
   - SRCountdownTimer (1.1)
 
 DEPENDENCIES:
-  - SRCountdownTimer
+  - SRCountdownTimer (from `https://github.com/maikdrop/SRCountdownTimer.git`)
 
-SPEC REPOS:
-  trunk:
-    - SRCountdownTimer
+EXTERNAL SOURCES:
+  SRCountdownTimer:
+    :git: https://github.com/maikdrop/SRCountdownTimer.git
+
+CHECKOUT OPTIONS:
+  SRCountdownTimer:
+    :commit: fbd2594a7a79d79375cc7f5f71b30e923badde58
+    :git: https://github.com/maikdrop/SRCountdownTimer.git
 
 SPEC CHECKSUMS:
-  SRCountdownTimer: 9c92e444b5403c92f01dd6610299b8c634bc8562
+  SRCountdownTimer: 2c98c7ea04301f9b29b3fab51917b1b5481685bb
 
-PODFILE CHECKSUM: 3411ae1784ab22e5afb5352c50fa4bcd812e25d4
+PODFILE CHECKSUM: 98beba1ec6b2b065dfb7cb49049a61361b252f34
 
 COCOAPODS: 1.9.0
