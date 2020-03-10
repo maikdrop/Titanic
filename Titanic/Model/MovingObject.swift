@@ -1,5 +1,5 @@
 //
-//  Iceberg.swift
+//  MovingObject.swift
 //  Titanic
 //
 //  Created by Maik on 01.03.20.
@@ -11,16 +11,32 @@ import Foundation
 struct Point {
     var x = 0.0, y = 0.0
 }
+
+extension Point: Hashable, Comparable {
+    static func == (lhs: Point, rhs: Point) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y
+    }
+    
+    static func < (lhs: Point, rhs: Point) -> Bool {
+        return (lhs.x < rhs.x) && (lhs.y < rhs.y)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(x)
+        hasher.combine(y)
+    }
+}
+
 struct Size {
     var width = 0.0, height = 0.0
 }
 
-struct Iceberg {
+struct MovingObject {
     
-    private var origin: Point
-    private var size: Size
+    var origin = Point()
+    var size = Size()
     var isHidden = false
-    var collosionWithShip = false
+    var hadCollosion = false
     
     var center: Point {
         get {
@@ -32,10 +48,5 @@ struct Iceberg {
             origin.x = newCenter.x - (size.width / 2)
             origin.y = newCenter.y - (size.height / 2)
         }
-    }
-    
-    init(origin: Point, size: Size) {
-        self.origin = Point()
-        self.size = Size()
     }
 }

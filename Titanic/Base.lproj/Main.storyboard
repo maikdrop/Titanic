@@ -162,6 +162,12 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="timerFinishingText" value="End"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-D4-3QK">
+                                <rect key="frame" x="207" y="475" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -169,6 +175,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dCY-eq-eLJ" secondAttribute="trailing" constant="5" id="6Tl-Uz-cwL"/>
                             <constraint firstItem="9h6-Di-rMR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="9i9-54-5Eq"/>
                             <constraint firstItem="dCY-eq-eLJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="SSt-ai-2YU"/>
+                            <constraint firstItem="vUB-D4-3QK" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Tgt-Qc-ooq"/>
+                            <constraint firstItem="vUB-D4-3QK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Xvm-nO-hoi"/>
                             <constraint firstItem="df9-26-EQo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="bYg-qo-71x"/>
                             <constraint firstItem="9h6-Di-rMR" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="nWm-ag-RAD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9h6-Di-rMR" secondAttribute="bottom" constant="60" id="xd8-x7-WlM"/>
@@ -187,6 +195,7 @@
                         <outlet property="crashCounterLbl" destination="MGy-0C-31y" id="zdX-52-qLU"/>
                         <outlet property="knotsLbl" destination="jL4-DK-PVy" id="6Ku-to-DQB"/>
                         <outlet property="milesLbl" destination="SdQ-Kt-BJ3" id="7zd-ac-g3C"/>
+                        <outlet property="startSequenceLbl" destination="vUB-D4-3QK" id="1iL-O3-Egr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

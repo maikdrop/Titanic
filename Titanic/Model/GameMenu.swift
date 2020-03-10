@@ -24,9 +24,4 @@ struct GameMenu {
     static func getGameStatus(from menuItem: String) -> GameStatus? {
         return menuDict[menuItem]
     }
-    
-    
-    
-    
-    
 }

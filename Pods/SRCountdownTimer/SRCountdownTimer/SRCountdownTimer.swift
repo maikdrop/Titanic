@@ -47,6 +47,9 @@ public class SRCountdownTimer: UIView {
     // use minutes and seconds for presentation
     public var useMinutesAndSecondsRepresentation = false
     public var moveClockWise = true
+    
+    // label and circle customization for the last seconds
+    private var lastSecondsReminderCount = 0
 
     private var timer: Timer?
     private var beginingValue: Int = 1
@@ -79,8 +82,8 @@ public class SRCountdownTimer: UIView {
                     if useMinutesAndSecondsRepresentation {
                         counterLabel.text = getMinutesAndSeconds(remainingSeconds: currentCounterValue)
                     } else {
-                        // label and circle customization for the last ten seconds
-                        if currentCounterValue == 10 {
+                        //MARK: Customization - counterLabelColor and circleLineColor set to red for the last seconds
+                        if currentCounterValue == lastSecondsReminderCount && lastSecondsReminderCount != 0 {
                             lineColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
                             counterLabel.textColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
                         }
@@ -155,9 +158,13 @@ public class SRCountdownTimer: UIView {
      *   - beginingValue: Value to start countdown from.
      *   - interval: Interval between reducing the counter(1 second by default)
      */
-    public func start(beginingValue: Int, interval: TimeInterval = 1) {
+    public func start(beginingValue: Int, interval: TimeInterval = 1, lastSecondsReminderCount: Int = 0) {
         self.beginingValue = beginingValue
         self.interval = interval
+        self.lastSecondsReminderCount = lastSecondsReminderCount
+        //MARK: Customization - counterLabelColor and circleLineColor alyways set to white before a new timer starts
+        self.counterLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        self.lineColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 
         totalTime = TimeInterval(beginingValue) * interval
         elapsedTime = 0
