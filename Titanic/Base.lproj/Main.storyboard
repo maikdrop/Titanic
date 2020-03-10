@@ -135,7 +135,7 @@
                                 </subviews>
                             </stackView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9h6-Di-rMR">
-                                <rect key="frame" x="38" y="772" width="338" height="31"/>
+                                <rect key="frame" x="38" y="782" width="338" height="31"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </slider>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCY-eq-eLJ" customClass="SRCountdownTimer" customModule="SRCountdownTimer">
@@ -159,7 +159,6 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="labelTextColor">
                                         <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="timerFinishingText" value="End"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-D4-3QK">
@@ -179,22 +178,23 @@
                             <constraint firstItem="vUB-D4-3QK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Xvm-nO-hoi"/>
                             <constraint firstItem="df9-26-EQo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="bYg-qo-71x"/>
                             <constraint firstItem="9h6-Di-rMR" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="nWm-ag-RAD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9h6-Di-rMR" secondAttribute="bottom" constant="60" id="xd8-x7-WlM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9h6-Di-rMR" secondAttribute="bottom" constant="50" id="xd8-x7-WlM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Q4R-IL-1jI">
-                        <barButtonItem key="rightBarButtonItem" image="chevron.down" catalog="system" id="HK5-fe-ziC">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="chevron.down" catalog="system" id="HK5-fe-ziC">
                             <connections>
                                 <action selector="showPopoverMenu:" destination="BYZ-38-t0r" id="2cF-cp-6hI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="countdownTimerLabl" destination="dCY-eq-eLJ" id="hC9-1m-sqk"/>
+                        <outlet property="countdownTimer" destination="dCY-eq-eLJ" id="7KK-OC-4GV"/>
                         <outlet property="crashCounterLbl" destination="MGy-0C-31y" id="zdX-52-qLU"/>
                         <outlet property="knotsLbl" destination="jL4-DK-PVy" id="6Ku-to-DQB"/>
                         <outlet property="milesLbl" destination="SdQ-Kt-BJ3" id="7zd-ac-g3C"/>
+                        <outlet property="popoverMenuBtn" destination="HK5-fe-ziC" id="JDh-cm-7wK"/>
                         <outlet property="startSequenceLbl" destination="vUB-D4-3QK" id="1iL-O3-Egr"/>
                     </connections>
                 </viewController>

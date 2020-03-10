@@ -16,7 +16,9 @@ class MenuTableViewController: UITableViewController {
     
     var gameStatus: GameStatus? = nil {
         didSet {
-            menuItems = GameMenu(gameStatus: gameStatus!).menuItems
+            if let gameStatus = self.gameStatus {
+                  menuItems = GameMenu(gameStatus: gameStatus).menuItems
+            }
         }
     }
     

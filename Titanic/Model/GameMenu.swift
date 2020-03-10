@@ -11,13 +11,13 @@ import Foundation
 struct GameMenu {
     
     private(set) var menuItems: [String]
-    private static var menuDict: [String:GameStatus] = ["New":.running, "Pause":.paused, "Resume":.resumed, "Cancel":.canceled]
+    private static var menuDict: [String:GameStatus] = ["New":.running, "Pause":.paused, "Resume":.resumed, "Cancel":.canceled, "End":.end]
     
     init(gameStatus: GameStatus) {
         switch gameStatus {
-        case .running, .resumed: menuItems = ["New", "Pause", "Cancel"]
-        case .paused: menuItems = ["New", "Resume", "Cancel"]
-        case .canceled: menuItems = ["New"]
+            case .running, .resumed: menuItems = ["New", "Pause", "Cancel"]
+            case .paused: menuItems = ["New", "Resume", "Cancel"]
+            case .canceled, .end: menuItems = ["New"]
         }
     }
     

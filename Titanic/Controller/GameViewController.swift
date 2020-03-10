@@ -14,6 +14,7 @@ enum GameStatus {
     case paused
     case resumed
     case canceled
+    case end
 }
 
 class GameViewController: UIViewController {
@@ -24,16 +25,19 @@ class GameViewController: UIViewController {
             switch gameStatus {
             //TODO
             case .running:
-                print("running")
                 beginStartSequence()
             //game = Titanic(numberOfIcebergs: 10, at: <#T##[Point]#>, with: <#T##[Size]#>)
-            case .paused: print("paused")
-            //timer.stop()
-            case .resumed: print("resumed")
-            //timer.play()
-            case .canceled: print("canceled")
-                //invalidate timers
-                //resetGame
+            case .paused:
+                countdownTimer.pause()
+                changeTextOfSequenceLabel(to: "Paused")
+            case .resumed:
+                countdownTimer.resume()
+                changeTextOfSequenceLabel(to: "")
+            case .canceled:
+                countdownTimer.reset()
+                changeTextOfSequenceLabel(to: "")
+            case .end:
+                changeTextOfSequenceLabel(to: "End")
             }
         }
     }
@@ -45,6 +49,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var crashCounterLbl: UILabel!
     
     @IBOutlet weak var startSequenceLbl: UILabel!
+    
+    @IBOutlet weak var popoverMenuBtn: UIBarButtonItem!
     
     @IBAction func showPopoverMenu(_ sender: UIBarButtonItem) {
         let storyboard : UIStoryboard = UIStoryboard(name: MAIN, bundle: nil)
@@ -61,11 +67,8 @@ class GameViewController: UIViewController {
         }
         
     }
-    
-    
-    @IBOutlet weak var countdownTimerLabl: SRCountdownTimer!
-    
-    
+ 
+    @IBOutlet weak var countdownTimer: SRCountdownTimer!
     
     private var game: Titanic! {
         didSet{
@@ -76,7 +79,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        countdownTimerLabl.delegate = self
+        countdownTimer.delegate = self
         beginStartSequence()
         
         //TODO
@@ -92,20 +95,20 @@ class GameViewController: UIViewController {
         
     }
     
-    private func resetGame() {
+    private func resetUI() {
         
     }
     
     func beginStartSequence()  {
-        startSequenceLbl.isHidden = false
+        self.popoverMenuBtn.isEnabled = true
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             self?.startSequenceTime -= 1
             if(self?.startSequenceTime == 0){
-                self?.startSequenceLbl.isHidden = true
                 self?.startSequenceLbl.text = ""
                 self?.startSequenceTime = 5
                 timer.invalidate()
-                self?.countdownTimerLabl.start(beginingValue: 20, lastSecondsReminderCount: 10)
+                self?.popoverMenuBtn.isEnabled = true
+                self?.countdownTimer.start(beginingValue: 20, lastSecondsReminderCount: 10)
             } else if (self?.startSequenceTime == 1) {
                 self?.startSequenceLbl.text = "GO"
             } else if let remainingSeconds = self?.startSequenceTime {
@@ -113,6 +116,11 @@ class GameViewController: UIViewController {
             }
         }
     }
+    
+    func changeTextOfSequenceLabel(to newText: String) {
+        startSequenceLbl.text = newText
+    }
+        
 }
 
 extension GameViewController: MenuDelegate {
@@ -140,6 +148,6 @@ extension GameViewController: SRCountdownTimerDelegate {
     }
     
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        
+        self.gameStatus = .end
     }
 }
