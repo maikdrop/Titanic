@@ -20,6 +20,12 @@ enum GameStatus {
 class GameViewController: UIViewController {
     
     private var startSequenceTime = 5
+    private var shipView = UIImageView()
+    private var game: Titanic! {
+        didSet{
+            updateViewFromModel()
+        }
+    }
     private var gameStatus: GameStatus = .running {
         didSet {
             switch gameStatus {
@@ -41,9 +47,8 @@ class GameViewController: UIViewController {
             }
         }
     }
-    
     @IBOutlet weak var knotsLbl: UILabel!
-    
+
     @IBOutlet weak var milesLbl: UILabel!
     
     @IBOutlet weak var crashCounterLbl: UILabel!
@@ -65,30 +70,42 @@ class GameViewController: UIViewController {
                 present(vc, animated: true)
             }
         }
-        
     }
  
     @IBOutlet weak var countdownTimer: SRCountdownTimer!
     
-    private var game: Titanic! {
-        didSet{
-            updateViewFromModel()
-        }
+    @IBAction func moveShip(_ sender: UISlider) {
+        // Breite des Schiffes
+        
+        let titanicWidth = Float(shipView.bounds.size.width)
+        
+        // Breite des Screens
+        
+        let screenWidth = Float(UIScreen.main.bounds.size.width)
+        
+        let distance = screenWidth - titanicWidth
+        
+        shipView.center.x = CGFloat((sender.value) * distance + (titanicWidth/2) )
+    
     }
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupShipView()
         countdownTimer.delegate = self
         beginStartSequence()
-        
-        //TODO
-        setupIcebergs()
-        //
     }
     
-    private func setupIcebergs() {
-        
+    private func setupShipView() {
+        let screenWidth = UIScreen.main.bounds.size.width
+        let safeAreaHeight = UIApplication.shared.windows[0].safeAreaLayoutGuide.layoutFrame.height
+        if let shipImage =  UIImage(named: "ship") {
+            shipView = UIImageView(image: shipImage)
+            let shipSize = shipImage.size
+            shipView.frame = CGRect(x: screenWidth/2 - shipSize.width/2, y: (safeAreaHeight - 185), width: shipSize.width, height: shipSize.height)
+            view.addSubview(shipView)
+        }
     }
     
     private func updateViewFromModel() {
