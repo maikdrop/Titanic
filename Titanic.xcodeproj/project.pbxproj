@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		292521C1241291170005D455 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C0241291170005D455 /* MenuTableViewController.swift */; };
 		292521C4241291260005D455 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C3241291260005D455 /* Constants.swift */; };
-		292521C6241291330005D455 /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C5241291330005D455 /* GameMenu.swift */; };
 		292521CA241702C60005D455 /* MovingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* MovingObject.swift */; };
 		292521FE2418582D0005D455 /* ship@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 292521FD2418582D0005D455 /* ship@3x.png */; };
+		292522002419950C0005D455 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521FF2419950B0005D455 /* Player.swift */; };
+		2925220324199DDE0005D455 /* Rules.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2925220224199DDE0005D455 /* Rules.txt */; };
+		29252205241B025E0005D455 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29252204241B025E0005D455 /* HelperFunctions.swift */; };
 		2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B52403D40000798E84 /* AppDelegate.swift */; };
 		2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B72403D40000798E84 /* SceneDelegate.swift */; };
 		2978B8BA2403D40000798E84 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B92403D40000798E84 /* GameViewController.swift */; };
@@ -43,9 +45,11 @@
 /* Begin PBXFileReference section */
 		292521C0241291170005D455 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		292521C3241291260005D455 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		292521C5241291330005D455 /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		292521C9241702C50005D455 /* MovingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingObject.swift; sourceTree = "<group>"; };
 		292521FD2418582D0005D455 /* ship@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ship@3x.png"; sourceTree = "<group>"; };
+		292521FF2419950B0005D455 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		2925220224199DDE0005D455 /* Rules.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rules.txt; sourceTree = "<group>"; };
+		29252204241B025E0005D455 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		2978B8B22403D40000798E84 /* Titanic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Titanic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2978B8B52403D40000798E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2978B8B72403D40000798E84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,10 +98,19 @@
 		292521C2241291260005D455 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				292521FD2418582D0005D455 /* ship@3x.png */,
 				292521C3241291260005D455 /* Constants.swift */,
+				29252204241B025E0005D455 /* HelperFunctions.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		29252201241999BE0005D455 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2925220224199DDE0005D455 /* Rules.txt */,
+				292521FD2418582D0005D455 /* ship@3x.png */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		2978B8A92403D40000798E84 = {
@@ -128,6 +141,7 @@
 				2978B8E72403D85D00798E84 /* Controller */,
 				2978B8E62403D85000798E84 /* Model */,
 				2978B8E52403D83C00798E84 /* Supporting Files */,
+				29252201241999BE0005D455 /* Sources */,
 				292521C2241291260005D455 /* Utilities */,
 				2978B8BB2403D40000798E84 /* Main.storyboard */,
 				2978B8C32403D40100798E84 /* Info.plist */,
@@ -166,8 +180,8 @@
 		2978B8E62403D85000798E84 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				292521C5241291330005D455 /* GameMenu.swift */,
 				2978B8EE240C062E00798E84 /* Titanic.swift */,
+				292521FF2419950B0005D455 /* Player.swift */,
 				292521C9241702C50005D455 /* MovingObject.swift */,
 			);
 			path = Model;
@@ -307,6 +321,7 @@
 			files = (
 				2978B8BF2403D40100798E84 /* Assets.xcassets in Resources */,
 				2978B8BD2403D40000798E84 /* Main.storyboard in Resources */,
+				2925220324199DDE0005D455 /* Rules.txt in Resources */,
 				292521FE2418582D0005D455 /* ship@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,12 +390,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				292521CA241702C60005D455 /* MovingObject.swift in Sources */,
-				292521C6241291330005D455 /* GameMenu.swift in Sources */,
 				2978B8BA2403D40000798E84 /* GameViewController.swift in Sources */,
 				2978B8EF240C062E00798E84 /* Titanic.swift in Sources */,
 				292521C1241291170005D455 /* MenuTableViewController.swift in Sources */,
 				292521C4241291260005D455 /* Constants.swift in Sources */,
 				2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */,
+				29252205241B025E0005D455 /* HelperFunctions.swift in Sources */,
+				292522002419950C0005D455 /* Player.swift in Sources */,
 				2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

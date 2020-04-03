@@ -16,3 +16,6 @@ let MAIN = "Main"
 
 // MARK: Cell Identifier
 let CELL_MENU_LIST = "cellMenuList"
+
+
+let FILE_EXTENSION = "txt"

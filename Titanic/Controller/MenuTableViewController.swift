@@ -7,22 +7,22 @@
 //
 
 protocol MenuDelegate: class {
-    func changeGameStatus(to newStatus: GameStatus)
+    func changeGameStatus(to newStatus: Titanic.GameStatus)
 }
 
 import UIKit
 
 class MenuTableViewController: UITableViewController {
     
-    var gameStatus: GameStatus? = nil {
+    var gameStatus: Titanic.GameStatus? = nil {
         didSet {
-            if let gameStatus = self.gameStatus {
-                  menuItems = GameMenu(gameStatus: gameStatus).menuItems
+            if gameStatus != nil {
+                menuItems = gameStatus!.list
             }
         }
     }
     
-    private var menuItems = [String]()
+    private var menuItems = [Titanic.GameStatus]()
     weak var delegate: MenuDelegate?
 
     override func viewDidLoad() {
@@ -58,7 +58,7 @@ class MenuTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_MENU_LIST, for: indexPath)
         
         cell.textLabel?.textAlignment = .center
-        cell.textLabel?.text = menuItems[indexPath.row]
+        cell.textLabel?.text = menuItems[indexPath.row].rawValue
         return cell
     }
     
@@ -67,11 +67,7 @@ class MenuTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         dismiss(animated: true, completion: {
-            guard let newGameStatus = GameMenu.getGameStatus(from: self.menuItems[indexPath.row]) else {
-                print("unknownGameStatus - MenuTableViewController.didSelectRowAt: \(indexPath.row)")
-                return
-            }
-            self.delegate?.changeGameStatus(to: newGameStatus)
+            self.delegate?.changeGameStatus(to: self.menuItems[indexPath.row])
         })
     }
 }

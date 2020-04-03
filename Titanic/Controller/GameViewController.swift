@@ -9,24 +9,28 @@
 import UIKit
 import SRCountdownTimer
 
-enum GameStatus {
-    case running
-    case paused
-    case resumed
-    case canceled
-    case end
-}
+//enum GameStatus {
+//    case running
+//    case paused
+//    case resumed
+//    case canceled
+//    case end
+//}
+
+
 
 class GameViewController: UIViewController {
     
     private var startSequenceTime = 5
+    private var crashCount = 0
+    private var drivenMiles = 0.0
     private var shipView = UIImageView()
     private var game: Titanic! {
         didSet{
             updateViewFromModel()
         }
     }
-    private var gameStatus: GameStatus = .running {
+    private var gameStatus: Titanic.GameStatus = .running {
         didSet {
             switch gameStatus {
             //TODO
@@ -116,7 +120,7 @@ class GameViewController: UIViewController {
         
     }
     
-    func beginStartSequence()  {
+    private func beginStartSequence()  {
         self.popoverMenuBtn.isEnabled = true
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             self?.startSequenceTime -= 1
@@ -125,6 +129,7 @@ class GameViewController: UIViewController {
                 self?.startSequenceTime = 5
                 timer.invalidate()
                 self?.popoverMenuBtn.isEnabled = true
+//                self?.highscoreEntry()
                 self?.countdownTimer.start(beginingValue: 20, lastSecondsReminderCount: 10)
             } else if (self?.startSequenceTime == 1) {
                 self?.startSequenceLbl.text = "GO"
@@ -134,15 +139,67 @@ class GameViewController: UIViewController {
         }
     }
     
-    func changeTextOfSequenceLabel(to newText: String) {
+    private func changeTextOfSequenceLabel(to newText: String) {
         startSequenceLbl.text = newText
     }
-        
+    
+    private func save(highscoreList: [Player]){
+        var textFieldText = ""
+        let alert = UIAlertController(title: "Name for Highscore", message: "", preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "Done", style: .default) { test in
+            print("Done Tapped")
+            if !textFieldText.isEmpty {
+                var newHighscoreList = highscoreList
+                newHighscoreList.append(Player(name: textFieldText, drivenMiles: self.drivenMiles))
+                newHighscoreList.sort(by: >)
+                let defaults = UserDefaults.standard
+                defaults.set(try? PropertyListEncoder().encode(newHighscoreList), forKey: "Highscorelist")
+            }
+        }
+        doneAction.isEnabled = false
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Enter your name"
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) {_ in
+                    let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+                    let textIsNotEmpty = textCount > 0
+                    doneAction.isEnabled = textIsNotEmpty
+                    textFieldText = textField.text ?? ""
+            }
+        })
+        alert.addAction(doneAction)
+        present(alert, animated: true)
+    }
+    
+    private func getHighscoreList() -> [Player]? {
+        let defaults = UserDefaults.standard
+        guard let highscoreList = defaults.object(forKey: "Highscorelist") as? Data else {
+            print("Error highscoreEntry() - Highscorelist is nil")
+            return nil
+        }
+        guard var playerHighscoreList = try? PropertyListDecoder().decode([Player].self, from: highscoreList) else {
+            print("Error highscoreEntry() - Decode highscorelist")
+            return nil
+        }
+        if playerHighscoreList.count < 10 {
+            print(playerHighscoreList.count)
+            return playerHighscoreList
+        } else {
+            if let lastPlayer = playerHighscoreList.last {
+                if drivenMiles <= lastPlayer.drivenMiles {
+                    return nil
+                } else {
+                    playerHighscoreList.removeLast()
+                    return playerHighscoreList
+                }
+            }
+        }
+        return nil
+    }
 }
 
 extension GameViewController: MenuDelegate {
     
-    func changeGameStatus(to newStatus: GameStatus) {
+    func changeGameStatus(to newStatus: Titanic.GameStatus) {
         gameStatus = newStatus
     }
 }
@@ -166,5 +223,8 @@ extension GameViewController: SRCountdownTimerDelegate {
     
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
         self.gameStatus = .end
+        if let playerList = getHighscoreList() {
+            save(highscoreList: playerList)
+        }
     }
 }

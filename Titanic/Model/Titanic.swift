@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+
 struct Titanic {
     
     private var icebergStartPositions = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
@@ -43,6 +45,26 @@ struct Titanic {
         ship.center = newCenter
     }
     
+}
+
+extension Titanic {
+    enum GameStatus: String {
+        case running = "New Game"
+        case paused = "Pause"
+        case resumed = "Resume"
+        case canceled = "Cancel"
+        case end = "End"
+        
+        static var all = [GameStatus.running, .paused, .resumed, .canceled, .end]
+        
+        var list: [GameStatus] {
+            switch self {
+                case .running, .resumed: return [.running, .paused, .canceled]
+                case .paused: return [.running, .resumed, .canceled]
+                case .canceled, .end: return [.running]
+            }
+        }
+    }
 }
 
 extension Int {

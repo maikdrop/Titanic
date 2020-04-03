@@ -17,13 +17,13 @@ extension Point: Hashable, Comparable {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
     
-    static func < (lhs: Point, rhs: Point) -> Bool {
-        return (lhs.x < rhs.x) && (lhs.y < rhs.y)
-    }
-    
     func hash(into hasher: inout Hasher) {
         hasher.combine(x)
         hasher.combine(y)
+    }
+    
+    static func < (lhs: Point, rhs: Point) -> Bool {
+        return (lhs.x < rhs.x) && (lhs.y < rhs.y)
     }
 }
 
