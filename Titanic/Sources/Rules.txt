@@ -1,8 +1,8 @@
-Goal of game: Drive as many miles as possible!
+Goal:|
+Drive as many miles as possible!|
 
-Rules:
-
-1. move the boat with the slider at the bottom of the screen
-2. avoid intersections with icebergs
-3. any intersection will be counted and will slow down your boat
+Usage:|
+1. move the boat with the slider at the bottom of the screen|
+2. avoid intersections with icebergs|
+3. any intersection will be counted and will slow down your boat|
 5. highscore entry is provided for the best ten results 

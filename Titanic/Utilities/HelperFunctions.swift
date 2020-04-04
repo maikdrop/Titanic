@@ -17,7 +17,7 @@ struct HelperFunctions {
             do {
                 fileContents = try NSString(contentsOf: resourceUrl, encoding: String.Encoding.utf8.rawValue) as String
             } catch {
-                print(error)
+                print(error.localizedDescription)
             }
             lineArray = fileContents.components(separatedBy: "|")
         }

@@ -22,6 +22,7 @@
 		2978B8CD2403D40100798E84 /* TitanicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8CC2403D40100798E84 /* TitanicTests.swift */; };
 		2978B8D82403D40100798E84 /* TitanicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8D72403D40100798E84 /* TitanicUITests.swift */; };
 		2978B8EF240C062E00798E84 /* Titanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8EE240C062E00798E84 /* Titanic.swift */; };
+		29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */; };
 		4F61EF7CC22F8CBD6B1054F4 /* Pods_Titanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0B64FC76F5F6449A342D64 /* Pods_Titanic.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		2978B8D72403D40100798E84 /* TitanicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicUITests.swift; sourceTree = "<group>"; };
 		2978B8D92403D40100798E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2978B8EE240C062E00798E84 /* Titanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titanic.swift; sourceTree = "<group>"; };
+		29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesViewController.swift; sourceTree = "<group>"; };
 		31DCAB1B8A9E6CF0C8FF1AFE /* Pods-Titanic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Titanic.debug.xcconfig"; path = "Target Support Files/Pods-Titanic/Pods-Titanic.debug.xcconfig"; sourceTree = "<group>"; };
 		58E5C94F7AD161E5165DF0AA /* Pods-Titanic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Titanic.release.xcconfig"; path = "Target Support Files/Pods-Titanic/Pods-Titanic.release.xcconfig"; sourceTree = "<group>"; };
 		FF0B64FC76F5F6449A342D64 /* Pods_Titanic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Titanic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 			children = (
 				292521C0241291170005D455 /* MenuTableViewController.swift */,
 				2978B8B92403D40000798E84 /* GameViewController.swift */,
+				29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 			files = (
 				292521CA241702C60005D455 /* MovingObject.swift in Sources */,
 				2978B8BA2403D40000798E84 /* GameViewController.swift in Sources */,
+				29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */,
 				2978B8EF240C062E00798E84 /* Titanic.swift in Sources */,
 				292521C1241291170005D455 /* MenuTableViewController.swift in Sources */,
 				292521C4241291260005D455 /* Constants.swift in Sources */,

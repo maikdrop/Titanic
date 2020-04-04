@@ -9,22 +9,13 @@
 import UIKit
 import SRCountdownTimer
 
-//enum GameStatus {
-//    case running
-//    case paused
-//    case resumed
-//    case canceled
-//    case end
-//}
-
-
-
 class GameViewController: UIViewController {
     
     private var startSequenceTime = 5
     private var crashCount = 0
     private var drivenMiles = 0.0
     private var shipView = UIImageView()
+    
     private var game: Titanic! {
         didSet{
             updateViewFromModel()
@@ -143,6 +134,38 @@ class GameViewController: UIViewController {
         startSequenceLbl.text = newText
     }
     
+    // MARK: HighscoreListFunctions
+    private func getHighscoreList() -> [Player]? {
+        let defaults = UserDefaults.standard
+        guard let highscoreList = defaults.object(forKey: "Highscorelist") as? Data else {
+            print("Error getHighscoreList() - Highscorelist is nil")
+            return nil
+        }
+        guard let playerHighscoreList = try? PropertyListDecoder().decode([Player].self, from: highscoreList) else {
+            print("Error getHighscoreList() - Decode highscorelist")
+            return nil
+        }
+        return playerHighscoreList
+    }
+    
+    private func verify(highscoreList: [Player]) -> [Player]? {
+        if highscoreList.count < 10 {
+            print(highscoreList.count)
+            return highscoreList
+        } else {
+            if let lastPlayer = highscoreList.last {
+                if drivenMiles <= lastPlayer.drivenMiles {
+                    return nil
+                } else {
+                    var verifiedHighscoreList = highscoreList
+                    verifiedHighscoreList.removeLast()
+                    return verifiedHighscoreList
+                }
+            }
+        }
+        return nil
+    }
+    
     private func save(highscoreList: [Player]){
         var textFieldText = ""
         let alert = UIAlertController(title: "Name for Highscore", message: "", preferredStyle: .alert)
@@ -169,32 +192,6 @@ class GameViewController: UIViewController {
         alert.addAction(doneAction)
         present(alert, animated: true)
     }
-    
-    private func getHighscoreList() -> [Player]? {
-        let defaults = UserDefaults.standard
-        guard let highscoreList = defaults.object(forKey: "Highscorelist") as? Data else {
-            print("Error highscoreEntry() - Highscorelist is nil")
-            return nil
-        }
-        guard var playerHighscoreList = try? PropertyListDecoder().decode([Player].self, from: highscoreList) else {
-            print("Error highscoreEntry() - Decode highscorelist")
-            return nil
-        }
-        if playerHighscoreList.count < 10 {
-            print(playerHighscoreList.count)
-            return playerHighscoreList
-        } else {
-            if let lastPlayer = playerHighscoreList.last {
-                if drivenMiles <= lastPlayer.drivenMiles {
-                    return nil
-                } else {
-                    playerHighscoreList.removeLast()
-                    return playerHighscoreList
-                }
-            }
-        }
-        return nil
-    }
 }
 
 extension GameViewController: MenuDelegate {
@@ -215,6 +212,7 @@ extension GameViewController: UIPopoverPresentationControllerDelegate {
 extension GameViewController: SRCountdownTimerDelegate {
     
     func timerDidStart(sender: SRCountdownTimer) {
+    
     }
     
     func timerDidUpdateCounterValue(sender: SRCountdownTimer, newValue: Int) {
@@ -223,8 +221,8 @@ extension GameViewController: SRCountdownTimerDelegate {
     
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
         self.gameStatus = .end
-        if let playerList = getHighscoreList() {
-            save(highscoreList: playerList)
+        if let list = getHighscoreList(), let verifiedList = verify(highscoreList: list) {
+            save(highscoreList: verifiedList)
         }
     }
 }

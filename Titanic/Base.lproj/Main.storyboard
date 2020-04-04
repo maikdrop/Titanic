@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9cW-Qa-6Mz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9cW-Qa-6Mz">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,7 +44,7 @@
                     <navigationItem key="navigationItem" id="MYD-x1-mvb">
                         <barButtonItem key="leftBarButtonItem" image="info.circle" catalog="system" id="aWT-x7-luS">
                             <connections>
-                                <segue destination="6mC-3C-6Iz" kind="show" id="4Hm-dY-c5K"/>
+                                <segue destination="6mC-3C-6Iz" kind="show" id="s5h-hJ-wlZ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="list.number" catalog="system" id="Jel-ET-1Lu">
@@ -85,23 +85,41 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnc-da-Emd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="689"/>
+            <point key="canvasLocation" x="1007" y="739"/>
         </scene>
-        <!--View Controller-->
+        <!--Rules-->
         <scene sceneID="MiU-xs-MOo">
             <objects>
-                <viewController id="6mC-3C-6Iz" sceneMemberID="viewController">
+                <viewController id="6mC-3C-6Iz" customClass="GameRulesViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zZa-tM-kzv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuI-87-Wq3">
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="oMM-Ch-2Ea" firstAttribute="bottom" secondItem="UuI-87-Wq3" secondAttribute="bottom" id="6gK-ee-goz"/>
+                            <constraint firstItem="oMM-Ch-2Ea" firstAttribute="trailing" secondItem="UuI-87-Wq3" secondAttribute="trailing" id="GPE-3I-wHZ"/>
+                            <constraint firstItem="UuI-87-Wq3" firstAttribute="top" secondItem="oMM-Ch-2Ea" secondAttribute="top" id="HBz-Nz-UEv"/>
+                            <constraint firstItem="UuI-87-Wq3" firstAttribute="leading" secondItem="oMM-Ch-2Ea" secondAttribute="leading" id="pUr-N0-15F"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="oMM-Ch-2Ea"/>
                     </view>
-                    <navigationItem key="navigationItem" id="xon-gP-v8l"/>
+                    <navigationItem key="navigationItem" title="Rules" id="xon-gP-v8l"/>
+                    <connections>
+                        <outlet property="textView" destination="UuI-87-Wq3" id="S1F-hs-Npg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i9w-Db-0qI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="-789"/>
+            <point key="canvasLocation" x="1007" y="-883"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -203,7 +221,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1957.5" y="-26.408450704225352"/>
+            <point key="canvasLocation" x="1958" y="-59"/>
         </scene>
         <!--Menu Table View Controller-->
         <scene sceneID="eL0-fB-mdS">
@@ -263,8 +281,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.down" catalog="system" width="64" height="36"/>
-        <image name="info.circle" catalog="system" width="64" height="60"/>
-        <image name="list.number" catalog="system" width="64" height="48"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="list.number" catalog="system" width="128" height="97"/>
     </resources>
 </document>
