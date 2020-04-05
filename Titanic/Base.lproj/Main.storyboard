@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="5XW-QJ-ZrN">
             <objects>
-                <viewController id="rgE-zM-luI" sceneMemberID="viewController">
+                <viewController id="rgE-zM-luI" customClass="WelcomeViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TrD-1R-5H3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,32 +47,44 @@
                                 <segue destination="6mC-3C-6Iz" kind="show" id="s5h-hJ-wlZ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="list.number" catalog="system" id="Jel-ET-1Lu">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" image="list.number" catalog="system" id="Jel-ET-1Lu">
                             <connections>
-                                <segue destination="vdO-rH-npa" kind="show" id="kPb-IG-lzB"/>
+                                <segue destination="wxg-ea-M6P" kind="presentation" identifier="showHighscoreList" id="cMM-JE-1tb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="highscoreListBtn" destination="Jel-ET-1Lu" id="Viz-gT-Bm8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BY-O0-m3X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1007" y="-84"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Highscore-->
         <scene sceneID="hXp-qu-gis">
             <objects>
-                <tableViewController id="vdO-rH-npa" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="AfI-Wk-XRO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <tableViewController id="vdO-rH-npa" customClass="HighscoreListTableViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="AfI-Wk-XRO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="G9V-fb-U3T">
+                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="highscoreEntry" textLabel="tNW-vf-O5k" style="IBUITableViewCellStyleDefault" id="G9V-fb-U3T">
                                 <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G9V-fb-U3T" id="AsJ-hA-gkY">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tNW-vf-O5k">
+                                            <rect key="frame" x="16" y="0.0" width="288" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -81,11 +93,17 @@
                             <outlet property="delegate" destination="vdO-rH-npa" id="4Pq-fG-jXa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="jYf-A3-Sga"/>
+                    <navigationItem key="navigationItem" title="Highscore" id="jYf-A3-Sga">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Vci-qf-ipH">
+                            <connections>
+                                <action selector="doneActionBtn:" destination="vdO-rH-npa" id="tgt-Sb-jat"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnc-da-Emd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1007" y="739"/>
+            <point key="canvasLocation" x="1999" y="864"/>
         </scene>
         <!--Rules-->
         <scene sceneID="MiU-xs-MOo">
@@ -207,6 +225,9 @@
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="chevron.down" catalog="system" id="HK5-fe-ziC">
                             <connections>
                                 <action selector="showPopoverMenu:" destination="BYZ-38-t0r" id="2cF-cp-6hI"/>
+                                <segue destination="Xcu-M3-ORT" kind="popoverPresentation" identifier="showPopoverMenu" popoverAnchorBarButtonItem="HK5-fe-ziC" id="Lgx-WY-Hy2">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -217,6 +238,7 @@
                         <outlet property="milesLbl" destination="SdQ-Kt-BJ3" id="7zd-ac-g3C"/>
                         <outlet property="popoverMenuBtn" destination="HK5-fe-ziC" id="JDh-cm-7wK"/>
                         <outlet property="startSequenceLbl" destination="vUB-D4-3QK" id="1iL-O3-Egr"/>
+                        <segue destination="wxg-ea-M6P" kind="presentation" identifier="showHighscoreList" id="3gH-f0-M40"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -226,9 +248,9 @@
         <!--Menu Table View Controller-->
         <scene sceneID="eL0-fB-mdS">
             <objects>
-                <tableViewController storyboardIdentifier="menuTableViewController" id="Xcu-M3-ORT" customClass="MenuTableViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Xcu-M3-ORT" customClass="MenuTableViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Uwc-vZ-1qW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -258,7 +280,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLh-o3-v0z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2933" y="-26"/>
+            <point key="canvasLocation" x="2893" y="-59"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8wi-gQ-Bmx">
@@ -279,7 +301,28 @@
             </objects>
             <point key="canvasLocation" x="45" y="-84"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ELQ-A2-NRH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wxg-ea-M6P" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FcP-bG-7KG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vdO-rH-npa" kind="relationship" relationship="rootViewController" id="buX-iI-aro"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YQJ-hV-bQr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1007" y="865"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="3gH-f0-M40"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>

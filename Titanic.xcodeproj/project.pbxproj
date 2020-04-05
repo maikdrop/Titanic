@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2918EE402439085E008EC004 /* HighscoreListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE3F2439085E008EC004 /* HighscoreListTableViewController.swift */; };
+		2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE412439120E008EC004 /* WelcomeViewController.swift */; };
 		292521C1241291170005D455 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C0241291170005D455 /* MenuTableViewController.swift */; };
 		292521C4241291260005D455 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C3241291260005D455 /* Constants.swift */; };
 		292521CA241702C60005D455 /* MovingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* MovingObject.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2918EE3F2439085E008EC004 /* HighscoreListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListTableViewController.swift; sourceTree = "<group>"; };
+		2918EE412439120E008EC004 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		292521C0241291170005D455 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		292521C3241291260005D455 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		292521C9241702C50005D455 /* MovingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingObject.swift; sourceTree = "<group>"; };
@@ -195,6 +199,8 @@
 				292521C0241291170005D455 /* MenuTableViewController.swift */,
 				2978B8B92403D40000798E84 /* GameViewController.swift */,
 				29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */,
+				2918EE3F2439085E008EC004 /* HighscoreListTableViewController.swift */,
+				2918EE412439120E008EC004 /* WelcomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -401,6 +407,8 @@
 				2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */,
 				29252205241B025E0005D455 /* HelperFunctions.swift in Sources */,
 				292522002419950C0005D455 /* Player.swift in Sources */,
+				2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */,
+				2918EE402439085E008EC004 /* HighscoreListTableViewController.swift in Sources */,
 				2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

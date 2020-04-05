@@ -23,4 +23,17 @@ struct HelperFunctions {
         }
         return lineArray
     }
+    
+    static func getHighscoreList() -> [Player]? {
+        let defaults = UserDefaults.standard
+        guard let highscoreList = defaults.object(forKey: "Highscorelist") as? Data else {
+            print("No highscoreList found")
+            return [Player]()
+        }
+        guard let playerHighscoreList = try? PropertyListDecoder().decode([Player].self, from: highscoreList) else {
+            print("Error getHighscoreList() - Decode highscorelist")
+            return nil
+        }
+        return playerHighscoreList
+    }
 }

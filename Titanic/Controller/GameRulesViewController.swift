@@ -17,8 +17,6 @@ class GameRulesViewController: UIViewController {
         super.viewDidLoad()
         textFileContent = HelperFunctions.readTextFile(fileName: "Rules")
         makeAttributedString()
-       
-     
     }
     
     private func makeAttributedString() {
