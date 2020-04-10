@@ -10,8 +10,9 @@ import UIKit
 
 class HighscoreListTableViewController: UITableViewController {
     
-    var highscoreList = [Player]()
-    var boldIndex: Int?
+    private var highscoreList = [Player]()
+    private var boldIndex: Int?
+    var drivenMiles: Double?
 
     @IBAction func doneActionBtn(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
@@ -19,6 +20,10 @@ class HighscoreListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let highscoreList = HelperFunctions.getHighscoreList() {
+            self.highscoreList = highscoreList
+        }
+        boldIndex = highscoreList.lastIndex{$0.drivenMiles == drivenMiles}
     }
 
     // MARK: - Table view data source

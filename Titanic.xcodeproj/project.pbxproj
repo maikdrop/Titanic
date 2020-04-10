@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		2918EE402439085E008EC004 /* HighscoreListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE3F2439085E008EC004 /* HighscoreListTableViewController.swift */; };
 		2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE412439120E008EC004 /* WelcomeViewController.swift */; };
+		2918EE44243CA85C008EC004 /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE43243CA85C008EC004 /* GamePresenter.swift */; };
 		292521C1241291170005D455 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C0241291170005D455 /* MenuTableViewController.swift */; };
 		292521C4241291260005D455 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C3241291260005D455 /* Constants.swift */; };
-		292521CA241702C60005D455 /* MovingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* MovingObject.swift */; };
+		292521CA241702C60005D455 /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* Iceberg.swift */; };
 		292521FE2418582D0005D455 /* ship@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 292521FD2418582D0005D455 /* ship@3x.png */; };
 		292522002419950C0005D455 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521FF2419950B0005D455 /* Player.swift */; };
 		2925220324199DDE0005D455 /* Rules.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2925220224199DDE0005D455 /* Rules.txt */; };
@@ -48,9 +49,10 @@
 /* Begin PBXFileReference section */
 		2918EE3F2439085E008EC004 /* HighscoreListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListTableViewController.swift; sourceTree = "<group>"; };
 		2918EE412439120E008EC004 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		2918EE43243CA85C008EC004 /* GamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
 		292521C0241291170005D455 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		292521C3241291260005D455 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		292521C9241702C50005D455 /* MovingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingObject.swift; sourceTree = "<group>"; };
+		292521C9241702C50005D455 /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
 		292521FD2418582D0005D455 /* ship@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ship@3x.png"; sourceTree = "<group>"; };
 		292521FF2419950B0005D455 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2925220224199DDE0005D455 /* Rules.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rules.txt; sourceTree = "<group>"; };
@@ -188,7 +190,7 @@
 			children = (
 				2978B8EE240C062E00798E84 /* Titanic.swift */,
 				292521FF2419950B0005D455 /* Player.swift */,
-				292521C9241702C50005D455 /* MovingObject.swift */,
+				292521C9241702C50005D455 /* Iceberg.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,6 +203,7 @@
 				29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */,
 				2918EE3F2439085E008EC004 /* HighscoreListTableViewController.swift */,
 				2918EE412439120E008EC004 /* WelcomeViewController.swift */,
+				2918EE43243CA85C008EC004 /* GamePresenter.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -398,7 +401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				292521CA241702C60005D455 /* MovingObject.swift in Sources */,
+				292521CA241702C60005D455 /* Iceberg.swift in Sources */,
 				2978B8BA2403D40000798E84 /* GameViewController.swift in Sources */,
 				29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */,
 				2978B8EF240C062E00798E84 /* Titanic.swift in Sources */,
@@ -410,6 +413,7 @@
 				2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */,
 				2918EE402439085E008EC004 /* HighscoreListTableViewController.swift in Sources */,
 				2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */,
+				2918EE44243CA85C008EC004 /* GamePresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

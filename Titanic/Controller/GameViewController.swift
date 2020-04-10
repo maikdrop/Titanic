@@ -11,74 +11,55 @@ import SRCountdownTimer
 
 class GameViewController: UIViewController {
     
-    private var crashCount = 0
-    private var drivenMiles = 10.0
+    private lazy var presenter = GamePresenter(view: self)
     private var shipView = UIImageView()
-    private var highscoreList = [Player]()
-    
-    private var game: Titanic! {
-        didSet{
-            updateViewFromModel()
-        }
-    }
-    private var gameStatus: Titanic.GameStatus = .running {
+    private var crashCount = 0 {
         didSet {
-            switch gameStatus {
-            //TODO
-            case .running:
-                beginStartSequence()
-            //game = Titanic(numberOfIcebergs: 10, at: <#T##[Point]#>, with: <#T##[Size]#>)
-            case .paused:
-                countdownTimer.pause()
-                changeTextOfSequenceLabel(to: "Paused")
-            case .resumed:
-                countdownTimer.resume()
-                changeTextOfSequenceLabel(to: "")
-            case .canceled:
-                countdownTimer.reset()
-                changeTextOfSequenceLabel(to: "")
-            case .end:
-                changeTextOfSequenceLabel(to: "End")
+            crashCounterLbl.text = "\(crashCount)"
+            if crashCount == 4 {
+                presenter.gameStatus = .end
             }
         }
     }
-    @IBOutlet weak var knotsLbl: UILabel!
-
-    @IBOutlet weak var milesLbl: UILabel!
+    private(set) var drivenMiles = 10.0 {
+        didSet {
+            milesLbl.text = "\(drivenMiles)"
+        }
+    }
+    private var startSequence = 0 {
+        didSet {
+            startSequenceLbl.text = startSequence == 0 ? "GO" : "\(startSequence)"
+            startSequenceLbl.isHidden = startSequence == -1
+        }
+    }
+    private var knots = 0 {
+        didSet {
+            knotsLbl.text = "\(knots)"
+        }
+    }
     
-    @IBOutlet weak var crashCounterLbl: UILabel!
+    @IBOutlet private weak var knotsLbl: UILabel!
+    @IBOutlet private weak var milesLbl: UILabel!
+    @IBOutlet private weak var crashCounterLbl: UILabel!
+    @IBOutlet private weak var startSequenceLbl: UILabel!
+    @IBOutlet private weak var popoverMenuBtn: UIBarButtonItem!
+    @IBOutlet private weak var countdownTimer: SRCountdownTimer!
     
-    @IBOutlet weak var startSequenceLbl: UILabel!
-    
-    @IBOutlet weak var popoverMenuBtn: UIBarButtonItem!
-    
-    @IBAction func showPopoverMenu(_ sender: UIBarButtonItem) {
+    @IBAction private func showPopoverMenu(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "showPopoverMenu", sender: self)
     }
- 
-    @IBOutlet weak var countdownTimer: SRCountdownTimer!
-    
-    @IBAction func moveShip(_ sender: UISlider) {
-        // Breite des Schiffes
-        
+
+    @IBAction private func moveShip(_ sender: UISlider) {
         let titanicWidth = Float(shipView.bounds.size.width)
-        
-        // Breite des Screens
-        
         let screenWidth = Float(UIScreen.main.bounds.size.width)
-        
         let distance = screenWidth - titanicWidth
-        
         shipView.center.x = CGFloat((sender.value) * distance + (titanicWidth/2) )
-    
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupShipView()
+        presenter.gameStatus = .new
         countdownTimer.delegate = self
-        beginStartSequence()
     }
     
     private func setupShipView() {
@@ -92,42 +73,60 @@ class GameViewController: UIViewController {
         }
     }
     
-    private func updateViewFromModel() {
-        
-    }
-    
-    private func resetUI() {
-        
-    }
-    
     private func beginStartSequence()  {
-        var startSequenceTime = 5
-        self.popoverMenuBtn.isEnabled = true
+        popoverMenuBtn.isEnabled = false
+        startSequence = 3
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-            startSequenceTime -= 1
-            if(startSequenceTime == 0){
-                self?.startSequenceLbl.text = ""
-                startSequenceTime = 5
-                timer.invalidate()
+            self?.startSequence -= 1
+            if self?.startSequence == -1 {
                 self?.popoverMenuBtn.isEnabled = true
-                self?.countdownTimer.start(beginingValue: 5, lastSecondsReminderCount: 10)
-            } else if (startSequenceTime == 1) {
-                self?.startSequenceLbl.text = "GO"
-            } else {
-                self?.startSequenceLbl.text = String(startSequenceTime - 1)
+                self?.countdownTimer.start(beginingValue: 10, interval: 1.0, lastSecondsReminderCount: 5)
+                timer.invalidate()
             }
         }
     }
     
-    private func changeTextOfSequenceLabel(to newText: String) {
-        startSequenceLbl.text = newText
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPopoverMenu" {
+            if let vc = segue.destination as? MenuTableViewController {
+                if let popover = vc.popoverPresentationController {
+                    popover.delegate = self
+                    vc.delegate = self
+                    vc.gameStatus = presenter.gameStatus
+                }
+            }
+        }
+        if segue.identifier == "showHighscoreList" {
+             if let nc = segue.destination as? UINavigationController {
+                if let vc = nc.viewControllers.first as? HighscoreListTableViewController {
+                    vc.drivenMiles = drivenMiles
+                }
+                
+            }
+        }
+    }
+}
+
+extension GameViewController: PresenterGameView {
+   
+    func newView() {
+        setupShipView()
+        beginStartSequence()
     }
     
-    private func showAlertForHighscoreEntry(){
+    func resetView() {
+        
+    }
+    
+    func updateView(from: Titanic) {
+    
+    }
+    
+    func showAlert(){
         let alert = UIAlertController(title: "Name for Highscore", message: "", preferredStyle: .alert)
         let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
-            if let text = alert.textFields?.first?.text, !text.isEmpty {
-                self.saveHighscoreEntry(with: text)
+            if let userName = alert.textFields?.first?.text, !userName.isEmpty {
+                self.presenter.save(of: userName, with: self.drivenMiles)
                 self.performSegue(withIdentifier: "showHighscoreList", sender: self)
             }
         }
@@ -145,42 +144,12 @@ class GameViewController: UIViewController {
         })
         present(alert, animated: true)
     }
+}
+
+extension GameViewController: MenuDelegate {
     
-    // MARK: HighscoreListFunctions
-    private func verifyHighscoreEntry() {
-        if highscoreList.count == 10 {
-            if let lastPlayerInList = highscoreList.last, lastPlayerInList.drivenMiles < drivenMiles {
-                 highscoreList.removeLast()
-            }
-        }
-        showAlertForHighscoreEntry()
-    }
-    
-    private func saveHighscoreEntry(with name: String) {
-        highscoreList.append(Player(name: name, drivenMiles: self.drivenMiles))
-        highscoreList.sort(by: >)
-        let defaults = UserDefaults.standard
-        defaults.set(try? PropertyListEncoder().encode(highscoreList), forKey: "Highscorelist")
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showPopoverMenu" {
-            if let vc = segue.destination as? MenuTableViewController {
-                if let popover = vc.popoverPresentationController {
-                    popover.delegate = self
-                    vc.delegate = self
-                    vc.gameStatus = gameStatus
-                }
-            }
-        }
-        if segue.identifier == "showHighscoreList" {
-            if let nc = segue.destination as? UINavigationController {
-                if let vc = nc.topViewController as? HighscoreListTableViewController {
-                    vc.highscoreList = self.highscoreList
-                    vc.boldIndex = highscoreList.lastIndex{$0.drivenMiles == drivenMiles}
-                }
-            }
-        }
+    func changeGameStatus(to newStatus: Titanic.GameStatus) {
+        presenter.gameStatus = newStatus
     }
 }
 
@@ -191,28 +160,17 @@ extension GameViewController: UIPopoverPresentationControllerDelegate {
     }
 }
 
-extension GameViewController: MenuDelegate {
+extension GameViewController: SRCountdownTimerDelegate {
     
-    func changeGameStatus(to newStatus: Titanic.GameStatus) {
-        gameStatus = newStatus
+    func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
+        presenter.gameStatus = .end
     }
 }
 
-extension GameViewController: SRCountdownTimerDelegate {
-    
-    func timerDidStart(sender: SRCountdownTimer) {
-    
-    }
-    
-    func timerDidUpdateCounterValue(sender: SRCountdownTimer, newValue: Int) {
-        
-    }
-    
-    func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        self.gameStatus = .end
-        if let list = HelperFunctions.getHighscoreList(){
-            highscoreList = list
-            verifyHighscoreEntry()
-        }
-    }
-}
+//func timerDidStart(sender: SRCountdownTimer) {
+//
+//}
+//
+//func timerDidUpdateCounterValue(sender: SRCountdownTimer, newValue: Int) {
+//
+//}

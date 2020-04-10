@@ -14,6 +14,9 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
     
+    private var menuItems = [Titanic.GameStatus]()
+    weak var delegate: MenuDelegate?
+
     var gameStatus: Titanic.GameStatus? = nil {
         didSet {
             if gameStatus != nil {
@@ -22,9 +25,6 @@ class MenuTableViewController: UITableViewController {
         }
     }
     
-    private var menuItems = [Titanic.GameStatus]()
-    weak var delegate: MenuDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }

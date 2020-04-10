@@ -15,9 +15,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAf-Ac-5GQ">
-                                <rect key="frame" x="74.5" y="94" width="171" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Titanic!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAf-Ac-5GQ">
+                                <rect key="frame" x="12.5" y="94" width="295.5" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -222,10 +222,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Q4R-IL-1jI">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="chevron.down" catalog="system" id="HK5-fe-ziC">
+                        <barButtonItem key="rightBarButtonItem" image="chevron.down" catalog="system" id="HK5-fe-ziC">
                             <connections>
                                 <action selector="showPopoverMenu:" destination="BYZ-38-t0r" id="2cF-cp-6hI"/>
-                                <segue destination="Xcu-M3-ORT" kind="popoverPresentation" identifier="showPopoverMenu" popoverAnchorBarButtonItem="HK5-fe-ziC" id="Lgx-WY-Hy2">
+                                <segue destination="Xcu-M3-ORT" kind="popoverPresentation" identifier="showPopoverMenu" popoverAnchorBarButtonItem="HK5-fe-ziC" id="QeY-Ss-gQi">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                                 </segue>
                             </connections>
@@ -248,7 +248,7 @@
         <!--Menu Table View Controller-->
         <scene sceneID="eL0-fB-mdS">
             <objects>
-                <tableViewController id="Xcu-M3-ORT" customClass="MenuTableViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="showPopoverMenu" id="Xcu-M3-ORT" customClass="MenuTableViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Uwc-vZ-1qW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -285,7 +285,7 @@
         <!--Navigation Controller-->
         <scene sceneID="8wi-gQ-Bmx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9cW-Qa-6Mz" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="initialNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="9cW-Qa-6Mz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lcb-IO-m4b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

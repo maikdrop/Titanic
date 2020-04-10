@@ -10,9 +10,7 @@ import Foundation
 
 struct Titanic {
     
-    private var icebergStartPositions = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
-    private(set) var icebergs = [MovingObject]()
-    private(set) var ship: MovingObject
+    private(set) var icebergs: [Iceberg]
     private var indexOfIcebergCollisonWithShip: Int? {
         get{
             let collisions = icebergs.indices.filter {icebergs[$0].hadCollosion}
@@ -25,55 +23,36 @@ struct Titanic {
         }
     }
     
-    init(shipPosition: Point, shipSize: Size, icebergSize: Size, screenWidth: Double ) {
-        ship = MovingObject(origin: shipPosition, size: shipSize)
-        for _ in 0..<10 {
-            var icebergStartPosition = Point()
-            icebergStartPosition.x = screenWidth/icebergStartPositions.remove(at: icebergStartPositions.count.arc4random)
-            icebergStartPosition.y -= icebergSize.height
-            icebergs.append(MovingObject(origin: icebergStartPosition, size: icebergSize))
-        }
+    init(numberOfIcebergs: Int) {
+        let iceberg = Iceberg()
+        icebergs = Array(repeating: iceberg, count: numberOfIcebergs)
     }
     
-    mutating func moveIceberg(at index: Int, to newCenter: Point) {
-        icebergs[index].center = newCenter
+    func calculateKnots() {
+        
     }
     
-    mutating func moveShip(to newCenter: Point) {
-        ship.center = newCenter
+    func calculateMiles() {
+        
     }
-    
 }
 
 extension Titanic {
     enum GameStatus: String {
-        case running = "New Game"
+        case new = "New Game"
         case paused = "Pause"
         case resumed = "Resume"
         case canceled = "Cancel"
         case end = "End"
         
-        static var all = [GameStatus.running, .paused, .resumed, .canceled, .end]
+        static var all = [GameStatus.new, .paused, .resumed, .canceled, .end]
         
         var list: [GameStatus] {
             switch self {
-                case .running, .resumed: return [.running, .paused, .canceled]
-                case .paused: return [.running, .resumed, .canceled]
-                case .canceled, .end: return [.running]
+                case .new, .resumed: return [.new, .paused, .canceled]
+                case .paused: return [.new, .resumed, .canceled]
+                case .canceled, .end: return [.new]
             }
         }
     }
 }
-
-extension Int {
-    var arc4random: Int {
-        if self > 0 {
-             return Int(arc4random_uniform(UInt32(self)))
-        } else if self < 0 {
-            return -Int(arc4random_uniform(UInt32(abs(self))))
-        } else {
-            return 0
-        }
-    }
-}
-
