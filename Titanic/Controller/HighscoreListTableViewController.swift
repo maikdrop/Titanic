@@ -10,20 +10,16 @@ import UIKit
 
 class HighscoreListTableViewController: UITableViewController {
     
-    private var highscoreList = [Player]()
-    private var boldIndex: Int?
-    var drivenMiles: Double?
+    private var latestEntry: Int?
+    var highscoreList = [Player]()
+    var drivenMiles: Double? {
+        didSet {
+            latestEntry = highscoreList.lastIndex{$0.drivenMiles == drivenMiles}
+        }
+    }
 
     @IBAction func doneActionBtn(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let highscoreList = HelperFunctions.getHighscoreList() {
-            self.highscoreList = highscoreList
-        }
-        boldIndex = highscoreList.lastIndex{$0.drivenMiles == drivenMiles}
     }
 
     // MARK: - Table view data source
@@ -39,7 +35,7 @@ class HighscoreListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "highscoreEntry", for: indexPath)
         let highscoreEntryText = "\(indexPath.row + 1)" + ". " + highscoreList[indexPath.row].name + ": " + "\(highscoreList[indexPath.row].drivenMiles)" + " miles"
         cell.textLabel?.text = highscoreEntryText
-        if indexPath.row == boldIndex {
+        if indexPath.row == latestEntry {
             let attributeBoldSystemFont: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 18, weight: .bold)]
             cell.textLabel?.attributedText = NSAttributedString(string: highscoreEntryText, attributes: attributeBoldSystemFont)
         }

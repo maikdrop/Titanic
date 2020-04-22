@@ -51,7 +51,7 @@ public class SRCountdownTimer: UIView {
     //MARK: Customization - color change of counterLabelColor and circleLineColor for the last seconds
     private var lastSecondsReminderCount = 0
 
-    private var timer: Timer?
+    private weak var timer: Timer?
     private var beginingValue: Int = 1
     private var totalTime: TimeInterval = 1
     private var elapsedTime: TimeInterval = 0
@@ -174,10 +174,9 @@ public class SRCountdownTimer: UIView {
         currentCounterValue = beginingValue
 
         timer?.invalidate()
-        timer = Timer(timeInterval: fireInterval, target: self, selector: #selector(SRCountdownTimer.timerFired(_:)), userInfo: nil, repeats: true)
-
+        timer = Timer.scheduledTimer(timeInterval: fireInterval, target: self, selector: #selector(SRCountdownTimer.timerFired(_:)), userInfo: nil, repeats: true)
+//            Timer(timeInterval: fireInterval, target: self, selector: #selector(SRCountdownTimer.timerFired(_:)), userInfo: nil, repeats: true)
         RunLoop.main.add(timer!, forMode: .common)
-
         delegate?.timerDidStart?(sender: self)
     }
 

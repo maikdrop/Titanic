@@ -10,18 +10,18 @@ import UIKit
 
 class GameRulesViewController: UIViewController {
     
-    @IBOutlet weak var textView: UITextView!
-    var textFileContent = [String]()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        textFileContent = HelperFunctions.readTextFile(fileName: "Rules")
-        makeAttributedString()
+    @IBOutlet weak var textView: UITextView! {
+        didSet {
+              makeAttributedString()
+        }
     }
+    var textFileContent = HelperFunctions.readTextFile(fileName: "Rules")
     
     private func makeAttributedString() {
-        let attributeSystemFont:  [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 17)]
-        let attributeBoldSystemFont: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 18)]
+        let scaledBoldFont = UIFontMetrics.default.scaledFont(for: UIFont.boldSystemFont(ofSize: 18))  
+        let scaledFont = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 17))
+        let attributeSystemFont:  [NSAttributedString.Key: Any] = [.font: scaledFont]
+        let attributeBoldSystemFont: [NSAttributedString.Key: Any] = [.font: scaledBoldFont]
         let atrributedString = NSMutableAttributedString()
         for string in textFileContent {
             if string.contains("Goal:") || string.contains("Usage:") {
@@ -31,5 +31,6 @@ class GameRulesViewController: UIViewController {
             }
         }
         textView.attributedText = atrributedString
+        textView.textColor = UIColor.label
     }
 }

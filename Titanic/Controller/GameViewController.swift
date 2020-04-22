@@ -12,114 +12,150 @@ import SRCountdownTimer
 class GameViewController: UIViewController {
     
     private lazy var presenter = GamePresenter(view: self)
-    private var shipView = UIImageView()
+    private var displayLink: CADisplayLink?
+    private var pauseView = PauseView()
     private var crashCount = 0 {
         didSet {
-            crashCounterLbl.text = "\(crashCount)"
-            if crashCount == 4 {
+            knotsLbl.text = "Knots: " + "\(knots)"
+            crashCounterLbl.text = "Crashes: " + "\(crashCount)"
+            if crashCount == 5 {
                 presenter.gameStatus = .end
             }
         }
     }
-    private(set) var drivenMiles = 10.0 {
+    var drivenMiles: Double = 0 {
         didSet {
-            milesLbl.text = "\(drivenMiles)"
+              milesLbl.text = String(format: "Miles: %.2f", drivenMiles)
         }
+        
     }
-    private var startSequence = 0 {
-        didSet {
-            startSequenceLbl.text = startSequence == 0 ? "GO" : "\(startSequence)"
-            startSequenceLbl.isHidden = startSequence == -1
-        }
+    private var knots: Int {
+        50 - crashCount * 5
     }
-    private var knots = 0 {
+    private var countdown = 0 {
         didSet {
-            knotsLbl.text = "\(knots)"
+            popoverMenuBtn.isEnabled = false
+            var countdownLabel = createLabel()
+            countdownLabel = configureLabel(countdownLabel)
+            countdownLabel.text = "\(countdown)"
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+                if countdownLabel.text == "GO" {
+                    countdownLabel.removeFromSuperview()
+                    timer.invalidate()
+                    self?.countdownTimer.start(beginingValue: 60, interval: 1.0, lastSecondsReminderCount: 10)
+                } else {
+                     countdownLabel.text = countdownLabel.text == "1" ? "GO": String(Int(countdownLabel.text!)! - 1)
+                }
+            }
         }
     }
     
-    @IBOutlet private weak var knotsLbl: UILabel!
-    @IBOutlet private weak var milesLbl: UILabel!
-    @IBOutlet private weak var crashCounterLbl: UILabel!
-    @IBOutlet private weak var startSequenceLbl: UILabel!
+    private func createLabel() -> UILabel{
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        gameView.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: gameView.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        return label
+    }
+    
+    private func configureLabel(_ label: UILabel) -> UILabel {
+        label.textColor = UIColor.white
+        label.text = presenter.gameStatus == .new ? "\(countdown)": presenter.gameStatus?.rawValue
+        let font =  UIFont.preferredFont(forTextStyle: .body).withSize(40)
+        label.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: font)
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }
+    
+    @IBOutlet private weak var knotsLbl: UILabel! {
+        didSet {
+              knotsLbl.text = "Knots: " + "\(knots)"
+        }
+    }
+    @IBOutlet private weak var milesLbl: UILabel! {
+        didSet {
+              milesLbl.text = String(format: "Miles: %.2f", drivenMiles)
+        }
+    }
+    @IBOutlet private weak var crashCounterLbl: UILabel! {
+        didSet {
+             crashCounterLbl.text = "Crashes: " + "\(crashCount)"
+        }
+    }
     @IBOutlet private weak var popoverMenuBtn: UIBarButtonItem!
-    @IBOutlet private weak var countdownTimer: SRCountdownTimer!
-    
-    @IBAction private func showPopoverMenu(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "showPopoverMenu", sender: self)
+    @IBOutlet private weak var countdownTimer: SRCountdownTimer! {
+        didSet {
+            countdownTimer.delegate = self
+            countdownTimer.labelFont = UIFont.systemFont(ofSize: 20)
+        }
     }
-
-    @IBAction private func moveShip(_ sender: UISlider) {
-        let titanicWidth = Float(shipView.bounds.size.width)
-        let screenWidth = Float(UIScreen.main.bounds.size.width)
+    
+    @IBOutlet weak var gameView: GameView! {
+        didSet {
+            gameView.horizontalSlider.addTarget(self, action: #selector(moveShip), for: .valueChanged)
+        }
+    }
+    
+    @objc private func moveShip(_ sender: UISlider) {
+        let titanicWidth = Float(gameView.ship.bounds.size.width)
+        let screenWidth = Float(view.bounds.size.width)
         let distance = screenWidth - titanicWidth
-        shipView.center.x = CGFloat((sender.value) * distance + (titanicWidth/2) )
+        gameView.ship.center.x = CGFloat((sender.value) * distance + (titanicWidth/2))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.gameStatus = .new
-        countdownTimer.delegate = self
     }
-    
-    private func setupShipView() {
-        let screenWidth = UIScreen.main.bounds.size.width
-        let safeAreaHeight = UIApplication.shared.windows[0].safeAreaLayoutGuide.layoutFrame.height
-        if let shipImage =  UIImage(named: "ship") {
-            shipView = UIImageView(image: shipImage)
-            let shipSize = shipImage.size
-            shipView.frame = CGRect(x: screenWidth/2 - shipSize.width/2, y: (safeAreaHeight - 185), width: shipSize.width, height: shipSize.height)
-            view.addSubview(shipView)
-        }
-    }
-    
-    private func beginStartSequence()  {
-        popoverMenuBtn.isEnabled = false
-        startSequence = 3
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-            self?.startSequence -= 1
-            if self?.startSequence == -1 {
-                self?.popoverMenuBtn.isEnabled = true
-                self?.countdownTimer.start(beginingValue: 10, interval: 1.0, lastSecondsReminderCount: 5)
-                timer.invalidate()
-            }
-        }
-    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showPopoverMenu" {
-            if let vc = segue.destination as? MenuTableViewController {
-                if let popover = vc.popoverPresentationController {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "showPopoverMenu":
+                if let vc = segue.destination as? MenuTableViewController, let popover = vc.popoverPresentationController {
                     popover.delegate = self
                     vc.delegate = self
                     vc.gameStatus = presenter.gameStatus
                 }
-            }
-        }
-        if segue.identifier == "showHighscoreList" {
-             if let nc = segue.destination as? UINavigationController {
-                if let vc = nc.viewControllers.first as? HighscoreListTableViewController {
+            case "showHighscoreList":
+                if let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? HighscoreListTableViewController {
                     vc.drivenMiles = drivenMiles
+                    vc.highscoreList = presenter.highscoreList
                 }
-                
+            default:
+                break
             }
         }
     }
 }
 
 extension GameViewController: PresenterGameView {
-   
-    func newView() {
-        setupShipView()
-        beginStartSequence()
+    
+    func updateView(from model: Titanic?) {
+        if model == nil {
+            pauseView.removeFromSuperview()
+            resetGameViewLayout()
+            resetTimer()
+            crashCount = 0
+            drivenMiles = 0
+        } else {
+            //TODO - Setup View based on Model
+              self.countdown = 3
+            
+        }
     }
     
-    func resetView() {
-        
+    func pauseGame() {
+        gameView.addSubview(pauseView)
+        countdownTimer.pause()
+        displayLink?.isPaused = true
     }
     
-    func updateView(from: Titanic) {
-    
+    func resumeGame() {
+        pauseView.removeFromSuperview()
+        countdownTimer.resume()
+        displayLink?.isPaused = false
     }
     
     func showAlert(){
@@ -137,40 +173,58 @@ extension GameViewController: PresenterGameView {
         alert.addTextField(configurationHandler: { (textField) in
             textField.placeholder = "Enter your name"
             NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) {_ in
-                    let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-                    let textIsNotEmpty = textCount > 0
-                    doneAction.isEnabled = textIsNotEmpty
+                let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+                let textIsNotEmpty = textCount > 0
+                doneAction.isEnabled = textIsNotEmpty
             }
         })
         present(alert, animated: true)
     }
+    
+    private func resetGameViewLayout() {
+        gameView.icebergs.forEach{$0.center.y = 0}
+        gameView.ship.center.x = gameView.center.x
+        gameView.horizontalSlider.isEnabled = false
+        gameView.horizontalSlider.value = 0.5
+    }
+    
+    private func resetTimer() {
+        displayLink?.invalidate()
+        displayLink = nil
+        countdownTimer.reset()
+    }
+    
+    @objc func movingIceberg() {
+        print("TEST")
+        gameView.icebergs.forEach{$0.center.y += 2}
+    }
+    
 }
 
-extension GameViewController: MenuDelegate {
+extension GameViewController: MenuDelegate,SRCountdownTimerDelegate, UIPopoverPresentationControllerDelegate {
     
-    func changeGameStatus(to newStatus: Titanic.GameStatus) {
+    func changeGameStatus(to newStatus: GamePresenter.GameStatus) {
         presenter.gameStatus = newStatus
     }
-}
-
-extension GameViewController: UIPopoverPresentationControllerDelegate {
+    
+    func timerDidStart(sender: SRCountdownTimer) {
+        popoverMenuBtn.isEnabled = true
+        gameView.horizontalSlider.isEnabled = true
+        displayLink = CADisplayLink(target: self, selector: #selector(movingIceberg))
+        displayLink?.add(to: .current, forMode: .common)
+    }
+    
+    func timerDidUpdateCounterValue(sender: SRCountdownTimer, newValue: Int) {
+        self.drivenMiles += self.presenter.calculateDrivenSeaMiles(from: self.knots)
+    }
+    
+    func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
+        presenter.gameStatus = .end
+        gameView.horizontalSlider.isEnabled = false
+        resetTimer()
+    }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }
 }
-
-extension GameViewController: SRCountdownTimerDelegate {
-    
-    func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        presenter.gameStatus = .end
-    }
-}
-
-//func timerDidStart(sender: SRCountdownTimer) {
-//
-//}
-//
-//func timerDidUpdateCounterValue(sender: SRCountdownTimer, newValue: Int) {
-//
-//}

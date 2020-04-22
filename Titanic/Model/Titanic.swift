@@ -28,31 +28,7 @@ struct Titanic {
         icebergs = Array(repeating: iceberg, count: numberOfIcebergs)
     }
     
-    func calculateKnots() {
-        
-    }
-    
     func calculateMiles() {
         
-    }
-}
-
-extension Titanic {
-    enum GameStatus: String {
-        case new = "New Game"
-        case paused = "Pause"
-        case resumed = "Resume"
-        case canceled = "Cancel"
-        case end = "End"
-        
-        static var all = [GameStatus.new, .paused, .resumed, .canceled, .end]
-        
-        var list: [GameStatus] {
-            switch self {
-                case .new, .resumed: return [.new, .paused, .canceled]
-                case .paused: return [.new, .resumed, .canceled]
-                case .canceled, .end: return [.new]
-            }
-        }
     }
 }

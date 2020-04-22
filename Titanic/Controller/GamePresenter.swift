@@ -11,43 +11,50 @@ import Foundation
 protocol PresenterGameView:class {
     
     var drivenMiles: Double {get}
-    func updateView(from model: Titanic)
-    func newView()
-    func resetView()
+    func updateView(from model: Titanic?)
+    func pauseGame()
+    func resumeGame()
     func showAlert()
 }
 
 class GamePresenter {
     
-    private weak var view: PresenterGameView?
+    private weak var gameView: PresenterGameView?
     private var icebergStartPositions = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
-    private var highscoreList = [Player]()
-    private var game = Titanic(numberOfIcebergs: 10)
-    
-    var gameStatus: Titanic.GameStatus = .new {
+    private(set) var highscoreList = [Player]()
+    private var game: Titanic! {
         didSet {
-            switch gameStatus {
-            case .new:
-                game = Titanic(numberOfIcebergs: 10)
-                view?.newView()
-            case .paused:
-                 //TODO
-                print()
-            case .resumed:
-                 //TODO
-                print()
-            case .canceled:
-                view?.resetView()
-            case .end:
-                if verify(of: view!.drivenMiles) {
-                    view?.showAlert()
+            gameView?.updateView(from: game)
+        }
+    }
+    
+    var gameStatus: GameStatus? {
+        didSet {
+            if let view = gameView, let status = gameStatus {
+                switch status {
+                case .new:
+                    game = Titanic(numberOfIcebergs: 10)
+                case .paused:
+                    gameView?.pauseGame()
+                case .resumed:
+                    gameView?.resumeGame()
+                case .canceled:
+                    game = nil
+                case .end:
+                    if verify(of: view.drivenMiles) {
+                        view.showAlert()
+                    }
                 }
             }
         }
     }
     
     init(view: PresenterGameView) {
-        self.view = view
+        self.gameView = view
+    }
+    
+    func calculateDrivenSeaMiles(from knots: Int) -> Double {
+       Double(knots) / 60
     }
     
     func verify(of drivenMiles: Double) -> Bool {
@@ -72,6 +79,26 @@ class GamePresenter {
     
     func collosionOfShipWithIceberg(at index: Int) {
         
+    }
+}
+
+extension GamePresenter {
+    enum GameStatus: String {
+        case new = "New Game"
+        case paused = "Pause"
+        case resumed = "Resume"
+        case canceled = "Cancel"
+        case end = "End"
+        
+        static var all = [GameStatus.new, .paused, .resumed, .canceled, .end]
+        
+        var list: [GameStatus] {
+            switch self {
+            case .new, .resumed: return [.new, .paused, .canceled]
+            case .paused: return [.new, .resumed, .canceled]
+            case .canceled, .end: return [.new]
+            }
+        }
     }
 }
 

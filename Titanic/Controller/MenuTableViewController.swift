@@ -7,26 +7,22 @@
 //
 
 protocol MenuDelegate: class {
-    func changeGameStatus(to newStatus: Titanic.GameStatus)
+    func changeGameStatus(to newStatus: GamePresenter.GameStatus)
 }
 
 import UIKit
 
 class MenuTableViewController: UITableViewController {
     
-    private var menuItems = [Titanic.GameStatus]()
+    private var menuItems = [GamePresenter.GameStatus]()
     weak var delegate: MenuDelegate?
 
-    var gameStatus: Titanic.GameStatus? = nil {
+    var gameStatus: GamePresenter.GameStatus? = nil {
         didSet {
             if gameStatus != nil {
                 menuItems = gameStatus!.list
             }
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     private var contentSizeObserver : NSKeyValueObservation?

@@ -10,15 +10,26 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    private var highscoreList = HelperFunctions.getHighscoreList()
     @IBOutlet weak var highscoreListBtn: UIBarButtonItem!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var startBtn: UIButton! {
+        didSet {
+            startBtn.titleLabel?.adjustsFontForContentSizeCategory = true
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if highscoreList != nil {
+             highscoreListBtn.isEnabled = highscoreList!.count > 0
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if let highscoreList = HelperFunctions.getHighscoreList() {
-             highscoreListBtn.isEnabled = highscoreList.count > 0
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showHighscoreList" {
+            if let navc = segue.destination as? UINavigationController {
+                if let vc = navc.viewControllers.first as? HighscoreListTableViewController {
+                    vc.highscoreList = highscoreList!
+                }
+            }
         }
     }
 }
