@@ -10,39 +10,55 @@ import Foundation
 
 protocol PresenterGameView:class {
     
-    var drivenMiles: Double {get}
+    var mainView: GameView {get}
     func updateView(from model: Titanic?)
+    func startGame()
     func pauseGame()
     func resumeGame()
-    func showAlert()
+    func showAlertForHighscoreEntry()
 }
 
 class GamePresenter {
     
-    private weak var gameView: PresenterGameView?
-    private var icebergStartPositions = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
-    private(set) var highscoreList = [Player]()
-    private var game: Titanic! {
+    private weak var presentingView: PresenterGameView?
+    private lazy var startDistanceBetweenIcebergs: [Double] = {
+        var array = [Double]()
+        for index in 0..<presentingView!.mainView.icebergs.count{
+            let distance = Double(index) * Double(presentingView!.mainView.ship.frame.height + presentingView!.mainView.ship.frame.height/2)
+            array.append(distance)
+        }
+        return array
+    }()
+    private var drivenSeaMiles = 0.0
+    var playerList: [Player]? {
+        return game?.players
+    }
+    private var game: Titanic? {
         didSet {
-            gameView?.updateView(from: game)
+            if game != nil {
+                presentingView?.startGame()
+            } else {
+                presentingView?.updateView(from: game)
+            }
         }
     }
     
     var gameStatus: GameStatus? {
         didSet {
-            if let view = gameView, let status = gameStatus {
+            if let view = presentingView, let status = gameStatus {
                 switch status {
                 case .new:
-                    game = Titanic(numberOfIcebergs: 10)
+                    game = createGameModel()
                 case .paused:
-                    gameView?.pauseGame()
+                    view.pauseGame()
                 case .resumed:
-                    gameView?.resumeGame()
+                    view.resumeGame()
                 case .canceled:
                     game = nil
                 case .end:
-                    if verify(of: view.drivenMiles) {
-                        view.showAlert()
+                    game = nil
+                    if verifyHighscoreEntry() {
+                        view.showAlertForHighscoreEntry()
                     }
                 }
             }
@@ -50,39 +66,37 @@ class GamePresenter {
     }
     
     init(view: PresenterGameView) {
-        self.gameView = view
+        self.presentingView = view
     }
     
     func calculateDrivenSeaMiles(from knots: Int) -> Double {
-       Double(knots) / 60
+        drivenSeaMiles = Double(knots) / 60
+        return drivenSeaMiles
     }
     
-    func verify(of drivenMiles: Double) -> Bool {
-        if let highscoreList = HelperFunctions.getHighscoreList() {
-            self.highscoreList = highscoreList
-            if self.highscoreList.count == 10 {
-                if let lastPlayerInList = self.highscoreList.last, lastPlayerInList.drivenMiles < drivenMiles {
-                    self.highscoreList.removeLast()
-                }
+    func moveIcebergAccordingToCrashCount(_ crashCount: Int) {
+        let factor = 1.0 - Double(crashCount) * 0.2
+        game?.translateIcebergsAcrossYAxis(with: factor)
+        presentingView?.updateView(from: game)
+        game?.icebergs.enumerated().forEach({iceberg in
+            if iceberg.element.origin.y > Double(presentingView!.mainView.frame.height) {
+                game?.resetIcebergAcrossYAxis(at: iceberg.offset)
             }
-            return true
-        }
-        return false
+        })
+    }
+    
+    func intersectionWithIceberg(at index: Int) {
+        game?.resetIcebergAcrossYAxis(at: index)
+        presentingView?.updateView(from: game)
     }
     
     func save(of userName: String, with drivenMiles: Double) {
-        highscoreList.append(Player(name: userName, drivenMiles: drivenMiles))
-        highscoreList.sort(by: >)
-        let defaults = UserDefaults.standard
-        defaults.set(try? PropertyListEncoder().encode(highscoreList), forKey: "Highscorelist")
-    }
-    
-    func collosionOfShipWithIceberg(at index: Int) {
-        
+        game?.savePlayer(userName: userName, drivenMiles: drivenMiles)
     }
 }
 
 extension GamePresenter {
+    
     enum GameStatus: String {
         case new = "New Game"
         case paused = "Pause"
@@ -100,6 +114,34 @@ extension GamePresenter {
             }
         }
     }
+    
+    private func verifyHighscoreEntry() -> Bool {
+        if playerList != nil {
+            if playerList!.count == 10 {
+                if let lastPlayerInList = playerList!.last {
+                    return lastPlayerInList.drivenMiles < drivenSeaMiles
+                }
+            }
+            return true
+        }
+        return false
+    }
+
+    
+    private func createGameModel() -> Titanic? {
+        
+        var icebergOrigin = [(x: Double, y: Double)]()
+        var icebergSize =  [(width: Double, height: Double)]()
+        if let view = presentingView {
+            view.mainView.icebergs.forEach({ iceberg in
+                let randomIndex = startDistanceBetweenIcebergs.index(startDistanceBetweenIcebergs.startIndex, offsetBy: startDistanceBetweenIcebergs.count.arc4random)
+                icebergOrigin.append((Double(iceberg.frame.minX), 0 - startDistanceBetweenIcebergs.remove(at: randomIndex)))
+                icebergSize.append((Double(iceberg.imageSize.width), Double(iceberg.imageSize.height)))
+            })
+            return Titanic(numberOfIcebergs: view.mainView.icebergs.count, icebergOrigin: icebergOrigin, icebergSize: icebergSize)
+        }
+        return nil
+    }
 }
 
 extension Int {
@@ -114,14 +156,3 @@ extension Int {
     }
 }
 
-
-
-//    init(shipPosition: Point, shipSize: Size, icebergSize: Size, screenWidth: Double ) {
-//        ship = MovingObject(origin: shipPosition, size: shipSize)
-//        for _ in 0..<10 {
-//            var icebergStartPosition = Point()
-//            icebergStartPosition.x = screenWidth/icebergStartPositions.remove(at: icebergStartPositions.count.arc4random)
-//            icebergStartPosition.y -= icebergSize.height
-//            icebergs.append(MovingObject(origin: icebergStartPosition, size: icebergSize))
-//        }
-//    }

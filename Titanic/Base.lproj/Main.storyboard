@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9cW-Qa-6Mz">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,19 +44,13 @@
                         <viewLayoutGuide key="safeArea" id="9zB-SD-zce"/>
                     </view>
                     <navigationItem key="navigationItem" id="MYD-x1-mvb">
-                        <barButtonItem key="leftBarButtonItem" image="info.circle" catalog="system" id="aWT-x7-luS">
+                        <barButtonItem key="rightBarButtonItem" image="info.circle" catalog="system" id="aWT-x7-luS">
                             <connections>
                                 <segue destination="6mC-3C-6Iz" kind="show" id="s5h-hJ-wlZ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" image="list.number" catalog="system" id="Jel-ET-1Lu">
-                            <connections>
-                                <segue destination="wxg-ea-M6P" kind="presentation" identifier="showHighscoreList" id="cMM-JE-1tb"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="highscoreListBtn" destination="Jel-ET-1Lu" id="Viz-gT-Bm8"/>
                         <outlet property="startBtn" destination="5yE-Pg-VuO" id="3FK-L3-u9j"/>
                     </connections>
                 </viewController>
@@ -106,7 +100,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnc-da-Emd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1999" y="864"/>
+            <point key="canvasLocation" x="2756" y="848"/>
         </scene>
         <!--Rules-->
         <scene sceneID="MiU-xs-MOo">
@@ -309,15 +303,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQJ-hV-bQr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="962" y="863"/>
+            <point key="canvasLocation" x="1875" y="849"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="3gH-f0-M40"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
-        <image name="list.number" catalog="system" width="128" height="97"/>
     </resources>
 </document>

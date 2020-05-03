@@ -15,7 +15,10 @@
 		292521CA241702C60005D455 /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* Iceberg.swift */; };
 		292522002419950C0005D455 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521FF2419950B0005D455 /* Player.swift */; };
 		2925220324199DDE0005D455 /* Rules.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2925220224199DDE0005D455 /* Rules.txt */; };
-		29252205241B025E0005D455 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29252204241B025E0005D455 /* HelperFunctions.swift */; };
+		296523FC245B6081006AF264 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 296523FA245B6081006AF264 /* Fire.sks */; };
+		296523FD245B6081006AF264 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296523FB245B6081006AF264 /* Assets.xcassets */; };
+		296523FF245C2317006AF264 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 296523FE245C2317006AF264 /* Smoke.sks */; };
+		29652401245C9269006AF264 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29652400245C9268006AF264 /* Launch Screen.storyboard */; };
 		296C52F22445007C0044401D /* ShipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296C52F12445007C0044401D /* ShipView.swift */; };
 		2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B52403D40000798E84 /* AppDelegate.swift */; };
 		2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B72403D40000798E84 /* SceneDelegate.swift */; };
@@ -26,6 +29,7 @@
 		2978B8D82403D40100798E84 /* TitanicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8D72403D40100798E84 /* TitanicUITests.swift */; };
 		2978B8EF240C062E00798E84 /* Titanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8EE240C062E00798E84 /* Titanic.swift */; };
 		29A3A0992447C1E400B5983D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A3A0982447C1E400B5983D /* GameView.swift */; };
+		29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */; };
 		29E9004F244CD16D0022BD8F /* IcebergView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9004E244CD16C0022BD8F /* IcebergView.swift */; };
 		29E90051244E3F670022BD8F /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E90050244E3F670022BD8F /* PauseView.swift */; };
 		29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */; };
@@ -58,7 +62,10 @@
 		292521C9241702C50005D455 /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
 		292521FF2419950B0005D455 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2925220224199DDE0005D455 /* Rules.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rules.txt; sourceTree = "<group>"; };
-		29252204241B025E0005D455 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		296523FA245B6081006AF264 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
+		296523FB245B6081006AF264 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		296523FE245C2317006AF264 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Smoke.sks; path = Titanic/Utilities/Smoke.sks; sourceTree = SOURCE_ROOT; };
+		29652400245C9268006AF264 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		296C52F12445007C0044401D /* ShipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipView.swift; sourceTree = "<group>"; };
 		2978B8B22403D40000798E84 /* Titanic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Titanic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2978B8B52403D40000798E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +82,7 @@
 		2978B8D92403D40100798E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2978B8EE240C062E00798E84 /* Titanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titanic.swift; sourceTree = "<group>"; };
 		29A3A0982447C1E400B5983D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeView.swift; sourceTree = "<group>"; };
 		29E9004E244CD16C0022BD8F /* IcebergView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcebergView.swift; sourceTree = "<group>"; };
 		29E90050244E3F670022BD8F /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 		29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesViewController.swift; sourceTree = "<group>"; };
@@ -112,8 +120,11 @@
 		292521C2241291260005D455 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				296523FE245C2317006AF264 /* Smoke.sks */,
+				29652400245C9268006AF264 /* Launch Screen.storyboard */,
+				296523FA245B6081006AF264 /* Fire.sks */,
+				296523FB245B6081006AF264 /* Assets.xcassets */,
 				292521C3241291260005D455 /* Constants.swift */,
-				29252204241B025E0005D455 /* HelperFunctions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -124,6 +135,14 @@
 				2925220224199DDE0005D455 /* Rules.txt */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		2925B8EB2458A91B000EEB1E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2918EE43243CA85C008EC004 /* GamePresenter.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		296C52F324451FA80044401D /* CustomViews */ = {
@@ -162,8 +181,10 @@
 		2978B8B42403D40000798E84 /* Titanic */ = {
 			isa = PBXGroup;
 			children = (
+				29AA4BB2245EDA8C00B8CE96 /* SpriteKitView */,
+				2925B8EB2458A91B000EEB1E /* Controller */,
 				296C52F324451FA80044401D /* CustomViews */,
-				2978B8E72403D85D00798E84 /* Controller */,
+				2978B8E72403D85D00798E84 /* ViewController */,
 				2978B8E62403D85000798E84 /* Model */,
 				2978B8E52403D83C00798E84 /* Supporting Files */,
 				29252201241999BE0005D455 /* Sources */,
@@ -212,7 +233,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2978B8E72403D85D00798E84 /* Controller */ = {
+		2978B8E72403D85D00798E84 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				292521C0241291170005D455 /* MenuTableViewController.swift */,
@@ -220,9 +241,16 @@
 				29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */,
 				2918EE3F2439085E008EC004 /* HighscoreListTableViewController.swift */,
 				2918EE412439120E008EC004 /* WelcomeViewController.swift */,
-				2918EE43243CA85C008EC004 /* GamePresenter.swift */,
 			);
-			path = Controller;
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		29AA4BB2245EDA8C00B8CE96 /* SpriteKitView */ = {
+			isa = PBXGroup;
+			children = (
+				29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */,
+			);
+			path = SpriteKitView;
 			sourceTree = "<group>";
 		};
 		88E88C8BE32B71A6C6F2645A /* Pods */ = {
@@ -349,8 +377,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2978B8BF2403D40100798E84 /* Assets.xcassets in Resources */,
+				296523FF245C2317006AF264 /* Smoke.sks in Resources */,
+				296523FC245B6081006AF264 /* Fire.sks in Resources */,
 				2978B8BD2403D40000798E84 /* Main.storyboard in Resources */,
 				2925220324199DDE0005D455 /* Rules.txt in Resources */,
+				296523FD245B6081006AF264 /* Assets.xcassets in Resources */,
+				29652401245C9269006AF264 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,9 +457,9 @@
 				29A3A0992447C1E400B5983D /* GameView.swift in Sources */,
 				292521C1241291170005D455 /* MenuTableViewController.swift in Sources */,
 				292521C4241291260005D455 /* Constants.swift in Sources */,
+				29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */,
 				2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */,
 				29E9004F244CD16D0022BD8F /* IcebergView.swift in Sources */,
-				29252205241B025E0005D455 /* HelperFunctions.swift in Sources */,
 				296C52F22445007C0044401D /* ShipView.swift in Sources */,
 				292522002419950C0005D455 /* Player.swift in Sources */,
 				2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */,
@@ -599,15 +631,18 @@
 			baseConfigurationReference = 31DCAB1B8A9E6CF0C8FF1AFE /* Pods-Titanic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
 				INFOPLIST_FILE = Titanic/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.Titanic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -618,9 +653,11 @@
 			baseConfigurationReference = 58E5C94F7AD161E5165DF0AA /* Pods-Titanic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
 				INFOPLIST_FILE = Titanic/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

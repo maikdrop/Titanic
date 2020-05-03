@@ -15,7 +15,7 @@ class GameRulesViewController: UIViewController {
               makeAttributedString()
         }
     }
-    var textFileContent = HelperFunctions.readTextFile(fileName: "Rules")
+    private lazy var textFileContent = readTextFile(fileName: "Rules")
     
     private func makeAttributedString() {
         let scaledBoldFont = UIFontMetrics.default.scaledFont(for: UIFont.boldSystemFont(ofSize: 18))  
@@ -32,5 +32,22 @@ class GameRulesViewController: UIViewController {
         }
         textView.attributedText = atrributedString
         textView.textColor = UIColor.label
+    }
+}
+
+extension GameRulesViewController {
+    
+    private func readTextFile (fileName: String) -> [String] {
+        var fileContents = ""
+        var lineArray = [String]()
+        if let resourceUrl = Bundle.main.url(forResource: fileName, withExtension: FILE_EXTENSION) {
+            do {
+                fileContents = try NSString(contentsOf: resourceUrl, encoding: String.Encoding.utf8.rawValue) as String
+            } catch {
+                print(error.localizedDescription)
+            }
+            lineArray = fileContents.components(separatedBy: "|")
+        }
+        return lineArray
     }
 }

@@ -24,11 +24,12 @@ class GameView: UIView {
         return imageView
     }()
     
-    private(set) var icebergs: [IcebergView] = {
+    private(set) lazy var icebergs: [IcebergView] = {
         var array = [IcebergView]()
-        for index in 0...2 {
+        let icebergCount = Int((ScreenSize.currentDevice.width / IcebergView().imageSize.width).rounded())
+        for index in 0..<icebergCount {
             let iceberg = IcebergView()
-            array.append(iceberg)
+            array.append(IcebergView())
         }
         return array
     }()
@@ -84,15 +85,16 @@ class GameView: UIView {
         let safeAreaMaxY = UIApplication.shared.windows[0].safeAreaLayoutGuide.layoutFrame.maxY
         let yCoordinateOfShip = safeAreaMaxY - sliderBottomConstraint - space - ship.imageSize.height
         ship.frame = CGRect(x: bounds.width/2 - ship.imageSize.width/2, y: yCoordinateOfShip, width: ship.imageSize.width, height: ship.imageSize.height)
+//         print(ship.frame)
     }
     
     private func icebergLayout() {
-        var xPositions = [CGFloat]()
-        if let iceberg = icebergs.first {
-            xPositions = [bounds.minX, bounds.width/2 - iceberg.imageSize.width/2, bounds.maxX - iceberg.imageSize.width]
-        }
+        let width = (UIScreen.main.bounds.size.width / CGFloat(icebergs.count)).rounded()
+        var center = width / 2
         icebergs.enumerated().forEach{iceberg in
-            iceberg.element.frame = CGRect(x: xPositions[iceberg.offset], y: 0, width: iceberg.element.imageSize.width, height: iceberg.element.imageSize.height)
+            iceberg.element.frame = CGRect(x: 0, y: 0, width: iceberg.element.imageSize.width, height: iceberg.element.imageSize.height)
+            iceberg.element.center = CGPoint(x: center, y: 0)
+            center += width
         }
     }
 }
