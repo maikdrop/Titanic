@@ -143,69 +143,7 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="GameView" customModule="Titanic" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="df9-26-EQo">
-                                <rect key="frame" x="5" y="49" width="77.5" height="86"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Knots:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jL4-DK-PVy">
-                                        <rect key="frame" x="0.0" y="0.0" width="77.5" height="24"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Miles:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdQ-Kt-BJ3">
-                                        <rect key="frame" x="0.0" y="31" width="77.5" height="24"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crashes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGy-0C-31y" userLabel="Crash Counter Lbl">
-                                        <rect key="frame" x="0.0" y="62" width="77.5" height="24"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUB-D4-3QK">
-                                <rect key="frame" x="116.5" y="270" width="87" height="72"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCY-eq-eLJ" customClass="SRCountdownTimer" customModule="SRCountdownTimer">
-                                <rect key="frame" x="280" y="49" width="35" height="35"/>
-                                <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="RWa-TS-BWO"/>
-                                    <constraint firstAttribute="height" constant="35" id="mcn-9d-faU"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="trailLineColor">
-                                        <color key="value" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isLabelHidden" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="labelTextColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="df9-26-EQo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="08v-yp-r5G"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dCY-eq-eLJ" secondAttribute="trailing" constant="5" id="6Tl-Uz-cwL"/>
-                            <constraint firstItem="dCY-eq-eLJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="SSt-ai-2YU"/>
-                            <constraint firstItem="vUB-D4-3QK" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Tgt-Qc-ooq"/>
-                            <constraint firstItem="vUB-D4-3QK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Xvm-nO-hoi"/>
-                            <constraint firstItem="df9-26-EQo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="bYg-qo-71x"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Q4R-IL-1jI">
@@ -218,11 +156,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="countdownTimer" destination="dCY-eq-eLJ" id="7KK-OC-4GV"/>
-                        <outlet property="crashCounterLbl" destination="MGy-0C-31y" id="zdX-52-qLU"/>
                         <outlet property="gameView" destination="8bC-Xf-vdC" id="ToE-Cp-NNH"/>
-                        <outlet property="knotsLbl" destination="jL4-DK-PVy" id="6Ku-to-DQB"/>
-                        <outlet property="milesLbl" destination="SdQ-Kt-BJ3" id="7zd-ac-g3C"/>
                         <outlet property="popoverMenuBtn" destination="HK5-fe-ziC" id="JDh-cm-7wK"/>
                         <segue destination="wxg-ea-M6P" kind="presentation" identifier="showHighscoreList" id="3gH-f0-M40"/>
                     </connections>

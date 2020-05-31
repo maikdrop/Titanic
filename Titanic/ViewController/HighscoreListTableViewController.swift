@@ -30,14 +30,13 @@ class HighscoreListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return highscoreList.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "highscoreEntry", for: indexPath)
         let highscoreEntryText = "\(indexPath.row + 1)" + ". " + highscoreList[indexPath.row].name + ": " + "\(highscoreList[indexPath.row].drivenMiles)" + " miles"
-        cell.textLabel?.text = highscoreEntryText
+        cell.textLabel?.attributedText = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont.scalableFont(forTextStyle: .body, fontSize: 17)])
         if indexPath.row == latestEntry {
-            let attributeBoldSystemFont: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 18, weight: .bold)]
-            cell.textLabel?.attributedText = NSAttributedString(string: highscoreEntryText, attributes: attributeBoldSystemFont)
+            cell.textLabel?.attributedText = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont.scalableWeightFont(forTextStyle: .body, fontSize: 20, weight: .bold)])
         }
         return cell
     }

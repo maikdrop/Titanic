@@ -30,6 +30,8 @@
 		2978B8EF240C062E00798E84 /* Titanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8EE240C062E00798E84 /* Titanic.swift */; };
 		29A3A0992447C1E400B5983D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A3A0982447C1E400B5983D /* GameView.swift */; };
 		29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */; };
+		29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B98044246092E200D7C302 /* ScoreStackView.swift */; };
+		29B980472461F99400D7C302 /* SRCountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B980462461F99400D7C302 /* SRCountDownTimer.swift */; };
 		29E9004F244CD16D0022BD8F /* IcebergView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9004E244CD16C0022BD8F /* IcebergView.swift */; };
 		29E90051244E3F670022BD8F /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E90050244E3F670022BD8F /* PauseView.swift */; };
 		29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */; };
@@ -83,6 +85,8 @@
 		2978B8EE240C062E00798E84 /* Titanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titanic.swift; sourceTree = "<group>"; };
 		29A3A0982447C1E400B5983D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeView.swift; sourceTree = "<group>"; };
+		29B98044246092E200D7C302 /* ScoreStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStackView.swift; sourceTree = "<group>"; };
+		29B980462461F99400D7C302 /* SRCountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRCountDownTimer.swift; sourceTree = "<group>"; };
 		29E9004E244CD16C0022BD8F /* IcebergView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcebergView.swift; sourceTree = "<group>"; };
 		29E90050244E3F670022BD8F /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 		29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 				296C52F12445007C0044401D /* ShipView.swift */,
 				29E9004E244CD16C0022BD8F /* IcebergView.swift */,
 				29E90050244E3F670022BD8F /* PauseView.swift */,
+				29B98044246092E200D7C302 /* ScoreStackView.swift */,
+				29B980462461F99400D7C302 /* SRCountDownTimer.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -449,10 +455,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */,
 				292521CA241702C60005D455 /* Iceberg.swift in Sources */,
 				2978B8BA2403D40000798E84 /* GameViewController.swift in Sources */,
 				29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */,
 				2978B8EF240C062E00798E84 /* Titanic.swift in Sources */,
+				29B980472461F99400D7C302 /* SRCountDownTimer.swift in Sources */,
 				29E90051244E3F670022BD8F /* PauseView.swift in Sources */,
 				29A3A0992447C1E400B5983D /* GameView.swift in Sources */,
 				292521C1241291170005D455 /* MenuTableViewController.swift in Sources */,

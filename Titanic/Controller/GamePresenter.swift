@@ -29,7 +29,7 @@ class GamePresenter {
         }
         return array
     }()
-    private var drivenSeaMiles = 0.0
+//    private var drivenSeaMiles = 0.0
     var playerList: [Player]? {
         return game?.players
     }
@@ -56,10 +56,10 @@ class GamePresenter {
                 case .canceled:
                     game = nil
                 case .end:
-                    game = nil
                     if verifyHighscoreEntry() {
                         view.showAlertForHighscoreEntry()
                     }
+                     game = nil
                 }
             }
         }
@@ -70,8 +70,7 @@ class GamePresenter {
     }
     
     func calculateDrivenSeaMiles(from knots: Int) -> Double {
-        drivenSeaMiles = Double(knots) / 60
-        return drivenSeaMiles
+        Double(knots) / 60
     }
     
     func moveIcebergAccordingToCrashCount(_ crashCount: Int) {
@@ -116,12 +115,11 @@ extension GamePresenter {
     }
     
     private func verifyHighscoreEntry() -> Bool {
-        if playerList != nil {
-            if playerList!.count == 10 {
+        if playerList != nil, playerList!.count == 10 {
                 if let lastPlayerInList = playerList!.last {
-                    return lastPlayerInList.drivenMiles < drivenSeaMiles
+                    //TODO drivenSeaMiles
+                    return lastPlayerInList.drivenMiles < 0.0
                 }
-            }
             return true
         }
         return false

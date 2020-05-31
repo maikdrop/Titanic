@@ -30,6 +30,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xlv-Zf-kO2">
+                                <rect key="frame" x="150" y="439" width="75" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -37,11 +43,13 @@
                             <constraint firstItem="vW0-2p-OTE" firstAttribute="centerY" secondItem="Bcu-3y-fUS" secondAttribute="centerY" id="3wr-Hk-RFD"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="centerX" secondItem="obG-Y5-kRd" secondAttribute="centerX" id="5cz-MP-9tL"/>
                             <constraint firstItem="87K-fj-gIT" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="DKC-8C-tCd"/>
+                            <constraint firstItem="Xlv-Zf-kO2" firstAttribute="firstBaseline" secondItem="vW0-2p-OTE" secondAttribute="baseline" constant="24.5" symbolType="layoutAnchor" id="Hfc-zp-XsB"/>
                             <constraint firstItem="obG-Y5-kRd" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" symbolic="YES" id="SfN-ll-jLj"/>
                             <constraint firstAttribute="bottom" secondItem="obG-Y5-kRd" secondAttribute="bottom" constant="20" id="Y44-ml-fuU"/>
                             <constraint firstItem="vW0-2p-OTE" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="egc-Eb-n63"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="87K-fj-gIT" secondAttribute="trailing" id="nVg-2s-EHF"/>
                             <constraint firstItem="87K-fj-gIT" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="spT-QT-Wrv"/>
+                            <constraint firstItem="Xlv-Zf-kO2" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="xHu-yt-c45"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                     </view>

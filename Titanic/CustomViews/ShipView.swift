@@ -16,15 +16,6 @@ class ShipView: UIView {
         return CGSize(width: 45 * ratio, height: 105 * ratio)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .clear
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func draw(_ rect: CGRect) {
         if let shipImage = UIImage(named: "ship") {
             if let newImage = shipImage.resizeImage(for: imageSize) {

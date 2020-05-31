@@ -18,16 +18,16 @@ class GameViewController: UIViewController {
     private var pauseView = PauseView()
     private var crashCount = 0 {
         didSet {
-            knotsLbl.text = "Knots: " + "\(knots)"
-            crashCounterLbl.text = "Crashes: " + "\(crashCount)"
+            gameView.scoreStack.knotsLbl.text = "Knots: " + "\(knots)"
+            gameView.scoreStack.crashCountLbl.text = "Crashes: " + "\(crashCount)"
             if crashCount == 5 {
                 presenter.gameStatus = .end
             }
         }
     }
-    private var drivenMiles: Double = 0 {
+    private(set) var drivenSeaMiles: Double = 0 {
         didSet {
-             milesLbl.text = "Miles: " + "\(drivenMiles)"
+            gameView.scoreStack.drivenSeaMilesLbl.text = "Miles: " + "\(drivenSeaMiles)"
         }
     }
     private var knots: Int {
@@ -36,47 +36,27 @@ class GameViewController: UIViewController {
     private var countdown = 0 {
         didSet {
             popoverMenuBtn.isEnabled = false
-            var countdownLabel = createLabel()
-            countdownLabel = configureCountdownLabel(countdownLabel)
-            countdownLabel.text = "\(countdown)"
+            let countdownLabel = createLabel()
+            configureLabel(countdownLabel)
+            layoutForLabel(countdownLabel)
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
                 if countdownLabel.text == "GO" {
                     countdownLabel.removeFromSuperview()
                     timer.invalidate()
-                    self?.countdownTimer.start(beginingValue: 5, interval: 1.0, lastSecondsReminderCount: 10)
+                    self?.gameView.countdownTimer.start(beginingValue: 5, interval: 1.0, lastSecondsReminderCount: 10)
                 } else {
                     countdownLabel.text = countdownLabel.text == "1" ? "GO": String(Int(countdownLabel.text!)! - 1)
                 }
             }
         }
     }
-    
-    @IBOutlet private weak var knotsLbl: UILabel! {
-        didSet {
-            knotsLbl.text = "Knots: " + "\(knots)"
-        }
-    }
-    @IBOutlet private weak var milesLbl: UILabel! {
-        didSet {
-            milesLbl.text = String(format: "Miles: %.2f", drivenMiles)
-        }
-    }
-    @IBOutlet private weak var crashCounterLbl: UILabel! {
-        didSet {
-            crashCounterLbl.text = "Crashes: " + "\(crashCount)"
-        }
-    }
+
     @IBOutlet private weak var popoverMenuBtn: UIBarButtonItem!
-    @IBOutlet private weak var countdownTimer: SRCountdownTimer! {
-        didSet {
-            countdownTimer.delegate = self
-            countdownTimer.labelFont = UIFont.systemFont(ofSize: 20)
-        }
-    }
-    
     @IBOutlet private weak var gameView: GameView! {
         didSet {
             gameView.horizontalSlider.addTarget(self, action: #selector(moveShip), for: .valueChanged)
+            gameView.countdownTimer.delegate = self
+          
         }
     }
     
@@ -99,7 +79,7 @@ class GameViewController: UIViewController {
                     if let playerlist = presenter.playerList {
                         vc.highscoreList = playerlist
                     }
-                    vc.drivenMiles = drivenMiles
+                    vc.drivenMiles = drivenSeaMiles
                     presenter.gameStatus = .canceled
                 }
             default:
@@ -119,6 +99,7 @@ class GameViewController: UIViewController {
         gameView.icebergs.enumerated().forEach{iceberg in
             presenter.moveIcebergAccordingToCrashCount(crashCount)
             if iceberg.element.frame.intersects(gameView.ship.frame) {
+                crashCount += 1
                 UIDevice.vibrate()
                 intersectionAnimation()
                 presenter.intersectionWithIceberg(at: iceberg.offset)
@@ -130,7 +111,7 @@ class GameViewController: UIViewController {
     private func resetTimer() {
         displayLink?.invalidate()
         displayLink = nil
-        countdownTimer.reset()
+        gameView.countdownTimer.reset()
     }
     
 }
@@ -147,25 +128,26 @@ extension GameViewController {
     
     private func resetLabels() {
         crashCount = 0
-        drivenMiles = 0
+        drivenSeaMiles = 0
     }
     
     private func createLabel() -> UILabel{
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         gameView.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: gameView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.centerYAnchor).isActive = true
         return label
     }
     
-    private func configureCountdownLabel(_ label: UILabel) -> UILabel {
+    private func configureLabel(_ label: UILabel){
         label.textColor = UIColor.white
         label.text = presenter.gameStatus == .new ? "\(countdown)": presenter.gameStatus?.rawValue
-        let font =  UIFont.preferredFont(forTextStyle: .body).withSize(40)
-        label.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: font)
+        label.font = UIFont.scalableFont(forTextStyle: .body, fontSize: 40)
         label.adjustsFontForContentSizeCategory = true
-        return label
+    }
+    
+    private func layoutForLabel(_ label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerXAnchor.constraint(equalTo: gameView.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.centerYAnchor).isActive = true
     }
     
     private func intersectionAnimation() {
@@ -202,26 +184,29 @@ extension GameViewController: PresenterGameView {
     }
     
     func startGame() {
-        self.countdown = 3
+        crashCount = 0
+        countdown = 3
     }
     
     func pauseGame() {
         gameView.addSubview(pauseView)
-        countdownTimer.pause()
+        gameView.countdownTimer.pause()
         displayLink?.isPaused = true
     }
     
     func resumeGame() {
         pauseView.removeFromSuperview()
-        countdownTimer.resume()
+        gameView.countdownTimer.resume()
         displayLink?.isPaused = false
     }
     
+    //TODO check creation of sperate class for alert
     func showAlertForHighscoreEntry(){
+        let drivenMiles = self.drivenSeaMiles
         let alert = UIAlertController(title: "Name for Highscore", message: "", preferredStyle: .alert)
         let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
             if let userName = alert.textFields?.first?.text, !userName.isEmpty {
-                self.presenter.save(of: userName, with: self.drivenMiles)
+                self.presenter.save(of: userName, with: drivenMiles)
                 self.performSegue(withIdentifier: "showHighscoreList", sender: self)
             }
         }
@@ -241,7 +226,6 @@ extension GameViewController: PresenterGameView {
         })
         present(alert, animated: true)
     }
-    
 }
 
 // view delegate methods
@@ -259,7 +243,7 @@ extension GameViewController: MenuDelegate, SRCountdownTimerDelegate, UIPopoverP
     }
     
     func timerDidUpdateCounterValue(sender: SRCountdownTimer, newValue: Int) {
-        drivenMiles = (drivenMiles + presenter.calculateDrivenSeaMiles(from: knots)).round(to: 2)
+        drivenSeaMiles = (drivenSeaMiles + presenter.calculateDrivenSeaMiles(from: knots)).round(to: 2)
     }
     
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
