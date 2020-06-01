@@ -58,6 +58,8 @@ class GameView: UIView {
         return icebergViewArray
     }()
     
+    private lazy var pauseView = PauseView()
+    
     private let sliderBottomConstraint: CGFloat = 25
     private let sliderLeadingConstraint: CGFloat = 20
     private let space: CGFloat = 60
@@ -72,18 +74,16 @@ class GameView: UIView {
         setupView()
     }
     
-    override func didAddSubview(_ subview: UIView) {
-        if subview is PauseView {
-            ship.isHidden = true
-            icebergs.forEach{$0.isHidden = true}
-        }
+    func addPauseView() {
+        self.addSubview(pauseView)
+        ship.isHidden = true
+        icebergs.forEach{$0.isHidden = true}
     }
     
-    override func willRemoveSubview(_ subview: UIView) {
-        if subview is PauseView {
-            ship.isHidden = false
-            icebergs.forEach{$0.isHidden = false}
-        }
+    func removePauseView() {
+        pauseView.removeFromSuperview()
+        ship.isHidden = false
+        icebergs.forEach{$0.isHidden = false}
     }
     
     private func setupView() {

@@ -13,8 +13,6 @@ protocol PresenterGameView:class {
     var mainView: GameView {get}
     func updateView(from model: Titanic?)
     func startGame()
-    func pauseGame()
-    func resumeGame()
     func showAlertForHighscoreEntry()
 }
 
@@ -23,13 +21,14 @@ class GamePresenter {
     private weak var presentingView: PresenterGameView?
     private lazy var startDistanceBetweenIcebergs: [Double] = {
         var array = [Double]()
+        //TODO Checking for presenting view nil
         for index in 0..<presentingView!.mainView.icebergs.count{
             let distance = Double(index) * Double(presentingView!.mainView.ship.frame.height + presentingView!.mainView.ship.frame.height/2)
             array.append(distance)
         }
         return array
     }()
-//    private var drivenSeaMiles = 0.0
+
     var playerList: [Player]? {
         return game?.players
     }
@@ -50,16 +49,16 @@ class GamePresenter {
                 case .new:
                     game = createGameModel()
                 case .paused:
-                    view.pauseGame()
+                    view.mainView.countdownTimer.pause()
                 case .resumed:
-                    view.resumeGame()
+                    view.mainView.countdownTimer.resume()
                 case .canceled:
                     game = nil
                 case .end:
                     if verifyHighscoreEntry() {
                         view.showAlertForHighscoreEntry()
+                        view.mainView.countdownTimer.pause()
                     }
-                     game = nil
                 }
             }
         }
@@ -90,7 +89,7 @@ class GamePresenter {
     }
     
     func save(of userName: String, with drivenMiles: Double) {
-        game?.savePlayer(userName: userName, drivenMiles: drivenMiles)
+        game?.savePlayerInHighscoreList(userName: userName, drivenMiles: drivenMiles)
     }
 }
 
@@ -115,12 +114,15 @@ extension GamePresenter {
     }
     
     private func verifyHighscoreEntry() -> Bool {
-        if playerList != nil, playerList!.count == 10 {
-                if let lastPlayerInList = playerList!.last {
-                    //TODO drivenSeaMiles
-                    return lastPlayerInList.drivenMiles < 0.0
+
+        if playerList != nil {
+            if playerList!.count < 10 {
+                return true
+            } else if playerList!.count == 10 {
+                if let drivenSeaMiles = Double(presentingView!.mainView.scoreStack.drivenSeaMilesLbl.text!) {
+                     return playerList!.last!.drivenMiles < drivenSeaMiles ? true:false
                 }
-            return true
+            }
         }
         return false
     }

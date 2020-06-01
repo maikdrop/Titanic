@@ -36,7 +36,7 @@ class HighscoreListTableViewController: UITableViewController {
         let highscoreEntryText = "\(indexPath.row + 1)" + ". " + highscoreList[indexPath.row].name + ": " + "\(highscoreList[indexPath.row].drivenMiles)" + " miles"
         cell.textLabel?.attributedText = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont.scalableFont(forTextStyle: .body, fontSize: 17)])
         if indexPath.row == latestEntry {
-            cell.textLabel?.attributedText = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont.scalableWeightFont(forTextStyle: .body, fontSize: 20, weight: .bold)])
+            cell.textLabel?.attributedText = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont.scalableWeightFont(forTextStyle: .body, fontSize: 18, weight: .bold)])
         }
         return cell
     }

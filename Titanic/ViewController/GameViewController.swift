@@ -15,7 +15,6 @@ class GameViewController: UIViewController {
     
     private lazy var presenter = GamePresenter(view: self)
     private var displayLink: CADisplayLink?
-    private var pauseView = PauseView()
     private var crashCount = 0 {
         didSet {
             gameView.scoreStack.knotsLbl.text = "Knots: " + "\(knots)"
@@ -50,13 +49,13 @@ class GameViewController: UIViewController {
             }
         }
     }
-
+    
     @IBOutlet private weak var popoverMenuBtn: UIBarButtonItem!
     @IBOutlet private weak var gameView: GameView! {
         didSet {
             gameView.horizontalSlider.addTarget(self, action: #selector(moveShip), for: .valueChanged)
             gameView.countdownTimer.delegate = self
-          
+            
         }
     }
     
@@ -172,7 +171,8 @@ extension GameViewController: PresenterGameView {
     
     func updateView(from model: Titanic?) {
         if model == nil {
-            pauseView.removeFromSuperview()
+            popoverMenuBtn.isEnabled = true
+            gameView.removePauseView()
             resetTimer()
             resetGameViewLayout()
             resetLabels()
@@ -188,18 +188,6 @@ extension GameViewController: PresenterGameView {
         countdown = 3
     }
     
-    func pauseGame() {
-        gameView.addSubview(pauseView)
-        gameView.countdownTimer.pause()
-        displayLink?.isPaused = true
-    }
-    
-    func resumeGame() {
-        pauseView.removeFromSuperview()
-        gameView.countdownTimer.resume()
-        displayLink?.isPaused = false
-    }
-    
     //TODO check creation of sperate class for alert
     func showAlertForHighscoreEntry(){
         let drivenMiles = self.drivenSeaMiles
@@ -208,6 +196,7 @@ extension GameViewController: PresenterGameView {
             if let userName = alert.textFields?.first?.text, !userName.isEmpty {
                 self.presenter.save(of: userName, with: drivenMiles)
                 self.performSegue(withIdentifier: "showHighscoreList", sender: self)
+                self.presenter.gameStatus = .canceled
             }
         }
         doneAction.isEnabled = false
@@ -224,6 +213,7 @@ extension GameViewController: PresenterGameView {
                 doneAction.isEnabled = textIsNotEmpty
             }
         })
+        popoverMenuBtn.isEnabled = false
         present(alert, animated: true)
     }
 }
@@ -233,6 +223,18 @@ extension GameViewController: MenuDelegate, SRCountdownTimerDelegate, UIPopoverP
     
     func changeGameStatus(to newStatus: GamePresenter.GameStatus) {
         presenter.gameStatus = newStatus
+    }
+    
+    func timerDidPause(sender: SRCountdownTimer) {
+        if self.presentedViewController as? UIAlertController == nil {
+            gameView.addPauseView()
+        }
+        displayLink?.isPaused = true
+    }
+    
+    func timerDidResume(sender: SRCountdownTimer) {
+        gameView.removePauseView()
+        displayLink?.isPaused = false
     }
     
     func timerDidStart(sender: SRCountdownTimer) {
