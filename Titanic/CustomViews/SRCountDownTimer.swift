@@ -72,6 +72,10 @@ class SRCountdownTimer: UIView {
         return label
     }()
     
+    deinit {
+        print("DEINIT SRCountdownTimer")
+    }
+    
     private func configureLabel(_ label: UILabel) {
         label.text = String(currentCounterValue)
         if let color = self.labelTextColor {

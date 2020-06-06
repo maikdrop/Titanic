@@ -12,21 +12,6 @@ struct Point {
     var x = 0.0, y = 0.0
 }
 
-extension Point: Hashable, Comparable {
-    static func == (lhs: Point, rhs: Point) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(x)
-        hasher.combine(y)
-    }
-    
-    static func < (lhs: Point, rhs: Point) -> Bool {
-        return (lhs.x < rhs.x) && (lhs.y < rhs.y)
-    }
-}
-
 struct Size {
     var width = 0.0, height = 0.0
 }
@@ -35,7 +20,6 @@ struct Iceberg {
     
     var origin = Point()
     var size = Size()
-//    var hadCollosion = false
     
     var center: Point {
         get {
@@ -47,5 +31,16 @@ struct Iceberg {
             origin.x = newCenter.x - (size.width / 2)
             origin.y = newCenter.y - (size.height / 2)
         }
+    }
+}
+
+extension Iceberg: Comparable {
+    
+    static func < (lhs: Iceberg, rhs: Iceberg) -> Bool {
+        return (lhs.center.y < rhs.center.y)
+    }
+    
+    static func == (lhs: Iceberg, rhs: Iceberg) -> Bool {
+        return lhs.center.y == rhs.center.y
     }
 }

@@ -47,24 +47,8 @@ class ScoreStackView: UIStackView {
         label.font = UIFont.scalableFont(forTextStyle: .title3, fontSize: 20)
         label.adjustsFontForContentSizeCategory = true
     }
-}
-
-extension UIFont {
-    static func scalableFont(forTextStyle textStyle: TextStyle, fontSize: CGFloat) -> UIFont {
-        let preferredFont = UIFont.preferredFont(forTextStyle: textStyle).withSize(fontSize)
-        if #available(iOS 11.0, *) {
-            return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: preferredFont)
-        } else {
-            return UIFont.systemFont(ofSize: fontSize)
-        }
-    }
     
-    static func scalableWeightFont(forTextStyle textStyle: TextStyle, fontSize: CGFloat, weight: Weight) -> UIFont {
-        let font = UIFont.systemFont(ofSize: fontSize, weight: weight)
-        if #available(iOS 11.0, *) {
-            return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: font)
-        } else {
-            return UIFont.boldSystemFont(ofSize: fontSize)
-        }
+    deinit {
+        print("DEINIT ScoreStackView")
     }
 }

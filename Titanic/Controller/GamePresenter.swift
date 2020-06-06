@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PresenterGameView:class {
-    
+    //TODO remove mainView -> add pauseGame(), resumeGame()
     var mainView: GameView {get}
     func updateView(from model: Titanic?)
     func startGame()
@@ -19,16 +19,6 @@ protocol PresenterGameView:class {
 class GamePresenter {
     
     private weak var presentingView: PresenterGameView?
-    private lazy var startDistanceBetweenIcebergs: [Double] = {
-        var array = [Double]()
-        //TODO Checking for presenting view nil
-        for index in 0..<presentingView!.mainView.icebergs.count{
-            let distance = Double(index) * Double(presentingView!.mainView.ship.frame.height + presentingView!.mainView.ship.frame.height/2)
-            array.append(distance)
-        }
-        return array
-    }()
-
     var playerList: [Player]? {
         return game?.players
     }
@@ -47,8 +37,10 @@ class GamePresenter {
             if let view = presentingView, let status = gameStatus {
                 switch status {
                 case .new:
+                    game = nil
                     game = createGameModel()
                 case .paused:
+                    //TODO view.pauseGame()
                     view.mainView.countdownTimer.pause()
                 case .resumed:
                     view.mainView.countdownTimer.resume()
@@ -57,7 +49,6 @@ class GamePresenter {
                 case .end:
                     if verifyHighscoreEntry() {
                         view.showAlertForHighscoreEntry()
-                        view.mainView.countdownTimer.pause()
                     }
                 }
             }
@@ -68,6 +59,10 @@ class GamePresenter {
         self.presentingView = view
     }
     
+    deinit {
+        print("DEINIT GamePresenter")
+    }
+    
     func calculateDrivenSeaMiles(from knots: Int) -> Double {
         Double(knots) / 60
     }
@@ -76,15 +71,18 @@ class GamePresenter {
         let factor = 1.0 - Double(crashCount) * 0.2
         game?.translateIcebergsAcrossYAxis(with: factor)
         presentingView?.updateView(from: game)
-        game?.icebergs.enumerated().forEach({iceberg in
-            if iceberg.element.origin.y > Double(presentingView!.mainView.frame.height) {
-                game?.resetIcebergAcrossYAxis(at: iceberg.offset)
-            }
-        })
+        if presentingView != nil {
+            game?.icebergs.enumerated().forEach({iceberg in
+                if iceberg.element.origin.y > Double(presentingView!.mainView.frame.height) {
+                    game?.loopingIcebergTranslation(at: iceberg.offset)
+                    presentingView!.updateView(from: game)
+                }
+            })
+        }
     }
     
-    func intersectionWithIceberg(at index: Int) {
-        game?.resetIcebergAcrossYAxis(at: index)
+    func intersectionOfShipAndIceberg() {
+        game?.shipCollisionWithIceberg()
         presentingView?.updateView(from: game)
     }
     
@@ -127,32 +125,20 @@ extension GamePresenter {
         return false
     }
 
-    
     private func createGameModel() -> Titanic? {
-        
-        var icebergOrigin = [(x: Double, y: Double)]()
-        var icebergSize =  [(width: Double, height: Double)]()
         if let view = presentingView {
+            let shipHeight = Double(view.mainView.ship.frame.height)
+            var icebergSize = (width: 0.0, height: 0.0)
+            if let iceberg = view.mainView.icebergs.first {
+                icebergSize.width = Double(iceberg.frame.width)
+                icebergSize.height = Double(iceberg.frame.height)
+            }
+            var icebergXOrigin = [Double]()
             view.mainView.icebergs.forEach({ iceberg in
-                let randomIndex = startDistanceBetweenIcebergs.index(startDistanceBetweenIcebergs.startIndex, offsetBy: startDistanceBetweenIcebergs.count.arc4random)
-                icebergOrigin.append((Double(iceberg.frame.minX), 0 - startDistanceBetweenIcebergs.remove(at: randomIndex)))
-                icebergSize.append((Double(iceberg.imageSize.width), Double(iceberg.imageSize.height)))
+                icebergXOrigin.append((Double(iceberg.frame.minX)))
             })
-            return Titanic(numberOfIcebergs: view.mainView.icebergs.count, icebergOrigin: icebergOrigin, icebergSize: icebergSize)
+            return Titanic(icebergXOrigin: icebergXOrigin, icebergSize: icebergSize, shipHeight: shipHeight)
         }
         return nil
     }
 }
-
-extension Int {
-    var arc4random: Int {
-        if self > 0 {
-            return Int(arc4random_uniform(UInt32(self)))
-        } else if self < 0 {
-            return -Int(arc4random_uniform(UInt32(abs(self))))
-        } else {
-            return 0
-        }
-    }
-}
-

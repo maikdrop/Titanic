@@ -9,6 +9,8 @@
 import UIKit
 import SRCountdownTimer
 
+//TODO Add Protocoll for communication with view Controller
+
 class GameView: UIView {
     
     private (set) lazy var scoreStack: ScoreStackView = {
@@ -50,7 +52,7 @@ class GameView: UIView {
     private(set) lazy var icebergs: [IcebergView] = {
         var icebergViewArray = [IcebergView]()
         let icebergCount = Int((ScreenSize.currentDevice.width / IcebergView().imageSize.width).rounded())
-        for index in 0..<icebergCount {
+        for index in 0..<icebergCount + 1 {
             let icebergView = IcebergView()
             icebergView.backgroundColor = .clear
             icebergViewArray.append(icebergView)
@@ -58,8 +60,8 @@ class GameView: UIView {
         return icebergViewArray
     }()
     
-    private lazy var pauseView = PauseView()
-    
+    private var pauseView: PauseView?
+    private var smokeView: SmokeView?
     private let sliderBottomConstraint: CGFloat = 25
     private let sliderLeadingConstraint: CGFloat = 20
     private let space: CGFloat = 60
@@ -74,16 +76,31 @@ class GameView: UIView {
         setupView()
     }
     
+    deinit {
+        print("DEINIT GameView")
+    }
+    
     func addPauseView() {
-        self.addSubview(pauseView)
+        pauseView = PauseView()
+        addSubview(pauseView!)
         ship.isHidden = true
         icebergs.forEach{$0.isHidden = true}
     }
     
     func removePauseView() {
-        pauseView.removeFromSuperview()
+        pauseView?.removeFromSuperview()
+        pauseView = nil
         ship.isHidden = false
         icebergs.forEach{$0.isHidden = false}
+    }
+    
+    func addSmokeView() {
+        smokeView = SmokeView(frame: frame)
+        addSubview(smokeView!)
+    }
+    
+    func removeSmokeView() {
+        smokeView?.removeFromSuperview()
     }
     
     private func setupView() {
@@ -126,16 +143,18 @@ class GameView: UIView {
     private func shipLayout() {
         let safeAreaMaxY = UIApplication.shared.windows[0].safeAreaLayoutGuide.layoutFrame.maxY
         let yCoordinateOfShip = safeAreaMaxY - sliderBottomConstraint - space - ship.imageSize.height
-        ship.frame = CGRect(x: bounds.width/2 - ship.imageSize.width/2, y: yCoordinateOfShip, width: ship.imageSize.width, height: ship.imageSize.height)
-        //         print(ship.frame)
+        ship.frame = CGRect(x: ScreenSize.currentDevice.width/2 - ship.imageSize.width/2, y: yCoordinateOfShip, width: ship.imageSize.width, height: ship.imageSize.height)
     }
     
     private func icebergLayout() {
-        let width = (UIScreen.main.bounds.size.width / CGFloat(icebergs.count)).rounded()
-        var center = width / 2
+        let width = (ScreenSize.currentDevice.width / CGFloat(icebergs.count-1)).rounded()
+        var center = width/2
         icebergs.enumerated().forEach{iceberg in
             iceberg.element.frame = CGRect(x: 0, y: 0, width: iceberg.element.imageSize.width, height: iceberg.element.imageSize.height)
             iceberg.element.center = CGPoint(x: center, y: 0)
+            if iceberg.offset == icebergs.count-1 {
+                iceberg.element.center.x = 0
+            }
             center += width
         }
     }
@@ -146,8 +165,4 @@ extension GameView {
         static let currentDevice = UIScreen.main.bounds.size
         static let iphoneSE = CGSize(width: 320, height: 568)
     }
-}
-
-extension UIColor {
-    static let oceanBlue = UIColor.init(red: 0, green: 0.328521, blue: 0.574885, alpha: 1)
 }

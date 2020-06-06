@@ -12,7 +12,7 @@ class IcebergView: UIView {
     
     var imageSize: CGSize {
         let ratio = GameView.ScreenSize.currentDevice.width / GameView.ScreenSize.iphoneSE.width
-        return CGSize(width: 100 * ratio, height: 75 * ratio)
+        return CGSize(width: 100 * ratio, height: 53 * ratio)
     }
     
     override func draw(_ rect: CGRect) {
@@ -21,5 +21,9 @@ class IcebergView: UIView {
                 newImage.draw(in: bounds)
             }
         }
+    }
+    
+    deinit {
+        print("DEINIT IcebergView")
     }
 }

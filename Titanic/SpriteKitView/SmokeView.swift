@@ -49,4 +49,8 @@ class SmokeView: SKView {
         }
         presentScene(newScene)
     }
+    
+    deinit {
+        print("DEINIT SmokeView")
+    }
 }
