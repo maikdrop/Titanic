@@ -10,9 +10,9 @@ import Foundation
 
 class Titanic {
     
-    private var icebergInitOriginY = [Double]()
-    private var icebergInitOriginX = [Double]()
-    private var icebergSpacingAcrossYAxis = 0.0
+    private var icebergInitXOrigin = [Double]()
+    private var icebergInitYOrigin = [Double]()
+    private var distanceBetweenIcebergs = 0.0
     private(set) var icebergs = [Iceberg]()
     private(set) lazy var players: [Player] = {
         if let url = try? FileManager.default.url(for: .applicationSupportDirectory,
@@ -27,66 +27,54 @@ class Titanic {
         return [Player]()
     }()
     
-    init(icebergXOrigin: [Double], icebergSize: (width: Double, height: Double), shipHeight: Double) {
-        self.icebergSpacingAcrossYAxis = icebergSize.height + 1.5 * shipHeight
-        self.icebergInitOriginX = icebergXOrigin
-        for index in 0..<icebergXOrigin.count{
-            let yOrigin = Double(index) * self.icebergSpacingAcrossYAxis
-            let origin = Point(x: icebergXOrigin[index], y: -yOrigin)
+    init(icebergInitXOrigin: [Double], icebergInitYOrigin: [Double], icebergSize: (width: Double, height: Double)) {
+        self.icebergInitXOrigin = icebergInitXOrigin
+        self.icebergInitYOrigin = icebergInitYOrigin
+        for index in 0..<icebergInitXOrigin.count {
+            let origin = Point(x: icebergInitXOrigin[index], y: icebergInitYOrigin[index])
             let size = Size(width: icebergSize.width, height: icebergSize.height)
             let iceberg = Iceberg(origin: origin, size: size)
-            icebergInitOriginY.append(iceberg.origin.y)
             icebergs += [iceberg]
         }
-        shuffleLastIcebergAcrossXAxis()
-        shuffleIcebergsAcrossYAxis()
+        distanceBetweenIcebergs = calculateDistanceBetweenIcebergs()
+        shuffleIcebergVertically(at: Array(icebergs.indices))
     }
     
-    func translateIcebergsAcrossYAxis(with factor: Double = 1) {
+    deinit {
+        print("DEINIT Titanic")
+    }
+    
+    func moveIcebergVertically(by factor: Double) {
         for index in 0..<icebergs.count {
             icebergs[index].center.y += factor
         }
     }
     
-    func loopingIcebergTranslation(at index: Int) {
-      
-        if let minimumIceberg = icebergs.min() {
-              icebergs[index].origin.y = minimumIceberg.origin.y - self.icebergSpacingAcrossYAxis
+    func resetIceberg(at index: Int) {
+        if let icebergWithSmallestY = icebergs.min() {
+            icebergs[index].origin.y = icebergWithSmallestY.origin.y - distanceBetweenIcebergs
         }
-        shuffleIcebergAcrossXAxis(at: index)
+        shuffleIcebergHorizontally(at: [index])
+       
     }
     
-    func shipCollisionWithIceberg() {
+    func resetAllIcebergsAfterCollisionWithShip() {
+        shuffleIcebergHorizontally(at: Array(icebergs.indices))
+        shuffleIcebergVertically(at: Array(icebergs.indices))
+    }
+    
+    func resetSetIcebergsToInitPosition() {
         for index in 0..<icebergs.count {
-            icebergs[index].origin.x = icebergInitOriginX[index]
+            icebergs[index].origin.x = icebergInitXOrigin[index]
+            icebergs[index].origin.y = icebergInitYOrigin[index]
         }
-        shuffleIcebergsAcrossYAxis()
-        shuffleLastIcebergAcrossXAxis()
-    }
-    
-    private func shuffleLastIcebergAcrossXAxis() {
-        let randomIndex = icebergs.index(icebergs.startIndex, offsetBy: (icebergs.count-1).arc4random)
-        icebergs[icebergs.count-1].origin.x = icebergInitOriginX[randomIndex]
-            
-    }
-    
-    private func shuffleIcebergsAcrossYAxis() {
-        var icebergOriginY = self.icebergInitOriginY
-        for index in 0..<icebergs.count {
-            let randomIndex = icebergOriginY.index(icebergOriginY.startIndex, offsetBy: icebergOriginY.count.arc4random)
-            self.icebergs[index].origin.y = icebergOriginY.remove(at: randomIndex)
-        }
-    }
-    
-    private func shuffleIcebergAcrossXAxis(at index: Int) {
-        let randomIndex = icebergInitOriginX.index(icebergInitOriginX.startIndex, offsetBy: (icebergInitOriginX.count-1).arc4random)
-        self.icebergs[index].origin.x = icebergInitOriginX[randomIndex]
+         shuffleIcebergVertically(at: Array(icebergs.indices))
     }
 
-    func savePlayerInHighscoreList(userName: String, drivenMiles: Double) {
+    func savePlayerInHighscoreList(userName: String, drivenSeaMiles: Double) {
         
         if players.count == 10 {players.removeLast()}
-        let newPlayer = Player(name: userName, drivenMiles: drivenMiles)
+        let newPlayer = Player(name: userName, drivenMiles: drivenSeaMiles)
         players.append(newPlayer)
         players.sort(by: >)
      
@@ -103,5 +91,28 @@ class Titanic {
                 print("couldn`t save \(error)")
             }
         }
+    }
+    
+    private func shuffleIcebergHorizontally(at indices: [Int]) {
+        var xOrigin = icebergInitXOrigin
+        indices.forEach({index in
+            let randomIndex = Int.random(in: 0 ..< xOrigin.count)
+            icebergs[index].origin.x = xOrigin.remove(at: randomIndex)
+        })
+    }
+    
+    private func shuffleIcebergVertically(at indices: [Int]) {
+       var yOrigin = icebergInitYOrigin
+        for index in 0..<icebergs.count {
+            let randomIndex = Int.random(in: 0 ..< yOrigin.count)
+            self.icebergs[index].origin.y = yOrigin.remove(at: randomIndex)
+        }
+    }
+    
+    private func calculateDistanceBetweenIcebergs() -> Double {
+        if icebergs.count > 1 {
+            return abs(icebergs[0].origin.y.distance(to: icebergs[1].origin.y))
+        }
+        return 0
     }
 }

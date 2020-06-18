@@ -44,7 +44,7 @@
                         <viewLayoutGuide key="safeArea" id="9zB-SD-zce"/>
                     </view>
                     <navigationItem key="navigationItem" id="MYD-x1-mvb">
-                        <barButtonItem key="rightBarButtonItem" image="info.circle" catalog="system" id="aWT-x7-luS">
+                        <barButtonItem key="rightBarButtonItem" title="Rules" id="aWT-x7-luS">
                             <connections>
                                 <segue destination="6mC-3C-6Iz" kind="show" id="s5h-hJ-wlZ"/>
                             </connections>
@@ -56,7 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BY-O0-m3X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1007" y="-84"/>
+            <point key="canvasLocation" x="1007" y="-86"/>
         </scene>
         <!--Top Ten Highscore-->
         <scene sceneID="hXp-qu-gis">
@@ -67,7 +67,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="highscoreEntry" textLabel="tNW-vf-O5k" style="IBUITableViewCellStyleDefault" id="G9V-fb-U3T">
+                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="highscoreEntryCell" textLabel="tNW-vf-O5k" style="IBUITableViewCellStyleDefault" id="G9V-fb-U3T">
                                 <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G9V-fb-U3T" id="AsJ-hA-gkY">
@@ -100,7 +100,30 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnc-da-Emd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2756" y="848"/>
+            <point key="canvasLocation" x="2841" y="731"/>
+        </scene>
+        <!--Pause View Controller-->
+        <scene sceneID="MB0-J9-OSd">
+            <objects>
+                <viewController id="wzQ-wa-1SM" customClass="PauseViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fkP-Iq-EpO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="lZ1-xX-IJY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="rra-LN-6Hs">
+                        <barButtonItem key="rightBarButtonItem" title="Resume" style="done" id="eS3-nv-Ypg">
+                            <connections>
+                                <segue destination="CxM-gh-swx" kind="unwind" unwindAction="goBackToResumeGameWithSegue:" id="QEE-Gj-woK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ns8-Tk-1Yr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="CxM-gh-swx" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3838.125" y="-65.492957746478879"/>
         </scene>
         <!--Rules-->
         <scene sceneID="MiU-xs-MOo">
@@ -112,13 +135,13 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuI-87-Wq3">
                                 <rect key="frame" x="0.0" y="44" width="320" height="524"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="oMM-Ch-2Ea" firstAttribute="bottom" secondItem="UuI-87-Wq3" secondAttribute="bottom" id="6gK-ee-goz"/>
                             <constraint firstItem="oMM-Ch-2Ea" firstAttribute="trailing" secondItem="UuI-87-Wq3" secondAttribute="trailing" id="GPE-3I-wHZ"/>
@@ -134,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i9w-Db-0qI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1007" y="-883"/>
+            <point key="canvasLocation" x="1007" y="-864"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -147,60 +170,22 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Q4R-IL-1jI">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="chevron.down" catalog="system" id="HK5-fe-ziC">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="action" id="HK5-fe-ziC" userLabel="GameControl">
                             <connections>
-                                <segue destination="Xcu-M3-ORT" kind="popoverPresentation" identifier="showPopoverMenu" popoverAnchorBarButtonItem="HK5-fe-ziC" id="QeY-Ss-gQi">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
-                                </segue>
+                                <action selector="changeGameStatus:" destination="BYZ-38-t0r" id="5YF-Vk-RfU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="gameControlBtn" destination="HK5-fe-ziC" id="nC1-cC-PjR"/>
                         <outlet property="gameView" destination="8bC-Xf-vdC" id="ToE-Cp-NNH"/>
-                        <outlet property="popoverMenuBtn" destination="HK5-fe-ziC" id="JDh-cm-7wK"/>
                         <segue destination="wxg-ea-M6P" kind="presentation" identifier="showHighscoreList" id="3gH-f0-M40"/>
+                        <segue destination="Ph8-Tn-fhj" kind="presentation" identifier="showPauseView" modalPresentationStyle="overFullScreen" id="3sz-97-VlQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1875" y="-59.154929577464792"/>
-        </scene>
-        <!--Menu Table View Controller-->
-        <scene sceneID="eL0-fB-mdS">
-            <objects>
-                <tableViewController storyboardIdentifier="showPopoverMenu" id="Xcu-M3-ORT" customClass="MenuTableViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Uwc-vZ-1qW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellMenuList" textLabel="109-vd-yPp" style="IBUITableViewCellStyleDefault" id="L75-CE-NwI">
-                                <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L75-CE-NwI" id="S3Q-x1-Ubk">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="109-vd-yPp">
-                                            <rect key="frame" x="16" y="0.0" width="288" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Xcu-M3-ORT" id="2Rw-l9-HUr"/>
-                            <outlet property="delegate" destination="Xcu-M3-ORT" id="vz2-Ox-Yu7"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JLh-o3-v0z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2893" y="-59"/>
+            <point key="canvasLocation" x="1875" y="-65"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8wi-gQ-Bmx">
@@ -237,11 +222,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQJ-hV-bQr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1875" y="849"/>
+            <point key="canvasLocation" x="1875" y="731"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="q6M-UF-nYh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ph8-Tn-fhj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="24g-RV-Eta">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wzQ-wa-1SM" kind="relationship" relationship="rootViewController" id="2x0-Kq-k0S"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bKS-pZ-gDt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2840.625" y="-65.492957746478879"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="chevron.down" catalog="system" width="128" height="72"/>
-        <image name="info.circle" catalog="system" width="128" height="121"/>
-    </resources>
 </document>

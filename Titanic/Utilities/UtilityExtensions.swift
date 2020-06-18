@@ -1,5 +1,5 @@
 //
-//  Utilities.swift
+//  UtilitieExtensions.swift
 //  Titanic
 //
 //  Created by Maik on 04.06.20.
@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
+//MARK: - Utility Extensions
 extension UIColor {
     static let oceanBlue = UIColor.init(red: 0, green: 0.328521, blue: 0.574885, alpha: 1)
 }
@@ -36,15 +37,21 @@ extension Double {
     }
 }
 
-extension Int {
-    var arc4random: Int {
-        if self > 0 {
-            return Int(arc4random_uniform(UInt32(self)))
-        } else if self < 0 {
-            return -Int(arc4random_uniform(UInt32(abs(self))))
-        } else {
-            return 0
-        }
+extension Sequence where Element: Hashable {
+    func uniqued() -> [Element] {
+        var seen = Set<Element>()
+        return self.filter {seen.insert($0).inserted}
     }
 }
 
+extension UIFont {
+    func scalableFont(forTextStyle textStyle: TextStyle, fontSize: CGFloat) -> UIFont {
+        let preferredFont = UIFont.preferredFont(forTextStyle: textStyle).withSize(fontSize)
+        return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: preferredFont)
+    }
+    
+    func scalableWeightFont(forTextStyle textStyle: TextStyle, fontSize: CGFloat, weight: Weight) -> UIFont {
+        let font = UIFont.systemFont(ofSize: fontSize, weight: weight)
+        return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: font)
+    }
+}

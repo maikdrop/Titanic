@@ -10,12 +10,12 @@ import UIKit
 
 class GameRulesViewController: UIViewController {
     
-    @IBOutlet weak var textView: UITextView! {
+    @IBOutlet private weak var textView: UITextView! {
         didSet {
-              makeAttributedString()
+            makeAttributedString()
         }
     }
-    private lazy var textFileContent = readTextFile(fileName: "Rules")
+    private lazy var textFileContent = readTextFile(fileName: RULES_FILE_NAME)
     
     private func makeAttributedString() {
         let scaledBoldFont = UIFontMetrics.default.scaledFont(for: UIFont.boldSystemFont(ofSize: 18))  
@@ -24,23 +24,20 @@ class GameRulesViewController: UIViewController {
         let attributeBoldSystemFont: [NSAttributedString.Key: Any] = [.font: scaledBoldFont]
         let atrributedString = NSMutableAttributedString()
         for string in textFileContent {
-            if string.contains("Goal:") || string.contains("Usage:") {
+            if string.contains(GOAL_SECTION_NAME) || string.contains(USAGE_SECTION_NAME) {
                 atrributedString.append(NSMutableAttributedString(string:string, attributes: attributeBoldSystemFont))
             } else {
-                 atrributedString.append(NSMutableAttributedString(string:string, attributes: attributeSystemFont))
+                atrributedString.append(NSMutableAttributedString(string:string, attributes: attributeSystemFont))
             }
         }
         textView.attributedText = atrributedString
-        textView.textColor = UIColor.label
+        textView.textColor = UIColor.white
     }
-}
-
-extension GameRulesViewController {
     
-    private func readTextFile (fileName: String) -> [String] {
+    private func readTextFile(fileName: String) -> [String] {
         var fileContents = ""
         var lineArray = [String]()
-        if let resourceUrl = Bundle.main.url(forResource: fileName, withExtension: FILE_EXTENSION) {
+        if let resourceUrl = Bundle.main.url(forResource: fileName, withExtension: TEXT_FILE_EXTENSION) {
             do {
                 fileContents = try NSString(contentsOf: resourceUrl, encoding: String.Encoding.utf8.rawValue) as String
             } catch {

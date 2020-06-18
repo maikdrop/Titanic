@@ -23,8 +23,8 @@
  */
 
 //modification for own use:
-//1. implemented Auto Layout
-//2. modified counterLabel creation in order to change label and view size depending on font content size category
+//1. modified counterLabel creation and configuration in order to change label size depending on font content size category
+//2. added auto layout for view because of having always constant space between counterlabel and view
 //cloned from github: https://github.com/rsrbk/SRCountdownTimer
 
 import UIKit
@@ -35,6 +35,7 @@ import UIKit
     @objc optional func timerDidPause(sender: SRCountdownTimer)
     @objc optional func timerDidResume(sender: SRCountdownTimer)
     @objc optional func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval)
+    @objc optional func timerDidReset(sender: SRCountdownTimer)
 }
 
 class SRCountdownTimer: UIView {
@@ -53,17 +54,17 @@ class SRCountdownTimer: UIView {
     var useMinutesAndSecondsRepresentation = false
     var moveClockWise = true
     
-    //MARK: Customization - color change of counterLabelColor and circleLineColor for the last seconds
+    //MARK: - Customization: color change of counterLabelColor and circleLineColor for the last seconds
     private var lastSecondsReminderCount = 0
 
     private weak var timer: Timer?
-    private var beginingValue: Int = 1
+    private var beginningValue: Int = 1
     private var totalTime: TimeInterval = 1
     private var elapsedTime: TimeInterval = 0
     private var interval: TimeInterval = 1 // Interval which is set by a user
     private let fireInterval: TimeInterval = 0.01 // ~60 FPS
 
-    private(set) lazy var counterLabel: UILabel = {
+    private lazy var counterLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = self.labelFont
@@ -77,17 +78,37 @@ class SRCountdownTimer: UIView {
     }
     
     private func configureLabel(_ label: UILabel) {
-        label.text = String(currentCounterValue)
+        label.text = currentCounterValue < 10 ? "0" + String(currentCounterValue):String(currentCounterValue)
         if let color = self.labelTextColor {
             label.textColor = color
         }
         label.sizeToFit()
     }
-    
+
     private func layoutForLabel(_ label: UILabel) {
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        label.bounds.size.height = label.bounds.width
+        label.center.x = bounds.width/2
+        label.center.y = bounds.height/2
+    }
+    
+    override func didMoveToSuperview() {
+        
+        addConstraint(NSLayoutConstraint(
+            item: self,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: counterLabel,
+            attribute: .height,
+            multiplier: 1,
+            constant: viewConstraintToCounterLabel))
+        addConstraint(NSLayoutConstraint(
+            item: self,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem:  counterLabel,
+            attribute: .width,
+            multiplier: 1,
+            constant: viewConstraintToCounterLabel))
     }
     
     private var currentCounterValue: Int = 0 {
@@ -120,6 +141,7 @@ class SRCountdownTimer: UIView {
     }
     
     override func draw(_ rect: CGRect) {
+       
         let context = UIGraphicsGetCurrentContext()
         let radius = (bounds.width - lineWidth) / 2
 
@@ -160,18 +182,18 @@ class SRCountdownTimer: UIView {
     /**
      * Starts the timer and the animation. If timer was previously runned, it'll invalidate it.
      * - Parameters:
-     *   - beginingValue: Value to start countdown from.
+     *   - beginningValue: Value to start countdown from.
      *   - interval: Interval between reducing the counter(1 second by default)
      */
-    func start(beginingValue: Int, interval: TimeInterval = 1, lastSecondsReminderCount: Int = 0) {
-        self.beginingValue = beginingValue
+    func start(beginningValue: Int, interval: TimeInterval = 1, lastSecondsReminderCount: Int = 0) {
+        self.beginningValue = beginningValue
         self.interval = interval
         //MARK: Customization - color of counterLabel and circleLine will be changed in the last seconds
         self.lastSecondsReminderCount = lastSecondsReminderCount
 
-        totalTime = TimeInterval(beginingValue) * interval
+        totalTime = TimeInterval(beginningValue) * interval
         elapsedTime = 0
-        currentCounterValue = beginingValue
+        currentCounterValue = beginningValue
 
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: fireInterval, target: self, selector: #selector(SRCountdownTimer.timerFired(_:)), userInfo: nil, repeats: true)
@@ -210,6 +232,7 @@ class SRCountdownTimer: UIView {
               
         timer?.invalidate()
         self.elapsedTime = 0
+        delegate?.timerDidReset?(sender: self)
         setNeedsDisplay()
         setNeedsLayout()
     }
@@ -221,7 +244,7 @@ class SRCountdownTimer: UIView {
         self.currentCounterValue = 0
         timer?.invalidate()
         
-        //MARK: Customization - counterLabelColor and circleLineColor alyways set to white before a new timer starts
+        //MARK: Customization - counterLabelColor and circleLineColor alyways set to white before new timer starts
         self.counterLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.lineColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
@@ -247,13 +270,20 @@ class SRCountdownTimer: UIView {
         if elapsedTime <= totalTime {
             setNeedsDisplay()
 
-            let computedCounterValue = beginingValue - Int(elapsedTime / interval)
+            let computedCounterValue = beginningValue - Int(elapsedTime / interval)
             if computedCounterValue != currentCounterValue {
                 currentCounterValue = computedCounterValue
             }
         } else {
             end()
         }
+    }
+}
+
+//MARK: -Constants
+extension SRCountdownTimer {
+    private var viewConstraintToCounterLabel: CGFloat {
+        15
     }
 }
 

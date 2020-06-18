@@ -12,147 +12,226 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
-    private lazy var presenter = GamePresenter(view: self)
+    private var gamePresenter: GamePresenter! {
+        didSet {
+             gamePresenter?.delegate = self
+        }
+    }
     private var displayLink: CADisplayLink?
-    private var crashCount = 0 {
-        didSet {
-            gameView.scoreStack.knotsLbl.text = "Knots: " + "\(knots)"
-            gameView.scoreStack.crashCountLbl.text = "Crashes: " + "\(crashCount)"
-            if crashCount == 5 {
-                //TODO call function in presenter: crashCountDidChange(to: crashCount)
-                presenter.gameStatus = .end
-            }
-        }
+    
+    private lazy var label: UILabel = {
+        let label = createLabel()
+        configureLabel(label)
+        layoutForLabel(label)
+        return label
+    }()
+        
+    @IBOutlet private weak var gameControlBtn: UIBarButtonItem!
+    @IBAction func changeGameStatus(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController (title: ACTION_TITLE, message: "", preferredStyle: .actionSheet)
+        gamePresenter.gameStatus?.menuList.forEach({status in
+                let style = status == .reset ? UIAlertAction.Style.destructive : UIAlertAction.Style.default
+                alert.addAction(UIAlertAction(title: status.rawValue, style: style) {_ in
+                //TODO check because of retain memory cycle
+                    self.gamePresenter.changeGameStatus(to: status)
+            })
+        })
+        alert.addAction(UIAlertAction(title: ACTION_TITLE_CANCEL_ACTION, style: .cancel) {_ in})
+        present(alert, animated: true)
     }
-    private(set) var drivenSeaMiles: Double = 0 {
-        didSet {
-            gameView.scoreStack.drivenSeaMilesLbl.text = "Miles: " + "\(drivenSeaMiles)"
-        }
-    }
-    private var knots: Int {
-        50 - crashCount * 5
-    }
-    private var countdown = 0 {
-        didSet {
-            popoverMenuBtn.isEnabled = false
-            let countdownLabel = createLabel()
-            configureLabel(countdownLabel)
-            layoutForLabel(countdownLabel)
-            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-                if countdownLabel.text == "GO" {
-                    countdownLabel.removeFromSuperview()
-                    timer.invalidate()
-                    self?.gameView.countdownTimer.start(beginingValue: 20, interval: 1.0, lastSecondsReminderCount: 10)
-                } else {
-                    countdownLabel.text = countdownLabel.text == "1" ? "GO": String(Int(countdownLabel.text!)! - 1)
-                }
-            }
+    
+    @IBOutlet private weak var gameView: GameView!
+    
+    @IBAction func goBackToResumeGame(segue: UIStoryboardSegue) {
+        if let mvcUnwoundFrom = segue.source as? PauseViewController {
+             gamePresenter.changeGameStatus(to: mvcUnwoundFrom.gameStatus)
         }
     }
     
-    @IBOutlet private weak var popoverMenuBtn: UIBarButtonItem!
-    @IBOutlet private weak var gameView: GameView! {
-        didSet {
-            //TODO put in GameView
-            gameView.horizontalSlider.addTarget(self, action: #selector(moveShip), for: .valueChanged)
-            //TODO put in GameView
-            gameView.countdownTimer.delegate = self
-            
-        }
-    }
-    //TODO put in GameView
-    @objc private func moveShip(_ sender: UISlider) {
-        let shipWidth = Float(gameView.ship.bounds.size.width)
-        let screenWidth = Float(view.bounds.size.width)
-        let distance = screenWidth - shipWidth
-        gameView.ship.center.x = CGFloat((sender.value) * distance + (shipWidth/2))
+    private var icebergObserver: NSObjectProtocol?
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        icebergObserver = NotificationCenter.default.addObserver(
+            forName: .ShipDidIntersectWithIceberg,
+            object: self.gameView,
+            queue: OperationQueue.main,
+            using: {[weak self] _ in
+                self?.intersectionOfShipAndIcebereg()
+        })
+        icebergObserver = NotificationCenter.default.addObserver(
+            forName: .IcebergDidReachEndOfView,
+            object: self.gameView,
+            queue: OperationQueue.main,
+            using: { [weak self] notification in
+                self?.icebergDidReachEndOfViewNotification(notification)
+        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNotificationObserver()
-        //TODO put in init of gamePresenter()
-        presenter.gameStatus = .new
+        gameView.addSubviews()
+        gameView.countdownTimer.delegate = self
+        setupGamePresenter()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        resetTimer()
+        gameView.countdownTimer.reset()
+        if let observer = icebergObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
      deinit {
         print("DEINIT GameViewController")
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            switch identifier {
-            case "showPopoverMenu":
-                if let vc = segue.destination as? MenuTableViewController, let popover = vc.popoverPresentationController {
-                    popover.delegate = self
-                    vc.delegate = self
-                    //TODO gameStatus should only be a variable
-                    vc.gameStatus = presenter.gameStatus
-                }
-            case "showHighscoreList":
-                if let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? HighscoreListTableViewController {
-                    if let playerlist = presenter.playerList {
-                        vc.highscoreList = playerlist
-                    }
-                    vc.drivenMiles = drivenSeaMiles
-                    presenter.gameStatus = .canceled
-                }
-            default:
-                break
-            }
+    //MARK: - GameView Logic
+    
+    private func setupGamePresenter() {
+        var icebergInitXOrigin = [Double]()
+        var icebergInitYOrigin = [Double]()
+        gameView.icebergs.forEach({iceberg in
+            icebergInitXOrigin.append((Double(iceberg.frame.origin.x)))
+            icebergInitYOrigin.append((Double(iceberg.frame.origin.y)))
+        })
+        if let iceberg = gameView.icebergs.first {
+            gamePresenter = GamePresenter(
+                icebergInitXOrigin: icebergInitXOrigin,
+                icebergInitYOrigin: icebergInitYOrigin,
+                icebergSize: (width: Double(iceberg.frame.width),
+                height: Double(iceberg.frame.height)))
         }
     }
     
-    func setNotificationObserver() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+    private func startCountdown() {
+        var countdown = countdownForTimer
+        label.text = String(countdown)
+        gameControlBtn.isEnabled = false
+        Timer.scheduledTimer(withTimeInterval: interval, repeats: true) {timer in
+            if self.label.text == GO_COUNTDOWN_LBL_TXT {
+                self.label.text = ""
+                timer.invalidate()
+                self.gameView.countdownTimer.start(beginningValue: self.countdownTimerbeginningValue, interval: self.interval, lastSecondsReminderCount: self.reminderCount)
+            } else {
+                countdown -= 1
+                self.label.text = self.label.text == ONE_COUNTDOWN_LBL_TXT ? GO_COUNTDOWN_LBL_TXT: String(countdown)
+                UIView.transition(
+                    with: self.gameView.horizontalSlider,
+                    duration:  self.interval,
+                    options: [],
+                    animations: {
+                        var newSliderValue:Float = 0
+                        if self.label.text == GO_COUNTDOWN_LBL_TXT {
+                            newSliderValue = self.gameView.horizontalSlider.maximumValue/2 
+                        } else {
+                            newSliderValue = self.gameView.horizontalSlider.value == 1 ? 0:1
+                            print("NEW Slider Value")
+                            print(newSliderValue)
+                        }
+                        self.gameView.horizontalSlider.setValue(newSliderValue, animated: true)
+                        self.gameView.horizontalSlider.sendActions(for: .valueChanged)
+                    }
+                )
+            }
+        }
+    }
+
+    private func intersectionOfShipAndIcebereg() {
+        UIDevice.vibrate()
+        intersectionAnimation()
+        gamePresenter.intersectionOfShipAndIceberg()
     }
     
-    @objc func appMovedToBackground() {
-        presenter.gameStatus = .paused
+    private func icebergDidReachEndOfViewNotification(_ notification: Notification) {
+        if let dict = notification.userInfo as NSDictionary?, let icebergView = dict[ICEBERG_VIEW_KEY] as? ImageView {
+            if let index = gameView.icebergs.firstIndex(of: icebergView) {
+                gamePresenter.icebergReachedBottom(at: index)
+            }
+        }
     }
     
     @objc private func moveIceberg() {
-        gameView.icebergs.enumerated().forEach{iceberg in
-            presenter.moveIcebergAccordingToCrashCount(crashCount)
-            //TO DO put in GameView
-            //notification for intersection
-            if iceberg.element.frame.intersects(gameView.ship.frame) {
-                UIDevice.vibrate()
-                intersectionAnimation()
-                presenter.intersectionOfShipAndIceberg()
-                crashCount += 1
+        gamePresenter.moveIcebergFromTopToBottom()
+    }
+    
+    private func updateViewFromModel() {
+        
+        guard let model = gamePresenter.game else {
+            return
+        }
+        model.icebergs.enumerated().forEach({iceberg in
+            gameView.icebergs[iceberg.offset].center = CGPoint(
+                x: model.icebergs[iceberg.offset].center.x,
+                y: model.icebergs[iceberg.offset].center.y)
+        })
+    }
+
+    private func intersectionAnimation() {
+        displayLink?.isPaused = true
+        let smokeView = SmokeView(frame: gameView.frame)
+        gameView.addSubview(smokeView)
+        DispatchQueue.main.asyncAfter(deadline: .now() + durationOfIntersectionAnimation, execute: {
+            smokeView.removeFromSuperview()
+            if self.gamePresenter.gameStatus != .pause {
+                self.displayLink?.isPaused = false
+            }
+        })
+    }
+
+    private func updateScoreLabels() {
+        gameView.scoreStackView.knotsLbl.text = KNOTS_LBL_TEXT + "\(gamePresenter.knots)"
+        gameView.scoreStackView.drivenSeaMilesLbl.text = SEA_MILES_LBL_TXT + "\(gamePresenter.drivenSeaMiles)"
+        gameView.scoreStackView.crashCountLbl.text = CRASH_COUNT_LBL_TXT + "\(gamePresenter.crashCount)"
+    }
+    
+    private func showAlertForHighscoreEntry() {
+        let alert = UIAlertController(title: ALERT_TITLE, message: ALERT_MESSAGE, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: ALERT_TITLE_DONE_ACTION, style: .default) {_ in
+            if let userName = alert.textFields?.first?.text, !userName.isEmpty {
+                self.gamePresenter.nameForHighscoreEntry(userName: userName)
+                self.performSegue(withIdentifier: SHOW_HIGHSCORE_LIST, sender: self)
+            }
+        })
+        alert.actions.first?.isEnabled = false
+        
+        alert.addAction(UIAlertAction(title: ALERT_TITLE_CANCEL_ACTION, style: .cancel) {_ in
+            
+        })
+        
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = ALERT_TEXT_FIELD_PLCHOLDER
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) {_ in
+                let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+                let textIsNotEmpty = textCount > 0
+                alert.actions.first?.isEnabled = textIsNotEmpty
+            }
+        })
+        present(alert, animated: true)
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SHOW_HIGHSCORE_LIST {
+            if let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? HighscoreListTableViewController {
+                if let playerlist = gamePresenter.highscoreList {
+                    vc.highscoreList = playerlist
+                }
+                vc.drivenSeaMiles = gamePresenter.drivenSeaMiles
             }
         }
     }
-    
-    private func resetTimer() {
-        displayLink?.invalidate()
-        displayLink = nil
-        gameView.countdownTimer.reset()
-    }
 }
 
-// layout stuff
+// MARK: - Layout and View Preparation
 extension GameViewController {
     
-    private func resetGameViewLayout() {
-        gameView.icebergs.forEach{$0.center.y = 0}
-        gameView.ship.center.x = gameView.center.x
-        gameView.horizontalSlider.isEnabled = false
-        gameView.horizontalSlider.value = 0.5
+    private func setupSlider() {
+        gameView.horizontalSlider.value = gameView.horizontalSlider.minimumValue
+        gameView.horizontalSlider.sendActions(for: .valueChanged)
     }
-    
-    private func resetLabels() {
-        crashCount = 0
-        drivenSeaMiles = 0
-    }
-    
     private func createLabel() -> UILabel{
         let label = UILabel()
         gameView.addSubview(label)
@@ -161,8 +240,7 @@ extension GameViewController {
     
     private func configureLabel(_ label: UILabel){
         label.textColor = UIColor.white
-        label.text = presenter.gameStatus == .new ? "\(countdown)": presenter.gameStatus?.rawValue
-        label.font = UIFont.scalableFont(forTextStyle: .body, fontSize: 40)
+        label.font = UIFont().scalableFont(forTextStyle: .body, fontSize: labelPrefferedFontSize)
         label.adjustsFontForContentSizeCategory = true
     }
     
@@ -171,112 +249,112 @@ extension GameViewController {
         label.centerXAnchor.constraint(equalTo: gameView.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.centerYAnchor).isActive = true
     }
+}
+
+// MARK: - Presenter Delegate Methods
+extension GameViewController: GamePresenterDelegate {
     
-    private func intersectionAnimation() {
-        displayLink?.isPaused = true
-        gameView.ship.isHidden = true
-        gameView.addSmokeView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-            self.gameView.removeSmokeView()
-            self.gameView.ship.isHidden = self.presenter.gameStatus == .end
-            self.displayLink?.isPaused = self.presenter.gameStatus == .end
-        })
+    func gameDidUpdate() {
+        updateViewFromModel()
+        updateScoreLabels()
+    }
+    
+    func gameDidStart() {
+        setupSlider()
+        startCountdown()
+    }
+    
+    func gameDidPause() {
+        gameView.countdownTimer.pause()
+        self.performSegue(withIdentifier: SHOW_PAUSE_VIEW, sender: self)
+    }
+    
+    func gameDidResume() {
+        gameView.countdownTimer.resume()
+    }
+    
+    func gameDidReset() {
+        gameView.countdownTimer.reset()
+        label.text = GAME_OVER
+    }
+    
+    func gameDidEndWithoutHighscore() {
+        label.text = GAME_END
+    }
+    
+    func gameDidEndWithHighscore() {
+        label.text = YOU_WIN
+        showAlertForHighscoreEntry()
     }
 }
 
-// presenter delegate methods
-extension GameViewController: PresenterGameView {
+// MARK: - Countdown Timer Delegate Methods
+extension GameViewController: SRCountdownTimerDelegate {
     
-    var mainView: GameView {
-        self.gameView
+    func timerDidStart(sender: SRCountdownTimer) {
+        gameControlBtn.isEnabled = true
+        displayLink = CADisplayLink(target: self, selector: #selector(moveIceberg))
+        displayLink?.add(to: .current, forMode: .common)
     }
     
-    func updateView(from model: Titanic?) {
-        if model == nil {
-            popoverMenuBtn.isEnabled = true
-            gameView.removePauseView()
-            resetTimer()
-            resetGameViewLayout()
-            resetLabels()
-        } else {
-            model!.icebergs.enumerated().forEach({
-                gameView.icebergs[$0.offset].center = CGPoint(x: model!.icebergs[$0.offset].center.x, y:  model!.icebergs[$0.offset].center.y)
-            })
-        }
-    }
-    
-    func startGame() {
-        crashCount = 0
-        countdown = 3
-    }
-    
-    //TODO check creation of sperate class for alert
-    func showAlertForHighscoreEntry(){
-        let alert = UIAlertController(title: "Name for Highscore", message: "", preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
-            if let userName = alert.textFields?.first?.text, !userName.isEmpty {
-                self.presenter.save(of: userName, with: self.drivenSeaMiles)
-                self.performSegue(withIdentifier: "showHighscoreList", sender: self)
-                self.presenter.gameStatus = .canceled
-            }
-        }
-        doneAction.isEnabled = false
-        alert.addAction(doneAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {_ in
-            self.presenter.gameStatus = .canceled
-        }
-        alert.addAction(cancelAction)
-        alert.addTextField(configurationHandler: { (textField) in
-            textField.placeholder = "Enter your name"
-            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) {_ in
-                let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-                let textIsNotEmpty = textCount > 0
-                doneAction.isEnabled = textIsNotEmpty
-            }
-        })
-        popoverMenuBtn.isEnabled = false
-        present(alert, animated: true)
-    }
-}
-
-// view delegate methods
-extension GameViewController: MenuDelegate, SRCountdownTimerDelegate, UIPopoverPresentationControllerDelegate {
-    
-    //remove MenuDelegate -> add actionSheet UIAlertController, changeStatus with String
-    func changeGameStatus(to newStatus: GamePresenter.GameStatus) {
-        presenter.gameStatus = newStatus
-    }
-    //put delegation methods
     func timerDidPause(sender: SRCountdownTimer) {
-        gameView.addPauseView()
-        displayLink?.isPaused = true
+         displayLink?.isPaused = true
     }
     
     func timerDidResume(sender: SRCountdownTimer) {
-        gameView.removePauseView()
-        displayLink?.isPaused = false
+         displayLink?.isPaused = false
     }
-    
-    func timerDidStart(sender: SRCountdownTimer) {
-        popoverMenuBtn.isEnabled = true
-        gameView.horizontalSlider.isEnabled = true
-        displayLink = CADisplayLink(target: self, selector: #selector(moveIceberg))
-        displayLink?.add(to: .current, forMode: .common)
-        
-       
-    }
-    
-    func timerDidUpdateCounterValue(sender: SRCountdownTimer, newValue: Int) {
-        //driven SeaMiles calculated by viewcontroller
-        drivenSeaMiles = (drivenSeaMiles + presenter.calculateDrivenSeaMiles(from: knots)).round(to: 2)
-    }
-    
+
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        presenter.gameStatus = .end
-        displayLink?.isPaused = true
+        displayLink?.invalidate()
+        displayLink = nil
+        gamePresenter.timerEnded()
     }
     
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return .none
+    func timerDidReset(sender: SRCountdownTimer) {
+        displayLink?.invalidate()
+        displayLink = nil
     }
 }
+
+// MARK: - Constants
+extension GameViewController {
+    
+    private struct SizeRatio {
+        static let labelFontSizeToBoundsHeight: CGFloat = 0.06
+    }
+    private var labelPrefferedFontSize: CGFloat {
+        return gameView.bounds.height * SizeRatio.labelFontSizeToBoundsHeight
+    }
+    
+    private var durationOfIntersectionAnimation: Double {
+           1.5
+    }
+    
+    private var countdownForTimer: Int {
+        3
+    }
+    
+    private var interval: Double {
+        1.0
+    }
+    
+    private var countdownTimerbeginningValue: Int {
+        20
+    }
+    
+    private var reminderCount: Int {
+        10
+    }
+    
+}
+
+
+//    func setNotificationObserver() {
+//        let notificationCenter = NotificationCenter.default
+//        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+//    }
+//
+//    @objc func appMovedToBackground() {
+//        presenter.gameStatus = .pause
+//    }

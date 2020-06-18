@@ -10,18 +10,18 @@ import UIKit
 
 class ImageView: UIView {
     
-    var icebergImage: UIImage?
+    var image: UIImage?
     var imageSize: CGSize {
-        if icebergImage != nil, superview != nil {
-            let ratio = superview!.frame.width / GameView.ScreenSize.iphoneSE.width
-            return CGSize(width: icebergImage!.size.width * ratio, height: icebergImage!.size.height * ratio)
+        if image != nil, superview != nil {
+            let ratio = superview!.bounds.width / referenceWidth
+            return CGSize(width: image!.size.width * ratio, height: image!.size.height * ratio)
         }
         return CGSize.zero
     }
     
     override func draw(_ rect: CGRect) {
-        if icebergImage != nil {
-            if let newImage = icebergImage.resizeImage(for: imageSize) {
+        if image != nil {
+            if let newImage = image!.resizeImage(for: imageSize) {
                 newImage.draw(in: bounds)
             }
         }
@@ -32,4 +32,8 @@ class ImageView: UIView {
     }
 }
 
-
+extension ImageView {
+    private var referenceWidth: CGFloat {
+        320
+    }
+}

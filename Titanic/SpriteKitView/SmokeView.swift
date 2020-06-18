@@ -25,7 +25,7 @@ class SmokeView: SKView {
     
     private lazy var emitterNode: SKEmitterNode? = {
         if let sv = superview as? GameView {
-            if let emitterNode = SKEmitterNode(fileNamed: "Smoke.sks") {
+            if let emitterNode = SKEmitterNode(fileNamed: SMOKE_FILE_NAME) {
                 emitterNode.position.x = sv.ship.frame.midX
                 emitterNode.position.y = sv.ship.frame.size.height * 2
                 return emitterNode

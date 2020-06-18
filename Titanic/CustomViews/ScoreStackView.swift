@@ -12,43 +12,51 @@ class ScoreStackView: UIStackView {
     
     private(set) lazy var knotsLbl: UILabel = {
         let knotsLbl = UILabel()
-        knotsLbl.text = "Knots: 0"
+        knotsLbl.text = INIT_KNOTS_LBL_TXT
         addArrangedSubview(knotsLbl)
         return knotsLbl
     }()
     
     private(set) lazy var drivenSeaMilesLbl: UILabel = {
         let drivenSeaMilesLbl = UILabel()
-        drivenSeaMilesLbl.text = "Miles: 0.00"
+        drivenSeaMilesLbl.text = INIT_MILES_LBL_TXT
         addArrangedSubview(drivenSeaMilesLbl)
         return drivenSeaMilesLbl
     }()
     
     private(set) lazy var crashCountLbl: UILabel = {
         let crashCountLbl = UILabel()
-        crashCountLbl.text = "Crashes: 0"
+        crashCountLbl.text = INIT_CRASH_LBL_TXT
         addArrangedSubview(crashCountLbl)
         return crashCountLbl
     }()
+
+    deinit {
+           print("DEINIT ScoreStackView")
+       }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func didMoveToSuperview() {
         configureScoreLabel(knotsLbl)
         configureScoreLabel(drivenSeaMilesLbl)
         configureScoreLabel(crashCountLbl)
     }
     
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private func configureScoreLabel(_ label: UILabel) {
         label.textColor = .white
-        label.font = UIFont.scalableFont(forTextStyle: .title3, fontSize: 20)
+        label.font = UIFont().scalableFont(forTextStyle: .title3, fontSize: labelPrefferedFontSize)
         label.adjustsFontForContentSizeCategory = true
     }
+}
+
+extension ScoreStackView {
     
-    deinit {
-        print("DEINIT ScoreStackView")
+    private struct SizeRatio {
+        static let labelFontSizeToBoundsHeight: CGFloat = 0.03
+    }
+    private var labelPrefferedFontSize: CGFloat {
+        guard let sv = superview else {
+            return 20
+        }
+        return sv.bounds.height * SizeRatio.labelFontSizeToBoundsHeight
     }
 }
