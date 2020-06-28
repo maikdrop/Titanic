@@ -33,10 +33,16 @@ class HighscoreListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HIGHSCORE_ENTRY_CELL, for: indexPath)
+        
         let highscoreEntryText = "\(indexPath.row + 1)" + ". " + highscoreList[indexPath.row].name + ": " + "\(highscoreList[indexPath.row].drivenMiles)" + " miles"
-        cell.textLabel?.attributedText = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont().scalableFont(forTextStyle: .body, fontSize: 17)])
+        let attributedString = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont().scalableFont(forTextStyle: .body, fontSize: 17)])
+       
+        cell.textLabel?.attributedText = attributedString
+       
         if indexPath.row == latestEntry {
-            cell.textLabel?.attributedText = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont().scalableWeightFont(forTextStyle: .body, fontSize: 18, weight: .bold)])
+            let attributedString = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont().scalableWeightFont(forTextStyle: .body, fontSize: 18, weight: .bold)])
+            
+            cell.textLabel?.attributedText = attributedString
         }
         return cell
     }

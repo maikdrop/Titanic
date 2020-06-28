@@ -28,12 +28,10 @@ class ImageView: UIView {
     }
     
     deinit {
-        print("DEINIT IcebergView")
+        print("DEINIT ImageView")
     }
 }
 
 extension ImageView {
-    private var referenceWidth: CGFloat {
-        320
-    }
+    private var referenceWidth: CGFloat {320}
 }

@@ -27,7 +27,6 @@
 		2978B8EF240C062E00798E84 /* Titanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8EE240C062E00798E84 /* Titanic.swift */; };
 		297C48472488DFA600944196 /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C48462488DFA600944196 /* UtilityExtensions.swift */; };
 		2997283124938A4800BEBAE4 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2997283024938A4700BEBAE4 /* PauseViewController.swift */; };
-		2997283324963B1B00BEBAE4 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 2997283224963B1A00BEBAE4 /* LaunchImage.png */; };
 		29A3A0992447C1E400B5983D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A3A0982447C1E400B5983D /* GameView.swift */; };
 		29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */; };
 		29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B98044246092E200D7C302 /* ScoreStackView.swift */; };
@@ -82,7 +81,6 @@
 		2978B8EE240C062E00798E84 /* Titanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titanic.swift; sourceTree = "<group>"; };
 		297C48462488DFA600944196 /* UtilityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
 		2997283024938A4700BEBAE4 /* PauseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PauseViewController.swift; path = Titanic/ViewController/PauseViewController.swift; sourceTree = SOURCE_ROOT; };
-		2997283224963B1A00BEBAE4 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
 		29A3A0982447C1E400B5983D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeView.swift; sourceTree = "<group>"; };
 		29B98044246092E200D7C302 /* ScoreStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStackView.swift; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				296523FE245C2317006AF264 /* Smoke.sks */,
-				29652400245C9268006AF264 /* Launch Screen.storyboard */,
 				296523FB245B6081006AF264 /* Assets.xcassets */,
 				292521C3241291260005D455 /* StringConstants.swift */,
 				297C48462488DFA600944196 /* UtilityExtensions.swift */,
@@ -136,7 +133,6 @@
 		29252201241999BE0005D455 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2997283224963B1A00BEBAE4 /* LaunchImage.png */,
 				2925220224199DDE0005D455 /* Rules.txt */,
 			);
 			path = Sources;
@@ -191,11 +187,11 @@
 				2925B8EB2458A91B000EEB1E /* Presenter */,
 				296C52F324451FA80044401D /* CustomViews */,
 				2978B8E72403D85D00798E84 /* ViewController */,
-				2978B8E62403D85000798E84 /* Model */,
+				2978B8E62403D85000798E84 /* Models */,
 				2978B8E52403D83C00798E84 /* Supporting Files */,
 				29252201241999BE0005D455 /* Sources */,
+				29824797249D46B3003C7618 /* Storyboards */,
 				292521C2241291260005D455 /* Utilities */,
-				2978B8BB2403D40000798E84 /* Main.storyboard */,
 				2978B8C32403D40100798E84 /* Info.plist */,
 			);
 			path = Titanic;
@@ -229,14 +225,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2978B8E62403D85000798E84 /* Model */ = {
+		2978B8E62403D85000798E84 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				2978B8EE240C062E00798E84 /* Titanic.swift */,
 				292521FF2419950B0005D455 /* Player.swift */,
 				292521C9241702C50005D455 /* Iceberg.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		2978B8E72403D85D00798E84 /* ViewController */ = {
@@ -249,6 +245,15 @@
 				2918EE412439120E008EC004 /* WelcomeViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		29824797249D46B3003C7618 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2978B8BB2403D40000798E84 /* Main.storyboard */,
+				29652400245C9268006AF264 /* Launch Screen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		29AA4BB2245EDA8C00B8CE96 /* SpriteKitView */ = {
@@ -384,7 +389,6 @@
 			files = (
 				2978B8BF2403D40100798E84 /* Assets.xcassets in Resources */,
 				296523FF245C2317006AF264 /* Smoke.sks in Resources */,
-				2997283324963B1B00BEBAE4 /* LaunchImage.png in Resources */,
 				2978B8BD2403D40000798E84 /* Main.storyboard in Resources */,
 				2925220324199DDE0005D455 /* Rules.txt in Resources */,
 				296523FD245B6081006AF264 /* Assets.xcassets in Resources */,

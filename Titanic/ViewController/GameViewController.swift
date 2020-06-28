@@ -18,6 +18,7 @@ class GameViewController: UIViewController {
         }
     }
     private var displayLink: CADisplayLink?
+    private weak var preparationTimer: Timer?
     
     private lazy var label: UILabel = {
         let label = createLabel()
@@ -27,7 +28,7 @@ class GameViewController: UIViewController {
     }()
         
     @IBOutlet private weak var gameControlBtn: UIBarButtonItem!
-    @IBAction func changeGameStatus(_ sender: UIBarButtonItem) {
+    @IBAction private func changeGameStatus(_ sender: UIBarButtonItem) {
         let alert = UIAlertController (title: ACTION_TITLE, message: "", preferredStyle: .actionSheet)
         gamePresenter.gameStatus?.menuList.forEach({status in
                 let style = status == .reset ? UIAlertAction.Style.destructive : UIAlertAction.Style.default
@@ -42,7 +43,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet private weak var gameView: GameView!
     
-    @IBAction func goBackToResumeGame(segue: UIStoryboardSegue) {
+    @IBAction private func goBackToResumeGame(segue: UIStoryboardSegue) {
         if let mvcUnwoundFrom = segue.source as? PauseViewController {
              gamePresenter.changeGameStatus(to: mvcUnwoundFrom.gameStatus)
         }
@@ -77,6 +78,7 @@ class GameViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        preparationTimer?.invalidate()
         gameView.countdownTimer.reset()
         if let observer = icebergObserver {
             NotificationCenter.default.removeObserver(observer)
@@ -105,15 +107,18 @@ class GameViewController: UIViewController {
         }
     }
     
-    private func startCountdown() {
-        var countdown = countdownForTimer
+    private func startPreparationCoutdownForUser() {
+        var countdown = self.preparationCountdownForUser
         label.text = String(countdown)
         gameControlBtn.isEnabled = false
-        Timer.scheduledTimer(withTimeInterval: interval, repeats: true) {timer in
+        
+        //Countdown Timer for user to prepare
+        preparationTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) {timer in
+           
             if self.label.text == GO_COUNTDOWN_LBL_TXT {
                 self.label.text = ""
-                timer.invalidate()
-                self.gameView.countdownTimer.start(beginningValue: self.countdownTimerbeginningValue, interval: self.interval, lastSecondsReminderCount: self.reminderCount)
+                //Countdown Timer for Game
+                self.gameView.countdownTimer.start(beginningValue: self.beginningValue, interval: self.interval, lastSecondsReminderCount: self.reminderCount)
             } else {
                 countdown -= 1
                 self.label.text = self.label.text == ONE_COUNTDOWN_LBL_TXT ? GO_COUNTDOWN_LBL_TXT: String(countdown)
@@ -122,22 +127,24 @@ class GameViewController: UIViewController {
                     duration:  self.interval,
                     options: [],
                     animations: {
-                        var newSliderValue:Float = 0
-                        if self.label.text == GO_COUNTDOWN_LBL_TXT {
-                            newSliderValue = self.gameView.horizontalSlider.maximumValue/2 
-                        } else {
-                            newSliderValue = self.gameView.horizontalSlider.value == 1 ? 0:1
-                            print("NEW Slider Value")
-                            print(newSliderValue)
-                        }
-                        self.gameView.horizontalSlider.setValue(newSliderValue, animated: true)
-                        self.gameView.horizontalSlider.sendActions(for: .valueChanged)
+                        self.sliderCountdownAnimation()
                     }
                 )
             }
         }
     }
-
+    
+    private func sliderCountdownAnimation() {
+        var newSliderValue:Float = 0
+        if self.label.text == GO_COUNTDOWN_LBL_TXT {
+            newSliderValue = Float.random(in: self.gameView.horizontalSlider.minimumValue...self.gameView.horizontalSlider.maximumValue)
+        } else {
+            newSliderValue = self.gameView.horizontalSlider.value == 1 ? 0:1
+        }
+        self.gameView.horizontalSlider.setValue(newSliderValue, animated: true)
+        self.gameView.horizontalSlider.sendActions(for: .valueChanged)
+    }
+    
     private func intersectionOfShipAndIcebereg() {
         UIDevice.vibrate()
         intersectionAnimation()
@@ -231,6 +238,7 @@ extension GameViewController {
     private func setupSlider() {
         gameView.horizontalSlider.value = gameView.horizontalSlider.minimumValue
         gameView.horizontalSlider.sendActions(for: .valueChanged)
+        gameView.horizontalSlider.isEnabled = false
     }
     private func createLabel() -> UILabel{
         let label = UILabel()
@@ -261,7 +269,7 @@ extension GameViewController: GamePresenterDelegate {
     
     func gameDidStart() {
         setupSlider()
-        startCountdown()
+        startPreparationCoutdownForUser()
     }
     
     func gameDidPause() {
@@ -293,6 +301,8 @@ extension GameViewController: SRCountdownTimerDelegate {
     
     func timerDidStart(sender: SRCountdownTimer) {
         gameControlBtn.isEnabled = true
+        gameView.horizontalSlider.isEnabled = true
+        preparationTimer?.invalidate()
         displayLink = CADisplayLink(target: self, selector: #selector(moveIceberg))
         displayLink?.add(to: .current, forMode: .common)
     }
@@ -304,16 +314,15 @@ extension GameViewController: SRCountdownTimerDelegate {
     func timerDidResume(sender: SRCountdownTimer) {
          displayLink?.isPaused = false
     }
-
+    func timerDidReset(sender: SRCountdownTimer) {
+        displayLink?.invalidate()
+        displayLink = nil
+    }
+    
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
         displayLink?.invalidate()
         displayLink = nil
         gamePresenter.timerEnded()
-    }
-    
-    func timerDidReset(sender: SRCountdownTimer) {
-        displayLink?.invalidate()
-        displayLink = nil
     }
 }
 
@@ -327,26 +336,11 @@ extension GameViewController {
         return gameView.bounds.height * SizeRatio.labelFontSizeToBoundsHeight
     }
     
-    private var durationOfIntersectionAnimation: Double {
-           1.5
-    }
-    
-    private var countdownForTimer: Int {
-        3
-    }
-    
-    private var interval: Double {
-        1.0
-    }
-    
-    private var countdownTimerbeginningValue: Int {
-        20
-    }
-    
-    private var reminderCount: Int {
-        10
-    }
-    
+    private var durationOfIntersectionAnimation: Double {1.5}
+    private var preparationCountdownForUser: Int {3}
+    private var interval: Double {1.0}
+    private var beginningValue: Int {20}
+    private var reminderCount: Int {10}
 }
 
 

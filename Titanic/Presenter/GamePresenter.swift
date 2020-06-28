@@ -93,7 +93,7 @@ class GamePresenter {
     func moveIcebergFromTopToBottom() {
         drivenSeaMiles += seaMilesPerSecond
         drivenSeaMiles = drivenSeaMiles.round(to: 2)
-        let factor = 4 - Double(crashCount) * 0.5
+        let factor = 6 - Double(crashCount) * 0.5
         game?.moveIcebergVertically(by: factor)
         delegate?.gameDidUpdate()
     }

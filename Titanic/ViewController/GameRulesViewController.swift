@@ -32,6 +32,7 @@ class GameRulesViewController: UIViewController {
         }
         textView.attributedText = atrributedString
         textView.textColor = UIColor.white
+        print("TEST")
     }
     
     private func readTextFile(fileName: String) -> [String] {

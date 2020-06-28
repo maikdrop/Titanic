@@ -106,7 +106,6 @@ class GameView: UIView {
    // MARK: - public API to add subviews because icebergs and ship are GameView size related and haven't any constraints
     
     func addSubviews() {
-       
         setupView()
         setupLayout()
     }
@@ -214,26 +213,10 @@ extension GameView {
         bounds.height * SizeRatio.stackViewSpacingToBoundsHeight
     }
     
-    private var sliderBottomConstraint: CGFloat {
-        25
-    }
-    
-    private var sliderLeadingConstraint: CGFloat {
-        20
-    }
-    
-    private var subviewConstraintToSuperview: CGFloat {
-        5
-    }
-    
-    private var countdownTimerTrailingConstraintToSuperview: CGFloat {
-        -10
-    }
-    
-    private var shipOffset: CGFloat {
-        60
-    }
-    private var icebergOffset: CGFloat {
-        1.5
-    }
+    private var sliderBottomConstraint: CGFloat {25}
+    private var sliderLeadingConstraint: CGFloat {20}
+    private var subviewConstraintToSuperview: CGFloat {5}
+    private var countdownTimerTrailingConstraintToSuperview: CGFloat {-10}
+    private var shipOffset: CGFloat {60}
+    private var icebergOffset: CGFloat {1.5}
 }
