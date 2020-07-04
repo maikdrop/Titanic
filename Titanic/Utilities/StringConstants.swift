@@ -39,7 +39,7 @@ let SMOKE_FILE_NAME = "Smoke.sks"
 
 // GameRulesTableViewController Text File
 let RULES_FILE_NAME = "Rules"
-let TEXT_FILE_EXTENSION = "txt"
+let TEXT_FILE_EXT = "txt"
 
 // IcebergView Image File
 let ICEBERG_IMAGE_NAME = "iceberg"
@@ -53,8 +53,8 @@ let ICEBERG_VIEW_KEY = "icebergView"
 
 
 // MARK: - GameRulesTableViewController Text File Content
-let GOAL_SECTION_NAME = "Goal:"
-let USAGE_SECTION_NAME = "Usage:"
+let GOAL_SECTION_NAME = "Goal"
+let USAGE_SECTION_NAME = "Usage"
 
 
 // MARK: - GameViewController Labels

@@ -2,7 +2,7 @@
 //  PauseView.swift
 //  Titanic
 //
-//  Created by Maik on 20.04.20.
+//  Created by Maik on 04.07.20.
 //  Copyright © 2020 maikdrop. All rights reserved.
 //
 
@@ -29,7 +29,7 @@ class PauseView: UIView {
         setupView()
     }
     
-    required init(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -50,8 +50,9 @@ class PauseView: UIView {
         statusLabel.centerXAnchor.constraint(equalTo: blurredEffectView.centerXAnchor).isActive = true
         statusLabel.centerYAnchor.constraint(equalTo: blurredEffectView.centerYAnchor).isActive = true
     }
+
 }
-//MARK: - Constants
+
 extension PauseView {
     
     private struct SizeRatio {
@@ -61,5 +62,3 @@ extension PauseView {
         bounds.height * SizeRatio.labelFontSizeToBoundsHeight
     }
 }
-
-

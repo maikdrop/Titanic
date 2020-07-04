@@ -19,36 +19,32 @@ class GameViewController: UIViewController {
     }
     private var displayLink: CADisplayLink?
     private weak var preparationTimer: Timer?
-    
-    private lazy var label: UILabel = {
-        let label = createLabel()
-        configureLabel(label)
-        layoutForLabel(label)
-        return label
-    }()
-        
-    @IBOutlet private weak var gameControlBtn: UIBarButtonItem!
-    @IBAction private func changeGameStatus(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController (title: ACTION_TITLE, message: "", preferredStyle: .actionSheet)
-        gamePresenter.gameStatus?.menuList.forEach({status in
-                let style = status == .reset ? UIAlertAction.Style.destructive : UIAlertAction.Style.default
-                alert.addAction(UIAlertAction(title: status.rawValue, style: style) {_ in
-                //TODO check because of retain memory cycle
-                    self.gamePresenter.changeGameStatus(to: status)
-            })
-        })
-        alert.addAction(UIAlertAction(title: ACTION_TITLE_CANCEL_ACTION, style: .cancel) {_ in})
-        present(alert, animated: true)
-    }
-    
-    @IBOutlet private weak var gameView: GameView!
-    
-    @IBAction private func goBackToResumeGame(segue: UIStoryboardSegue) {
-        if let mvcUnwoundFrom = segue.source as? PauseViewController {
-             gamePresenter.changeGameStatus(to: mvcUnwoundFrom.gameStatus)
+    private var preparationCountdownForUser = 3 {
+        didSet {
+            if preparationCountdownForUser == 0 {
+                preparationCountdownForUser = 3
+            }
         }
     }
     
+    private lazy var startEndView = StartEndView(frame: gameView.frame)
+    private lazy var pauseView = PauseView(frame: gameView.frame)
+    
+    @IBOutlet private weak var gameControlBtn: UIBarButtonItem!
+    @IBAction private func changeGameStatus(_ sender: UIBarButtonItem) {
+        if let status = gamePresenter.gameStatus {
+            GameStatusPresenter(status: status, handler: { [unowned self] outcome in
+                switch outcome {
+                case .newStatus(let newStatus):
+                    self.gamePresenter.changeGameStatus(to: newStatus)
+                case .rejected:
+                    break
+                }
+            }).present(in: self)
+        }
+    }
+    
+    @IBOutlet private weak var gameView: GameView!
     private var icebergObserver: NSObjectProtocol?
 
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +85,7 @@ class GameViewController: UIViewController {
         print("DEINIT GameViewController")
     }
     
-    //MARK: - GameView Logic
+    //MARK: - GameView View Logic
     
     private func setupGamePresenter() {
         var icebergInitXOrigin = [Double]()
@@ -107,39 +103,48 @@ class GameViewController: UIViewController {
         }
     }
     
-    private func startPreparationCoutdownForUser() {
-        var countdown = self.preparationCountdownForUser
-        label.text = String(countdown)
+    private func startPreparationCoutdown() {
         gameControlBtn.isEnabled = false
-        
+        if gameView.subviews.contains(startEndView) {
+            startEndView.label.text = String(preparationCountdownForUser)
+        } else {
+              addStartEndView(lblText: String(preparationCountdownForUser))
+        }
         //Countdown Timer for user to prepare
-        preparationTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) {timer in
-           
-            if self.label.text == GO_COUNTDOWN_LBL_TXT {
-                self.label.text = ""
-                //Countdown Timer for Game
-                self.gameView.countdownTimer.start(beginningValue: self.beginningValue, interval: self.interval, lastSecondsReminderCount: self.reminderCount)
-            } else {
-                countdown -= 1
-                self.label.text = self.label.text == ONE_COUNTDOWN_LBL_TXT ? GO_COUNTDOWN_LBL_TXT: String(countdown)
-                UIView.transition(
-                    with: self.gameView.horizontalSlider,
-                    duration:  self.interval,
-                    options: [],
-                    animations: {
-                        self.sliderCountdownAnimation()
-                    }
-                )
-            }
+        preparationTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(runningPreparationCountdown), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func runningPreparationCountdown() {
+        if startEndView.label.text == GO_COUNTDOWN_LBL_TXT {
+            removeStartEndView()
+            //Countdown Timer for Game
+            gameView.countdownTimer.start(beginningValue: beginningValue, interval: interval, lastSecondsReminderCount: reminderCount)
+            preparationTimer?.invalidate()
+            gameControlBtn.isEnabled = true
+        } else {
+            preparationCountdownForUser -= 1
+           startEndView.label.text = startEndView.label.text == ONE_COUNTDOWN_LBL_TXT ? GO_COUNTDOWN_LBL_TXT : String(preparationCountdownForUser)
+            sliderAnimation()
         }
     }
     
-    private func sliderCountdownAnimation() {
+    private func sliderAnimation() {
+        UIView.transition(
+            with: self.gameView.horizontalSlider,
+            duration:  self.interval,
+            options: [],
+            animations: {
+                self.lookingForRandomSliderValue()
+            }
+        )
+    }
+    
+    private func lookingForRandomSliderValue() {
         var newSliderValue:Float = 0
-        if self.label.text == GO_COUNTDOWN_LBL_TXT {
+        if startEndView.label.text == GO_COUNTDOWN_LBL_TXT {
             newSliderValue = Float.random(in: self.gameView.horizontalSlider.minimumValue...self.gameView.horizontalSlider.maximumValue)
         } else {
-            newSliderValue = self.gameView.horizontalSlider.value == 1 ? 0:1
+            newSliderValue = self.gameView.horizontalSlider.value == self.gameView.horizontalSlider.maximumValue ? self.gameView.horizontalSlider.minimumValue:self.gameView.horizontalSlider.maximumValue
         }
         self.gameView.horizontalSlider.setValue(newSliderValue, animated: true)
         self.gameView.horizontalSlider.sendActions(for: .valueChanged)
@@ -194,68 +199,43 @@ class GameViewController: UIViewController {
     }
     
     private func showAlertForHighscoreEntry() {
-        let alert = UIAlertController(title: ALERT_TITLE, message: ALERT_MESSAGE, preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: ALERT_TITLE_DONE_ACTION, style: .default) {_ in
-            if let userName = alert.textFields?.first?.text, !userName.isEmpty {
-                self.gamePresenter.nameForHighscoreEntry(userName: userName)
-                self.performSegue(withIdentifier: SHOW_HIGHSCORE_LIST, sender: self)
-            }
-        })
-        alert.actions.first?.isEnabled = false
-        
-        alert.addAction(UIAlertAction(title: ALERT_TITLE_CANCEL_ACTION, style: .cancel) {_ in
-            
-        })
-        
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = ALERT_TEXT_FIELD_PLCHOLDER
-            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) {_ in
-                let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
-                let textIsNotEmpty = textCount > 0
-                alert.actions.first?.isEnabled = textIsNotEmpty
-            }
-        })
-        present(alert, animated: true)
-    }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SHOW_HIGHSCORE_LIST {
-            if let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? HighscoreListTableViewController {
-                if let playerlist = gamePresenter.highscoreList {
-                    vc.highscoreList = playerlist
+        let presenter = NewHighscoreEntryPresenter(
+            title: ALERT_TITLE,
+            message: ALERT_MESSAGE,
+            acceptTitle: ALERT_TITLE_DONE_ACTION,
+            rejectTitle: ALERT_TITLE_CANCEL_ACTION,
+            handler: { [unowned self] outcome in
+                switch outcome {
+                    case .accepted(let userName):
+                        self.gamePresenter.nameForHighscoreEntry(userName: userName)
+                        HighscoreListPresenter().present(in: self)
+                    case .rejected:
+                        break
                 }
-                vc.drivenSeaMiles = gamePresenter.drivenSeaMiles
             }
-        }
+        )
+        presenter.present(in: self)
     }
 }
 
 // MARK: - Layout and View Preparation
 extension GameViewController {
     
-    private func setupSlider() {
-        gameView.horizontalSlider.value = gameView.horizontalSlider.minimumValue
-        gameView.horizontalSlider.sendActions(for: .valueChanged)
-        gameView.horizontalSlider.isEnabled = false
-    }
-    private func createLabel() -> UILabel{
-        let label = UILabel()
-        gameView.addSubview(label)
-        return label
+    private func addStartEndView(lblText: String){
+        gameView.addSubview(startEndView)
+        startEndView.label.text = lblText
+        UIView.animate(withDuration: 1) {
+            self.startEndView.alpha = 0.8
+        }
     }
     
-    private func configureLabel(_ label: UILabel){
-        label.textColor = UIColor.white
-        label.font = UIFont().scalableFont(forTextStyle: .body, fontSize: labelPrefferedFontSize)
-        label.adjustsFontForContentSizeCategory = true
-    }
-    
-    private func layoutForLabel(_ label: UILabel) {
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.centerXAnchor.constraint(equalTo: gameView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: gameView.safeAreaLayoutGuide.centerYAnchor).isActive = true
+    private func removeStartEndView() {
+        UIView.animate(withDuration: 0.5, animations: {
+             self.startEndView.alpha = 0.0
+        }, completion: {finished in
+            self.startEndView.removeFromSuperview()
+        })
     }
 }
 
@@ -268,30 +248,31 @@ extension GameViewController: GamePresenterDelegate {
     }
     
     func gameDidStart() {
-        setupSlider()
-        startPreparationCoutdownForUser()
+        sliderAnimation()
+        startPreparationCoutdown()
     }
     
     func gameDidPause() {
         gameView.countdownTimer.pause()
-        self.performSegue(withIdentifier: SHOW_PAUSE_VIEW, sender: self)
+        gameView.addSubview(pauseView)
     }
     
     func gameDidResume() {
         gameView.countdownTimer.resume()
+        pauseView.removeFromSuperview()
     }
     
     func gameDidReset() {
         gameView.countdownTimer.reset()
-        label.text = GAME_OVER
+        addStartEndView(lblText: GAME_OVER)
     }
     
     func gameDidEndWithoutHighscore() {
-        label.text = GAME_END
+        addStartEndView(lblText: GAME_END)
     }
     
     func gameDidEndWithHighscore() {
-        label.text = YOU_WIN
+        addStartEndView(lblText: YOU_WIN)
         showAlertForHighscoreEntry()
     }
 }
@@ -300,9 +281,6 @@ extension GameViewController: GamePresenterDelegate {
 extension GameViewController: SRCountdownTimerDelegate {
     
     func timerDidStart(sender: SRCountdownTimer) {
-        gameControlBtn.isEnabled = true
-        gameView.horizontalSlider.isEnabled = true
-        preparationTimer?.invalidate()
         displayLink = CADisplayLink(target: self, selector: #selector(moveIceberg))
         displayLink?.add(to: .current, forMode: .common)
     }
@@ -329,26 +307,8 @@ extension GameViewController: SRCountdownTimerDelegate {
 // MARK: - Constants
 extension GameViewController {
     
-    private struct SizeRatio {
-        static let labelFontSizeToBoundsHeight: CGFloat = 0.06
-    }
-    private var labelPrefferedFontSize: CGFloat {
-        return gameView.bounds.height * SizeRatio.labelFontSizeToBoundsHeight
-    }
-    
     private var durationOfIntersectionAnimation: Double {1.5}
-    private var preparationCountdownForUser: Int {3}
     private var interval: Double {1.0}
     private var beginningValue: Int {20}
     private var reminderCount: Int {10}
 }
-
-
-//    func setNotificationObserver() {
-//        let notificationCenter = NotificationCenter.default
-//        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
-//    }
-//
-//    @objc func appMovedToBackground() {
-//        presenter.gameStatus = .pause
-//    }

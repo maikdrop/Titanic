@@ -26,9 +26,6 @@ class GamePresenter {
             gameStatus = .new
         }
     }
-    var highscoreList: [Player]? {
-        return game?.players
-    }
     private(set) var game: Titanic! {
         didSet {
            delegate?.gameDidUpdate()
@@ -60,11 +57,11 @@ class GamePresenter {
             case .resume:
                 delegate?.gameDidResume()
             case .reset:
-                game?.resetSetIcebergsToInitPosition()
+                game?.resetIcebergsToInitPosition()
                 delegate?.gameDidUpdate()
                 delegate?.gameDidReset()
             case .end:
-                game?.resetSetIcebergsToInitPosition()
+                game?.resetIcebergsToInitPosition()
                 delegate?.gameDidUpdate()
                 endOfGame()
             default:
@@ -132,28 +129,21 @@ extension GamePresenter {
             [GameStatus.new, .pause, .resume, .reset, .end]
         }
         
-        var menuList: [GameStatus] {
+        var list: [GameStatus] {
             switch self {
-            case .new, .resume: return [.new, .pause, .reset]
-            case .pause: return []
-            case .reset, .end: return [.new]
+                case .new, .resume: return [.new, .pause, .reset]
+                case .pause: return [.resume]
+                case .reset, .end: return [.new]
             }
         }
     }
     
     private func endOfGame(){
-        if highscoreList != nil {
-            if highscoreList!.count < 10 {
-                delegate?.gameDidEndWithHighscore()
-                return
-            } else if highscoreList!.count == 10, let drivenSeaMilesOfLastPlayer = highscoreList!.last?.drivenMiles {
-                if drivenSeaMilesOfLastPlayer < drivenSeaMiles {
-                    delegate?.gameDidEndWithHighscore()
-                    return
-                }
-            }
+        if game.isInHighscoreList(drivenSeaMiles) {
+              delegate?.gameDidEndWithHighscore()
+        } else {
+             delegate?.gameDidEndWithoutHighscore()
         }
-        delegate?.gameDidEndWithoutHighscore()
     }
     
     private func initScoreValues() {

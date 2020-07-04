@@ -10,8 +10,6 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
-    @IBOutlet weak var launchImageView: UIImageView!
-    
     @IBOutlet weak var startBtn: UIButton! {
         didSet {
             startBtn.titleLabel?.adjustsFontForContentSizeCategory = true

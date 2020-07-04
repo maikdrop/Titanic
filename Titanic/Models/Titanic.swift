@@ -13,19 +13,9 @@ class Titanic {
     private var icebergInitXOrigin = [Double]()
     private var icebergInitYOrigin = [Double]()
     private var distanceBetweenIcebergs = 0.0
+    private var fileHandler = FileHandler()
     private(set) var icebergs = [Iceberg]()
-    private(set) lazy var players: [Player] = {
-        if let url = try? FileManager.default.url(for: .applicationSupportDirectory,
-                                                  in: .userDomainMask,
-                                                  appropriateFor: nil,
-                                                  create: true)
-            .appendingPathComponent("highscore") {
-            if let data = try? Data(contentsOf: url), let highscoreList = try? PropertyListDecoder().decode([Player].self, from: data) {
-                return highscoreList
-            }
-        }
-        return [Player]()
-    }()
+    private(set) lazy var player = getPlayer()
     
     init(icebergInitXOrigin: [Double], icebergInitYOrigin: [Double], icebergSize: (width: Double, height: Double)) {
         self.icebergInitXOrigin = icebergInitXOrigin
@@ -63,34 +53,58 @@ class Titanic {
         shuffleIcebergVertically(at: Array(icebergs.indices))
     }
     
-    func resetSetIcebergsToInitPosition() {
+    func resetIcebergsToInitPosition() {
         for index in 0..<icebergs.count {
             icebergs[index].origin.x = icebergInitXOrigin[index]
             icebergs[index].origin.y = icebergInitYOrigin[index]
         }
          shuffleIcebergVertically(at: Array(icebergs.indices))
     }
+    
+    func isInHighscoreList(_ drivenSeaMiles: Double) -> Bool {
+        guard player != nil else {
+            return false
+        }
+        if player!.count < 10 {
+            return true
+        } else if player!.count == 10, let drivenSeaMilesOfLastPlayer = player?.last?.drivenMiles {
+            if drivenSeaMilesOfLastPlayer < drivenSeaMiles {
+                return true
+            }
+        }
+        return false
+    }
 
     func savePlayerInHighscoreList(userName: String, drivenSeaMiles: Double) {
         
-        if players.count == 10 {players.removeLast()}
-        let newPlayer = Player(name: userName, drivenMiles: drivenSeaMiles)
-        players.append(newPlayer)
-        players.sort(by: >)
-     
-        if let url = try? FileManager.default.url(for: .applicationSupportDirectory,
-                                                  in: .userDomainMask,
-                                                  appropriateFor: nil,
-                                                  create: true)
-            .appendingPathComponent("highscore") {
-            do  {
-                try PropertyListEncoder().encode(players.self).write(to: url)
-                print("saved successfully")
-                
-            } catch let error {
-                print("couldn`t save \(error)")
-            }
+        guard player != nil else {
+            return
         }
+        if player!.count == 10 {player!.removeLast()}
+        let newPlayer = Player(name: userName, drivenMiles: drivenSeaMiles)
+        player!.append(newPlayer)
+        player!.sort(by: >)
+        saveHighscorelistToDisc(player!)
+    }
+    
+    private func getPlayer() -> [Player]? {
+        var playerList: [Player]?
+        fileHandler.loadPlayerFile(then: {(result) in
+            if case .success(let player) = result {
+                playerList = player
+            } else {
+                playerList = nil
+            }
+        })
+        return playerList
+    }
+
+    private func saveHighscorelistToDisc(_ player: [Player]) {
+        fileHandler.savePlayerToFile(player: player, then: {result in
+            if case .failure(let error) = result {
+                print(error)
+            }
+        })
     }
     
     private func shuffleIcebergHorizontally(at indices: [Int]) {

@@ -68,10 +68,9 @@ class GameView: UIView {
 
     private(set) lazy var icebergs: [ImageView] = {
         var icebergViewArray = [ImageView]()
-        var icebergCount = 0
         if let icebergImage = UIImage(named: ICEBERG_IMAGE_NAME) {
-            icebergCount = Int((bounds.width / icebergImage.size.width).rounded(.up))
-            for index in 0..<icebergCount {
+            let icebergCount = Int((bounds.width / icebergImage.size.width).rounded(.up))
+            for _ in 0..<icebergCount {
                 let icebergView = ImageView()
                 icebergView.image = icebergImage
                 icebergView.backgroundColor = .clear

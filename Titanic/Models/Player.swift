@@ -12,10 +12,12 @@ struct Player: Codable, Comparable {
     
     private(set) var name: String
     private(set) var drivenMiles: Double
-    
+    private(set) var date: Date
+
     init(name: String, drivenMiles: Double){
         self.name = name
         self.drivenMiles = drivenMiles
+        self.date = Date()
     }
     
     static func < (lhs: Player, rhs: Player) -> Bool {
