@@ -9,26 +9,9 @@
 import UIKit
 import SRCountdownTimer
 import SpriteKit
+import Combine
 
 class GameViewController: UIViewController {
-    
-    private var gamePresenter: GamePresenter! {
-        didSet {
-             gamePresenter?.delegate = self
-        }
-    }
-    private var displayLink: CADisplayLink?
-    private weak var preparationTimer: Timer?
-    private var preparationCountdownForUser = 3 {
-        didSet {
-            if preparationCountdownForUser == 0 {
-                preparationCountdownForUser = 3
-            }
-        }
-    }
-    
-    private lazy var startEndView = StartEndView(frame: gameView.frame)
-    private lazy var pauseView = PauseView(frame: gameView.frame)
     
     @IBOutlet private weak var gameControlBtn: UIBarButtonItem!
     @IBAction private func changeGameStatus(_ sender: UIBarButtonItem) {
@@ -43,49 +26,46 @@ class GameViewController: UIViewController {
             }).present(in: self)
         }
     }
-    
     @IBOutlet private weak var gameView: GameView!
-    private var icebergObserver: NSObjectProtocol?
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        icebergObserver = NotificationCenter.default.addObserver(
-            forName: .ShipDidIntersectWithIceberg,
-            object: self.gameView,
-            queue: OperationQueue.main,
-            using: {[weak self] _ in
-                self?.intersectionOfShipAndIcebereg()
-        })
-        icebergObserver = NotificationCenter.default.addObserver(
-            forName: .IcebergDidReachEndOfView,
-            object: self.gameView,
-            queue: OperationQueue.main,
-            using: { [weak self] notification in
-                self?.icebergDidReachEndOfViewNotification(notification)
-        })
+    
+    private var gamePresenter: GamePresenter! {
+        didSet {
+             gamePresenter?.delegate = self
+        }
     }
+    private var preparationCountdownForUser = 3 {
+        didSet {
+            if preparationCountdownForUser == 0 {
+                preparationCountdownForUser = 3
+            }
+        }
+    }
+    
+    private var cancellableObserver = [Cancellable?]()
+    private var preparationTimer: Cancellable?
+    private var displayLink: CADisplayLink?
+    private lazy var startEndView = StartEndView(frame: gameView.frame)
+    private lazy var pauseView = PauseView(frame: gameView.frame)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         gameView.addSubviews()
         gameView.countdownTimer.delegate = self
         setupGamePresenter()
+        setupPublisher()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        preparationTimer?.invalidate()
+        preparationTimer?.cancel()
         gameView.countdownTimer.reset()
-        if let observer = icebergObserver {
-            NotificationCenter.default.removeObserver(observer)
-        }
     }
     
      deinit {
         print("DEINIT GameViewController")
     }
     
-    //MARK: - GameView View Logic
+    //MARK: - View Logic
     
     private func setupGamePresenter() {
         var icebergInitXOrigin = [Double]()
@@ -103,40 +83,42 @@ class GameViewController: UIViewController {
         }
     }
     
+    private func setupPublisher() {
+        cancellableObserver.append(NotificationCenter.default
+            .publisher(for: .IcebergDidReachEndOfView)
+            .sink() { [weak self] notification in
+                self?.icebergDidReachEndOfViewNotification(notification)
+        })
+        cancellableObserver.append(NotificationCenter.default
+            .publisher(for: .ShipDidIntersectWithIceberg)
+            .sink() {[weak self] _ in
+                self?.intersectionOfShipAndIceberg()
+        })
+    }
+    
     private func startPreparationCoutdown() {
         gameControlBtn.isEnabled = false
         if gameView.subviews.contains(startEndView) {
             startEndView.label.text = String(preparationCountdownForUser)
         } else {
-              addStartEndView(lblText: String(preparationCountdownForUser))
+              addStartEndViewWithAnimation(lblText: String(preparationCountdownForUser))
         }
-        //Countdown Timer for user to prepare
-        preparationTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(runningPreparationCountdown), userInfo: nil, repeats: true)
+        preparationTimer = Timer.publish(every: interval, on: .main, in: .common).autoconnect().sink(receiveValue: { [weak self] _ in
+            self?.runningPreparationCountdown()
+        })
     }
     
-    @objc private func runningPreparationCountdown() {
+    private func runningPreparationCountdown() {
         if startEndView.label.text == GO_COUNTDOWN_LBL_TXT {
-            removeStartEndView()
-            //Countdown Timer for Game
+            removeStartEndViewWithAnimation()
             gameView.countdownTimer.start(beginningValue: beginningValue, interval: interval, lastSecondsReminderCount: reminderCount)
-            preparationTimer?.invalidate()
+            preparationTimer?.cancel()
             gameControlBtn.isEnabled = true
         } else {
             preparationCountdownForUser -= 1
            startEndView.label.text = startEndView.label.text == ONE_COUNTDOWN_LBL_TXT ? GO_COUNTDOWN_LBL_TXT : String(preparationCountdownForUser)
             sliderAnimation()
         }
-    }
-    
-    private func sliderAnimation() {
-        UIView.transition(
-            with: self.gameView.horizontalSlider,
-            duration:  self.interval,
-            options: [],
-            animations: {
-                self.lookingForRandomSliderValue()
-            }
-        )
     }
     
     private func lookingForRandomSliderValue() {
@@ -150,7 +132,7 @@ class GameViewController: UIViewController {
         self.gameView.horizontalSlider.sendActions(for: .valueChanged)
     }
     
-    private func intersectionOfShipAndIcebereg() {
+    private func intersectionOfShipAndIceberg() {
         UIDevice.vibrate()
         intersectionAnimation()
         gamePresenter.intersectionOfShipAndIceberg()
@@ -180,18 +162,6 @@ class GameViewController: UIViewController {
         })
     }
 
-    private func intersectionAnimation() {
-        displayLink?.isPaused = true
-        let smokeView = SmokeView(frame: gameView.frame)
-        gameView.addSubview(smokeView)
-        DispatchQueue.main.asyncAfter(deadline: .now() + durationOfIntersectionAnimation, execute: {
-            smokeView.removeFromSuperview()
-            if self.gamePresenter.gameStatus != .pause {
-                self.displayLink?.isPaused = false
-            }
-        })
-    }
-
     private func updateScoreLabels() {
         gameView.scoreStackView.knotsLbl.text = KNOTS_LBL_TEXT + "\(gamePresenter.knots)"
         gameView.scoreStackView.drivenSeaMilesLbl.text = SEA_MILES_LBL_TXT + "\(gamePresenter.drivenSeaMiles)"
@@ -200,7 +170,7 @@ class GameViewController: UIViewController {
     
     private func showAlertForHighscoreEntry() {
         
-        let presenter = NewHighscoreEntryPresenter(
+        NewHighscoreEntryPresenter(
             title: ALERT_TITLE,
             message: ALERT_MESSAGE,
             acceptTitle: ALERT_TITLE_DONE_ACTION,
@@ -214,24 +184,47 @@ class GameViewController: UIViewController {
                         break
                 }
             }
-        )
-        presenter.present(in: self)
+        ).present(in: self)
     }
 }
 
-// MARK: - Layout and View Preparation
+// MARK: - Layout and Animation
 extension GameViewController {
     
-    private func addStartEndView(lblText: String){
+    private func intersectionAnimation() {
+        displayLink?.isPaused = true
+        let smokeView = SmokeView(frame: gameView.frame)
+        gameView.addSubview(smokeView)
+        DispatchQueue.main.asyncAfter(deadline: .now() + durationOfIntersectionAnimation, execute: {
+            smokeView.removeFromSuperview()
+            if self.gamePresenter.gameStatus != .pause {
+                self.displayLink?.isPaused = false
+            }
+        })
+    }
+    
+    private func sliderAnimation() {
+        UIView.transition(
+            with: self.gameView.horizontalSlider,
+            duration:  self.interval,
+            options: [],
+            animations: {
+                self.lookingForRandomSliderValue()
+        })
+    }
+    
+    private func addStartEndViewWithAnimation(lblText: String){
         gameView.addSubview(startEndView)
         startEndView.label.text = lblText
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: interval) {
             self.startEndView.alpha = 0.8
         }
     }
     
-    private func removeStartEndView() {
-        UIView.animate(withDuration: 0.5, animations: {
+    private func removeStartEndViewWithAnimation() {
+        UIView.animate(
+            withDuration: interval/2,
+            animations: {
              self.startEndView.alpha = 0.0
         }, completion: {finished in
             self.startEndView.removeFromSuperview()
@@ -264,15 +257,15 @@ extension GameViewController: GamePresenterDelegate {
     
     func gameDidReset() {
         gameView.countdownTimer.reset()
-        addStartEndView(lblText: GAME_OVER)
+        addStartEndViewWithAnimation(lblText: GAME_OVER)
     }
     
     func gameDidEndWithoutHighscore() {
-        addStartEndView(lblText: GAME_END)
+        addStartEndViewWithAnimation(lblText: GAME_END)
     }
     
     func gameDidEndWithHighscore() {
-        addStartEndView(lblText: YOU_WIN)
+        addStartEndViewWithAnimation(lblText: YOU_WIN)
         showAlertForHighscoreEntry()
     }
 }

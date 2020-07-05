@@ -8,6 +8,7 @@
 
 import UIKit
 import SRCountdownTimer
+import Combine
 
 extension Notification.Name {
     static let ShipDidIntersectWithIceberg = Notification.Name("ShipDidIntersectWithIceberg")
@@ -64,7 +65,7 @@ class GameView: UIView {
         return shipView
     }()
     
-    private var icebergObservations = [UIView: NSKeyValueObservation]()
+    private var cancellable = [UIView: Cancellable?]()
 
     private(set) lazy var icebergs: [ImageView] = {
         var icebergViewArray = [ImageView]()
@@ -74,15 +75,15 @@ class GameView: UIView {
                 let icebergView = ImageView()
                 icebergView.image = icebergImage
                 icebergView.backgroundColor = .clear
-                icebergObservations[icebergView] = icebergView.observe(\.center) { [weak self] (iceberg, change) in
-                    if iceberg.frame.intersects(self!.ship.frame) {
+                cancellable[icebergView] = icebergView.publisher(for: \.center).sink() { [weak self] _ in
+                    if icebergView.frame.intersects(self!.ship.frame) {
                         NotificationCenter.default.post(name: .ShipDidIntersectWithIceberg,
                                                         object: self)
                     }
-                    if iceberg.frame.origin.y > self!.frame.height {
+                    if icebergView.frame.origin.y > self!.frame.height {
                         NotificationCenter.default.post(name: .IcebergDidReachEndOfView,
                                                         object: self,
-                                                        userInfo: [ICEBERG_VIEW_KEY: iceberg])
+                                                        userInfo: [ICEBERG_VIEW_KEY: icebergView])
                     }
                 }
                 icebergViewArray.append(icebergView)
@@ -90,13 +91,6 @@ class GameView: UIView {
         }
         return icebergViewArray
     }()
-    
-    override func willRemoveSubview(_ subview: UIView) {
-        super.willRemoveSubview(subview)
-        if icebergObservations[subview] != nil {
-            icebergObservations[subview] = nil
-        }
-    }
     
     deinit {
         print("DEINIT GameView")
