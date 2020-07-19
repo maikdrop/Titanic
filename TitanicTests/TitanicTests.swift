@@ -15,7 +15,7 @@ class TitanicTests: XCTestCase {
     var sut: TitanicGame!
     var icebergInitXOrigin: [Double] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     var icebergInitYOrigin: [Double] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    var icebergSize = (width: 20.0, height: 20.0)
+    var icebergSize = Array(repeating: (width: 20.0, height: 20.0), count: 10)
 
     override func setUp() {
         super.setUp()
@@ -34,7 +34,7 @@ class TitanicTests: XCTestCase {
         let sortedIcebergs =  sut.icebergs.sorted(by: <)
     
         for index in 0..<sut.icebergs.count {
-            XCTAssertEqual(sortedIcebergs[index].center.y,icebergInitYOrigin[index] + factor + icebergSize.height/2)
+            XCTAssertEqual(sortedIcebergs[index].center.y,icebergInitYOrigin[index] + factor + icebergSize[index].height/2)
         }
     }
     
@@ -46,7 +46,7 @@ class TitanicTests: XCTestCase {
     }
     
     func testResetAllIcebergsAfterCollisionWithShip() {
-        sut.resetAllIcebergsAfterCollisionWithShip()
+        sut.resetAllIcebergsVerticallyAndHorizontally()
         let xOrigins = sut.icebergs.sorted(by: {$0.origin.x < $1.origin.x})
         let yOrigins = sut.icebergs.sorted(by: {$0.origin.y < $1.origin.y})
         
