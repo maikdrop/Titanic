@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,7 +43,6 @@
 		29D6B20124B0EE7800472FC5 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6B20024B0EE7800472FC5 /* PauseView.swift */; };
 		29E9004F244CD16D0022BD8F /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9004E244CD16C0022BD8F /* ImageView.swift */; };
 		29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */; };
-		29FA73BC24B725B8000F8C8E /* Double+Round2Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73BB24B725B7000F8C8E /* Double+Round2Places.swift */; };
 		29FA73BE24B743ED000F8C8E /* AvoidMassiveVC.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */; };
 		29FA73C024B743FF000F8C8E /* Layout.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73BF24B743FE000F8C8E /* Layout.txt */; };
 		29FA73D124B7798E000F8C8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73D024B7798E000F8C8E /* Main.storyboard */; };
@@ -122,7 +121,6 @@
 		29D6B20024B0EE7800472FC5 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 		29E9004E244CD16C0022BD8F /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesViewController.swift; sourceTree = "<group>"; };
-		29FA73BB24B725B7000F8C8E /* Double+Round2Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Round2Places.swift"; sourceTree = "<group>"; };
 		29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AvoidMassiveVC.txt; sourceTree = "<group>"; };
 		29FA73BF24B743FE000F8C8E /* Layout.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Layout.txt; sourceTree = "<group>"; };
 		29FA73D024B7798E000F8C8E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -209,7 +207,6 @@
 				29379BEE24AA4F0E00D38F2B /* UIImage+Resize.swift */,
 				29379BF024AA4FE000D38F2B /* Collection+ElementOperations.swift */,
 				29379BF424AA533D00D38F2B /* UIColor+CustomColor.swift */,
-				29FA73BB24B725B7000F8C8E /* Double+Round2Places.swift */,
 				29FA73E524B7A805000F8C8E /* NotificationName.swift */,
 			);
 			path = Extensions;
@@ -556,7 +553,6 @@
 				29FA73F924B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift in Sources */,
 				29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */,
 				2978B8EF240C062E00798E84 /* TitanicGame.swift in Sources */,
-				29FA73BC24B725B8000F8C8E /* Double+Round2Places.swift in Sources */,
 				29379C0824ADF1EA00D38F2B /* FileHandler.swift in Sources */,
 				29B980472461F99400D7C302 /* SRCountDownTimer.swift in Sources */,
 				29FA73E424B7A097000F8C8E /* UIViewController+Alert.swift in Sources */,
