@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  Titanic
+
+  Created by Maik on 09.07.20.
+  Copyright © 2020 maikdrop. All rights reserved.
+*/
+
+//Alert Titles
+"ErrorAlert_Title" = "Fehler aufgetreten";
+"NewHighscoreEntryAlert_Title" = "Gratulation 👏";
+"GameControl_Title" = "Spielsteuerung";
+
+//Alert Components
+"NewHighscoreEntry_Message" = "Du bist in den Top 10. Bitte trage deinen Namen ein, um deine Platzierung zu sehen.";
+"TextField_Placeholder" = "Dein Name";
+
+//Alert Actions
+"AlertAction_Ok" = "OK";
+"AlertAction_Done" = "Fertig";
+"AlertAction_Cancel" = "Abbrechen";
+
+//Welcome
+"Welcome_HeadLineTitle" = "Willkommen zu Titanic!";
+"Welcome_RightBarBtnTitle" = "Regeln";
+"Welcome_LeftBarBtnTitle" = "App Information";
+
+//Rules
+"Rules_SubheadlineTitle" = "Lass uns Spaß haben!";
+"Rules_GoalSectionTitle" = "Ziel";
+"Rules_GoalSectionContent" = "Fahre so viele Seemeilen wie möglich!";
+"Rules_UsageSectionTitle" = "Benutzung";
+"Rules_UsageSectionContent" = "1. Während der Startphase sucht das Boot nach einer Startposition.\n2. Beweg das Boot mit dem Slider!\n3. Vermeide Zusammenstöße mit den Eisbergen!\n4. Jeder Zusammenstoß wird gezählt und verlangsamt das Boot.\n5. Ein Highscore Eintrag wird angeboten, wenn die gefahrenen Seemeilen in den Top Zehn sind.\n6. Die Spielsteuerung wird durch den Button in der oberen rechten Ecke aufgerufen.";
+
+//Game
+"GoLbl_Txt" = "LOS";
+"KnotsLbl_Txt" = "Knoten: ";
+"MilesLbl_Txt" = "Meilen: ";
+"CrashesLbl_Txt" = "Kollisionen: ";
+"GameOverLbl_Txt" = "SPIEL VERLOREN";
+"GameEndLbl_Txt" = "SPIELENDE";
+"YouWinLbl_Txt" = "DU GEWINNST";
+
+//Game Status
+"New" = "Neu";
+"Pause" = "Pause";
+"Resume" = "Fortsetzen";
+"Reset" = "Zurücksetzen";
+"End" = "Ende";
+
+//App Information
+"AboutTheAppLbl_Txt" = "Über die App";
+"ConceptLbl_Txt" = "Konzept";
+"LegalLbl_Txt" = "Impressum";
+
+//Concept
+"Concept_DesignPatternTitle" = "MVP Entwurfsmuster";
+"Concept_AvoidMassiveVCTitle" = "Großen VC verhindern";
+"Concept_LayoutTitle" = "Layout";

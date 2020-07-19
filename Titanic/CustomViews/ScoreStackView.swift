@@ -10,23 +10,24 @@ import UIKit
 
 class ScoreStackView: UIStackView {
     
+     // MARK: - Properties
     private(set) lazy var knotsLbl: UILabel = {
         let knotsLbl = UILabel()
-        knotsLbl.text = INIT_KNOTS_LBL_TXT
+        knotsLbl.text = AppStrings.Game.knotsLblTxt + "0"
         addArrangedSubview(knotsLbl)
         return knotsLbl
     }()
     
     private(set) lazy var drivenSeaMilesLbl: UILabel = {
         let drivenSeaMilesLbl = UILabel()
-        drivenSeaMilesLbl.text = INIT_MILES_LBL_TXT
+        drivenSeaMilesLbl.text = AppStrings.Game.drivenSeaMilesLblTxt + "0.00"
         addArrangedSubview(drivenSeaMilesLbl)
         return drivenSeaMilesLbl
     }()
     
     private(set) lazy var crashCountLbl: UILabel = {
         let crashCountLbl = UILabel()
-        crashCountLbl.text = INIT_CRASH_LBL_TXT
+        crashCountLbl.text = AppStrings.Game.crashesLblTxt + "0"
         addArrangedSubview(crashCountLbl)
         return crashCountLbl
     }()
@@ -34,12 +35,20 @@ class ScoreStackView: UIStackView {
     deinit {
            print("DEINIT ScoreStackView")
        }
+}
+
+// MARK: - Default Methods
+extension ScoreStackView {
     
     override func didMoveToSuperview() {
         configureScoreLabel(knotsLbl)
         configureScoreLabel(drivenSeaMilesLbl)
         configureScoreLabel(crashCountLbl)
     }
+}
+
+// MARK: - Private methods for setting up label layout
+private extension ScoreStackView {
     
     private func configureScoreLabel(_ label: UILabel) {
         label.textColor = .white
@@ -48,6 +57,7 @@ class ScoreStackView: UIStackView {
     }
 }
 
+//MARK: - Constants
 extension ScoreStackView {
     
     private struct SizeRatio {

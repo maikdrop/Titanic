@@ -40,6 +40,7 @@ class FileHandler {
         if let url = url, let json = try? JSONEncoder().encode(player)  {
             do {
                 try json.write(to: url)
+                 handler(.success(player))
             } catch {
                 handler(.failure(error))
             }

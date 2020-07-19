@@ -8,40 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE412439120E008EC004 /* WelcomeViewController.swift */; };
-		2918EE44243CA85C008EC004 /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE43243CA85C008EC004 /* GamePresenter.swift */; };
-		292521C4241291260005D455 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C3241291260005D455 /* StringConstants.swift */; };
+		2918EE44243CA85C008EC004 /* GameViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE43243CA85C008EC004 /* GameViewPresenter.swift */; };
+		292521C4241291260005D455 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C3241291260005D455 /* AppStrings.swift */; };
 		292521CA241702C60005D455 /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* Iceberg.swift */; };
 		292522002419950C0005D455 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521FF2419950B0005D455 /* Player.swift */; };
-		2925220324199DDE0005D455 /* Rules.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2925220224199DDE0005D455 /* Rules.txt */; };
 		29379BE624A930B700D38F2B /* AppInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */; };
 		29379BEA24AA48C400D38F2B /* MIT_License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29379BE924AA48C400D38F2B /* MIT_License.txt */; };
 		29379BED24AA4ECF00D38F2B /* UIFont+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BEC24AA4ECF00D38F2B /* UIFont+Scale.swift */; };
 		29379BEF24AA4F0E00D38F2B /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BEE24AA4F0E00D38F2B /* UIImage+Resize.swift */; };
 		29379BF124AA4FE000D38F2B /* Collection+ElementOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BF024AA4FE000D38F2B /* Collection+ElementOperations.swift */; };
-		29379BF324AA505B00D38F2B /* Double+Round2Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BF224AA505B00D38F2B /* Double+Round2Places.swift */; };
 		29379BF524AA533D00D38F2B /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BF424AA533D00D38F2B /* UIColor+CustomColor.swift */; };
-		29379BF824AA53DD00D38F2B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BF724AA53DD00D38F2B /* Utilities.swift */; };
-		29379BFA24AA7DE300D38F2B /* ContentAppInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BF924AA7DE300D38F2B /* ContentAppInformationViewController.swift */; };
+		29379BF824AA53DD00D38F2B /* UtilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BF724AA53DD00D38F2B /* UtilityHelpers.swift */; };
 		29379BFC24AAB5F400D38F2B /* AboutTheApp.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29379BFB24AAB5F400D38F2B /* AboutTheApp.txt */; };
 		29379BFE24AB873000D38F2B /* StartEndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BFD24AB873000D38F2B /* StartEndView.swift */; };
 		29379C0024ABD33000D38F2B /* ConceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BFF24ABD33000D38F2B /* ConceptViewController.swift */; };
-		29379C0424AD09D400D38F2B /* GameStatusPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0324AD09D400D38F2B /* GameStatusPresenter.swift */; };
+		29379C0424AD09D400D38F2B /* NewGameStatusPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0324AD09D400D38F2B /* NewGameStatusPresenter.swift */; };
 		29379C0624AD484000D38F2B /* NewHighscoreEntryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0524AD484000D38F2B /* NewHighscoreEntryPresenter.swift */; };
 		29379C0824ADF1EA00D38F2B /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0724ADF1EA00D38F2B /* FileHandler.swift */; };
 		29379C0C24AE7CF600D38F2B /* HighscoreListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0B24AE7CF600D38F2B /* HighscoreListPresenter.swift */; };
 		29379C1024AE82B200D38F2B /* HighscoreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0F24AE82B200D38F2B /* HighscoreListViewController.swift */; };
-		296523FD245B6081006AF264 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296523FB245B6081006AF264 /* Assets.xcassets */; };
-		296523FF245C2317006AF264 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 296523FE245C2317006AF264 /* Smoke.sks */; };
-		29652401245C9269006AF264 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29652400245C9268006AF264 /* Launch Screen.storyboard */; };
+		2938C12A24B50A2700174FE4 /* DesignPattern.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2938C12924B50A2700174FE4 /* DesignPattern.txt */; };
 		2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B52403D40000798E84 /* AppDelegate.swift */; };
 		2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B72403D40000798E84 /* SceneDelegate.swift */; };
 		2978B8BA2403D40000798E84 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B92403D40000798E84 /* GameViewController.swift */; };
-		2978B8BD2403D40000798E84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2978B8BB2403D40000798E84 /* Main.storyboard */; };
-		2978B8BF2403D40100798E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2978B8BE2403D40100798E84 /* Assets.xcassets */; };
 		2978B8CD2403D40100798E84 /* TitanicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8CC2403D40100798E84 /* TitanicTests.swift */; };
 		2978B8D82403D40100798E84 /* TitanicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8D72403D40100798E84 /* TitanicUITests.swift */; };
-		2978B8EF240C062E00798E84 /* Titanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8EE240C062E00798E84 /* Titanic.swift */; };
+		2978B8EF240C062E00798E84 /* TitanicGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8EE240C062E00798E84 /* TitanicGame.swift */; };
 		297C48472488DFA600944196 /* UIDevice+Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C48462488DFA600944196 /* UIDevice+Vibrate.swift */; };
+		298010A924C3A741006DC917 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298010A824C3A741006DC917 /* Launch Screen.storyboard */; };
 		29A3A0992447C1E400B5983D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A3A0982447C1E400B5983D /* GameView.swift */; };
 		29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */; };
 		29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B98044246092E200D7C302 /* ScoreStackView.swift */; };
@@ -49,6 +43,23 @@
 		29D6B20124B0EE7800472FC5 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6B20024B0EE7800472FC5 /* PauseView.swift */; };
 		29E9004F244CD16D0022BD8F /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9004E244CD16C0022BD8F /* ImageView.swift */; };
 		29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */; };
+		29FA73BC24B725B8000F8C8E /* Double+Round2Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73BB24B725B7000F8C8E /* Double+Round2Places.swift */; };
+		29FA73BE24B743ED000F8C8E /* AvoidMassiveVC.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */; };
+		29FA73C024B743FF000F8C8E /* Layout.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73BF24B743FE000F8C8E /* Layout.txt */; };
+		29FA73D124B7798E000F8C8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73D024B7798E000F8C8E /* Main.storyboard */; };
+		29FA73D524B77AB8000F8C8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73D724B77AB8000F8C8E /* Localizable.strings */; };
+		29FA73DC24B78266000F8C8E /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73DB24B78266000F8C8E /* AppIcon.xcassets */; };
+		29FA73DE24B78285000F8C8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73DD24B78285000F8C8E /* Assets.xcassets */; };
+		29FA73E124B78A5E000F8C8E /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73E024B78A5E000F8C8E /* Smoke.sks */; };
+		29FA73E424B7A097000F8C8E /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73E324B7A097000F8C8E /* UIViewController+Alert.swift */; };
+		29FA73E624B7A805000F8C8E /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73E524B7A805000F8C8E /* NotificationName.swift */; };
+		29FA73E824B7CB6E000F8C8E /* GameViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73E724B7CB6D000F8C8E /* GameViewDelegate.swift */; };
+		29FA73EB24B7F129000F8C8E /* SRCountdownTimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73EA24B7F129000F8C8E /* SRCountdownTimerDelegate.swift */; };
+		29FA73EF24B87D5E000F8C8E /* GameRules.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73EE24B87D5E000F8C8E /* GameRules.storyboard */; };
+		29FA73F324B884F8000F8C8E /* Concept.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73F224B884F8000F8C8E /* Concept.storyboard */; };
+		29FA73F524B885BC000F8C8E /* ContentAppInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73F424B885BC000F8C8E /* ContentAppInformation.storyboard */; };
+		29FA73F924B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73F824B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift */; };
+		29FA73FB24B8A4C7000F8C8E /* AppInformationContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73FA24B8A4C7000F8C8E /* AppInformationContentPresenter.swift */; };
 		4F61EF7CC22F8CBD6B1054F4 /* Pods_Titanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0B64FC76F5F6449A342D64 /* Pods_Titanic.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,37 +82,30 @@
 
 /* Begin PBXFileReference section */
 		2918EE412439120E008EC004 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		2918EE43243CA85C008EC004 /* GamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
-		292521C3241291260005D455 /* StringConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
+		2918EE43243CA85C008EC004 /* GameViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewPresenter.swift; sourceTree = "<group>"; };
+		292521C3241291260005D455 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		292521C9241702C50005D455 /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
 		292521FF2419950B0005D455 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		2925220224199DDE0005D455 /* Rules.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rules.txt; sourceTree = "<group>"; };
 		29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationTableViewController.swift; sourceTree = "<group>"; };
 		29379BE924AA48C400D38F2B /* MIT_License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MIT_License.txt; sourceTree = "<group>"; };
 		29379BEC24AA4ECF00D38F2B /* UIFont+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Scale.swift"; sourceTree = "<group>"; };
 		29379BEE24AA4F0E00D38F2B /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		29379BF024AA4FE000D38F2B /* Collection+ElementOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+ElementOperations.swift"; sourceTree = "<group>"; };
-		29379BF224AA505B00D38F2B /* Double+Round2Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Round2Places.swift"; sourceTree = "<group>"; };
 		29379BF424AA533D00D38F2B /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
-		29379BF724AA53DD00D38F2B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		29379BF924AA7DE300D38F2B /* ContentAppInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAppInformationViewController.swift; sourceTree = "<group>"; };
+		29379BF724AA53DD00D38F2B /* UtilityHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityHelpers.swift; sourceTree = "<group>"; };
 		29379BFB24AAB5F400D38F2B /* AboutTheApp.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AboutTheApp.txt; sourceTree = "<group>"; };
 		29379BFD24AB873000D38F2B /* StartEndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEndView.swift; sourceTree = "<group>"; };
 		29379BFF24ABD33000D38F2B /* ConceptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptViewController.swift; sourceTree = "<group>"; };
-		29379C0324AD09D400D38F2B /* GameStatusPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatusPresenter.swift; sourceTree = "<group>"; };
+		29379C0324AD09D400D38F2B /* NewGameStatusPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameStatusPresenter.swift; sourceTree = "<group>"; };
 		29379C0524AD484000D38F2B /* NewHighscoreEntryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHighscoreEntryPresenter.swift; sourceTree = "<group>"; };
 		29379C0724ADF1EA00D38F2B /* FileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
 		29379C0B24AE7CF600D38F2B /* HighscoreListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListPresenter.swift; sourceTree = "<group>"; };
 		29379C0F24AE82B200D38F2B /* HighscoreListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListViewController.swift; sourceTree = "<group>"; };
-		296523FB245B6081006AF264 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		296523FE245C2317006AF264 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Smoke.sks; path = Titanic/Utilities/Smoke.sks; sourceTree = SOURCE_ROOT; };
-		29652400245C9268006AF264 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		2938C12924B50A2700174FE4 /* DesignPattern.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DesignPattern.txt; sourceTree = "<group>"; };
 		2978B8B22403D40000798E84 /* Titanic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Titanic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2978B8B52403D40000798E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2978B8B72403D40000798E84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2978B8B92403D40000798E84 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		2978B8BC2403D40000798E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2978B8BE2403D40100798E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2978B8C32403D40100798E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2978B8C82403D40100798E84 /* TitanicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TitanicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2978B8CC2403D40100798E84 /* TitanicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicTests.swift; sourceTree = "<group>"; };
@@ -109,8 +113,9 @@
 		2978B8D32403D40100798E84 /* TitanicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TitanicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2978B8D72403D40100798E84 /* TitanicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicUITests.swift; sourceTree = "<group>"; };
 		2978B8D92403D40100798E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2978B8EE240C062E00798E84 /* Titanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titanic.swift; sourceTree = "<group>"; };
+		2978B8EE240C062E00798E84 /* TitanicGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGame.swift; sourceTree = "<group>"; };
 		297C48462488DFA600944196 /* UIDevice+Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Vibrate.swift"; sourceTree = "<group>"; };
+		298010A824C3A741006DC917 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		29A3A0982447C1E400B5983D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeView.swift; sourceTree = "<group>"; };
 		29B98044246092E200D7C302 /* ScoreStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStackView.swift; sourceTree = "<group>"; };
@@ -118,6 +123,24 @@
 		29D6B20024B0EE7800472FC5 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 		29E9004E244CD16C0022BD8F /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesViewController.swift; sourceTree = "<group>"; };
+		29FA73BB24B725B7000F8C8E /* Double+Round2Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Round2Places.swift"; sourceTree = "<group>"; };
+		29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AvoidMassiveVC.txt; sourceTree = "<group>"; };
+		29FA73BF24B743FE000F8C8E /* Layout.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Layout.txt; sourceTree = "<group>"; };
+		29FA73D024B7798E000F8C8E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		29FA73D624B77AB8000F8C8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		29FA73D824B77AC9000F8C8E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		29FA73DB24B78266000F8C8E /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
+		29FA73DD24B78285000F8C8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		29FA73E024B78A5E000F8C8E /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
+		29FA73E324B7A097000F8C8E /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		29FA73E524B7A805000F8C8E /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		29FA73E724B7CB6D000F8C8E /* GameViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewDelegate.swift; sourceTree = "<group>"; };
+		29FA73EA24B7F129000F8C8E /* SRCountdownTimerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRCountdownTimerDelegate.swift; sourceTree = "<group>"; };
+		29FA73EE24B87D5E000F8C8E /* GameRules.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameRules.storyboard; sourceTree = "<group>"; };
+		29FA73F224B884F8000F8C8E /* Concept.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Concept.storyboard; sourceTree = "<group>"; };
+		29FA73F424B885BC000F8C8E /* ContentAppInformation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContentAppInformation.storyboard; sourceTree = "<group>"; };
+		29FA73F824B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAppInformationTableViewController.swift; sourceTree = "<group>"; };
+		29FA73FA24B8A4C7000F8C8E /* AppInformationContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationContentPresenter.swift; sourceTree = "<group>"; };
 		31DCAB1B8A9E6CF0C8FF1AFE /* Pods-Titanic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Titanic.debug.xcconfig"; path = "Target Support Files/Pods-Titanic/Pods-Titanic.debug.xcconfig"; sourceTree = "<group>"; };
 		58E5C94F7AD161E5165DF0AA /* Pods-Titanic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Titanic.release.xcconfig"; path = "Target Support Files/Pods-Titanic/Pods-Titanic.release.xcconfig"; sourceTree = "<group>"; };
 		FF0B64FC76F5F6449A342D64 /* Pods_Titanic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Titanic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,23 +172,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		292521C2241291260005D455 /* Utilities */ = {
+		292521C2241291260005D455 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				296523FE245C2317006AF264 /* Smoke.sks */,
-				296523FB245B6081006AF264 /* Assets.xcassets */,
-				292521C3241291260005D455 /* StringConstants.swift */,
-				29379BF724AA53DD00D38F2B /* Utilities.swift */,
+				29FA73DF24B78900000F8C8E /* View Helpers */,
+				29FA73E224B78A80000F8C8E /* Utility Helpers */,
 			);
-			path = Utilities;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		29252201241999BE0005D455 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				29379BFB24AAB5F400D38F2B /* AboutTheApp.txt */,
-				29379BE924AA48C400D38F2B /* MIT_License.txt */,
-				2925220224199DDE0005D455 /* Rules.txt */,
+				29FA73DA24B78141000F8C8E /* Assets */,
+				29824797249D46B3003C7618 /* Storyboards */,
+				29FA73E024B78A5E000F8C8E /* Smoke.sks */,
+				29FA73D424B779E4000F8C8E /* Localization */,
+				29FA73D924B77B1B000F8C8E /* LocalTxtFiles */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -173,10 +196,11 @@
 		2925B8EB2458A91B000EEB1E /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				2918EE43243CA85C008EC004 /* GamePresenter.swift */,
-				29379C0324AD09D400D38F2B /* GameStatusPresenter.swift */,
+				2918EE43243CA85C008EC004 /* GameViewPresenter.swift */,
+				29379C0324AD09D400D38F2B /* NewGameStatusPresenter.swift */,
 				29379C0524AD484000D38F2B /* NewHighscoreEntryPresenter.swift */,
 				29379C0B24AE7CF600D38F2B /* HighscoreListPresenter.swift */,
+				29FA73FA24B8A4C7000F8C8E /* AppInformationContentPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -184,12 +208,14 @@
 		29379BEB24AA4EA400D38F2B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				29FA73E324B7A097000F8C8E /* UIViewController+Alert.swift */,
 				297C48462488DFA600944196 /* UIDevice+Vibrate.swift */,
 				29379BEC24AA4ECF00D38F2B /* UIFont+Scale.swift */,
 				29379BEE24AA4F0E00D38F2B /* UIImage+Resize.swift */,
 				29379BF024AA4FE000D38F2B /* Collection+ElementOperations.swift */,
-				29379BF224AA505B00D38F2B /* Double+Round2Places.swift */,
 				29379BF424AA533D00D38F2B /* UIColor+CustomColor.swift */,
+				29FA73BB24B725B7000F8C8E /* Double+Round2Places.swift */,
+				29FA73E524B7A805000F8C8E /* NotificationName.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -249,9 +275,8 @@
 				2978B8E62403D85000798E84 /* Models */,
 				2978B8E52403D83C00798E84 /* Supporting Files */,
 				29252201241999BE0005D455 /* Resources */,
-				29824797249D46B3003C7618 /* Storyboards */,
-				292521C2241291260005D455 /* Utilities */,
-				2978B8C32403D40100798E84 /* Info.plist */,
+				292521C2241291260005D455 /* Helpers */,
+				29FA73E924B7CB7F000F8C8E /* Protocols */,
 			);
 			path = Titanic;
 			sourceTree = "<group>";
@@ -277,9 +302,9 @@
 		2978B8E52403D83C00798E84 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2978B8C32403D40100798E84 /* Info.plist */,
 				2978B8B72403D40000798E84 /* SceneDelegate.swift */,
 				2978B8B52403D40000798E84 /* AppDelegate.swift */,
-				2978B8BE2403D40100798E84 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -287,7 +312,7 @@
 		2978B8E62403D85000798E84 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2978B8EE240C062E00798E84 /* Titanic.swift */,
+				2978B8EE240C062E00798E84 /* TitanicGame.swift */,
 				292521FF2419950B0005D455 /* Player.swift */,
 				292521C9241702C50005D455 /* Iceberg.swift */,
 			);
@@ -302,8 +327,8 @@
 				29379C0F24AE82B200D38F2B /* HighscoreListViewController.swift */,
 				2918EE412439120E008EC004 /* WelcomeViewController.swift */,
 				29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */,
-				29379BF924AA7DE300D38F2B /* ContentAppInformationViewController.swift */,
 				29379BFF24ABD33000D38F2B /* ConceptViewController.swift */,
+				29FA73F824B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -311,10 +336,67 @@
 		29824797249D46B3003C7618 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				2978B8BB2403D40000798E84 /* Main.storyboard */,
-				29652400245C9268006AF264 /* Launch Screen.storyboard */,
+				29FA73D024B7798E000F8C8E /* Main.storyboard */,
+				298010A824C3A741006DC917 /* Launch Screen.storyboard */,
+				29FA73EE24B87D5E000F8C8E /* GameRules.storyboard */,
+				29FA73F224B884F8000F8C8E /* Concept.storyboard */,
+				29FA73F424B885BC000F8C8E /* ContentAppInformation.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		29FA73D424B779E4000F8C8E /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				29FA73D724B77AB8000F8C8E /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		29FA73D924B77B1B000F8C8E /* LocalTxtFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2938C12924B50A2700174FE4 /* DesignPattern.txt */,
+				29379BFB24AAB5F400D38F2B /* AboutTheApp.txt */,
+				29FA73BF24B743FE000F8C8E /* Layout.txt */,
+				29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */,
+				29379BE924AA48C400D38F2B /* MIT_License.txt */,
+			);
+			path = LocalTxtFiles;
+			sourceTree = "<group>";
+		};
+		29FA73DA24B78141000F8C8E /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				29FA73DB24B78266000F8C8E /* AppIcon.xcassets */,
+				29FA73DD24B78285000F8C8E /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		29FA73DF24B78900000F8C8E /* View Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				292521C3241291260005D455 /* AppStrings.swift */,
+			);
+			path = "View Helpers";
+			sourceTree = "<group>";
+		};
+		29FA73E224B78A80000F8C8E /* Utility Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				29379BF724AA53DD00D38F2B /* UtilityHelpers.swift */,
+			);
+			path = "Utility Helpers";
+			sourceTree = "<group>";
+		};
+		29FA73E924B7CB7F000F8C8E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				29FA73E724B7CB6D000F8C8E /* GameViewDelegate.swift */,
+				29FA73EA24B7F129000F8C8E /* SRCountdownTimerDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		88E88C8BE32B71A6C6F2645A /* Pods */ = {
@@ -422,6 +504,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 2978B8A92403D40000798E84;
 			productRefGroup = 2978B8B32403D40000798E84 /* Products */;
@@ -440,14 +523,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2978B8BF2403D40100798E84 /* Assets.xcassets in Resources */,
-				296523FF245C2317006AF264 /* Smoke.sks in Resources */,
-				2978B8BD2403D40000798E84 /* Main.storyboard in Resources */,
-				2925220324199DDE0005D455 /* Rules.txt in Resources */,
+				29FA73D524B77AB8000F8C8E /* Localizable.strings in Resources */,
+				29FA73DC24B78266000F8C8E /* AppIcon.xcassets in Resources */,
+				29FA73F524B885BC000F8C8E /* ContentAppInformation.storyboard in Resources */,
+				29FA73C024B743FF000F8C8E /* Layout.txt in Resources */,
 				29379BEA24AA48C400D38F2B /* MIT_License.txt in Resources */,
+				29FA73DE24B78285000F8C8E /* Assets.xcassets in Resources */,
+				298010A924C3A741006DC917 /* Launch Screen.storyboard in Resources */,
+				29FA73D124B7798E000F8C8E /* Main.storyboard in Resources */,
+				29FA73EF24B87D5E000F8C8E /* GameRules.storyboard in Resources */,
 				29379BFC24AAB5F400D38F2B /* AboutTheApp.txt in Resources */,
-				296523FD245B6081006AF264 /* Assets.xcassets in Resources */,
-				29652401245C9269006AF264 /* Launch Screen.storyboard in Resources */,
+				29FA73BE24B743ED000F8C8E /* AvoidMassiveVC.txt in Resources */,
+				2938C12A24B50A2700174FE4 /* DesignPattern.txt in Resources */,
+				29FA73E124B78A5E000F8C8E /* Smoke.sks in Resources */,
+				29FA73F324B884F8000F8C8E /* Concept.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,18 +610,22 @@
 				29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */,
 				292521CA241702C60005D455 /* Iceberg.swift in Sources */,
 				29379BF524AA533D00D38F2B /* UIColor+CustomColor.swift in Sources */,
-				29379C0424AD09D400D38F2B /* GameStatusPresenter.swift in Sources */,
-				29379BF824AA53DD00D38F2B /* Utilities.swift in Sources */,
+				29379C0424AD09D400D38F2B /* NewGameStatusPresenter.swift in Sources */,
+				29379BF824AA53DD00D38F2B /* UtilityHelpers.swift in Sources */,
 				2978B8BA2403D40000798E84 /* GameViewController.swift in Sources */,
+				29FA73F924B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift in Sources */,
 				29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */,
-				2978B8EF240C062E00798E84 /* Titanic.swift in Sources */,
+				2978B8EF240C062E00798E84 /* TitanicGame.swift in Sources */,
+				29FA73BC24B725B8000F8C8E /* Double+Round2Places.swift in Sources */,
 				29379C0824ADF1EA00D38F2B /* FileHandler.swift in Sources */,
 				29B980472461F99400D7C302 /* SRCountDownTimer.swift in Sources */,
+				29FA73E424B7A097000F8C8E /* UIViewController+Alert.swift in Sources */,
+				29FA73E824B7CB6E000F8C8E /* GameViewDelegate.swift in Sources */,
 				29A3A0992447C1E400B5983D /* GameView.swift in Sources */,
-				292521C4241291260005D455 /* StringConstants.swift in Sources */,
+				292521C4241291260005D455 /* AppStrings.swift in Sources */,
 				29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */,
+				29FA73E624B7A805000F8C8E /* NotificationName.swift in Sources */,
 				29379C0024ABD33000D38F2B /* ConceptViewController.swift in Sources */,
-				29379BF324AA505B00D38F2B /* Double+Round2Places.swift in Sources */,
 				29379C0624AD484000D38F2B /* NewHighscoreEntryPresenter.swift in Sources */,
 				2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */,
 				29E9004F244CD16D0022BD8F /* ImageView.swift in Sources */,
@@ -541,11 +634,12 @@
 				2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */,
 				29379BF124AA4FE000D38F2B /* Collection+ElementOperations.swift in Sources */,
 				29379BE624A930B700D38F2B /* AppInformationTableViewController.swift in Sources */,
-				29379BFA24AA7DE300D38F2B /* ContentAppInformationViewController.swift in Sources */,
 				2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */,
 				297C48472488DFA600944196 /* UIDevice+Vibrate.swift in Sources */,
 				29379BFE24AB873000D38F2B /* StartEndView.swift in Sources */,
-				2918EE44243CA85C008EC004 /* GamePresenter.swift in Sources */,
+				2918EE44243CA85C008EC004 /* GameViewPresenter.swift in Sources */,
+				29FA73EB24B7F129000F8C8E /* SRCountdownTimerDelegate.swift in Sources */,
+				29FA73FB24B8A4C7000F8C8E /* AppInformationContentPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,12 +675,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2978B8BB2403D40000798E84 /* Main.storyboard */ = {
+		29FA73D724B77AB8000F8C8E /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2978B8BC2403D40000798E84 /* Base */,
+				29FA73D624B77AB8000F8C8E /* en */,
+				29FA73D824B77AC9000F8C8E /* de */,
 			);
-			name = Main.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -596,6 +691,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -656,6 +752,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -714,12 +811,13 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
-				INFOPLIST_FILE = Titanic/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				INFOPLIST_FILE = "Titanic/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.Titanic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -736,12 +834,13 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
-				INFOPLIST_FILE = Titanic/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				INFOPLIST_FILE = "Titanic/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.Titanic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

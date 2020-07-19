@@ -10,6 +10,7 @@ import UIKit
 
 class ImageView: UIView {
     
+     // MARK: - Properties
     var image: UIImage?
     var imageSize: CGSize {
         if image != nil, superview != nil {
@@ -19,6 +20,14 @@ class ImageView: UIView {
         return CGSize.zero
     }
     
+    deinit {
+        print("DEINIT ImageView")
+    }
+}
+
+// MARK: - Default Methods
+extension ImageView {
+    
     override func draw(_ rect: CGRect) {
         if image != nil {
             if let newImage = image!.resizeImage(for: imageSize) {
@@ -26,12 +35,9 @@ class ImageView: UIView {
             }
         }
     }
-    
-    deinit {
-        print("DEINIT ImageView")
-    }
 }
 
+// MARK: - Constants
 extension ImageView {
     private var referenceWidth: CGFloat {320}
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class PauseView: UIView {
 
+     // MARK: - Properties
     private let blurEffect = UIBlurEffect(style: .light)
     private lazy var blurredEffectView = UIVisualEffectView(effect: blurEffect)
     private lazy var vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
@@ -17,13 +18,14 @@ class PauseView: UIView {
     
     private lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
-        statusLabel.text = PAUSE
+        statusLabel.text = pause
         statusLabel.font = UIFont().scalableFont(forTextStyle: .title1, fontSize: labelPrefferedFontSize)
         statusLabel.adjustsFontForContentSizeCategory = true
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
     }()
     
+      // MARK: - Creating a PauseView
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -36,6 +38,10 @@ class PauseView: UIView {
     deinit {
         print("DEINIT PauseView")
     }
+}
+
+// MARK: - Private methods for setting up view and layout
+private extension PauseView {
     
     private func setupView() {
         addSubview(blurredEffectView)
@@ -50,9 +56,9 @@ class PauseView: UIView {
         statusLabel.centerXAnchor.constraint(equalTo: blurredEffectView.centerXAnchor).isActive = true
         statusLabel.centerYAnchor.constraint(equalTo: blurredEffectView.centerYAnchor).isActive = true
     }
-
 }
 
+// MARK: - Constants
 extension PauseView {
     
     private struct SizeRatio {
@@ -61,4 +67,5 @@ extension PauseView {
     private var labelPrefferedFontSize: CGFloat {
         bounds.height * SizeRatio.labelFontSizeToBoundsHeight
     }
+    private var pause: String {"Pause"}
 }

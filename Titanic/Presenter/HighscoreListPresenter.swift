@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-class HighscoreListPresenter {
+//source: https://www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
+struct HighscoreListPresenter {
 
     func present(in viewController: UIViewController) {
         let list = HighscoreListViewController()

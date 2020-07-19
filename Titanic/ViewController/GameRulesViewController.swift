@@ -10,27 +10,36 @@ import UIKit
 
 class GameRulesViewController: UIViewController {
     
+    // MARK: - Properties
+    @IBOutlet weak var subheadlineLbl: UILabel! {
+        didSet {
+            subheadlineLbl.text = AppStrings.Rules.subheadlineTitle
+        }
+    }
+    
     @IBOutlet weak var goalTitleLbl: UILabel! {
         didSet {
-            goalTitleLbl.attributedText = NSAttributedString(string: GOAL_SECTION_NAME, attributes:
+            goalTitleLbl.attributedText = NSAttributedString(string: AppStrings.Rules.goalSectionTitle, attributes:
             [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        }
+    }
+    
+    @IBOutlet weak var goalContentLbl: UILabel! {
+        didSet {
+            goalContentLbl.text = AppStrings.Rules.goalSectionContent
         }
     }
     
     @IBOutlet weak var usageTitleLbl: UILabel! {
         didSet {
-            usageTitleLbl.attributedText = NSAttributedString(string: USAGE_SECTION_NAME, attributes:
+            usageTitleLbl.attributedText = NSAttributedString(string: AppStrings.Rules.usageSectionTitle, attributes:
             [.underlineStyle: NSUnderlineStyle.single.rawValue])
         }
     }
     @IBOutlet weak var usageContentLbl: UILabel! {
         didSet {
-            usageContentLbl.text = rules.reduce("",+).replacingOccurrences(of: "|", with: "\n")
+            usageContentLbl.text = AppStrings.Rules.usageSectionContent
+            //.reduce("",+).replacingOccurrences(of: "|", with: "\n")
         }
     }
-    
-    private lazy var rules: [String] = {
-        var content = readTextFromFile(fileName: RULES_FILE_NAME, with: TEXT_FILE_EXT)
-        return content.components(separatedBy: "|")
-    }()
 }

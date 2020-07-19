@@ -29,15 +29,6 @@
 
 import UIKit
 
-@objc protocol SRCountdownTimerDelegate: class {
-    @objc optional func timerDidUpdateCounterValue(sender: SRCountdownTimer, newValue: Int)
-    @objc optional func timerDidStart(sender: SRCountdownTimer)
-    @objc optional func timerDidPause(sender: SRCountdownTimer)
-    @objc optional func timerDidResume(sender: SRCountdownTimer)
-    @objc optional func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval)
-    @objc optional func timerDidReset(sender: SRCountdownTimer)
-}
-
 class SRCountdownTimer: UIView {
     var lineWidth: CGFloat = 2.0
     var lineColor: UIColor = .white
@@ -78,17 +69,26 @@ class SRCountdownTimer: UIView {
     }
     
     private func configureLabel(_ label: UILabel) {
-        label.text = currentCounterValue < 10 ? "0" + String(currentCounterValue):String(currentCounterValue)
+        label.text = getCounterValueAsText()
         if let color = self.labelTextColor {
             label.textColor = color
         }
         label.sizeToFit()
     }
+    
+    private func getCounterValueAsText() -> String {
+        currentCounterValue < 10 ? "0" + currentCounterValue.description:currentCounterValue.description
+    }
 
     private func layoutForLabel(_ label: UILabel) {
+        label.bounds.size.width = label.bounds.width + counterLabelOffset
         label.bounds.size.height = label.bounds.width
         label.center.x = bounds.width/2
         label.center.y = bounds.height/2
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        setNeedsLayout()
     }
     
     override func didMoveToSuperview() {
@@ -124,8 +124,9 @@ class SRCountdownTimer: UIView {
                         if currentCounterValue == lastSecondsReminderCount && lastSecondsReminderCount != 0 {
                             lineColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
                             counterLabel.textColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+                            labelTextColor = counterLabel.textColor
                         }
-                        counterLabel.text = "\(currentCounterValue)"
+                        counterLabel.text = getCounterValueAsText()
                     }
                 }
             }
@@ -226,9 +227,9 @@ class SRCountdownTimer: UIView {
     func reset() {
         self.currentCounterValue = 0
     
-        //MARK: Customization - counterLabelColor and circleLineColor alyways set to white after Reset
+        //MARK: Customization - counterLabelColor and circleLineColor alyways set to white after reset
         self.lineColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        self.counterLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        self.labelTextColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
               
         timer?.invalidate()
         self.elapsedTime = 0
@@ -245,8 +246,8 @@ class SRCountdownTimer: UIView {
         timer?.invalidate()
         
         //MARK: Customization - counterLabelColor and circleLineColor alyways set to white before new timer starts
-        self.counterLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.lineColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.labelTextColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         delegate?.timerDidEnd?(sender: self, elapsedTime: elapsedTime)
         setNeedsDisplay()
@@ -280,10 +281,9 @@ class SRCountdownTimer: UIView {
     }
 }
 
-//MARK: -Constants
+// MARK: - Constants
 extension SRCountdownTimer {
-    private var viewConstraintToCounterLabel: CGFloat {
-        15
-    }
+    private var viewConstraintToCounterLabel: CGFloat {15}
+    private var counterLabelOffset: CGFloat {10}
 }
 

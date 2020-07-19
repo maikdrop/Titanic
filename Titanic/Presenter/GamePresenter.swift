@@ -8,25 +8,17 @@
 
 import Foundation
 
-protocol GamePresenterDelegate:class {
-
-    func gameDidUpdate()
-    func gameDidStart()
-    func gameDidPause()
-    func gameDidResume()
-    func gameDidReset()
-    func gameDidEndWithHighscore()
-    func gameDidEndWithoutHighscore()
-}
-
-class GamePresenter {
+class GameViewPresenter {
     
-    weak var delegate: GamePresenterDelegate? {
+    // MARK: - Properties
+    private var fileHandler = FileHandler()
+    private(set) lazy var player = getPlayer()
+    private weak var delegate: GamePresenterDelegate? {
         didSet {
-            gameStatus = .new
+            status = .new
         }
     }
-    private(set) var game: Titanic! {
+    private(set) var game: TitanicGame! {
         didSet {
            delegate?.gameDidUpdate()
         }
@@ -34,56 +26,92 @@ class GamePresenter {
     private(set) var crashCount = 0 {
         didSet {
             if crashCount == 5 {
-                gameStatus = .reset
+                status = .reset
             }
         }
     }
     var knots: Int {
-        gameStatus == .end || gameStatus == .reset ? 0 : 50 - crashCount * 5
+        status == .end || status == .reset ? 0 : 50 - crashCount * 5
     }
     private(set) var drivenSeaMiles = 0.0
     private var seaMilesPerSecond: Double {
         (Double(knots) / 60)/60
     }
     
-    private(set) var gameStatus: GameStatus? {
+    private(set) var status: GameStatus? {
         didSet {
-            switch gameStatus {
-            case .new:
-                initScoreValues()
-                delegate?.gameDidStart()
-            case .pause:
-                delegate?.gameDidPause()
-            case .resume:
-                delegate?.gameDidResume()
-            case .reset:
-                game?.resetIcebergsToInitPosition()
-                delegate?.gameDidUpdate()
-                delegate?.gameDidReset()
-            case .end:
-                game?.resetIcebergsToInitPosition()
-                delegate?.gameDidUpdate()
-                endOfGame()
-            default:
-                break
+            switch status {
+                case .new:
+                    initScoreValues()
+                    delegate?.gameDidStart()
+                case .pause:
+                    delegate?.gameDidPause()
+                case .resume:
+                    delegate?.gameDidResume()
+                case .reset:
+                    game?.resetAllIcebergsVerticallyAndHorizontally()
+                    delegate?.gameDidUpdate()
+                    delegate?.gameDidReset()
+                case .end:
+                    game?.resetAllIcebergsVerticallyAndHorizontally()
+                    delegate?.gameDidUpdate()
+                    endOfGame()
+                default:
+                    break
             }
         }
     }
     
+    
+    // MARK: - Creating a Game Presenter
     init(icebergInitXOrigin: [Double], icebergInitYOrigin: [Double], icebergSize: (width: Double, height: Double)) {
-        game = Titanic(icebergInitXOrigin: icebergInitXOrigin, icebergInitYOrigin: icebergInitYOrigin, icebergSize: icebergSize)
+        game = TitanicGame(icebergInitXOrigin: icebergInitXOrigin, icebergInitYOrigin: icebergInitYOrigin, icebergSize: icebergSize)
     }
     
     deinit {
         print("DEINIT GamePresenter")
     }
+}
+
+  // MARK: - Public API
+extension GameViewPresenter {
+    
+    enum GameStatus {
+        case new
+        case pause
+        case resume
+        case reset
+        case end
+        
+        static var all: [GameStatus] {
+            [GameStatus.new, .pause, .resume, .reset, .end]
+        }
+        
+        var stringValue: String {
+            switch self {
+                case .new: return AppStrings.GameStatus.new
+                case .pause: return AppStrings.GameStatus.pause
+                case .resume: return AppStrings.GameStatus.resume
+                case .reset: return AppStrings.GameStatus.reset
+                case .end: return AppStrings.GameStatus.end
+            }
+        }
+        
+        var list: [GameStatus] {
+            switch self {
+                case .new, .resume: return [.new, .pause, .reset]
+                case .pause: return [.resume]
+                case .reset, .end: return [.new]
+            }
+        }
+    }
     
     func changeGameStatus(to newStatus: GameStatus) {
         if newStatus == .new {
-            gameStatus = .reset
-            gameStatus = .new
+            status = .reset
+            status = .new
         } else {
-             gameStatus = newStatus
+            status = newStatus
         }
     }
     
@@ -96,53 +124,48 @@ class GamePresenter {
     }
     
     func icebergReachedBottom(at index: Int) {
-        game?.resetIceberg(at: index)
+        game?.resetIcebergVertically(at: index)
     }
     
     func intersectionOfShipAndIceberg() {
         crashCount += 1
-        game?.resetAllIcebergsAfterCollisionWithShip()
+        game?.resetAllIcebergsVerticallyAndHorizontally()
         delegate?.gameDidUpdate()
     }
     
-    func nameForHighscoreEntry(userName: String) {
-        game?.savePlayerInHighscoreList(userName: userName, drivenSeaMiles: drivenSeaMiles)
-        delegate?.gameDidUpdate()
+    func nameForHighscoreEntry(userName: String, completion: (Error?) -> ()) {
+        guard player != nil else {
+            return
+        }
+        if player!.count == 10 {player!.removeLast()}
+        let newPlayer = Player(name: userName, drivenMiles: drivenSeaMiles)
+        player!.append(newPlayer)
+        player!.sort(by: >)
+        fileHandler.savePlayerToFile(player: player!, then: {result in
+            if case .failure(let error) = result {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        })
     }
     
     func timerEnded() {
-        gameStatus = .end
+        status = .end
     }
-    
 }
 
-extension GamePresenter {
+private extension GameViewPresenter {
     
-    enum GameStatus: String {
-        case new = "New"
-        case pause = "Pause"
-        case resume = "Resume"
-        case reset = "Reset"
-        case end = "End"
+    private func setViewDelegate(gameViewDelegate: self) {
         
-        static var all: [GameStatus] {
-            [GameStatus.new, .pause, .resume, .reset, .end]
-        }
-        
-        var list: [GameStatus] {
-            switch self {
-                case .new, .resume: return [.new, .pause, .reset]
-                case .pause: return [.resume]
-                case .reset, .end: return [.new]
-            }
-        }
     }
     
     private func endOfGame(){
-        if game.isInHighscoreList(drivenSeaMiles) {
-              delegate?.gameDidEndWithHighscore()
+        if isInHighscoreList(drivenSeaMiles) {
+            delegate?.gameDidEndWithHighscore()
         } else {
-             delegate?.gameDidEndWithoutHighscore()
+            delegate?.gameDidEndWithoutHighscore()
         }
     }
     
@@ -150,5 +173,30 @@ extension GamePresenter {
         crashCount = 0
         drivenSeaMiles = 0.0
     }
+    
+    private func isInHighscoreList(_ drivenSeaMiles: Double) -> Bool {
+        guard player != nil else {
+            return false
+        }
+        if player!.count < 10 {
+            return true
+        } else if player!.count == 10, let drivenSeaMilesOfLastPlayer = player?.last?.drivenMiles {
+            if drivenSeaMilesOfLastPlayer < drivenSeaMiles {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func getPlayer() -> [Player]? {
+        var playerList: [Player]?
+        fileHandler.loadPlayerFile(then: {(result) in
+            if case .success(let player) = result {
+                playerList = player
+            } else {
+                playerList = nil
+            }
+        })
+        return playerList
+    }
 }
-

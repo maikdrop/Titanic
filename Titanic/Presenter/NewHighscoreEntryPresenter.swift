@@ -12,10 +12,10 @@ import UIKit
 //source: https://www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
 struct NewHighscoreEntryPresenter {
     
-    let title: String
-    let message: String
-    let acceptTitle: String
-    let rejectTitle: String
+    let title = AppStrings.NewHighscoreEntryAlert.title
+    let message = AppStrings.NewHighscoreEntryAlert.message
+    let acceptTitle = AppStrings.CommonAlertAction.done
+    let rejectTitle = AppStrings.CommonAlertAction.cancel
     let handler: (Outcome) -> Void
 
     func present(in viewController: UIViewController) {
@@ -36,7 +36,7 @@ struct NewHighscoreEntryPresenter {
         }
     
         alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = ALERT_TEXT_FIELD_PLCHOLDER
+            textField.placeholder = AppStrings.NewHighscoreEntryAlert.textFieldPlaceholder
             NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) {_ in
                 let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
                 let textIsNotEmpty = textCount > 0

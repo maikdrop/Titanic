@@ -10,13 +10,9 @@ import UIKit
 import SRCountdownTimer
 import Combine
 
-extension Notification.Name {
-    static let ShipDidIntersectWithIceberg = Notification.Name("ShipDidIntersectWithIceberg")
-    static let IcebergDidReachEndOfView = Notification.Name("IcebergDidReachEndOfView")
-}
-
 class GameView: UIView {
     
+    // MARK: - Properties
     private(set) lazy var scoreStackView: ScoreStackView = {
         let scoreStack = ScoreStackView()
         scoreStack.axis = .vertical
@@ -27,7 +23,7 @@ class GameView: UIView {
         return scoreStack
     }()
     
-    private(set) lazy var countdownTimer: SRCountdownTimer = {
+    private(set) lazy var gameCountdownTimer: SRCountdownTimer = {
         let countdownTimer = SRCountdownTimer()
         countdownTimer.backgroundColor = .clear
         countdownTimer.labelFont = UIFont().scalableFont(forTextStyle: .title3, fontSize: labelPrefferedFontSize)
@@ -48,17 +44,10 @@ class GameView: UIView {
         slider.addTarget(self, action: #selector(moveShip(by:)), for: .valueChanged)
         return slider
     }()
-         
-    @objc private func moveShip(by sender: UISlider) {
-        let shipWidth = Float(ship.bounds.size.width)
-        let screenWidth = Float(bounds.size.width)
-        let distance = screenWidth - shipWidth
-        ship.center.x = CGFloat((sender.value) * distance + (shipWidth/2))
-    }
     
     private(set) lazy var ship: ImageView =  {
         let shipView = ImageView()
-        if let shipImage = UIImage(named: SHIP_IMAGE_NAME) {
+        if let shipImage = UIImage(named: "ship") {
             shipView.image = shipImage
             shipView.backgroundColor = .clear
         }
@@ -66,12 +55,11 @@ class GameView: UIView {
     }()
     
     private var cancellable = [UIView: Cancellable?]()
-
+    
     private(set) lazy var icebergs: [ImageView] = {
         var icebergViewArray = [ImageView]()
-        if let icebergImage = UIImage(named: ICEBERG_IMAGE_NAME) {
-            let icebergCount = Int((bounds.width / icebergImage.size.width).rounded(.up))
-            for _ in 0..<icebergCount {
+        if let icebergImage = UIImage(named: "iceberg") {
+            for _ in 0..<8 {
                 let icebergView = ImageView()
                 icebergView.image = icebergImage
                 icebergView.backgroundColor = .clear
@@ -83,7 +71,7 @@ class GameView: UIView {
                     if icebergView.frame.origin.y > self!.frame.height {
                         NotificationCenter.default.post(name: .IcebergDidReachEndOfView,
                                                         object: self,
-                                                        userInfo: [ICEBERG_VIEW_KEY: icebergView])
+                                                        userInfo: [AppStrings.UserInfoKey.iceberg: icebergView])
                     }
                 }
                 icebergViewArray.append(icebergView)
@@ -95,19 +83,29 @@ class GameView: UIView {
     deinit {
         print("DEINIT GameView")
     }
-    
-   // MARK: - public API to add subviews because icebergs and ship are GameView size related and haven't any constraints
-    
+}
+
+// MARK: - Public API to add subviews because icebergs and ship are GameView size related and haven't any constraints
+extension GameView {
     func addSubviews() {
         setupView()
         setupLayout()
     }
+}
+
+ // MARK: - Private methods for setting up main view and layout of subviews
+private extension GameView {
     
-    //MARK: - view and layout stuff
+    @objc private func moveShip(by sender: UISlider) {
+        let shipWidth = Float(ship.bounds.size.width)
+        let screenWidth = Float(bounds.size.width)
+        let distance = screenWidth - shipWidth
+        ship.center.x = CGFloat((sender.value) * distance + (shipWidth/2))
+    }
     
     private func setupView() {
         addSubview(scoreStackView)
-        addSubview(countdownTimer)
+        addSubview(gameCountdownTimer)
         addSubview(horizontalSlider)
         addSubview(ship)
         icebergs.forEach{addSubview($0)}
@@ -133,11 +131,11 @@ class GameView: UIView {
     }
     
     private func countdownTimerLayout() {
-        countdownTimer.trailingAnchor.constraint(
+        gameCountdownTimer.trailingAnchor.constraint(
             equalTo: safeAreaLayoutGuide.trailingAnchor,
             constant: countdownTimerTrailingConstraintToSuperview)
             .isActive = true
-        countdownTimer.topAnchor.constraint(
+        gameCountdownTimer.topAnchor.constraint(
             equalTo: safeAreaLayoutGuide.topAnchor,
             constant: subviewConstraintToSuperview)
             .isActive = true
@@ -158,19 +156,23 @@ class GameView: UIView {
     }
     
     private func shipLayout() {
-        let shipFrameOriginY = bounds.height - sliderBottomConstraint - shipOffset - ship.imageSize.height
-        ship.frame = CGRect(
-            x: bounds.width/2 - ship.imageSize.width/2,
-            y: shipFrameOriginY,
-            width: ship.imageSize.width,
-            height: ship.imageSize.height)
+        if let safeAreaHeight = UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height {
+            let shipFrameOriginY = safeAreaHeight - shipOffset - ship.imageSize.height
+            ship.frame = CGRect(
+                x: bounds.width/2 - ship.imageSize.width/2,
+                y: shipFrameOriginY,
+                width: ship.imageSize.width,
+                height: ship.imageSize.height)
+        }
     }
     
     private func icebergLayout() {
-        if let iceberg = icebergs.first {
-            let icebergVerticalCount = (bounds.width / iceberg.imageSize.width).rounded(.down)
-            let widthPerIceberg = (bounds.width / icebergVerticalCount).rounded()
+        if let first = icebergs.first {
+            let icebergVerticalCount = Int((bounds.width / first.imageSize.width).rounded(.down))
+            let widthPerIceberg = bounds.width / CGFloat(icebergVerticalCount)
             var icebergCenter = widthPerIceberg/2
+            var indexArray = Array(0..<icebergVerticalCount)
+            
             icebergs.enumerated().forEach{iceberg in
                 let x = icebergCenter - iceberg.element.imageSize.width/2
                 let y = CGFloat(iceberg.offset) * (iceberg.element.imageSize.height + icebergOffset * ship.imageSize.height)
@@ -182,9 +184,11 @@ class GameView: UIView {
                     height: iceberg.element.imageSize.height)
                 
                 iceberg.element.center.x = icebergCenter
-                if iceberg.element == icebergs.last {
-                    let randomIndex = Int.random(in: 0 ..< iceberg.offset)
-                    icebergs[iceberg.offset].center.x = icebergs[randomIndex].center.x
+                
+                if iceberg.offset >= Int(icebergVerticalCount) {
+                    let randomIndex = Int.random(in: 0 ..< indexArray.count)
+                    icebergs[iceberg.offset].center.x = icebergs[indexArray.remove(at: randomIndex)].center.x
+                    if indexArray.isEmpty {indexArray = Array(0..<icebergVerticalCount)}
                 }
                 icebergCenter += widthPerIceberg
             }
@@ -192,7 +196,7 @@ class GameView: UIView {
     }
 }
 
-//MARK: - Constants
+// MARK: - Constants
 extension GameView {
     
     private struct SizeRatio {

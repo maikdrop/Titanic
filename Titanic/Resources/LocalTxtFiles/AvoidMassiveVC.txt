@@ -1,0 +1,3 @@
+- Subviews
+- Delegate Pattern
+- Notifcation and Observer for ViewEvents

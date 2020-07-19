@@ -9,30 +9,46 @@
 import UIKit
 
 class ConceptViewController: UIViewController {
-
-    var cellIdentifierFromParentVC = ""
-    private lazy var lblTxtsConcept: [String] = {
-        var stringArray = [String]()
-        stringArray.append("About The Concept")
-        stringArray.append("Design Pattern")
-        stringArray.append("Layout")
-        stringArray.append("Layout")
-        stringArray.append(readTextFromFile(fileName: "", with: "txt"))
-        stringArray.append(readTextFromFile(fileName: "AboutTheApp", with: "txt"))
-               
-        
-        
-        
-        return stringArray
-    }()
     
-    @IBOutlet weak var stackView: UIStackView! {
+      // MARK: - Properties
+    @IBOutlet private weak var designPatternInnerStackView: UIStackView! {
         didSet {
-            for index in 0..<stackView.arrangedSubviews.count {
-                if let label = stackView.arrangedSubviews[index] as? UILabel {
-                    label.text = lblTxtsConcept[optional:index] ?? ""
+            let contentArray = [AppStrings.Concept.designPatternTitle, "", readTextFromFile(fileName: designPatternFileName, with: txtExt)]
+            for index in 0..<designPatternInnerStackView.arrangedSubviews.count {
+                if let label = designPatternInnerStackView.arrangedSubviews[index] as? UILabel {
+                    label.text = contentArray[optional:index] ?? ""
                 }
             }
         }
     }
+    
+    @IBOutlet private weak var avoidingMassiveVCInnerStackView: UIStackView! {
+        didSet {
+            let contentArray = [AppStrings.Concept.avoidMassiveVCTitle, "", readTextFromFile(fileName: avoidMassiveVCFileName, with: txtExt)]
+            for index in 0..<avoidingMassiveVCInnerStackView.arrangedSubviews.count {
+                if let label = avoidingMassiveVCInnerStackView.arrangedSubviews[index] as? UILabel {
+                    label.text = contentArray[optional:index] ?? ""
+                }
+            }
+        }
+    }
+    
+    @IBOutlet private weak var layoutInnerStackView: UIStackView! {
+        didSet {
+            let contentArray = [AppStrings.Concept.layoutTitle, "", readTextFromFile(fileName: layoutFileName, with: txtExt)]
+            for index in 0..<layoutInnerStackView.arrangedSubviews.count {
+                if let label = layoutInnerStackView.arrangedSubviews[index] as? UILabel {
+                    label.text = contentArray[optional:index] ?? ""
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Constants
+extension ConceptViewController {
+    private var designPatternFileName: String {"DesignPattern"}
+    private var avoidMassiveVCFileName: String {"AvoidMassiveVC"}
+    private var layoutFileName: String {"Layout"}
+    private var txtExt: String {"txt"}
 }

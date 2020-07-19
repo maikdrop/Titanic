@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  Titanic
+
+  Created by Maik on 09.07.20.
+  Copyright © 2020 maikdrop. All rights reserved.
+*/
+
+//Alert Titles
+"ErrorAlert_Title" = "Error occurred";
+"NewHighscoreEntryAlert_Title" = "Congratulations 👏";
+"GameControl_Title" = "Game Control";
+
+//Alert Components
+"NewHighscoreEntry_Message" = "You`re in the Top 10. Please enter your name to see your ranking.";
+"TextField_Placeholder" = "Your Name";
+
+//Alert Actions
+"AlertAction_Ok" = "OK";
+"AlertAction_Done" = "Done";
+"AlertAction_Cancel" = "Cancel";
+
+//Welcome
+"Welcome_HeadLineTitle" = "Welcome To Titanic!";
+"Welcome_RightBarBtnTitle" = "Rules";
+"Welcome_LeftBarBtnTitle" = "App Information";
+
+//Rules
+"Rules_SubheadlineTitle" = "Let`s have fun!";
+"Rules_GoalSectionTitle" = "Goal";
+"Rules_GoalSectionContent" = "Drive as many sea miles as possible!";
+"Rules_UsageSectionTitle" = "Usage";
+"Rules_UsageSectionContent" = "1. during startup contdown boat is looking after a random start position\n2. move boat by moving slider\n3. avoid intersections with icebergs\n4. any intersection will be counted and will slow down your boat\n5. highscore entry is provided if you are in the top ten\n6. game status can be controlled through action button in the upper right corner";
+
+//Game
+"GoLbl_Txt" = "GO";
+"KnotsLbl_Txt" = "Knots: ";
+"MilesLbl_Txt" = "Miles: ";
+"CrashesLbl_Txt" = "Crashes: ";
+"GameOverLbl_Txt" = "GAME OVER";
+"GameEndLbl_Txt" = "GAME END";
+"YouWinLbl_Txt" = "YOU WIN";
+
+//Game Status
+"New" = "New";
+"Pause" = "Pause";
+"Resume" = "Resume";
+"Reset" = "Reset";
+"End" = "End";
+
+//App Information
+"AboutTheAppLbl_Txt" = "About The App";
+"ConceptLbl_Txt" = "Concept";
+"LegalLbl_Txt" = "Legal Notices";
+
+//Concept
+"Concept_DesignPatternTitle" = "MVP Design Pattern";
+"Concept_AvoidMassiveVCTitle" = "Avoiding Massive VC";
+"Concept_LayoutTitle" = "Layout";

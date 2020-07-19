@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OQy-eB-GW1">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Content App Information View Controller-->
+        <scene sceneID="A0k-UG-ONL">
+            <objects>
+                <viewController storyboardIdentifier="ContentAppInformationViewController" id="OQy-eB-GW1" customClass="ContentAppInformationViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OqG-3B-BZb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rf7-PW-5Tc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCm-is-qre">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="111"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="MsH-DH-Y2p">
+                                                <rect key="frame" x="16" y="16" width="381" height="79"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qV-hi-SLD" userLabel="Title">
+                                                        <rect key="frame" x="0.0" y="0.0" width="381" height="26.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uL-fq-TEb">
+                                                        <rect key="frame" x="0.0" y="58.5" width="381" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="MsH-DH-Y2p" secondAttribute="trailing" id="0Ix-Dk-lAG"/>
+                                            <constraint firstItem="MsH-DH-Y2p" firstAttribute="top" secondItem="wCm-is-qre" secondAttribute="topMargin" id="0Y9-ww-zEM"/>
+                                            <constraint firstItem="MsH-DH-Y2p" firstAttribute="leading" secondItem="wCm-is-qre" secondAttribute="leadingMargin" id="AcN-A6-xo7"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="MsH-DH-Y2p" secondAttribute="bottom" id="cJz-6y-gBT"/>
+                                        </constraints>
+                                        <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="17"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="wCm-is-qre" secondAttribute="trailing" id="9FT-K6-0Ki"/>
+                                    <constraint firstItem="wCm-is-qre" firstAttribute="leading" secondItem="rf7-PW-5Tc" secondAttribute="leading" id="CCp-Iv-BTZ"/>
+                                    <constraint firstItem="wCm-is-qre" firstAttribute="top" secondItem="rf7-PW-5Tc" secondAttribute="top" id="VnV-bW-alI"/>
+                                    <constraint firstAttribute="bottom" secondItem="wCm-is-qre" secondAttribute="bottom" id="bvO-m6-5Gx"/>
+                                    <constraint firstItem="wCm-is-qre" firstAttribute="width" secondItem="rf7-PW-5Tc" secondAttribute="width" id="qQG-DI-Z0b"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="rf7-PW-5Tc" secondAttribute="bottom" id="7c1-MQ-oTp"/>
+                            <constraint firstItem="rf7-PW-5Tc" firstAttribute="top" secondItem="OqG-3B-BZb" secondAttribute="top" id="V14-S2-fWg"/>
+                            <constraint firstAttribute="trailing" secondItem="rf7-PW-5Tc" secondAttribute="trailing" id="WKb-Ue-w3x"/>
+                            <constraint firstItem="rf7-PW-5Tc" firstAttribute="leading" secondItem="OqG-3B-BZb" secondAttribute="leading" id="Yeg-rC-tDd"/>
+                            <constraint firstItem="rf7-PW-5Tc" firstAttribute="width" secondItem="OqG-3B-BZb" secondAttribute="width" id="oiN-Mp-vMQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EJl-zd-yJ6"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Yol-FO-Emk"/>
+                    <connections>
+                        <outlet property="stackView" destination="MsH-DH-Y2p" id="Gla-zt-C4N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a9U-eS-7lc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1651" y="506"/>
+        </scene>
+    </scenes>
+</document>

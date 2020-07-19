@@ -1,6 +1,0 @@
-1. during startup contdown slider is looking for a random start position|
-2. avoid intersections with icebergs which coming down from the top|
-3. move boat by moving slider|
-4. any intersection will be counted and will slow down your boat|
-5. highscore entry is provided if you are in the top 10
-6. game status can be controlled through action button in the upper right corner
