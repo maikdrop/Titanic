@@ -31,7 +31,7 @@ class TitanicTests: XCTestCase {
         let factor = 10.0
         sut.moveIcebergVertically(by: factor)
         
-        let sortedIcebergs =  sut.icebergs.sorted(by: <)
+        let sortedIcebergs = sut.icebergs.sorted(by: <)
     
         for index in 0..<sut.icebergs.count {
             XCTAssertEqual(sortedIcebergs[index].center.y,icebergInitYOrigin[index] + factor + icebergSize[index].height/2)
@@ -53,17 +53,6 @@ class TitanicTests: XCTestCase {
         for index in 0..<sut.icebergs.count {
             XCTAssertEqual(icebergInitXOrigin[index], xOrigins[index].origin.x)
             XCTAssertEqual(icebergInitYOrigin[index], yOrigins[index].origin.y)
-        }
-        
-    }
-    
-//    func test TODO Player Handling
-    
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
         }
     }
 

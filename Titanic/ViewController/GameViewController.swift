@@ -231,7 +231,7 @@ private extension GameViewController {
     }
 }
 
-// MARK: - GamePresenter Delegate Methods
+// MARK: - GameViewPresenter Delegate Methods
 extension GameViewController: GameViewDelegate {
     
     func gameDidUpdate() {

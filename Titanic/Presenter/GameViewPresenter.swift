@@ -190,7 +190,7 @@ private extension GameViewPresenter {
     
     private func getPlayer() -> [Player]? {
         var playerList: [Player]?
-        fileHandler.loadPlayerFile(then: {(result) in
+        fileHandler.loadPlayerFile(then: { result in
             if case .success(let player) = result {
                 playerList = player
             } else {

@@ -19,7 +19,7 @@ class FileHandler {
     
     typealias Handler = (Result<[Player], Error>) -> Void
     
-    func loadPlayerFile(then handler: @escaping Handler){
+    func loadPlayerFile(then handler: Handler){
         if let url = url {
             if !FileManager.default.fileExists(atPath: url.path) {
                 handler(.success([Player]()))
