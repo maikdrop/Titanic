@@ -1,6 +1,0 @@
-framework module Pods_Titanic {
-  umbrella header "Pods-Titanic-umbrella.h"
-
-  export *
-  module * { export * }
-}
