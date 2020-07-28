@@ -10,7 +10,7 @@ import XCTest
 @testable import Titanic
 
 class TitanicTests: XCTestCase {
-    
+
 //    var sut: GamePresenter!
     var sut: TitanicGame!
     var icebergInitXOrigin: [Double] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -19,7 +19,10 @@ class TitanicTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = TitanicGame(icebergInitXOrigin: icebergInitXOrigin, icebergInitYOrigin: icebergInitYOrigin, icebergSize: icebergSize)
+        sut = TitanicGame(
+                icebergInitXOrigin: icebergInitXOrigin,
+                icebergInitYOrigin: icebergInitYOrigin,
+                icebergSize: icebergSize)
     }
 
     override func tearDown() {
@@ -30,29 +33,30 @@ class TitanicTests: XCTestCase {
     func testMoveIcebergVertically() {
         let factor = 10.0
         sut.moveIcebergVertically(by: factor)
-        
+
         let sortedIcebergs = sut.icebergs.sorted(by: <)
-    
+
         for index in 0..<sut.icebergs.count {
-            XCTAssertEqual(sortedIcebergs[index].center.y,icebergInitYOrigin[index] + factor + icebergSize[index].height/2)
+            XCTAssertEqual(
+            sortedIcebergs[index].center.yCoordinate, icebergInitYOrigin[index] + factor + icebergSize[index].height/2)
         }
     }
-    
+
     func testResetIcebergVertically() {
         for index in 0..<sut.icebergs.count {
             sut.resetIcebergVertically(at: index)
-            XCTAssertEqual(sut.icebergs[index].origin.y, Double(0 - index))
+            XCTAssertEqual(sut.icebergs[index].origin.yCoordinate, Double(0 - index))
         }
     }
-    
+
     func testResetAllIcebergsAfterCollisionWithShip() {
         sut.resetAllIcebergsVerticallyAndHorizontally()
-        let xOrigins = sut.icebergs.sorted(by: {$0.origin.x < $1.origin.x})
-        let yOrigins = sut.icebergs.sorted(by: {$0.origin.y < $1.origin.y})
-        
+        let xOrigins = sut.icebergs.sorted(by: {$0.origin.xCoordinate < $1.origin.xCoordinate})
+        let yOrigins = sut.icebergs.sorted(by: {$0.origin.yCoordinate < $1.origin.yCoordinate})
+
         for index in 0..<sut.icebergs.count {
-            XCTAssertEqual(icebergInitXOrigin[index], xOrigins[index].origin.x)
-            XCTAssertEqual(icebergInitYOrigin[index], yOrigins[index].origin.y)
+            XCTAssertEqual(icebergInitXOrigin[index], xOrigins[index].origin.xCoordinate)
+            XCTAssertEqual(icebergInitYOrigin[index], yOrigins[index].origin.yCoordinate)
         }
     }
 

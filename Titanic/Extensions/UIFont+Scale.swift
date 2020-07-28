@@ -13,7 +13,7 @@ extension UIFont {
         let preferredFont = UIFont.preferredFont(forTextStyle: textStyle).withSize(fontSize)
         return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: preferredFont)
     }
-    
+
     func scalableWeightFont(forTextStyle textStyle: TextStyle, fontSize: CGFloat, weight: Weight) -> UIFont {
         let font = UIFont.systemFont(ofSize: fontSize, weight: weight)
         return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: font)

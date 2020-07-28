@@ -9,11 +9,14 @@
 import UIKit
 
 class ConceptViewController: UIViewController {
-    
+
       // MARK: - Properties
     @IBOutlet private weak var designPatternInnerStackView: UIStackView! {
         didSet {
-            let contentArray = [AppStrings.Concept.designPatternTitle, "", readTextFromFile(fileName: designPatternFileName, with: txtExt)]
+            let contentArray = [
+                AppStrings.Concept.designPatternTitle,
+                "",
+                readTextFromFile(fileName: designPatternFileName, with: txtExt)]
             for index in 0..<designPatternInnerStackView.arrangedSubviews.count {
                 if let label = designPatternInnerStackView.arrangedSubviews[index] as? UILabel {
                     label.text = contentArray[optional:index] ?? ""
@@ -21,10 +24,13 @@ class ConceptViewController: UIViewController {
             }
         }
     }
-    
+
     @IBOutlet private weak var avoidingMassiveVCInnerStackView: UIStackView! {
         didSet {
-            let contentArray = [AppStrings.Concept.avoidMassiveVCTitle, "", readTextFromFile(fileName: avoidMassiveVCFileName, with: txtExt)]
+            let contentArray = [
+                AppStrings.Concept.avoidMassiveVCTitle,
+                "",
+                readTextFromFile(fileName: avoidMassiveVCFileName, with: txtExt)]
             for index in 0..<avoidingMassiveVCInnerStackView.arrangedSubviews.count {
                 if let label = avoidingMassiveVCInnerStackView.arrangedSubviews[index] as? UILabel {
                     label.text = contentArray[optional:index] ?? ""
@@ -32,10 +38,13 @@ class ConceptViewController: UIViewController {
             }
         }
     }
-    
+
     @IBOutlet private weak var layoutInnerStackView: UIStackView! {
         didSet {
-            let contentArray = [AppStrings.Concept.layoutTitle, "", readTextFromFile(fileName: layoutFileName, with: txtExt)]
+            let contentArray = [
+                AppStrings.Concept.layoutTitle,
+                "",
+                readTextFromFile(fileName: layoutFileName, with: txtExt)]
             for index in 0..<layoutInnerStackView.arrangedSubviews.count {
                 if let label = layoutInnerStackView.arrangedSubviews[index] as? UILabel {
                     label.text = contentArray[optional:index] ?? ""

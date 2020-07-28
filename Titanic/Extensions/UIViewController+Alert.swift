@@ -17,10 +17,10 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-	
+
     func alertError(title: String?, message: String?) {
 		let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: AppStrings.CommonAlertAction.ok, style: .default)
+        let okAction = UIAlertAction(title: AppStrings.CommonAlertAction.okay, style: .default)
 		alertController.addAction(okAction)
 		present(alertController, animated: true, completion: nil)
 	}

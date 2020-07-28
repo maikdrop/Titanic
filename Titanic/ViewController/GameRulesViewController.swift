@@ -9,27 +9,27 @@
 import UIKit
 
 class GameRulesViewController: UIViewController {
-    
+
     // MARK: - Properties
     @IBOutlet weak var subheadlineLbl: UILabel! {
         didSet {
             subheadlineLbl.text = AppStrings.Rules.subheadlineTitle
         }
     }
-    
+
     @IBOutlet weak var goalTitleLbl: UILabel! {
         didSet {
             goalTitleLbl.attributedText = NSAttributedString(string: AppStrings.Rules.goalSectionTitle, attributes:
             [.underlineStyle: NSUnderlineStyle.single.rawValue])
         }
     }
-    
+
     @IBOutlet weak var goalContentLbl: UILabel! {
         didSet {
             goalContentLbl.text = AppStrings.Rules.goalSectionContent
         }
     }
-    
+
     @IBOutlet weak var usageTitleLbl: UILabel! {
         didSet {
             usageTitleLbl.attributedText = NSAttributedString(string: AppStrings.Rules.usageSectionTitle, attributes:

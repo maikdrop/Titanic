@@ -9,7 +9,7 @@
 import Foundation
 
 struct Point {
-    var x = 0.0, y = 0.0
+    var xCoordinate = 0.0, yCoordinate = 0.0
 }
 
 struct Size {
@@ -17,30 +17,30 @@ struct Size {
 }
 
 struct Iceberg {
-    
+
     var origin = Point()
     var size = Size()
-    
+
     var center: Point {
         get {
-            let centerX = origin.x + (size.width / 2)
-            let centerY = origin.y + (size.height / 2)
-            return Point(x: centerX, y: centerY)
+            let centerX = origin.xCoordinate + (size.width / 2)
+            let centerY = origin.yCoordinate + (size.height / 2)
+            return Point(xCoordinate: centerX, yCoordinate: centerY)
         }
         set(newCenter) {
-            origin.x = newCenter.x - (size.width / 2)
-            origin.y = newCenter.y - (size.height / 2)
+            origin.xCoordinate = newCenter.xCoordinate - (size.width / 2)
+            origin.yCoordinate = newCenter.yCoordinate - (size.height / 2)
         }
     }
 }
 
 extension Iceberg: Comparable {
-    
+
     static func < (lhs: Iceberg, rhs: Iceberg) -> Bool {
-        return (lhs.center.y < rhs.center.y)
+        return (lhs.center.yCoordinate < rhs.center.yCoordinate)
     }
-    
+
     static func == (lhs: Iceberg, rhs: Iceberg) -> Bool {
-        return lhs.center.y == rhs.center.y
+        return lhs.center.yCoordinate == rhs.center.yCoordinate
     }
 }

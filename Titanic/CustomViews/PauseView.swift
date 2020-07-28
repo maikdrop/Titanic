@@ -15,7 +15,7 @@ class PauseView: UIView {
     private lazy var blurredEffectView = UIVisualEffectView(effect: blurEffect)
     private lazy var vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
     private lazy var vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-    
+
     private lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.text = pause
@@ -24,17 +24,17 @@ class PauseView: UIView {
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
     }()
-    
+
       // MARK: - Creating a PauseView
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         print("DEINIT PauseView")
     }
@@ -42,14 +42,14 @@ class PauseView: UIView {
 
 // MARK: - Private methods for setting up view and layout
 private extension PauseView {
-    
+
     private func setupView() {
         addSubview(blurredEffectView)
         vibrancyEffectView.contentView.addSubview(statusLabel)
         blurredEffectView.contentView.addSubview(vibrancyEffectView)
         setupLayout()
     }
-    
+
     private func setupLayout() {
         blurredEffectView.frame = frame
         vibrancyEffectView.frame = blurredEffectView.frame
@@ -60,7 +60,7 @@ private extension PauseView {
 
 // MARK: - Constants
 extension PauseView {
-    
+
     private struct SizeRatio {
         static let labelFontSizeToBoundsHeight: CGFloat = 0.075
     }

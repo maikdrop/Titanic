@@ -10,26 +10,28 @@ import Foundation
 import UIKit
 
 struct AppInformationContentPresenter {
-    
+
     func present(in viewController: UIViewController, for cellText: String) {
         var informationVC: UIViewController?
-        
-        if cellText == AppStrings.AppInformation.aboutTheAppLblTxt || cellText == AppStrings.AppInformation.legalLblTxt {
+
+        if cellText == AppStrings.AppInformation.aboutTheAppLblTxt ||
+            cellText == AppStrings.AppInformation.legalLblTxt {
             informationVC = ContentAppInformationTableViewController()
-            if let vc = informationVC as? ContentAppInformationTableViewController {
-                vc.cellIdentifierFromParentVC = cellText
-                vc.navigationItem.title = cellText
+            if let infoVC = informationVC as? ContentAppInformationTableViewController {
+                infoVC.cellIdentifierFromParentVC = cellText
+                infoVC.navigationItem.title = cellText
             }
         } else if cellText == AppStrings.AppInformation.conceptLblTxt {
             let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-            if let conceptVC = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as? ConceptViewController {
+            if let conceptVC = storyboard.instantiateViewController(
+                withIdentifier: viewControllerIdentifier) as? ConceptViewController {
                 informationVC = conceptVC
                 conceptVC.navigationItem.title = cellText
             }
         }
-             
-        if let navigationController = viewController.navigationController, let vc = informationVC {
-           navigationController.pushViewController(vc, animated: true)
+
+        if let navigationController = viewController.navigationController, let infoVC = informationVC {
+           navigationController.pushViewController(infoVC, animated: true)
         }
     }
 }

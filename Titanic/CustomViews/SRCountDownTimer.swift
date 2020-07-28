@@ -23,9 +23,10 @@
  */
 
 //modification for own use:
-//1. modified counterLabel creation and configuration in order to change label size depending on font content size category
-//2. added auto layout for view because of having always constant space between counterlabel and view
-//cloned from github: https://github.com/rsrbk/SRCountdownTimer
+// 1. modified counterLabel creation and configuration in order to change label
+//  size depending on font content size category
+// 2. added auto layout for view because of having always constant space between counterlabel and view
+// cloned from github: https://github.com/rsrbk/SRCountdownTimer
 
 import UIKit
 
@@ -34,18 +35,18 @@ class SRCountdownTimer: UIView {
     var lineColor: UIColor = .white
     var trailLineColor: UIColor = UIColor.lightGray.withAlphaComponent(0.5)
     var isLabelHidden: Bool = false
-    
+
     var labelFont: UIFont?
     var labelTextColor: UIColor?
     var timerFinishingText: String?
 
     weak var delegate: SRCountdownTimerDelegate?
-    
+
     // use minutes and seconds for presentation
     var useMinutesAndSecondsRepresentation = false
     var moveClockWise = true
-    
-    //MARK: - Customization: color change of counterLabelColor and circleLineColor for the last seconds
+
+    // MARK: - Customization: color change of counterLabelColor and circleLineColor for the last seconds
     private var lastSecondsReminderCount = 0
 
     private weak var timer: Timer?
@@ -63,11 +64,11 @@ class SRCountdownTimer: UIView {
         addSubview(label)
         return label
     }()
-    
+
     deinit {
         print("DEINIT SRCountdownTimer")
     }
-    
+
     private func configureLabel(_ label: UILabel) {
         label.text = getCounterValueAsText()
         if let color = self.labelTextColor {
@@ -75,7 +76,7 @@ class SRCountdownTimer: UIView {
         }
         label.sizeToFit()
     }
-    
+
     private func getCounterValueAsText() -> String {
         currentCounterValue < 10 ? "0" + currentCounterValue.description:currentCounterValue.description
     }
@@ -86,13 +87,13 @@ class SRCountdownTimer: UIView {
         label.center.x = bounds.width/2
         label.center.y = bounds.height/2
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setNeedsLayout()
     }
-    
+
     override func didMoveToSuperview() {
-        
+
         addConstraint(NSLayoutConstraint(
             item: self,
             attribute: .height,
@@ -105,12 +106,12 @@ class SRCountdownTimer: UIView {
             item: self,
             attribute: .width,
             relatedBy: .equal,
-            toItem:  counterLabel,
+            toItem: counterLabel,
             attribute: .width,
             multiplier: 1,
             constant: viewConstraintToCounterLabel))
     }
-    
+
     private var currentCounterValue: Int = 0 {
         didSet {
             if !isLabelHidden {
@@ -120,7 +121,7 @@ class SRCountdownTimer: UIView {
                     if useMinutesAndSecondsRepresentation {
                         counterLabel.text = getMinutesAndSeconds(remainingSeconds: currentCounterValue)
                     } else {
-                        //MARK: Customization - counterLabelColor and circleLine for the last seconds
+                        // MARK: Customization - counterLabelColor and circleLine for the last seconds
                         if currentCounterValue == lastSecondsReminderCount && lastSecondsReminderCount != 0 {
                             lineColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
                             counterLabel.textColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
@@ -134,19 +135,19 @@ class SRCountdownTimer: UIView {
             delegate?.timerDidUpdateCounterValue?(sender: self, newValue: currentCounterValue)
         }
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         configureLabel(counterLabel)
         layoutForLabel(counterLabel)
     }
-    
+
     override func draw(_ rect: CGRect) {
-       
+
         let context = UIGraphicsGetCurrentContext()
         let radius = (bounds.width - lineWidth) / 2
 
-        var currentAngle : CGFloat!
+        var currentAngle: CGFloat!
 
         if moveClockWise {
             currentAngle = CGFloat((.pi * 2 * elapsedTime) / totalTime)
@@ -159,7 +160,7 @@ class SRCountdownTimer: UIView {
         // Main line
         context?.beginPath()
         context?.addArc(
-            center: CGPoint(x: bounds.midX, y:bounds.midY),
+            center: CGPoint(x: bounds.midX, y: bounds.midY),
             radius: radius,
             startAngle: currentAngle - .pi / 2,
             endAngle: .pi * 2 - .pi / 2,
@@ -170,7 +171,7 @@ class SRCountdownTimer: UIView {
         // Trail line
         context?.beginPath()
         context?.addArc(
-            center: CGPoint(x: bounds.midX, y:bounds.midY),
+            center: CGPoint(x: bounds.midX, y: bounds.midY),
             radius: radius,
             startAngle: -.pi / 2,
             endAngle: currentAngle - .pi / 2,
@@ -189,7 +190,7 @@ class SRCountdownTimer: UIView {
     func start(beginningValue: Int, interval: TimeInterval = 1, lastSecondsReminderCount: Int = 0) {
         self.beginningValue = beginningValue
         self.interval = interval
-        //MARK: Customization - color of counterLabel and circleLine will be changed in the last seconds
+        // MARK: Customization - color of counterLabel and circleLine will be changed in the last seconds
         self.lastSecondsReminderCount = lastSecondsReminderCount
 
         totalTime = TimeInterval(beginningValue) * interval
@@ -197,8 +198,12 @@ class SRCountdownTimer: UIView {
         currentCounterValue = beginningValue
 
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: fireInterval, target: self, selector: #selector(SRCountdownTimer.timerFired(_:)), userInfo: nil, repeats: true)
-//            Timer(timeInterval: fireInterval, target: self, selector: #selector(SRCountdownTimer.timerFired(_:)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(
+            timeInterval: fireInterval,
+            target: self,
+            selector: #selector(SRCountdownTimer.timerFired(_:)),
+            userInfo: nil, repeats: true)
+
         RunLoop.main.add(timer!, forMode: .common)
         delegate?.timerDidStart?(sender: self)
     }
@@ -226,34 +231,34 @@ class SRCountdownTimer: UIView {
      */
     func reset() {
         self.currentCounterValue = 0
-    
-        //MARK: Customization - counterLabelColor and circleLineColor alyways set to white after reset
+
+        // MARK: Customization - counterLabelColor and circleLineColor alyways set to white after reset
         self.lineColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         self.labelTextColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-              
+
         timer?.invalidate()
         self.elapsedTime = 0
         delegate?.timerDidReset?(sender: self)
         setNeedsDisplay()
         setNeedsLayout()
     }
-    
+
     /**
      * End the timer
      */
     public func end() {
         self.currentCounterValue = 0
         timer?.invalidate()
-        
-        //MARK: Customization - counterLabelColor and circleLineColor alyways set to white before new timer starts
+
+        // MARK: Customization - counterLabelColor and circleLineColor alyways set to white before new timer starts
         self.lineColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         self.labelTextColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
+
         delegate?.timerDidEnd?(sender: self, elapsedTime: elapsedTime)
         setNeedsDisplay()
         setNeedsLayout()
     }
-    
+
     /**
      * Calculate value in minutes and seconds and return it as String
      */
@@ -286,4 +291,3 @@ extension SRCountdownTimer {
     private var viewConstraintToCounterLabel: CGFloat {15}
     private var counterLabelOffset: CGFloat {10}
 }
-

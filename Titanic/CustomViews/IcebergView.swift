@@ -1,5 +1,5 @@
 //
-//  IcebergView.swift
+//  ImageView.swift
 //  Titanic
 //
 //  Created by Maik on 19.04.20.
@@ -9,7 +9,7 @@
 import UIKit
 
 class ImageView: UIView {
-    
+
     var icebergImage: UIImage?
     var imageSize: CGSize {
         if icebergImage != nil, superview != nil {
@@ -18,7 +18,7 @@ class ImageView: UIView {
         }
         return CGSize.zero
     }
-    
+
     override func draw(_ rect: CGRect) {
         if icebergImage != nil {
             if let newImage = icebergImage.resizeImage(for: imageSize) {
@@ -26,10 +26,8 @@ class ImageView: UIView {
             }
         }
     }
-    
+
     deinit {
         print("DEINIT IcebergView")
     }
 }
-
-

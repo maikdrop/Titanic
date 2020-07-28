@@ -9,12 +9,12 @@
 import Foundation
 
 struct Player: Codable {
-    
+
     private(set) var name: String
     private(set) var drivenMiles: Double
     private(set) var date: Date
-    
-    init(name: String, drivenMiles: Double){
+
+    init(name: String, drivenMiles: Double) {
         self.name = name
         self.drivenMiles = drivenMiles
         self.date = Date()
@@ -22,7 +22,7 @@ struct Player: Codable {
 }
 
 extension Player: Comparable {
-    
+
     static func < (lhs: Player, rhs: Player) -> Bool {
         return (lhs.drivenMiles < rhs.drivenMiles)
     }

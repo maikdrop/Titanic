@@ -8,8 +8,7 @@
 
 import Foundation
 
-protocol GameViewDelegate:class {
-
+protocol GameViewDelegate: class {
     func gameDidUpdate()
     func gameDidStart()
     func gameDidPause()

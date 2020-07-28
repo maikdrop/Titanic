@@ -19,5 +19,3 @@ func readTextFromFile(fileName: String, with typeExtension: String) -> String {
     }
     return fileContents
 }
-
-

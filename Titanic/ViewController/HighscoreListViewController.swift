@@ -27,7 +27,7 @@ class HighscoreListViewController: UIViewController {
 
  // MARK: - Default Methods
 extension HighscoreListViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Top 10"
@@ -42,14 +42,14 @@ extension HighscoreListViewController {
 
  // MARK: - Private methods for setting up table view
 private extension HighscoreListViewController {
-    
+
     private func setupTableView() {
         tableView.isUserInteractionEnabled = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: highscoreEntryCell)
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
+
     private func setupTableViewLayout() {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,24 +61,34 @@ private extension HighscoreListViewController {
 }
 
  // MARK: - DataSource Methods
-extension HighscoreListViewController:  UITableViewDelegate, UITableViewDataSource {
-    
+extension HighscoreListViewController: UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         player.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: highscoreEntryCell, for: indexPath)
-        
-        let highscoreEntryText = "\(indexPath.row + 1)" + ". " + player[indexPath.row].name + ": " + "\(player[indexPath.row].drivenMiles)" + " miles"
-        let attributedString = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont().scalableFont(forTextStyle: .body, fontSize: 17)])
-        
+
+        let highscoreEntryText = "\(indexPath.row + 1)" + ". " +
+            player[indexPath.row].name + ": " + "\(player[indexPath.row].drivenMiles)" + " miles"
+        let attributedString = NSAttributedString(
+            string: highscoreEntryText,
+            attributes: [.font: UIFont().scalableFont(
+                forTextStyle: .body,
+                fontSize: 17)])
+
         cell.textLabel?.attributedText = attributedString
-        
+
         if indexPath.row == latestEntry {
-            let attributedString = NSAttributedString(string: highscoreEntryText, attributes: [.font: UIFont().scalableWeightFont(forTextStyle: .body, fontSize: 18, weight: .bold)])
-            
-            cell.textLabel?.attributedText = attributedString
+            let attributedString = NSAttributedString(
+            string: highscoreEntryText,
+            attributes: [.font: UIFont().scalableWeightFont(
+                forTextStyle: .body,
+                fontSize: 18,
+                weight: .bold)])
+
+        cell.textLabel?.attributedText = attributedString
         }
         return cell
     }

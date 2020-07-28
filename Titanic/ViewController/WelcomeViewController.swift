@@ -9,7 +9,7 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
-    
+
     // MARK: - Properties
     @IBOutlet weak var appInformationBtn: UIBarButtonItem! {
         didSet {
@@ -31,7 +31,7 @@ class WelcomeViewController: UIViewController {
             startBtn.titleLabel?.adjustsFontForContentSizeCategory = true
         }
     }
-    
+
     // MARK: - Button Action
     @IBAction func appInformationBarActionBtn(_ sender: UIBarButtonItem) {
         if let navigator = navigationController {
@@ -40,26 +40,26 @@ class WelcomeViewController: UIViewController {
             navigator.pushViewController(destinationVC, animated: true)
         }
     }
-    
+
     @IBAction func rulesBarActionBtn(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as? GameRulesViewController {
-            vc.navigationItem.title = rulesBtn.title
+        if let gameRulesVC = storyboard.instantiateViewController(
+            withIdentifier: viewControllerIdentifier) as? GameRulesViewController {
+            gameRulesVC.navigationItem.title = rulesBtn.title
             if let navigator = navigationController {
-                navigator.pushViewController(vc, animated: true)
+                navigator.pushViewController(gameRulesVC, animated: true)
             }
         }
     }
-    
 }
 
  // MARK: - Default Methods
 extension WelcomeViewController {
-    
+
     override func viewDidLoad() {
         navigationItem.rightBarButtonItem?.title = AppStrings.Welcome.rightBarBtnTitle
     }
-    
+
     override func viewDidLayoutSubviews() {
         startBtn.isEnabled = false
         navigationItem.rightBarButtonItem?.isEnabled = false
@@ -81,10 +81,11 @@ extension WelcomeViewController {
                     delay: 0,
                     options: [],
                     animations: {
-                        imageView.transform = CGAffineTransform.identity.scaledBy(x: self.scaleFactor, y: self.scaleFactor)
-                    imageView.alpha = 0
-                    },
-                    completion: { _ in
+                        imageView.transform = CGAffineTransform.identity.scaledBy(
+                            x: self.scaleFactor,
+                            y: self.scaleFactor)
+                        imageView.alpha = 0
+                    }, completion: { _ in
                         self.navigationItem.rightBarButtonItem?.isEnabled = true
                         self.navigationItem.leftBarButtonItem?.isEnabled = true
                         self.startBtn.isEnabled = true

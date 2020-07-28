@@ -21,7 +21,6 @@ struct HighscoreListPresenter {
             target: navigationController,
             action: #selector(UIViewController.dismissWithAnimation)
         )
-
         viewController.present(navigationController, animated: true)
     }
 }

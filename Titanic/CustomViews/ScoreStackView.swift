@@ -9,7 +9,7 @@
 import UIKit
 
 class ScoreStackView: UIStackView {
-    
+
      // MARK: - Properties
     private(set) lazy var knotsLbl: UILabel = {
         let knotsLbl = UILabel()
@@ -17,14 +17,14 @@ class ScoreStackView: UIStackView {
         addArrangedSubview(knotsLbl)
         return knotsLbl
     }()
-    
+
     private(set) lazy var drivenSeaMilesLbl: UILabel = {
         let drivenSeaMilesLbl = UILabel()
         drivenSeaMilesLbl.text = AppStrings.Game.drivenSeaMilesLblTxt + "0.00"
         addArrangedSubview(drivenSeaMilesLbl)
         return drivenSeaMilesLbl
     }()
-    
+
     private(set) lazy var crashCountLbl: UILabel = {
         let crashCountLbl = UILabel()
         crashCountLbl.text = AppStrings.Game.crashesLblTxt + "0"
@@ -39,7 +39,7 @@ class ScoreStackView: UIStackView {
 
 // MARK: - Default Methods
 extension ScoreStackView {
-    
+
     override func didMoveToSuperview() {
         configureScoreLabel(knotsLbl)
         configureScoreLabel(drivenSeaMilesLbl)
@@ -49,7 +49,7 @@ extension ScoreStackView {
 
 // MARK: - Private methods for setting up label layout
 private extension ScoreStackView {
-    
+
     private func configureScoreLabel(_ label: UILabel) {
         label.textColor = .white
         label.font = UIFont().scalableFont(forTextStyle: .title3, fontSize: labelPrefferedFontSize)
@@ -57,16 +57,7 @@ private extension ScoreStackView {
     }
 }
 
-//MARK: - Constants
+// MARK: - Constants
 extension ScoreStackView {
-    
-    private struct SizeRatio {
-        static let labelFontSizeToBoundsHeight: CGFloat = 0.03
-    }
-    private var labelPrefferedFontSize: CGFloat {
-        guard let sv = superview else {
-            return 20
-        }
-        return sv.bounds.height * SizeRatio.labelFontSizeToBoundsHeight
-    }
+    private var labelPrefferedFontSize: CGFloat {20}
 }
