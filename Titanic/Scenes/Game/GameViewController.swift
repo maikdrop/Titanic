@@ -313,7 +313,7 @@ extension GameViewController: SRCountdownTimerDelegate {
     func timerDidResume(sender: SRCountdownTimer) {
         displayLink?.isPaused = false
     }
-    
+
     func timerDidReset(sender: SRCountdownTimer) {
         invalidateDisplayLink()
     }

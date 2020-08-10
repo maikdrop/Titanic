@@ -30,7 +30,7 @@ class TitanicStartGameUITests: XCTestCase {
         let startBtn = sut.buttons["Start"]
         let startLbl = sut.staticTexts["Start"]
         let knotsLbl = sut.staticTexts["Knots: 0"]
-        let milesLbl = sut.staticTexts["Miles: 0.00"]
+        let milesLbl = sut.staticTexts["Miles: 0.0"]
         let crashesLbl =  sut.staticTexts["Crashes: 0"]
         let countdownLbl = sut.staticTexts["00"]
 
@@ -40,7 +40,6 @@ class TitanicStartGameUITests: XCTestCase {
         startBtn.tap()
 
         XCTAssertTrue(knotsLbl.exists)
-//        print(milesLbl)
         XCTAssertTrue(milesLbl.exists)
         XCTAssertTrue(crashesLbl.exists)
         XCTAssertTrue(countdownLbl.exists)
