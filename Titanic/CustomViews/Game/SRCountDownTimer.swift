@@ -30,7 +30,7 @@
 
 import UIKit
 
-class SRCountdownTimer: UIView {
+final class SRCountdownTimer: UIView {
     var lineWidth: CGFloat = 2.0
     var lineColor: UIColor = .white
     var trailLineColor: UIColor = UIColor.lightGray.withAlphaComponent(0.5)
