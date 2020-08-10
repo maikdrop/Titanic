@@ -8,3 +8,16 @@ opt_in_rules:
 - empty_count
 - file_name
 - modifier_order
+- ignores_comments
+- private_action
+- private_outlet
+- unused_private_declaration
+
+line_length:
+    warning: 120
+    error: 200
+    ignores_function_declarations: true
+    ignores_comments: true
+    ignores_interpolated_strings: true
+    ignores_urls: true
+
