@@ -19,26 +19,29 @@ class GameControlMenuUITests: XCTestCase {
         continueAfterFailure = false
     }
 
+    override func tearDown() {
+        app = nil
+        super.tearDown()
+    }
+
     func testGameStatusMenu() {
         let startBtn = app.buttons["Start"].staticTexts["Start"]
-        let shareBtn = app.navigationBars["Titanic.GameView"].buttons["Share"]
+        let controlBtn = app.navigationBars["Titanic.GameView"].buttons["Control"]
         let newBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
         let pauseBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
-        let resetBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Reset"]
         let cancelBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Cancel"]
 
         startBtn.tap()
-        shareBtn.tap()
+        controlBtn.tap()
 
         XCTAssertTrue(newBtn.waitForExistence(timeout: 1))
         XCTAssertTrue(pauseBtn.waitForExistence(timeout: 1))
-        XCTAssertTrue(resetBtn.waitForExistence(timeout: 1))
         XCTAssertTrue(cancelBtn.waitForExistence(timeout: 1))
     }
 
     func testChangeGameStatusToNew() {
         let startBtn = app.buttons["Start"].staticTexts["Start"]
-        let shareBtn = app.navigationBars["Titanic.GameView"].buttons["Share"]
+        let controlBtn = app.navigationBars["Titanic.GameView"].buttons["Control"]
         let newBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
         let countdownLbl = app.staticTexts["3"]
 
@@ -46,7 +49,7 @@ class GameControlMenuUITests: XCTestCase {
 
         XCTAssertTrue(countdownLbl.waitForExistence(timeout: 0))
 
-        shareBtn.tap()
+        controlBtn.tap()
         newBtn.tap()
 
         XCTAssertTrue(countdownLbl.waitForExistence(timeout: 0))
@@ -54,44 +57,31 @@ class GameControlMenuUITests: XCTestCase {
 
     func testChangeGameStatusToPause() {
         let startBtn = app.buttons["Start"].staticTexts["Start"]
-        let shareBtn = app.navigationBars["Titanic.GameView"].buttons["Share"]
+        let controlBtn = app.navigationBars["Titanic.GameView"].buttons["Control"]
         let pauseBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
         let pauseLbl = app.staticTexts["Pause"]
 
         startBtn.tap()
-        shareBtn.tap()
+        controlBtn.tap()
         pauseBtn.tap()
 
         XCTAssertTrue(pauseLbl.waitForExistence(timeout: 0))
     }
 
-    func testChangeGameStatusToReset() {
-        let startBtn = app.buttons["Start"].staticTexts["Start"]
-        let shareBtn = app.navigationBars["Titanic.GameView"].buttons["Share"]
-        let resetBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Reset"]
-        let gameOverLbl = app.staticTexts["GAME OVER"]
-
-        startBtn.tap()
-        shareBtn.tap()
-        resetBtn.tap()
-
-        XCTAssertTrue(gameOverLbl.waitForExistence(timeout: 0))
-    }
-
     func testChangeGameStatusToResume() {
         let startBtn = app.buttons["Start"].staticTexts["Start"]
-        let shareBtn = app.navigationBars["Titanic.GameView"].buttons["Share"]
+        let controlBtn = app.navigationBars["Titanic.GameView"].buttons["Control"]
         let pauseBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
         let pauseLbl = app.staticTexts["Pause"]
         let resumeBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Resume"]
 
         startBtn.tap()
-        shareBtn.tap()
+        controlBtn.tap()
         pauseBtn.tap()
 
         XCTAssertTrue(pauseLbl.waitForExistence(timeout: 0))
 
-        shareBtn.tap()
+        controlBtn.tap()
         resumeBtn.tap()
 
         XCTAssertFalse(pauseLbl.waitForExistence(timeout: 0))

@@ -13,7 +13,7 @@ protocol GameViewDelegate: class {
     func gameDidStart()
     func gameDidPause()
     func gameDidResume()
-    func gameDidReset()
+//    func gameDidReset()
     func gameDidEndWithHighscore()
     func gameDidEndWithoutHighscore()
 }

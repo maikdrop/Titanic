@@ -36,8 +36,6 @@ enum AppStrings {
         static let new = NSLocalizedString("New", comment: "")
         static let pause = NSLocalizedString("Pause", comment: "")
         static let resume = NSLocalizedString("Resume", comment: "")
-        static let reset = NSLocalizedString("Reset", comment: "")
-        static let end = NSLocalizedString("End", comment: "")
     }
 
     enum UserInfoKey {

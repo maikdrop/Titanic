@@ -77,7 +77,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Q4R-IL-1jI">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="action" id="HK5-fe-ziC" userLabel="GameControl">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Control" image="control" catalog="system" id="HK5-fe-ziC" userLabel="GameControl">
                             <connections>
                                 <action selector="changeGameStatus:" destination="BYZ-38-t0r" id="5YF-Vk-RfU"/>
                             </connections>
@@ -112,4 +112,7 @@
             <point key="canvasLocation" x="-119" y="-85"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="control" catalog="system" width="128" height="72"/>
+    </resources>
 </document>

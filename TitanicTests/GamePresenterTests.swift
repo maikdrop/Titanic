@@ -24,39 +24,39 @@ class GamePresenterTests: XCTestCase {
                 icebergSize: icebergSize)
     }
 
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
+
     func testChangeGameStatusToNew() {
 
-        sut.changeGameStatus(to: .new)
+        let new = AppStrings.GameStatus.new
+        let newStatus = GameViewPresenter.GameStatus.running
 
-        XCTAssertEqual(GameViewPresenter.GameStatus.new, sut.gameStatus)
+        sut.changeGameStatus(to: new)
+
+        XCTAssertEqual(newStatus, sut.gameStatus)
     }
 
     func testChangeGameStatusToPause() {
 
-        sut.changeGameStatus(to: .pause)
+        let pause = AppStrings.GameStatus.pause
+        let newStatus = GameViewPresenter.GameStatus.pause
 
-        XCTAssertEqual(GameViewPresenter.GameStatus.pause, sut.gameStatus)
+        sut.changeGameStatus(to: pause)
+
+        XCTAssertEqual(newStatus, sut.gameStatus)
     }
 
     func testChangeGameStatusToResume() {
 
-        sut.changeGameStatus(to: .pause)
-        sut.changeGameStatus(to: .resume)
+        let resume = AppStrings.GameStatus.resume
+        let newStatus = GameViewPresenter.GameStatus.running
 
-        XCTAssertEqual(GameViewPresenter.GameStatus.resume, sut.gameStatus)
+        sut.changeGameStatus(to: resume)
+
+        XCTAssertEqual(newStatus, sut.gameStatus)
     }
 
-    func testChangeGameStatusToReset() {
-
-        sut.changeGameStatus(to: .reset)
-
-        XCTAssertEqual(GameViewPresenter.GameStatus.reset, sut.gameStatus)
-    }
-
-    func testChangeGameStatusToEnd() {
-
-        sut.changeGameStatus(to: .end)
-
-        XCTAssertEqual(GameViewPresenter.GameStatus.end, sut.gameStatus)
-    }
 }

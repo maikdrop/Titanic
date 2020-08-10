@@ -38,15 +38,12 @@
 "MilesLbl_Txt" = "Miles: ";
 "CrashesLbl_Txt" = "Crashes: ";
 "GameOverLbl_Txt" = "GAME OVER";
-"GameEndLbl_Txt" = "GAME END";
 "YouWinLbl_Txt" = "YOU WIN";
 
 //Game Status
 "New" = "New";
 "Pause" = "Pause";
 "Resume" = "Resume";
-"Reset" = "Reset";
-"End" = "End";
 
 //App Information
 "AboutTheAppLbl_Txt" = "About The App";

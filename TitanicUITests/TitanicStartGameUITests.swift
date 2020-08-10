@@ -11,23 +11,28 @@ import XCTest
 
 class TitanicStartGameUITests: XCTestCase {
 
-    var app: XCUIApplication!
+    var sut: XCUIApplication!
 
     override func setUp() {
-        app = XCUIApplication()
-        app.launch()
+        sut = XCUIApplication()
+        sut.launch()
         continueAfterFailure = false
+    }
+
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
     }
 
     func testStartGame() {
 
-        let welcomeLbl = app.staticTexts["Welcome To Titanic!"]
-        let startBtn = app.buttons["Start"]
-        let startLbl = app.staticTexts["Start"]
-        let knotsLbl = app.staticTexts["Knots: 0"]
-        let milesLbl = app.staticTexts["Miles: 0.00"]
-        let crashesLbl =  app.staticTexts["Crashes: 0"]
-        let countdownLbl = app.staticTexts["00"]
+        let welcomeLbl = sut.staticTexts["Welcome To Titanic!"]
+        let startBtn = sut.buttons["Start"]
+        let startLbl = sut.staticTexts["Start"]
+        let knotsLbl = sut.staticTexts["Knots: 0"]
+        let milesLbl = sut.staticTexts["Miles: 0.00"]
+        let crashesLbl =  sut.staticTexts["Crashes: 0"]
+        let countdownLbl = sut.staticTexts["00"]
 
         XCTAssertTrue(welcomeLbl.exists)
         XCTAssertTrue(startLbl.exists)
@@ -35,6 +40,7 @@ class TitanicStartGameUITests: XCTestCase {
         startBtn.tap()
 
         XCTAssertTrue(knotsLbl.exists)
+//        print(milesLbl)
         XCTAssertTrue(milesLbl.exists)
         XCTAssertTrue(crashesLbl.exists)
         XCTAssertTrue(countdownLbl.exists)

@@ -37,16 +37,13 @@
 "KnotsLbl_Txt" = "Knoten: ";
 "MilesLbl_Txt" = "Meilen: ";
 "CrashesLbl_Txt" = "Kollisionen: ";
-"GameOverLbl_Txt" = "SPIEL VERLOREN";
-"GameEndLbl_Txt" = "SPIELENDE";
-"YouWinLbl_Txt" = "DU GEWINNST";
+"GameOverLbl_Txt" = "SPIEL ZU ENDE";
+"YouWinLbl_Txt" = "GEWONNEN";
 
 //Game Status
 "New" = "Neu";
 "Pause" = "Pause";
 "Resume" = "Fortsetzen";
-"Reset" = "Zurücksetzen";
-"End" = "Ende";
 
 //App Information
 "AboutTheAppLbl_Txt" = "Über die App";

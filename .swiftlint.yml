@@ -1,3 +1,10 @@
-excluded: # paths to ignore during linting. Takes precedence over `included`.
+excluded:
 - Pods
+- Titanic/Extensions
 - Titanic/Supporting Files/*
+
+opt_in_rules:
+- empty_string
+- empty_count
+- file_name
+- modifier_order

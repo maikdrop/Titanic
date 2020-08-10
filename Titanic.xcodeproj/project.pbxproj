@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,6 @@
 		2918EE44243CA85C008EC004 /* GameViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE43243CA85C008EC004 /* GameViewPresenter.swift */; };
 		292521C4241291260005D455 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C3241291260005D455 /* AppStrings.swift */; };
 		292521CA241702C60005D455 /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* Iceberg.swift */; };
-		292522002419950C0005D455 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521FF2419950B0005D455 /* Player.swift */; };
 		29379BE624A930B700D38F2B /* AppInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */; };
 		29379BEA24AA48C400D38F2B /* MIT_License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29379BE924AA48C400D38F2B /* MIT_License.txt */; };
 		29379BED24AA4ECF00D38F2B /* UIFont+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BEC24AA4ECF00D38F2B /* UIFont+Scale.swift */; };
@@ -26,7 +25,6 @@
 		29379C0624AD484000D38F2B /* NewHighscoreEntryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0524AD484000D38F2B /* NewHighscoreEntryPresenter.swift */; };
 		29379C0824ADF1EA00D38F2B /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0724ADF1EA00D38F2B /* FileHandler.swift */; };
 		29379C0C24AE7CF600D38F2B /* HighscoreListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0B24AE7CF600D38F2B /* HighscoreListPresenter.swift */; };
-		29379C1024AE82B200D38F2B /* HighscoreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379C0F24AE82B200D38F2B /* HighscoreListViewController.swift */; };
 		2938C12A24B50A2700174FE4 /* DesignPattern.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2938C12924B50A2700174FE4 /* DesignPattern.txt */; };
 		295E4CDE24C4F47200C7A78F /* Double+Round2Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E4CDD24C4F47200C7A78F /* Double+Round2Places.swift */; };
 		295E4CE024C59F5400C7A78F /* MockFileHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E4CDF24C59F5400C7A78F /* MockFileHandlerTests.swift */; };
@@ -34,18 +32,28 @@
 		2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B52403D40000798E84 /* AppDelegate.swift */; };
 		2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B72403D40000798E84 /* SceneDelegate.swift */; };
 		2978B8BA2403D40000798E84 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B92403D40000798E84 /* GameViewController.swift */; };
-		2978B8CD2403D40100798E84 /* TitanicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8CC2403D40100798E84 /* TitanicTests.swift */; };
+		2978B8CD2403D40100798E84 /* TitanicGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8CC2403D40100798E84 /* TitanicGameTests.swift */; };
 		2978B8D82403D40100798E84 /* TitanicStartGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8D72403D40100798E84 /* TitanicStartGameUITests.swift */; };
 		2978B8EF240C062E00798E84 /* TitanicGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8EE240C062E00798E84 /* TitanicGame.swift */; };
 		297C48472488DFA600944196 /* UIDevice+Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C48462488DFA600944196 /* UIDevice+Vibrate.swift */; };
 		297CF4D424CF0F1C007040EE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 297CF4D324CF0F1C007040EE /* .swiftlint.yml */; };
-		297CF4D624CF20AA007040EE /* MockNewHighscoreEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4D524CF20AA007040EE /* MockNewHighscoreEntryTests.swift */; };
+		297CF4D624CF20AA007040EE /* NewHighscoreEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4D524CF20AA007040EE /* NewHighscoreEntryTests.swift */; };
 		297CF4D824CF4769007040EE /* GameControlMenuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4D724CF4769007040EE /* GameControlMenuUITests.swift */; };
-		298010A924C3A741006DC917 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298010A824C3A741006DC917 /* Launch Screen.storyboard */; };
+		297CF4DD24D0A596007040EE /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 297CF4DC24D0A596007040EE /* SnapshotTesting */; };
+		297CF4DF24D0A6B2007040EE /* GameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4DE24D0A6B2007040EE /* GameViewControllerTests.swift */; };
+		297CF4E324D21646007040EE /* HighscoreListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4E224D21646007040EE /* HighscoreListPresenterTests.swift */; };
+		297CF4E524D2291E007040EE /* HighscoreListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4E424D2291E007040EE /* HighscoreListTests.swift */; };
+		297CF4E724D46B97007040EE /* HighscoreList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 297CF4E624D46B97007040EE /* HighscoreList.storyboard */; };
+		297CF4E924D46C39007040EE /* HighscoreListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4E824D46C39007040EE /* HighscoreListTableViewController.swift */; };
+		298010A924C3A741006DC917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298010A824C3A741006DC917 /* LaunchScreen.storyboard */; };
+		299E980E24DF2CCF00847FE9 /* GameViewPresenter+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E980D24DF2CCF00847FE9 /* GameViewPresenter+State.swift */; };
+		299E981124DF330000847FE9 /* Iceberg+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E981024DF330000847FE9 /* Iceberg+Geometry.swift */; };
+		299E981324DF347900847FE9 /* TitanicGame+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E981224DF347900847FE9 /* TitanicGame+Player.swift */; };
+		299E981924DF3D8600847FE9 /* Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E981824DF3D8600847FE9 /* Outcome.swift */; };
 		29A3A0992447C1E400B5983D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A3A0982447C1E400B5983D /* GameView.swift */; };
 		29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */; };
 		29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B98044246092E200D7C302 /* ScoreStackView.swift */; };
-		29B980472461F99400D7C302 /* SRCountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B980462461F99400D7C302 /* SRCountDownTimer.swift */; };
+		29B980472461F99400D7C302 /* SRCountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B980462461F99400D7C302 /* SRCountdownTimer.swift */; };
 		29D6B20124B0EE7800472FC5 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6B20024B0EE7800472FC5 /* PauseView.swift */; };
 		29E9004F244CD16D0022BD8F /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9004E244CD16C0022BD8F /* ImageView.swift */; };
 		29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */; };
@@ -63,7 +71,7 @@
 		29FA73EF24B87D5E000F8C8E /* GameRules.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73EE24B87D5E000F8C8E /* GameRules.storyboard */; };
 		29FA73F324B884F8000F8C8E /* Concept.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73F224B884F8000F8C8E /* Concept.storyboard */; };
 		29FA73F524B885BC000F8C8E /* ContentAppInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73F424B885BC000F8C8E /* ContentAppInformation.storyboard */; };
-		29FA73F924B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73F824B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift */; };
+		29FA73F924B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73F824B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift */; };
 		29FA73FB24B8A4C7000F8C8E /* AppInformationContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73FA24B8A4C7000F8C8E /* AppInformationContentPresenter.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,7 +97,6 @@
 		2918EE43243CA85C008EC004 /* GameViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewPresenter.swift; sourceTree = "<group>"; };
 		292521C3241291260005D455 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		292521C9241702C50005D455 /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
-		292521FF2419950B0005D455 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationTableViewController.swift; sourceTree = "<group>"; };
 		29379BE924AA48C400D38F2B /* MIT_License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MIT_License.txt; sourceTree = "<group>"; };
 		29379BEC24AA4ECF00D38F2B /* UIFont+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Scale.swift"; sourceTree = "<group>"; };
@@ -104,7 +111,6 @@
 		29379C0524AD484000D38F2B /* NewHighscoreEntryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHighscoreEntryPresenter.swift; sourceTree = "<group>"; };
 		29379C0724ADF1EA00D38F2B /* FileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
 		29379C0B24AE7CF600D38F2B /* HighscoreListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListPresenter.swift; sourceTree = "<group>"; };
-		29379C0F24AE82B200D38F2B /* HighscoreListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListViewController.swift; sourceTree = "<group>"; };
 		2938C12924B50A2700174FE4 /* DesignPattern.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DesignPattern.txt; sourceTree = "<group>"; };
 		295E4CDD24C4F47200C7A78F /* Double+Round2Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Round2Places.swift"; sourceTree = "<group>"; };
 		295E4CDF24C59F5400C7A78F /* MockFileHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFileHandlerTests.swift; sourceTree = "<group>"; };
@@ -115,7 +121,7 @@
 		2978B8B92403D40000798E84 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		2978B8C32403D40100798E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2978B8C82403D40100798E84 /* TitanicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TitanicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2978B8CC2403D40100798E84 /* TitanicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicTests.swift; sourceTree = "<group>"; };
+		2978B8CC2403D40100798E84 /* TitanicGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGameTests.swift; sourceTree = "<group>"; };
 		2978B8CE2403D40100798E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2978B8D32403D40100798E84 /* TitanicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TitanicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2978B8D72403D40100798E84 /* TitanicStartGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicStartGameUITests.swift; sourceTree = "<group>"; };
@@ -123,13 +129,22 @@
 		2978B8EE240C062E00798E84 /* TitanicGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGame.swift; sourceTree = "<group>"; };
 		297C48462488DFA600944196 /* UIDevice+Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Vibrate.swift"; sourceTree = "<group>"; };
 		297CF4D324CF0F1C007040EE /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		297CF4D524CF20AA007040EE /* MockNewHighscoreEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNewHighscoreEntryTests.swift; sourceTree = "<group>"; };
+		297CF4D524CF20AA007040EE /* NewHighscoreEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHighscoreEntryTests.swift; sourceTree = "<group>"; };
 		297CF4D724CF4769007040EE /* GameControlMenuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlMenuUITests.swift; sourceTree = "<group>"; };
-		298010A824C3A741006DC917 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		297CF4DE24D0A6B2007040EE /* GameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerTests.swift; sourceTree = "<group>"; };
+		297CF4E224D21646007040EE /* HighscoreListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListPresenterTests.swift; sourceTree = "<group>"; };
+		297CF4E424D2291E007040EE /* HighscoreListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListTests.swift; sourceTree = "<group>"; };
+		297CF4E624D46B97007040EE /* HighscoreList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HighscoreList.storyboard; sourceTree = "<group>"; };
+		297CF4E824D46C39007040EE /* HighscoreListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListTableViewController.swift; sourceTree = "<group>"; };
+		298010A824C3A741006DC917 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		299E980D24DF2CCF00847FE9 /* GameViewPresenter+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewPresenter+State.swift"; sourceTree = "<group>"; };
+		299E981024DF330000847FE9 /* Iceberg+Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Iceberg+Geometry.swift"; sourceTree = "<group>"; };
+		299E981224DF347900847FE9 /* TitanicGame+Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGame+Player.swift"; sourceTree = "<group>"; };
+		299E981824DF3D8600847FE9 /* Outcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outcome.swift; sourceTree = "<group>"; };
 		29A3A0982447C1E400B5983D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeView.swift; sourceTree = "<group>"; };
 		29B98044246092E200D7C302 /* ScoreStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStackView.swift; sourceTree = "<group>"; };
-		29B980462461F99400D7C302 /* SRCountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRCountDownTimer.swift; sourceTree = "<group>"; };
+		29B980462461F99400D7C302 /* SRCountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRCountdownTimer.swift; sourceTree = "<group>"; };
 		29D6B20024B0EE7800472FC5 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 		29E9004E244CD16C0022BD8F /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesViewController.swift; sourceTree = "<group>"; };
@@ -148,7 +163,7 @@
 		29FA73EE24B87D5E000F8C8E /* GameRules.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameRules.storyboard; sourceTree = "<group>"; };
 		29FA73F224B884F8000F8C8E /* Concept.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Concept.storyboard; sourceTree = "<group>"; };
 		29FA73F424B885BC000F8C8E /* ContentAppInformation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContentAppInformation.storyboard; sourceTree = "<group>"; };
-		29FA73F824B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAppInformationTableViewController.swift; sourceTree = "<group>"; };
+		29FA73F824B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationDetailTableViewController.swift; sourceTree = "<group>"; };
 		29FA73FA24B8A4C7000F8C8E /* AppInformationContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationContentPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				297CF4DD24D0A596007040EE /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,11 +217,9 @@
 		2925B8EB2458A91B000EEB1E /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				2918EE43243CA85C008EC004 /* GameViewPresenter.swift */,
-				29379C0324AD09D400D38F2B /* NewGameStatusPresenter.swift */,
-				29379C0524AD484000D38F2B /* NewHighscoreEntryPresenter.swift */,
-				29379C0B24AE7CF600D38F2B /* HighscoreListPresenter.swift */,
-				29FA73FA24B8A4C7000F8C8E /* AppInformationContentPresenter.swift */,
+				299E981524DF361D00847FE9 /* Navigation */,
+				299E981624DF365800847FE9 /* Game */,
+				299E981724DF367300847FE9 /* Alert */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -236,13 +250,7 @@
 		296C52F324451FA80044401D /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				29A3A0982447C1E400B5983D /* GameView.swift */,
-				29E9004E244CD16C0022BD8F /* ImageView.swift */,
-				29B98044246092E200D7C302 /* ScoreStackView.swift */,
-				29B980462461F99400D7C302 /* SRCountDownTimer.swift */,
-				29379BFD24AB873000D38F2B /* StartEndView.swift */,
-				29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */,
-				29D6B20024B0EE7800472FC5 /* PauseView.swift */,
+				299E981424DF35E000847FE9 /* Game */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -275,7 +283,7 @@
 				29379BEB24AA4EA400D38F2B /* Extensions */,
 				2925B8EB2458A91B000EEB1E /* Presenter */,
 				296C52F324451FA80044401D /* CustomViews */,
-				2978B8E72403D85D00798E84 /* ViewController */,
+				299E980424DF05B400847FE9 /* Scenes */,
 				29379C0924AE609C00D38F2B /* Handler */,
 				2978B8E62403D85000798E84 /* Models */,
 				2978B8E52403D83C00798E84 /* Supporting Files */,
@@ -289,10 +297,13 @@
 		2978B8CB2403D40100798E84 /* TitanicTests */ = {
 			isa = PBXGroup;
 			children = (
-				297CF4D524CF20AA007040EE /* MockNewHighscoreEntryTests.swift */,
+				297CF4E424D2291E007040EE /* HighscoreListTests.swift */,
+				297CF4E224D21646007040EE /* HighscoreListPresenterTests.swift */,
+				297CF4DE24D0A6B2007040EE /* GameViewControllerTests.swift */,
+				297CF4D524CF20AA007040EE /* NewHighscoreEntryTests.swift */,
 				295E4CE124C98D0400C7A78F /* GamePresenterTests.swift */,
 				295E4CDF24C59F5400C7A78F /* MockFileHandlerTests.swift */,
-				2978B8CC2403D40100798E84 /* TitanicTests.swift */,
+				2978B8CC2403D40100798E84 /* TitanicGameTests.swift */,
 				2978B8CE2403D40100798E84 /* Info.plist */,
 			);
 			path = TitanicTests;
@@ -321,37 +332,187 @@
 		2978B8E62403D85000798E84 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2978B8EE240C062E00798E84 /* TitanicGame.swift */,
-				292521FF2419950B0005D455 /* Player.swift */,
-				292521C9241702C50005D455 /* Iceberg.swift */,
+				299E980C24DF2BD800847FE9 /* Game */,
+				299E980B24DF2BBB00847FE9 /* State */,
+				299E980F24DF2DF400847FE9 /* MovingObject */,
+				299E981A24DF3D9100847FE9 /* Alert */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		2978B8E72403D85D00798E84 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				2978B8B92403D40000798E84 /* GameViewController.swift */,
-				29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */,
-				29379C0F24AE82B200D38F2B /* HighscoreListViewController.swift */,
-				2918EE412439120E008EC004 /* WelcomeViewController.swift */,
-				29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */,
-				29379BFF24ABD33000D38F2B /* ConceptViewController.swift */,
-				29FA73F824B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		29824797249D46B3003C7618 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				29FA73D024B7798E000F8C8E /* Main.storyboard */,
-				298010A824C3A741006DC917 /* Launch Screen.storyboard */,
+				298010A824C3A741006DC917 /* LaunchScreen.storyboard */,
 				29FA73EE24B87D5E000F8C8E /* GameRules.storyboard */,
 				29FA73F224B884F8000F8C8E /* Concept.storyboard */,
 				29FA73F424B885BC000F8C8E /* ContentAppInformation.storyboard */,
+				297CF4E624D46B97007040EE /* HighscoreList.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		299E980424DF05B400847FE9 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				299E980524DF05DE00847FE9 /* Game */,
+				299E980624DF05E800847FE9 /* HighscoreList */,
+				299E980724DF067A00847FE9 /* GameRules */,
+				299E980824DF068500847FE9 /* Welcome */,
+				299E980924DF299E00847FE9 /* AppInformation */,
+				299E980A24DF29AA00847FE9 /* Concept */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		299E980524DF05DE00847FE9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				2978B8B92403D40000798E84 /* GameViewController.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		299E980624DF05E800847FE9 /* HighscoreList */ = {
+			isa = PBXGroup;
+			children = (
+				297CF4E824D46C39007040EE /* HighscoreListTableViewController.swift */,
+			);
+			path = HighscoreList;
+			sourceTree = "<group>";
+		};
+		299E980724DF067A00847FE9 /* GameRules */ = {
+			isa = PBXGroup;
+			children = (
+				29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */,
+			);
+			path = GameRules;
+			sourceTree = "<group>";
+		};
+		299E980824DF068500847FE9 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				2918EE412439120E008EC004 /* WelcomeViewController.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		299E980924DF299E00847FE9 /* AppInformation */ = {
+			isa = PBXGroup;
+			children = (
+				29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */,
+				29FA73F824B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift */,
+			);
+			path = AppInformation;
+			sourceTree = "<group>";
+		};
+		299E980A24DF29AA00847FE9 /* Concept */ = {
+			isa = PBXGroup;
+			children = (
+				29379BFF24ABD33000D38F2B /* ConceptViewController.swift */,
+			);
+			path = Concept;
+			sourceTree = "<group>";
+		};
+		299E980B24DF2BBB00847FE9 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				299E980D24DF2CCF00847FE9 /* GameViewPresenter+State.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		299E980C24DF2BD800847FE9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				2978B8EE240C062E00798E84 /* TitanicGame.swift */,
+				299E981224DF347900847FE9 /* TitanicGame+Player.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		299E980F24DF2DF400847FE9 /* MovingObject */ = {
+			isa = PBXGroup;
+			children = (
+				292521C9241702C50005D455 /* Iceberg.swift */,
+				299E981024DF330000847FE9 /* Iceberg+Geometry.swift */,
+			);
+			path = MovingObject;
+			sourceTree = "<group>";
+		};
+		299E981424DF35E000847FE9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				29A3A0982447C1E400B5983D /* GameView.swift */,
+				29E9004E244CD16C0022BD8F /* ImageView.swift */,
+				29B98044246092E200D7C302 /* ScoreStackView.swift */,
+				29B980462461F99400D7C302 /* SRCountdownTimer.swift */,
+				29379BFD24AB873000D38F2B /* StartEndView.swift */,
+				29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */,
+				29D6B20024B0EE7800472FC5 /* PauseView.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		299E981524DF361D00847FE9 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				29FA73FA24B8A4C7000F8C8E /* AppInformationContentPresenter.swift */,
+				29379C0B24AE7CF600D38F2B /* HighscoreListPresenter.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		299E981624DF365800847FE9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				2918EE43243CA85C008EC004 /* GameViewPresenter.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		299E981724DF367300847FE9 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				29379C0324AD09D400D38F2B /* NewGameStatusPresenter.swift */,
+				29379C0524AD484000D38F2B /* NewHighscoreEntryPresenter.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		299E981A24DF3D9100847FE9 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				299E981824DF3D8600847FE9 /* Outcome.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		299E981D24DF57A000847FE9 /* LegalNotices */ = {
+			isa = PBXGroup;
+			children = (
+				29379BE924AA48C400D38F2B /* MIT_License.txt */,
+			);
+			path = LegalNotices;
+			sourceTree = "<group>";
+		};
+		299E981E24DF57C900847FE9 /* Concept */ = {
+			isa = PBXGroup;
+			children = (
+				2938C12924B50A2700174FE4 /* DesignPattern.txt */,
+				29FA73BF24B743FE000F8C8E /* Layout.txt */,
+				29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */,
+			);
+			path = Concept;
+			sourceTree = "<group>";
+		};
+		299E981F24DF57DC00847FE9 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				29379BFB24AAB5F400D38F2B /* AboutTheApp.txt */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 		29FA73D424B779E4000F8C8E /* Localization */ = {
@@ -365,11 +526,9 @@
 		29FA73D924B77B1B000F8C8E /* LocalTxtFiles */ = {
 			isa = PBXGroup;
 			children = (
-				2938C12924B50A2700174FE4 /* DesignPattern.txt */,
-				29379BFB24AAB5F400D38F2B /* AboutTheApp.txt */,
-				29FA73BF24B743FE000F8C8E /* Layout.txt */,
-				29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */,
-				29379BE924AA48C400D38F2B /* MIT_License.txt */,
+				299E981E24DF57C900847FE9 /* Concept */,
+				299E981F24DF57DC00847FE9 /* About */,
+				299E981D24DF57A000847FE9 /* LegalNotices */,
 			);
 			path = LocalTxtFiles;
 			sourceTree = "<group>";
@@ -450,6 +609,9 @@
 				2978B8CA2403D40100798E84 /* PBXTargetDependency */,
 			);
 			name = TitanicTests;
+			packageProductDependencies = (
+				297CF4DC24D0A596007040EE /* SnapshotTesting */,
+			);
 			productName = TitanicTests;
 			productReference = 2978B8C82403D40100798E84 /* TitanicTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -505,6 +667,9 @@
 				de,
 			);
 			mainGroup = 2978B8A92403D40000798E84;
+			packageReferences = (
+				297CF4DB24D0A596007040EE /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			productRefGroup = 2978B8B32403D40000798E84 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -528,7 +693,8 @@
 				29FA73C024B743FF000F8C8E /* Layout.txt in Resources */,
 				29379BEA24AA48C400D38F2B /* MIT_License.txt in Resources */,
 				29FA73DE24B78285000F8C8E /* Assets.xcassets in Resources */,
-				298010A924C3A741006DC917 /* Launch Screen.storyboard in Resources */,
+				297CF4E724D46B97007040EE /* HighscoreList.storyboard in Resources */,
+				298010A924C3A741006DC917 /* LaunchScreen.storyboard in Resources */,
 				29FA73D124B7798E000F8C8E /* Main.storyboard in Resources */,
 				29FA73EF24B87D5E000F8C8E /* GameRules.storyboard in Resources */,
 				29379BFC24AAB5F400D38F2B /* AboutTheApp.txt in Resources */,
@@ -582,21 +748,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				29379BED24AA4ECF00D38F2B /* UIFont+Scale.swift in Sources */,
+				299E981124DF330000847FE9 /* Iceberg+Geometry.swift in Sources */,
 				29D6B20124B0EE7800472FC5 /* PauseView.swift in Sources */,
-				29379C1024AE82B200D38F2B /* HighscoreListViewController.swift in Sources */,
 				29379C0C24AE7CF600D38F2B /* HighscoreListPresenter.swift in Sources */,
 				29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */,
 				292521CA241702C60005D455 /* Iceberg.swift in Sources */,
 				29379BF524AA533D00D38F2B /* UIColor+CustomColor.swift in Sources */,
+				299E981324DF347900847FE9 /* TitanicGame+Player.swift in Sources */,
 				29379C0424AD09D400D38F2B /* NewGameStatusPresenter.swift in Sources */,
 				29379BF824AA53DD00D38F2B /* UtilityHelpers.swift in Sources */,
 				2978B8BA2403D40000798E84 /* GameViewController.swift in Sources */,
-				29FA73F924B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift in Sources */,
+				29FA73F924B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift in Sources */,
 				29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */,
+				297CF4E924D46C39007040EE /* HighscoreListTableViewController.swift in Sources */,
 				2978B8EF240C062E00798E84 /* TitanicGame.swift in Sources */,
 				29379C0824ADF1EA00D38F2B /* FileHandler.swift in Sources */,
-				29B980472461F99400D7C302 /* SRCountDownTimer.swift in Sources */,
+				29B980472461F99400D7C302 /* SRCountdownTimer.swift in Sources */,
 				29FA73E424B7A097000F8C8E /* UIViewController+Alert.swift in Sources */,
+				299E980E24DF2CCF00847FE9 /* GameViewPresenter+State.swift in Sources */,
 				29FA73E824B7CB6E000F8C8E /* GameViewDelegate.swift in Sources */,
 				29A3A0992447C1E400B5983D /* GameView.swift in Sources */,
 				292521C4241291260005D455 /* AppStrings.swift in Sources */,
@@ -606,7 +775,6 @@
 				29379C0624AD484000D38F2B /* NewHighscoreEntryPresenter.swift in Sources */,
 				2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */,
 				29E9004F244CD16D0022BD8F /* ImageView.swift in Sources */,
-				292522002419950C0005D455 /* Player.swift in Sources */,
 				29379BEF24AA4F0E00D38F2B /* UIImage+Resize.swift in Sources */,
 				2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */,
 				29379BF124AA4FE000D38F2B /* Collection+ElementOperations.swift in Sources */,
@@ -615,6 +783,7 @@
 				297C48472488DFA600944196 /* UIDevice+Vibrate.swift in Sources */,
 				29379BFE24AB873000D38F2B /* StartEndView.swift in Sources */,
 				2918EE44243CA85C008EC004 /* GameViewPresenter.swift in Sources */,
+				299E981924DF3D8600847FE9 /* Outcome.swift in Sources */,
 				295E4CDE24C4F47200C7A78F /* Double+Round2Places.swift in Sources */,
 				29FA73EB24B7F129000F8C8E /* SRCountdownTimerDelegate.swift in Sources */,
 				29FA73FB24B8A4C7000F8C8E /* AppInformationContentPresenter.swift in Sources */,
@@ -626,9 +795,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				295E4CE024C59F5400C7A78F /* MockFileHandlerTests.swift in Sources */,
+				297CF4DF24D0A6B2007040EE /* GameViewControllerTests.swift in Sources */,
+				297CF4E524D2291E007040EE /* HighscoreListTests.swift in Sources */,
+				297CF4E324D21646007040EE /* HighscoreListPresenterTests.swift in Sources */,
 				295E4CE224C98D0400C7A78F /* GamePresenterTests.swift in Sources */,
-				297CF4D624CF20AA007040EE /* MockNewHighscoreEntryTests.swift in Sources */,
-				2978B8CD2403D40100798E84 /* TitanicTests.swift in Sources */,
+				297CF4D624CF20AA007040EE /* NewHighscoreEntryTests.swift in Sources */,
+				2978B8CD2403D40100798E84 /* TitanicGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,6 +1124,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		297CF4DB24D0A596007040EE /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		297CF4DC24D0A596007040EE /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 297CF4DB24D0A596007040EE /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2978B8AA2403D40000798E84 /* Project object */;
 }

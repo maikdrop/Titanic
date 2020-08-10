@@ -8,8 +8,9 @@
 
 import Foundation
 
-class FileHandler {
+struct FileHandler {
 
+    // MARK: - Properties
     private let url = try? FileManager.default.url(
                         for: .applicationSupportDirectory,
                         in: .userDomainMask,
@@ -17,17 +18,18 @@ class FileHandler {
                         create: true)
                         .appendingPathComponent("highscore.json")
 
-    typealias Handler = (Result<[Player], Error>) -> Void
+    typealias Handler = (Result<[TitanicGame.Player], Error>) -> Void
 
+    // MARK: - Public API
     func loadPlayerFile(then handler: Handler) {
         if let url = url {
             if !FileManager.default.fileExists(atPath: url.path) {
-                handler(.success([Player]()))
+                handler(.success([TitanicGame.Player]()))
                 return
             }
             if let data = try? Data(contentsOf: url) {
                 do {
-                    let player = try JSONDecoder().decode([Player].self, from: data)
+                    let player = try JSONDecoder().decode([TitanicGame.Player].self, from: data)
                     handler(.success(player))
                 } catch {
                     handler(.failure(error))
@@ -36,7 +38,7 @@ class FileHandler {
         }
     }
 
-    func savePlayerToFile(player: [Player], then handler: Handler) {
+    func savePlayerToFile(player: [TitanicGame.Player], then handler: Handler) {
         if let url = url, let json = try? JSONEncoder().encode(player) {
             do {
                 try json.write(to: url)

@@ -9,58 +9,60 @@
 import XCTest
 @testable import Titanic
 
-class MockFileHandler: FileHandler {
+struct MockFileHandler {
 
-    var drivenMiles = 0
-    override func savePlayerToFile(player: [Player], then handler: (Result<[Player], Error>) -> Void) {
+    func savePlayerToFile(player: [TitanicGame.Player], then handler: FileHandler.Handler) {
         if player.contains(where: {player in
-            player.name == "maikdrop_1"
-            }) {
-                drivenMiles += 1
-            }
+            player.name == "maikdrop"}) {
+                handler(.success(player))
+        }
     }
 
-    override func loadPlayerFile(then handler: FileHandler.Handler) {
-        let player = [Player(name: "maikdrop", drivenMiles: 0)]
+    func loadPlayerFile(then handler: FileHandler.Handler) {
+        let player = [TitanicGame.Player(name: "maikdrop", drivenMiles: 0)]
         handler(.success(player))
     }
 }
 
 class MockFileHandlerTests: XCTestCase {
 
-    var sut: GameViewPresenter!
-    var mockFileHandler: MockFileHandler!
-    var icebergInitXOrigin = [Double]()
-    var icebergInitYOrigin = [Double]()
-    var icebergSize = [(width: Double, height: Double)]()
+    var sut: MockFileHandler!
 
     override func setUp() {
         super.setUp()
-        sut = GameViewPresenter(
-            icebergInitXOrigin: icebergInitXOrigin,
-            icebergInitYOrigin: icebergInitYOrigin,
-            icebergSize: icebergSize)
-        mockFileHandler = MockFileHandler()
+        sut = MockFileHandler()
+    }
 
-        //uncomment following line for testing purposes and set fileHandler object public in GameViewPresenter
-//         sut.fileHandler = mockFileHandler
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
     }
 
     func testLoadingPlayer() {
 
-        let playerName = "maikdrop"
+        let playerToTest = TitanicGame.Player(name: "maikdrop", drivenMiles: 0)
 
-        let name = sut.player?.first?.name
-
-        XCTAssertEqual(playerName, name)
+        sut.loadPlayerFile(then: {result in
+            if case .success(let player) = result {
+                XCTAssertEqual(playerToTest.name, player.first?.name)
+                XCTAssertEqual(playerToTest.drivenMiles, player.first?.drivenMiles)
+            } else {
+                 XCTAssertTrue(false)
+            }
+        })
     }
 
     func testSavingPlayer() {
 
-        let playerName = "maikdrop_1"
+         let playerToTest = [TitanicGame.Player(name: "maikdrop", drivenMiles: 0)]
 
-        sut.nameForHighscoreEntry(userName: playerName, completion: {_ in})
-
-        XCTAssertEqual(1, mockFileHandler.drivenMiles)
+        sut.savePlayerToFile(player: playerToTest, then: {result in
+            if case .success(let loadedPlayer) = result {
+                XCTAssertEqual(playerToTest.first?.name, loadedPlayer.first?.name)
+                XCTAssertEqual(playerToTest.first?.drivenMiles, loadedPlayer.first?.drivenMiles)
+            } else {
+                XCTAssertTrue(false)
+            }
+        })
     }
 }
