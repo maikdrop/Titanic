@@ -17,8 +17,8 @@ final class ImageView: UIView {
      // MARK: - Properties
     var image: UIImage?
     var imageSize: CGSize {
-        if image != nil, superview != nil {
-            let ratio = superview!.bounds.width / referenceWidth
+        if image != nil, let width = UIApplication.shared.windows.first?.frame.width {
+            let ratio =  width / referenceWidth
             return CGSize(width: image!.size.width * ratio, height: image!.size.height * ratio)
         }
         return CGSize.zero
@@ -45,3 +45,11 @@ extension ImageView {
 extension ImageView {
     private var referenceWidth: CGFloat {375}
 }
+
+//var imageSize: CGSize {
+//    if image != nil {
+//        let ratio = bounds.width / referenceWidth
+//        return CGSize(width: image!.size.width * ratio, height: image!.size.height * ratio)
+//    }
+//    return CGSize.zero
+//}

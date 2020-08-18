@@ -10,7 +10,7 @@
 		2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE412439120E008EC004 /* WelcomeViewController.swift */; };
 		2918EE44243CA85C008EC004 /* GameViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE43243CA85C008EC004 /* GameViewPresenter.swift */; };
 		292521C4241291260005D455 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C3241291260005D455 /* AppStrings.swift */; };
-		292521CA241702C60005D455 /* Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* Iceberg.swift */; };
+		292521CA241702C60005D455 /* TitanicGame+Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* TitanicGame+Iceberg.swift */; };
 		29379BE624A930B700D38F2B /* AppInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */; };
 		29379BEA24AA48C400D38F2B /* MIT_License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29379BE924AA48C400D38F2B /* MIT_License.txt */; };
 		29379BED24AA4ECF00D38F2B /* UIFont+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BEC24AA4ECF00D38F2B /* UIFont+Scale.swift */; };
@@ -39,15 +39,14 @@
 		297CF4D424CF0F1C007040EE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 297CF4D324CF0F1C007040EE /* .swiftlint.yml */; };
 		297CF4D624CF20AA007040EE /* NewHighscoreEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4D524CF20AA007040EE /* NewHighscoreEntryTests.swift */; };
 		297CF4D824CF4769007040EE /* GameControlMenuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4D724CF4769007040EE /* GameControlMenuUITests.swift */; };
-		297CF4DD24D0A596007040EE /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 297CF4DC24D0A596007040EE /* SnapshotTesting */; };
-		297CF4DF24D0A6B2007040EE /* GameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4DE24D0A6B2007040EE /* GameViewControllerTests.swift */; };
 		297CF4E324D21646007040EE /* HighscoreListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4E224D21646007040EE /* HighscoreListPresenterTests.swift */; };
-		297CF4E524D2291E007040EE /* HighscoreListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4E424D2291E007040EE /* HighscoreListTests.swift */; };
 		297CF4E724D46B97007040EE /* HighscoreList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 297CF4E624D46B97007040EE /* HighscoreList.storyboard */; };
 		297CF4E924D46C39007040EE /* HighscoreListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297CF4E824D46C39007040EE /* HighscoreListTableViewController.swift */; };
 		298010A924C3A741006DC917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298010A824C3A741006DC917 /* LaunchScreen.storyboard */; };
+		2999A9D624EAADD300C74094 /* HighscoreListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999A9D524EAADD300C74094 /* HighscoreListTests.swift */; };
+		2999A9DF24EAB09400C74094 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2999A9DE24EAB09400C74094 /* SnapshotTesting */; };
+		2999A9E124EAB7DA00C74094 /* GameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999A9E024EAB7DA00C74094 /* GameViewControllerTests.swift */; };
 		299E980E24DF2CCF00847FE9 /* GameViewPresenter+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E980D24DF2CCF00847FE9 /* GameViewPresenter+State.swift */; };
-		299E981124DF330000847FE9 /* Iceberg+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E981024DF330000847FE9 /* Iceberg+Geometry.swift */; };
 		299E981324DF347900847FE9 /* TitanicGame+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E981224DF347900847FE9 /* TitanicGame+Player.swift */; };
 		299E981924DF3D8600847FE9 /* Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E981824DF3D8600847FE9 /* Outcome.swift */; };
 		29A3A0992447C1E400B5983D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A3A0982447C1E400B5983D /* GameView.swift */; };
@@ -90,13 +89,20 @@
 			remoteGlobalIDString = 2978B8B12403D40000798E84;
 			remoteInfo = Titanic;
 		};
+		2999A9D824EAADD300C74094 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2978B8AA2403D40000798E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2978B8B12403D40000798E84;
+			remoteInfo = Titanic;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2918EE412439120E008EC004 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		2918EE43243CA85C008EC004 /* GameViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewPresenter.swift; sourceTree = "<group>"; };
 		292521C3241291260005D455 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
-		292521C9241702C50005D455 /* Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iceberg.swift; sourceTree = "<group>"; };
+		292521C9241702C50005D455 /* TitanicGame+Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGame+Iceberg.swift"; sourceTree = "<group>"; };
 		29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationTableViewController.swift; sourceTree = "<group>"; };
 		29379BE924AA48C400D38F2B /* MIT_License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MIT_License.txt; sourceTree = "<group>"; };
 		29379BEC24AA4ECF00D38F2B /* UIFont+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Scale.swift"; sourceTree = "<group>"; };
@@ -131,14 +137,15 @@
 		297CF4D324CF0F1C007040EE /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		297CF4D524CF20AA007040EE /* NewHighscoreEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHighscoreEntryTests.swift; sourceTree = "<group>"; };
 		297CF4D724CF4769007040EE /* GameControlMenuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlMenuUITests.swift; sourceTree = "<group>"; };
-		297CF4DE24D0A6B2007040EE /* GameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerTests.swift; sourceTree = "<group>"; };
 		297CF4E224D21646007040EE /* HighscoreListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListPresenterTests.swift; sourceTree = "<group>"; };
-		297CF4E424D2291E007040EE /* HighscoreListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListTests.swift; sourceTree = "<group>"; };
 		297CF4E624D46B97007040EE /* HighscoreList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HighscoreList.storyboard; sourceTree = "<group>"; };
 		297CF4E824D46C39007040EE /* HighscoreListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListTableViewController.swift; sourceTree = "<group>"; };
 		298010A824C3A741006DC917 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2999A9D324EAADD300C74094 /* TitanicSnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TitanicSnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2999A9D524EAADD300C74094 /* HighscoreListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListTests.swift; sourceTree = "<group>"; };
+		2999A9D724EAADD300C74094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2999A9E024EAB7DA00C74094 /* GameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerTests.swift; sourceTree = "<group>"; };
 		299E980D24DF2CCF00847FE9 /* GameViewPresenter+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewPresenter+State.swift"; sourceTree = "<group>"; };
-		299E981024DF330000847FE9 /* Iceberg+Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Iceberg+Geometry.swift"; sourceTree = "<group>"; };
 		299E981224DF347900847FE9 /* TitanicGame+Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGame+Player.swift"; sourceTree = "<group>"; };
 		299E981824DF3D8600847FE9 /* Outcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outcome.swift; sourceTree = "<group>"; };
 		29A3A0982447C1E400B5983D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -179,7 +186,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				297CF4DD24D0A596007040EE /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +193,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2999A9D024EAADD300C74094 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2999A9DF24EAB09400C74094 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +276,7 @@
 				2978B8B42403D40000798E84 /* Titanic */,
 				2978B8CB2403D40100798E84 /* TitanicTests */,
 				2978B8D62403D40100798E84 /* TitanicUITests */,
+				2999A9D424EAADD300C74094 /* TitanicSnapshotTests */,
 				2978B8B32403D40000798E84 /* Products */,
 				88E88C8BE32B71A6C6F2645A /* Pods */,
 			);
@@ -273,6 +288,7 @@
 				2978B8B22403D40000798E84 /* Titanic.app */,
 				2978B8C82403D40100798E84 /* TitanicTests.xctest */,
 				2978B8D32403D40100798E84 /* TitanicUITests.xctest */,
+				2999A9D324EAADD300C74094 /* TitanicSnapshotTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -297,9 +313,7 @@
 		2978B8CB2403D40100798E84 /* TitanicTests */ = {
 			isa = PBXGroup;
 			children = (
-				297CF4E424D2291E007040EE /* HighscoreListTests.swift */,
 				297CF4E224D21646007040EE /* HighscoreListPresenterTests.swift */,
-				297CF4DE24D0A6B2007040EE /* GameViewControllerTests.swift */,
 				297CF4D524CF20AA007040EE /* NewHighscoreEntryTests.swift */,
 				295E4CE124C98D0400C7A78F /* GamePresenterTests.swift */,
 				295E4CDF24C59F5400C7A78F /* MockFileHandlerTests.swift */,
@@ -334,7 +348,6 @@
 			children = (
 				299E980C24DF2BD800847FE9 /* Game */,
 				299E980B24DF2BBB00847FE9 /* State */,
-				299E980F24DF2DF400847FE9 /* MovingObject */,
 				299E981A24DF3D9100847FE9 /* Alert */,
 			);
 			path = Models;
@@ -351,6 +364,16 @@
 				297CF4E624D46B97007040EE /* HighscoreList.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		2999A9D424EAADD300C74094 /* TitanicSnapshotTests */ = {
+			isa = PBXGroup;
+			children = (
+				2999A9E024EAB7DA00C74094 /* GameViewControllerTests.swift */,
+				2999A9D524EAADD300C74094 /* HighscoreListTests.swift */,
+				2999A9D724EAADD300C74094 /* Info.plist */,
+			);
+			path = TitanicSnapshotTests;
 			sourceTree = "<group>";
 		};
 		299E980424DF05B400847FE9 /* Scenes */ = {
@@ -428,17 +451,9 @@
 			children = (
 				2978B8EE240C062E00798E84 /* TitanicGame.swift */,
 				299E981224DF347900847FE9 /* TitanicGame+Player.swift */,
+				292521C9241702C50005D455 /* TitanicGame+Iceberg.swift */,
 			);
 			path = Game;
-			sourceTree = "<group>";
-		};
-		299E980F24DF2DF400847FE9 /* MovingObject */ = {
-			isa = PBXGroup;
-			children = (
-				292521C9241702C50005D455 /* Iceberg.swift */,
-				299E981024DF330000847FE9 /* Iceberg+Geometry.swift */,
-			);
-			path = MovingObject;
 			sourceTree = "<group>";
 		};
 		299E981424DF35E000847FE9 /* Game */ = {
@@ -610,7 +625,6 @@
 			);
 			name = TitanicTests;
 			packageProductDependencies = (
-				297CF4DC24D0A596007040EE /* SnapshotTesting */,
 			);
 			productName = TitanicTests;
 			productReference = 2978B8C82403D40100798E84 /* TitanicTests.xctest */;
@@ -634,13 +648,34 @@
 			productReference = 2978B8D32403D40100798E84 /* TitanicUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		2999A9D224EAADD300C74094 /* TitanicSnapshotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2999A9DA24EAADD300C74094 /* Build configuration list for PBXNativeTarget "TitanicSnapshotTests" */;
+			buildPhases = (
+				2999A9CF24EAADD300C74094 /* Sources */,
+				2999A9D024EAADD300C74094 /* Frameworks */,
+				2999A9D124EAADD300C74094 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2999A9D924EAADD300C74094 /* PBXTargetDependency */,
+			);
+			name = TitanicSnapshotTests;
+			packageProductDependencies = (
+				2999A9DE24EAB09400C74094 /* SnapshotTesting */,
+			);
+			productName = TitanicSnapshotTests;
+			productReference = 2999A9D324EAADD300C74094 /* TitanicSnapshotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		2978B8AA2403D40000798E84 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = maikdrop;
 				TargetAttributes = {
@@ -653,6 +688,10 @@
 					};
 					2978B8D22403D40100798E84 = {
 						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 2978B8B12403D40000798E84;
+					};
+					2999A9D224EAADD300C74094 = {
+						CreatedOnToolsVersion = 11.6;
 						TestTargetID = 2978B8B12403D40000798E84;
 					};
 				};
@@ -668,7 +707,7 @@
 			);
 			mainGroup = 2978B8A92403D40000798E84;
 			packageReferences = (
-				297CF4DB24D0A596007040EE /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				2999A9DD24EAB09400C74094 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 2978B8B32403D40000798E84 /* Products */;
 			projectDirPath = "";
@@ -677,6 +716,7 @@
 				2978B8B12403D40000798E84 /* Titanic */,
 				2978B8C72403D40100798E84 /* TitanicTests */,
 				2978B8D22403D40100798E84 /* TitanicUITests */,
+				2999A9D224EAADD300C74094 /* TitanicSnapshotTests */,
 			);
 		};
 /* End PBXProject section */
@@ -719,6 +759,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2999A9D124EAADD300C74094 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -748,11 +795,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				29379BED24AA4ECF00D38F2B /* UIFont+Scale.swift in Sources */,
-				299E981124DF330000847FE9 /* Iceberg+Geometry.swift in Sources */,
 				29D6B20124B0EE7800472FC5 /* PauseView.swift in Sources */,
 				29379C0C24AE7CF600D38F2B /* HighscoreListPresenter.swift in Sources */,
 				29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */,
-				292521CA241702C60005D455 /* Iceberg.swift in Sources */,
+				292521CA241702C60005D455 /* TitanicGame+Iceberg.swift in Sources */,
 				29379BF524AA533D00D38F2B /* UIColor+CustomColor.swift in Sources */,
 				299E981324DF347900847FE9 /* TitanicGame+Player.swift in Sources */,
 				29379C0424AD09D400D38F2B /* NewGameStatusPresenter.swift in Sources */,
@@ -795,8 +841,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				295E4CE024C59F5400C7A78F /* MockFileHandlerTests.swift in Sources */,
-				297CF4DF24D0A6B2007040EE /* GameViewControllerTests.swift in Sources */,
-				297CF4E524D2291E007040EE /* HighscoreListTests.swift in Sources */,
 				297CF4E324D21646007040EE /* HighscoreListPresenterTests.swift in Sources */,
 				295E4CE224C98D0400C7A78F /* GamePresenterTests.swift in Sources */,
 				297CF4D624CF20AA007040EE /* NewHighscoreEntryTests.swift in Sources */,
@@ -813,6 +857,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2999A9CF24EAADD300C74094 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2999A9E124EAB7DA00C74094 /* GameViewControllerTests.swift in Sources */,
+				2999A9D624EAADD300C74094 /* HighscoreListTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -825,6 +878,11 @@
 			isa = PBXTargetDependency;
 			target = 2978B8B12403D40000798E84 /* Titanic */;
 			targetProxy = 2978B8D42403D40100798E84 /* PBXContainerItemProxy */;
+		};
+		2999A9D924EAADD300C74094 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2978B8B12403D40000798E84 /* Titanic */;
+			targetProxy = 2999A9D824EAADD300C74094 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1084,6 +1142,48 @@
 			};
 			name = Release;
 		};
+		2999A9DB24EAADD300C74094 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7FESQ389Q;
+				INFOPLIST_FILE = TitanicSnapshotTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.TitanicSnapshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Titanic.app/Titanic";
+			};
+			name = Debug;
+		};
+		2999A9DC24EAADD300C74094 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7FESQ389Q;
+				INFOPLIST_FILE = TitanicSnapshotTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maikdrop.TitanicSnapshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Titanic.app/Titanic";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1123,10 +1223,19 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		2999A9DA24EAADD300C74094 /* Build configuration list for PBXNativeTarget "TitanicSnapshotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2999A9DB24EAADD300C74094 /* Debug */,
+				2999A9DC24EAADD300C74094 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		297CF4DB24D0A596007040EE /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+		2999A9DD24EAB09400C74094 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
 			requirement = {
@@ -1137,9 +1246,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		297CF4DC24D0A596007040EE /* SnapshotTesting */ = {
+		2999A9DE24EAB09400C74094 /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 297CF4DB24D0A596007040EE /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			package = 2999A9DD24EAB09400C74094 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -16,16 +16,11 @@ import XCTest
 class GamePresenterTests: XCTestCase {
 
     var sut: GameViewPresenter!
-    var icebergInitXOrigin = [Double]()
-    var icebergInitYOrigin = [Double]()
-    var icebergSize = [(width: Double, height: Double)]()
+    let icebergs = [ImageView]()
 
     override func setUp() {
         super.setUp()
-        sut = GameViewPresenter(
-                icebergInitXOrigin: icebergInitXOrigin,
-                icebergInitYOrigin: icebergInitYOrigin,
-                icebergSize: icebergSize)
+        sut = GameViewPresenter(icebergs: icebergs)
     }
 
     override func tearDown() {

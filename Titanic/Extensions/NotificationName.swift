@@ -14,6 +14,6 @@ import Foundation
 
 extension Notification.Name {
     static let ShipDidIntersectWithIceberg = Notification.Name("ShipDidIntersectWithIceberg")
-    static let IcebergDidReachEndOfView = Notification.Name("IcebergDidReachEndOfView")
+    static let IcebergReachedEndOfView = Notification.Name("IcebergReachedEndOfView")
     static let GameDidEnd = Notification.Name("GameDidEnd")
 }

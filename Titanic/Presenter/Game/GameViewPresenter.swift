@@ -12,22 +12,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import Foundation
 import Combine
+import UIKit
 
-final class GameViewPresenter {
+class GameViewPresenter {
 
     // MARK: - Properties
-    private let fileHandler = FileHandler()
-    private(set) lazy var player = getPlayer()
-
-    private(set) var game: TitanicGame!
-    private weak var gameViewDelegate: GameViewDelegate?
+    private var game: TitanicGame!
     private var cancellableObserver: Cancellable?
+    private weak var gameViewDelegate: GameViewDelegate?
 
     private(set) var gameStatus: GameStatus? {
         didSet {
             switch gameStatus {
             case .new:
-                game.startNewRound()
+                game.startNewTitanicGame()
                 gameViewDelegate?.gameDidStart()
                 gameStatus = .running
             case .pause:
@@ -36,20 +34,40 @@ final class GameViewPresenter {
                 gameViewDelegate?.gameDidResume()
                 gameStatus = .running
             case .end:
-                endOfGame()
+                gameViewDelegate?.gameDidUpdate()
+                game.drivenSeaMilesInHighscoreList == true ?
+                    gameViewDelegate?.gameEndedWithHighscore() : gameViewDelegate?.gameEndedWithoutHighscore()
             default:
                 break
             }
         }
     }
 
-    // MARK: - Creating a GameView Presenter
-    init(icebergInitXOrigin: [Double], icebergInitYOrigin: [Double], icebergSize: [(width: Double, height: Double)]) {
-        game = TitanicGame(
-                icebergInitXOrigin: icebergInitXOrigin,
-                icebergInitYOrigin: icebergInitYOrigin,
-                icebergSize: icebergSize)
-        setupSubscriber()
+    // MARK: - Access to the Model
+    var icebergsToDisplay: [CGPoint] {
+        var center = [CGPoint]()
+        game.icebergs.forEach {iceberg in
+            center.append(CGPoint(x: iceberg.center.xCoordinate, y: iceberg.center.yCoordinate))
+        }
+        return center
+    }
+    var knots: Int {
+        gameStatus == .running ? game.knots : 0
+    }
+    var drivenSeaMiles: Double {
+        game.drivenSeaMiles
+    }
+    var crashCount: Int {
+        game.crashCount
+    }
+    var countdownBeginningValue: Int {
+        game.countdownBeginningValue
+    }
+
+    // MARK: - Creating a GameView Presenter and Titanic Game Object
+    init(icebergs: [ImageView]) {
+        game = createGameModel(from: icebergs)
+        setupSubscriberForGameEnd()
     }
 
     deinit {
@@ -58,59 +76,72 @@ final class GameViewPresenter {
     }
 }
 
-  // MARK: - Public API
+  // MARK: - Public API: Intents
 extension GameViewPresenter {
 
     func setGameViewDelegate(gameViewDelegate: GameViewDelegate?) {
         self.gameViewDelegate = gameViewDelegate
-        gameStatus = .new
     }
 
     func changeGameStatus(to newStatus: String) {
         gameStatus = GameStatus(string: newStatus)
     }
 
-    func moveIcebergsToScreenEnd() {
-        game?.moveIcebergsVertically()
-        gameViewDelegate?.gameDidUpdate()
-    }
-
-    func reachingEndOfViewOfIceberg(at index: Int) {
-        game?.resetIceberg(at: index)
-        gameViewDelegate?.gameDidUpdate()
-    }
-
-    func intersectionOfShipAndIceberg() {
-        game.collisionBetweenShipAndIceberg()
-        gameViewDelegate?.gameDidUpdate()
-    }
-
-    func nameForHighscoreEntry(userName: String, completion: (Error?) -> Void) {
-        guard player != nil else {
-            return
+    /**
+     While game is running iceberg is moving vertically.
+     */
+    func moveIcebergsVertically() {
+        if gameStatus == .running {
+            game?.moveIcebergsVertically()
+            gameViewDelegate?.gameDidUpdate()
         }
-        if player!.count == playerCount {player!.removeLast()}
-        let newPlayer = TitanicGame.Player(name: userName, drivenMiles: game.drivenSeaMiles)
-        player!.append(newPlayer)
-        player!.sort(by: >)
-        fileHandler.savePlayerToFile(player: player!) {result in
-            if case .failure(let error) = result {
+    }
+
+    /**
+     While game is running it will be detected that an iceberg reached the end of view.
+     */
+    func endOfViewReachedFromIceberg(at index: Int) {
+        if gameStatus == .running {
+            game?.endOfViewReachedFromIceberg(at: index)
+            gameViewDelegate?.gameDidUpdate()
+        }
+    }
+
+    /**
+     While game is running it will be detected that there is a collision between ship and iceberg.
+     */
+    func intersectionOfShipAndIceberg() {
+        if gameStatus == .running {
+            game.collisionBetweenShipAndIceberg()
+            gameViewDelegate?.gameDidUpdate()
+        }
+    }
+
+    /**
+     Saving Player with user name for new highscore entry.
+     */
+    func nameForHighscoreEntry(userName: String, completion: (Error?) -> Void) {
+        game.savePlayer(userName: userName) {error in
+             if let error = error {
                 completion(error)
-            } else {
+             } else {
                 completion(nil)
             }
         }
     }
 
-    func gameCountdownTimerDidUpdate() {
-        game.countdownUpdate()
+    func countdownEnded() {
+        gameStatus = .end
     }
 }
 
 // MARK: - Private methods
 private extension GameViewPresenter {
 
-    private func setupSubscriber() {
+    /**
+     Receiving notification when game did end.
+     */
+    private func setupSubscriberForGameEnd() {
 
         cancellableObserver = NotificationCenter.default.publisher(
             for: .GameDidEnd,
@@ -121,42 +152,29 @@ private extension GameViewPresenter {
         }
     }
 
-    private func endOfGame() {
-        if isInHighscoreList(game.drivenSeaMiles) {
-            gameViewDelegate?.gameDidEndWithHighscore()
-        } else {
-            gameViewDelegate?.gameDidEndWithoutHighscore()
-        }
-    }
+    typealias Iceberg = TitanicGame.Iceberg
+    typealias Point = TitanicGame.Iceberg.Point
+    typealias Size = TitanicGame.Iceberg.Size
 
-    private func isInHighscoreList(_ drivenSeaMiles: Double) -> Bool {
-        guard player != nil else {
-            return false
+    /**
+     Creating new game model.
+     
+     - Parameter icebergs: icebergs from game view
+     
+     - Returns: a titanic game
+    */
+    private func createGameModel(from icebergs: [ImageView]) -> TitanicGame {
+        var modelIcebergs = [TitanicGame.Iceberg]()
+        icebergs.forEach {icebergView in
+            let point = Point(
+                xCoordinate: Double(icebergView.frame.origin.x),
+                yCoordinate: Double(icebergView.frame.origin.y))
+            let size = Size(
+                width: Double(icebergView.frame.size.width),
+                height: Double(icebergView.frame.size.height))
+            let iceberg = Iceberg(origin: point, size: size)
+            modelIcebergs.append(iceberg)
         }
-        if player!.count < playerCount {
-            return true
-        } else if player!.count == playerCount, let drivenSeaMilesOfLastPlayer = player?.last?.drivenMiles {
-            if drivenSeaMilesOfLastPlayer < drivenSeaMiles {
-                return true
-            }
-        }
-        return false
+        return TitanicGame(icebergs: modelIcebergs)
     }
-
-    private func getPlayer() -> [TitanicGame.Player]? {
-        var playerList: [TitanicGame.Player]?
-        fileHandler.loadPlayerFile {result in
-            if case .success(let player) = result {
-                playerList = player
-            } else {
-                playerList = nil
-            }
-        }
-        return playerList
-    }
-}
-
-// MARK: - Constants
-extension GameViewPresenter {
-    private var playerCount: Int {10}
 }

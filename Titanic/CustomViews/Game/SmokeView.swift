@@ -16,16 +16,12 @@ import SpriteKit
 final class SmokeView: SKView {
 
      // MARK: - Properties
-    private lazy var newScene: SKScene? = {
+    private lazy var newScene: SKScene = {
         let scene = SKScene(size: frame.size)
         scene.scaleMode = .aspectFit
         scene.backgroundColor = .clear
         scene.anchorPoint = frame.origin
-        if let emitterNode = self.emitterNode {
-            scene.addChild(emitterNode)
-            return scene
-        }
-        return nil
+        return scene
     }()
 
     private lazy var emitterNode: SKEmitterNode? = {
@@ -61,6 +57,9 @@ extension SmokeView {
         guard superview != nil else {
             return
         }
-        presentScene(newScene)
+        if let emitterNode = emitterNode {
+           newScene.addChild(emitterNode)
+           presentScene(newScene)
+        }
     }
 }

@@ -13,12 +13,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
+//UI-Tests done on simulator
 class TitanicStartGameUITests: XCTestCase {
 
     var sut: XCUIApplication!
 
     override func setUp() {
         sut = XCUIApplication()
+        sut.launchEnvironment = ["UITEST_DISABLE_ANIMATIONS": "YES"]
         sut.launch()
         continueAfterFailure = false
     }
@@ -35,7 +37,7 @@ class TitanicStartGameUITests: XCTestCase {
         let startLbl = sut.staticTexts["Start"]
         let knotsLbl = sut.staticTexts["Knots: 0"]
         let milesLbl = sut.staticTexts["Miles: 0.0"]
-        let crashesLbl =  sut.staticTexts["Crashes: 0"]
+        let crashesLbl =  sut.staticTexts["Crashs: 0"]
         let countdownLbl = sut.staticTexts["00"]
 
         XCTAssertTrue(welcomeLbl.exists)

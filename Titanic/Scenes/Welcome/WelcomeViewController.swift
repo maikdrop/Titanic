@@ -15,6 +15,8 @@ import UIKit
 final class WelcomeViewController: UIViewController {
 
     // MARK: - Properties
+    private let launchImageView = UIImageView(image: UIImage(named: "LaunchImage"))
+
     @IBOutlet private weak var appInformationBtn: UIBarButtonItem! {
         didSet {
             appInformationBtn.title = AppStrings.Welcome.leftBarBtnTitle
@@ -64,38 +66,36 @@ final class WelcomeViewController: UIViewController {
 extension WelcomeViewController {
 
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         icebergAnimation()
     }
 }
 
-// MARK: - Private method for animation stuff
+// MARK: - Private methods for iceberg animation
 private extension WelcomeViewController {
 
     private func icebergAnimation() {
-        let imageView = UIImageView(image: UIImage(named: launchImageFileName))
-        imageView.center = startBtn.center
-        view.addSubview(imageView)
-        let ratio = view.frame.width / imageView.frame.width
+        launchImageView.center = startBtn.center
+        view.addSubview(launchImageView)
+        let ratio = view.frame.width / launchImageView.frame.width
         UIView.transition(
-            with: imageView,
+            with: launchImageView,
             duration: transitionAnimationDuration,
             options: [],
             animations: {
-                imageView.transform = CGAffineTransform.identity.scaledBy(x: ratio, y: ratio)
+                self.launchImageView.transform = CGAffineTransform.identity.scaledBy(x: ratio, y: ratio)
         }, completion: { _ in
             UIViewPropertyAnimator.runningPropertyAnimator(
                 withDuration: self.propertyAnimationDuration,
                 delay: 0,
                 options: [],
                 animations: {
-                    imageView.transform = CGAffineTransform.identity.scaledBy(
+                    self.launchImageView.transform = CGAffineTransform.identity.scaledBy(
                         x: self.scaleFactor,
                         y: self.scaleFactor)
-                    imageView.alpha = 0
+                    self.launchImageView.alpha = 0
             }, completion: { _ in
-                imageView.isHidden = true
-                imageView.alpha = 1
-                imageView.transform = .identity
+                self.launchImageView.removeFromSuperview()
                 self.appInformationBtn.isEnabled = true
                 self.rulesBtn.isEnabled = true
                 self.startBtn.isEnabled = true
@@ -111,5 +111,4 @@ extension WelcomeViewController {
     private var scaleFactor: CGFloat {0.1}
     private var storyboardName: String {"GameRules"}
     private var viewControllerIdentifier: String {"GameRulesViewController"}
-    private var launchImageFileName: String {"LaunchImage"}
 }

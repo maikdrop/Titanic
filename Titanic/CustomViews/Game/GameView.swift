@@ -16,6 +16,19 @@ import Combine
 final class GameView: UIView {
 
     // MARK: - Properties
+    private lazy var icebergImage = UIImage(named: icebergImageName)
+//    private lazy var shipImage = UIImage(named: shipImageName)
+
+    private lazy var icebergHorizontalCount: Int =  {
+        let icebergView = ImageView(frame: frame)
+        if let icebergImage = icebergImage {
+            icebergView.image = icebergImage
+            return Int((bounds.width / icebergView.imageSize.width).rounded(.down))
+        } else {
+            return 0
+        }
+    }()
+
     private(set) lazy var scoreStackView: ScoreStackView = {
         let scoreStack = ScoreStackView()
         scoreStack.axis = .vertical
@@ -49,7 +62,7 @@ final class GameView: UIView {
     }()
 
     private(set) lazy var ship: ImageView =  {
-        let shipView = ImageView()
+        let shipView = ImageView(frame: bounds)
         if let shipImage = UIImage(named: shipImageName) {
             shipView.image = shipImage
             shipView.backgroundColor = .clear
@@ -61,24 +74,11 @@ final class GameView: UIView {
 
     private(set) lazy var icebergs: [ImageView] = {
         var icebergViewArray = [ImageView]()
-        if let icebergImage = UIImage(named: icebergImageName) {
-            for _ in 0..<icebergsCount {
-                let icebergView = ImageView()
-                icebergView.image = icebergImage
-                icebergView.backgroundColor = .clear
-                cancellable[icebergView] = icebergView.publisher(for: \.center).sink { [unowned self] _ in
-                    if icebergView.frame.intersects(self.ship.frame) {
-                        NotificationCenter.default.post(name: .ShipDidIntersectWithIceberg,
-                                                        object: self)
-                    }
-                    if icebergView.frame.origin.y > self.frame.height {
-                        NotificationCenter.default.post(name: .IcebergDidReachEndOfView,
-                                                        object: self,
-                                                        userInfo: [AppStrings.UserInfoKey.iceberg: icebergView])
-                    }
-                }
-                icebergViewArray.append(icebergView)
-            }
+        for _ in 0..<(icebergHorizontalCount * 2) {
+            let icebergView = ImageView()
+            icebergView.image = icebergImage
+            icebergView.backgroundColor = .clear
+            icebergViewArray.append(icebergView)
         }
         return icebergViewArray
     }()
@@ -99,17 +99,29 @@ extension GameView {
     }
 }
 
-// MARK: - Public API to add subviews because icebergs and ship are GameView size related and haven't any constraints
+// MARK: - Public API
 extension GameView {
-    func addSubviews() {
-        setupView()
+
+    /**
+     Setup all Game View related subviews.
+     
+     Important: Should be called after Game View was loaded because of the geometry of objects.
+    */
+    func setupGameView() {
+        addSubviews()
         setupLayout()
+        setupIcebergPublisher()
     }
 }
 
- // MARK: - Private methods for setting up main view and layout of subviews
+ // MARK: - Setting up main view and layout of subviews
 private extension GameView {
 
+    /**
+     Target action from UISlider when value changed.
+     
+     - Parameter sender: The sender who is moving the ship.
+     */
     @objc private func moveShip(by sender: UISlider) {
         let shipWidth = Float(ship.bounds.size.width)
         let screenWidth = Float(bounds.size.width)
@@ -117,7 +129,10 @@ private extension GameView {
         ship.center.x = CGFloat((sender.value) * distance + (shipWidth/2))
     }
 
-    private func setupView() {
+    /**
+     Adding all subviews to Game View.
+     */
+    private func addSubviews() {
         addSubview(scoreStackView)
         addSubview(gameCountdownTimer)
         addSubview(horizontalSlider)
@@ -125,6 +140,9 @@ private extension GameView {
         icebergs.forEach {addSubview($0)}
     }
 
+    /**
+     Calls functions to setup layout of all subviews.
+     */
     private func setupLayout() {
         scoreStackLayout()
         countdownTimerLayout()
@@ -133,6 +151,9 @@ private extension GameView {
         icebergLayout()
     }
 
+    /**
+     Layout for score labels.
+     */
     private func scoreStackLayout() {
         scoreStackView.leadingAnchor.constraint(
             equalTo: safeAreaLayoutGuide.leadingAnchor,
@@ -144,6 +165,9 @@ private extension GameView {
             .isActive = true
     }
 
+    /**
+     Layout for countdown timer.
+     */
     private func countdownTimerLayout() {
         gameCountdownTimer.trailingAnchor.constraint(
             equalTo: safeAreaLayoutGuide.trailingAnchor,
@@ -155,6 +179,9 @@ private extension GameView {
             .isActive = true
     }
 
+    /**
+     Layout for slider.
+     */
     private func sliderLayout() {
         horizontalSlider.centerXAnchor.constraint(
             equalTo: centerXAnchor)
@@ -169,6 +196,9 @@ private extension GameView {
             .isActive = true
     }
 
+    /**
+     Layout for ship.
+    */
     private func shipLayout() {
         if let safeAreaHeight = UIApplication.shared.windows.first?.safeAreaLayoutGuide.layoutFrame.height {
             let shipFrameOriginY = safeAreaHeight - shipOffset - ship.imageSize.height
@@ -180,30 +210,51 @@ private extension GameView {
         }
     }
 
+    /**
+     Setting up Layout and create initial coordinates of icebergs.
+     */
     private func icebergLayout() {
-        if let first = icebergs.first {
-            let icebergHorizontalCount = Int((bounds.width / first.imageSize.width).rounded(.down))
-            let widthPerIceberg = bounds.width / CGFloat(icebergHorizontalCount)
-            var icebergCenter: CGFloat = 0
-            let space = first.imageSize.height + icebergOffset * ship.imageSize.height
+        if let iceberg = icebergs.first {
+            let maxIcebergWidth = bounds.width / CGFloat(icebergHorizontalCount)
+            let verticalSpaceBetweenIcebergs = iceberg.imageSize.height + icebergVerticalOffset * ship.imageSize.height
+            let startingXCoordinate = maxIcebergWidth/2 - iceberg.imageSize.width/2
+            var horizontalOffset: CGFloat = 0
 
             icebergs.enumerated().forEach {iceberg in
-                let xCoordinate = icebergCenter - iceberg.element.imageSize.width/2
-                //yCoordinates have to be out of visble y Axis
-                let yCoordinate = -(CGFloat(iceberg.offset) * space) - iceberg.element.imageSize.height
 
                 if iceberg.offset.isMultiple(of: icebergHorizontalCount) {
-                    icebergCenter = widthPerIceberg/2
+                    horizontalOffset = 0
                 }
+                let xCoordinate = startingXCoordinate + horizontalOffset
+                //yCoordinates have to be out of visble y Axis
+                let yCoordinate =
+                    -(CGFloat(iceberg.offset) * verticalSpaceBetweenIcebergs) - iceberg.element.imageSize.height
 
                 iceberg.element.frame = CGRect(
                     x: xCoordinate,
                     y: yCoordinate,
                     width: iceberg.element.imageSize.width,
                     height: iceberg.element.imageSize.height)
+                horizontalOffset += maxIcebergWidth
+            }
+        }
+    }
 
-                iceberg.element.center.x = icebergCenter
-                icebergCenter += widthPerIceberg
+    /**
+     Setting up publishers in order to post Notifications for intersections of ship and iceberg and when an iceberg reached the end of view.
+     */
+    private func setupIcebergPublisher() {
+        icebergs.forEach {icebergView in
+            cancellable[icebergView] = icebergView.publisher(for: \.center).sink {[unowned self] _ in
+                if icebergView.frame.intersects(self.ship.frame) {
+                    NotificationCenter.default.post(name: .ShipDidIntersectWithIceberg,
+                                                    object: self)
+                }
+                if icebergView.frame.origin.y > self.frame.height {
+                    NotificationCenter.default.post(name: .IcebergReachedEndOfView,
+                                                    object: self,
+                                                    userInfo: [AppStrings.UserInfoKey.iceberg: icebergView])
+                }
             }
         }
     }
@@ -224,8 +275,7 @@ extension GameView {
             return 65
         }
     }
-    private var icebergOffset: CGFloat {1.5}
+    private var icebergVerticalOffset: CGFloat {1.5}
     private var shipImageName: String {"ship"}
     private var icebergImageName: String {"iceberg"}
-    private var icebergsCount: Int {6}
 }

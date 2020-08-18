@@ -12,15 +12,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import Foundation
 
-final class TitanicGame {
+class TitanicGame {
 
     // MARK: - Properties
     private var icebergInitXOrigin = [Double]()
     private var icebergInitYOrigin = [Double]()
-    private(set) var icebergs = [Iceberg]()
-
     private var distanceBetweenIcebergs = 0.0
+    private(set) var icebergs = [Iceberg]()
+    private let fileHandler = FileHandler()
+    private var player: [Player]?
     private(set) var drivenSeaMiles = 0.0
+
+    var drivenSeaMilesInHighscoreList: Bool {
+           isInHighscoreList()
+    }
 
     private var seaMilesPerSecond: Double {
         (Double(knots) / 60)/60
@@ -31,32 +36,19 @@ final class TitanicGame {
 
     private(set) var crashCount = 0 {
         didSet {
-            if crashCount == maximumCrashs {
+            if crashCount == maxCrashs {
                  NotificationCenter.default.post(name: .GameDidEnd, object: self)
             }
         }
     }
-    private(set) var countdown = 0 {
-        didSet {
-            if countdown == 0 {
-                  NotificationCenter.default.post(name: .GameDidEnd, object: self)
-            }
-
-        }
-    }
 
      // MARK: - Creating a Titanic Game
-    init(icebergInitXOrigin: [Double], icebergInitYOrigin: [Double], icebergSize: [(width: Double, height: Double)]) {
-        self.icebergInitXOrigin = icebergInitXOrigin
-        self.icebergInitYOrigin = icebergInitYOrigin
-        for index in 0..<icebergInitXOrigin.count {
-            let origin = Iceberg.Point(
-                xCoordinate: icebergInitXOrigin[index],
-                yCoordinate: icebergInitYOrigin[index])
-            let size = Iceberg.Size(width: icebergSize[index].width, height: icebergSize[index].height)
-            let iceberg = Iceberg(origin: origin, size: size)
-            icebergs += [iceberg]
-        }
+    init(icebergs: [Iceberg]) {
+        self.icebergs = icebergs
+        self.icebergs.forEach({iceberg in
+            icebergInitXOrigin.append(iceberg.origin.xCoordinate)
+            icebergInitYOrigin.append(iceberg.origin.yCoordinate)
+        })
         distanceBetweenIcebergs = calculateDistanceBetweenIcebergs()
     }
 
@@ -65,9 +57,12 @@ final class TitanicGame {
     }
 }
 
-  // MARK: - Public API to control a Titanic Game
+  // MARK: - Public API
 extension TitanicGame {
 
+    /**
+     Move icebergs vertically and calculate driven sea miles.
+     */
     func moveIcebergsVertically() {
         drivenSeaMiles += seaMilesPerSecond
         drivenSeaMiles = drivenSeaMiles.round(to: 2)
@@ -76,33 +71,69 @@ extension TitanicGame {
         }
     }
 
-    func resetIceberg(at index: Int) {
+    /**
+     When iceberg reaches end of view the postion is reset behind the iceberg with smallest y Value.
+     
+     - Parameter index: index of iceberg in icebergs array
+     */
+    func endOfViewReachedFromIceberg(at index: Int) {
         if let icebergWithSmallestY = icebergs.min() {
-            icebergs[index].origin.yCoordinate = icebergWithSmallestY.origin.yCoordinate - distanceBetweenIcebergs
+            icebergs[index].origin.yCoordinate =
+                icebergWithSmallestY.origin.yCoordinate - distanceBetweenIcebergs
         }
     }
 
+    /**
+     When a collision between ship and iceberg is detected crash count increases and alle icebergs were reset to a random position.
+     */
     func collisionBetweenShipAndIceberg() {
         crashCount += 1
         shuffleIcebergs()
     }
 
-    func countdownUpdate() {
-        countdown -= 1
-    }
-
-    func startNewRound() {
+    /**
+     Resets scores and shuffles the position of all icebergs.
+     
+     - Important: should be called always before a new game is started
+     */
+    func startNewTitanicGame() {
         drivenSeaMiles = 0.0
         crashCount = 0
-        countdown = countdownBeginningValue
         shuffleIcebergs()
     }
 
+    /**
+     Saving Player into highscore list.
+     
+     - Parameter userName: name of user
+     - Parameter completion: completion handler when player was saved
+     */
+    func savePlayer(userName: String, completion: (Error?) -> Void) {
+        guard var newPlayerList = player else {
+            return
+        }
+        if newPlayerList.count == maxPlayerCount { newPlayerList.removeLast()}
+        let newPlayer = Player(name: userName, drivenMiles: drivenSeaMiles)
+        newPlayerList.append(newPlayer)
+        newPlayerList.sort(by: >)
+        fileHandler.savePlayerToFile(player: newPlayerList) {result in
+            if case .failure(let error) = result {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+    }
 }
 
-// MARK: - Private methods to customize the behavior of a Titanic Game
+// MARK: - Private methods
 private extension TitanicGame {
 
+    /**
+     Calculates distance between two icebergs.
+     
+     - Returns: distance between two icebergs
+     */
     private func calculateDistanceBetweenIcebergs() -> Double {
         if icebergs.count > 1 {
             return abs(icebergs[0].origin.yCoordinate.distance(to: icebergs[1].origin.yCoordinate))
@@ -110,34 +141,85 @@ private extension TitanicGame {
         return 0
     }
 
+    /**
+     Calls functions to shuffle iceberg coordinates vertically and horizontally.
+     */
     private func shuffleIcebergs() {
         shuffleIcebergVertically(at: Array(icebergs.indices))
         shuffleIcebergHorizontally(at: Array(icebergs.indices))
     }
 
+    /**
+     Iceberg coordinates will be shuffled vertically.
+     
+     - Parameter indices: indices of icebergs which will be shuffled
+     */
     private func shuffleIcebergVertically(at indices: [Int]) {
         var yOrigin = icebergInitYOrigin
-        for index in 0..<icebergs.count {
+        indices.forEach {index in
             let randomIndex = Int.random(in: 0 ..< yOrigin.count)
             self.icebergs[index].origin.yCoordinate = yOrigin.remove(at: randomIndex)
         }
     }
 
+    /**
+     Iceberg coordinates will be shuffled horizontally.
+     
+     - Parameter indices: indices of icebergs which will be shuffled
+     */
     private func shuffleIcebergHorizontally(at indices: [Int]) {
         var xOrigin = icebergInitXOrigin
-        indices.forEach({index in
+        indices.forEach {index in
             let randomIndex = Int.random(in: 0 ..< xOrigin.count)
             icebergs[index].origin.xCoordinate = xOrigin.remove(at: randomIndex)
-        })
+        }
+    }
+
+    /**
+     Calls file handler to get saved highscore list.
+     
+     - Returns: list with saved players
+     */
+    private func getHighscoreList() -> [Player]? {
+        var playerList: [Player]?
+        fileHandler.loadPlayerFile {result in
+            if case .success(let player) = result {
+                playerList = player
+            } else {
+                playerList = nil
+            }
+        }
+        return playerList
+    }
+
+    /**
+    Verification if driven sea miles are valid for a new highscore entry.
+    
+    - Returns: true when new highscore entry is possible
+    */
+    private func isInHighscoreList() -> Bool {
+        player = getHighscoreList()
+        guard player != nil else {
+            return false
+        }
+        if player!.count < maxPlayerCount {
+            return true
+        } else if player!.count == maxPlayerCount, let drivenSeaMilesOfLastPlayer = player?.last?.drivenMiles {
+            if drivenSeaMilesOfLastPlayer < drivenSeaMiles {
+                return true
+            }
+        }
+        return false
     }
 }
 
 // MARK: - Constants
 extension TitanicGame {
 
-    var countdownBeginningValue: Int {30}
+    var countdownBeginningValue: Int {20}
     private var moveFactor: Double {10}
-    private var maximumCrashs: Int {5}
+    private var maxCrashs: Int {5}
     private var startKnots: Int {50}
     private var knotsReducer: Int {5}
+    private var maxPlayerCount: Int {10}
 }

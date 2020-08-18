@@ -13,27 +13,28 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
+//UI-Tests done on simulator
 class GameControlMenuUITests: XCTestCase {
 
-    var app: XCUIApplication!
+    var sut: XCUIApplication!
 
     override func setUp() {
-        app = XCUIApplication()
-        app.launch()
+        sut = XCUIApplication()
+        sut.launch()
         continueAfterFailure = false
     }
 
     override func tearDown() {
-        app = nil
+        sut = nil
         super.tearDown()
     }
 
     func testGameStatusMenu() {
-        let startBtn = app.buttons["Start"].staticTexts["Start"]
-        let controlBtn = app.navigationBars["Titanic.GameView"].buttons["Control"]
-        let newBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
-        let pauseBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
-        let cancelBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Cancel"]
+        let startBtn = sut.buttons["Start"].staticTexts["Start"]
+        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["Control"]
+        let newBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
+        let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
+        let cancelBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Cancel"]
 
         startBtn.tap()
         controlBtn.tap()
@@ -44,50 +45,49 @@ class GameControlMenuUITests: XCTestCase {
     }
 
     func testChangeGameStatusToNew() {
-        let startBtn = app.buttons["Start"].staticTexts["Start"]
-        let controlBtn = app.navigationBars["Titanic.GameView"].buttons["Control"]
-        let newBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
-        let countdownLbl = app.staticTexts["3"]
+
+        let startBtn = sut.buttons["Start"].staticTexts["Start"]
+        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["Control"]
+        let newBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
+        let countdownLbl = sut.staticTexts["3"]
 
         startBtn.tap()
-
-        XCTAssertTrue(countdownLbl.waitForExistence(timeout: 0))
 
         controlBtn.tap()
         newBtn.tap()
 
-        XCTAssertTrue(countdownLbl.waitForExistence(timeout: 0))
+        XCTAssertTrue(countdownLbl.exists)
     }
 
     func testChangeGameStatusToPause() {
-        let startBtn = app.buttons["Start"].staticTexts["Start"]
-        let controlBtn = app.navigationBars["Titanic.GameView"].buttons["Control"]
-        let pauseBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
-        let pauseLbl = app.staticTexts["Pause"]
+        let startBtn = sut.buttons["Start"].staticTexts["Start"]
+        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["Control"]
+        let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
+        let pauseLbl = sut.staticTexts["Pause"]
 
         startBtn.tap()
         controlBtn.tap()
         pauseBtn.tap()
 
-        XCTAssertTrue(pauseLbl.waitForExistence(timeout: 0))
+        XCTAssertTrue(pauseLbl.exists)
     }
 
     func testChangeGameStatusToResume() {
-        let startBtn = app.buttons["Start"].staticTexts["Start"]
-        let controlBtn = app.navigationBars["Titanic.GameView"].buttons["Control"]
-        let pauseBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
-        let pauseLbl = app.staticTexts["Pause"]
-        let resumeBtn = app.sheets["Game Control"].scrollViews.otherElements.buttons["Resume"]
+        let startBtn = sut.buttons["Start"].staticTexts["Start"]
+        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["Control"]
+        let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
+        let pauseLbl = sut.staticTexts["Pause"]
+        let resumeBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Resume"]
 
         startBtn.tap()
         controlBtn.tap()
         pauseBtn.tap()
 
-        XCTAssertTrue(pauseLbl.waitForExistence(timeout: 0))
+        XCTAssertTrue(pauseLbl.exists)
 
         controlBtn.tap()
         resumeBtn.tap()
 
-        XCTAssertFalse(pauseLbl.waitForExistence(timeout: 0))
+        XCTAssertFalse(pauseLbl.exists)
     }
 }

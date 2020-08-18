@@ -17,6 +17,6 @@ protocol GameViewDelegate: class {
     func gameDidStart()
     func gameDidPause()
     func gameDidResume()
-    func gameDidEndWithHighscore()
-    func gameDidEndWithoutHighscore()
+    func gameEndedWithHighscore()
+    func gameEndedWithoutHighscore()
 }
