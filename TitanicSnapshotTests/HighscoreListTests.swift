@@ -25,7 +25,7 @@ class HighscoreListTests: XCTestCase {
                 let player = TitanicGame.Player(name: "maikdrop_" + String(index), drivenMiles: Double(index * 10))
                 players.append(player)
             }
-            // MARK: - set player public and change to var for testing purpose in HighscoreListTableViewController
+            // MARK: - remove private from player and change let to var for testing purpose in HighscoreListTableViewController
 
             /* highscoreList.player = players */
 

@@ -53,7 +53,7 @@ class TitanicGame {
     }
 
     deinit {
-        print("DEINIT Titanic")
+        print("DEINIT TitanicGame")
     }
 }
 

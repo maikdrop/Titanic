@@ -14,11 +14,13 @@ import XCTest
 class GameViewControllerTests: XCTestCase {
 
     func testGameView() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let gameVc = storyboard.instantiateViewController(
-            withIdentifier: "GameViewController") as? GameViewController {
-
-            assertSnapshot(matching: gameVc, as: .image)
+        let storyboard = UIStoryboard(name: "Welcome", bundle: nil)
+        if let welcome = storyboard.instantiateViewController(
+            withIdentifier: "WelcomeViewController") as? WelcomeViewController {
+            GameViewPresenter().presentGameView(in: welcome)
+            if let gameVc = welcome.presentedViewController {
+                 assertSnapshot(matching: gameVc, as: .image)
+            }
         }
     }
 

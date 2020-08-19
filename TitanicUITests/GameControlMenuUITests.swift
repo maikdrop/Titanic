@@ -31,7 +31,7 @@ class GameControlMenuUITests: XCTestCase {
 
     func testGameStatusMenu() {
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
-        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["Control"]
+        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["control"]
         let newBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
         let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
         let cancelBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Cancel"]
@@ -47,7 +47,7 @@ class GameControlMenuUITests: XCTestCase {
     func testChangeGameStatusToNew() {
 
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
-        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["Control"]
+        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["control"]
         let newBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
         let countdownLbl = sut.staticTexts["3"]
 
@@ -61,7 +61,7 @@ class GameControlMenuUITests: XCTestCase {
 
     func testChangeGameStatusToPause() {
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
-        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["Control"]
+        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["control"]
         let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
         let pauseLbl = sut.staticTexts["Pause"]
 
@@ -74,7 +74,7 @@ class GameControlMenuUITests: XCTestCase {
 
     func testChangeGameStatusToResume() {
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
-        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["Control"]
+        let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["control"]
         let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
         let pauseLbl = sut.staticTexts["Pause"]
         let resumeBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Resume"]

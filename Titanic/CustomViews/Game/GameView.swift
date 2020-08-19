@@ -16,18 +16,9 @@ import Combine
 final class GameView: UIView {
 
     // MARK: - Properties
-    private lazy var icebergImage = UIImage(named: icebergImageName)
-//    private lazy var shipImage = UIImage(named: shipImageName)
-
-    private lazy var icebergHorizontalCount: Int =  {
-        let icebergView = ImageView(frame: frame)
-        if let icebergImage = icebergImage {
-            icebergView.image = icebergImage
-            return Int((bounds.width / icebergView.imageSize.width).rounded(.down))
-        } else {
-            return 0
-        }
-    }()
+    private var cancellable = [UIView: Cancellable?]()
+    private(set) var icebergs: [ImageView]
+    private(set) var ship: ImageView
 
     private(set) lazy var scoreStackView: ScoreStackView = {
         let scoreStack = ScoreStackView()
@@ -61,27 +52,17 @@ final class GameView: UIView {
         return slider
     }()
 
-    private(set) lazy var ship: ImageView =  {
-        let shipView = ImageView(frame: bounds)
-        if let shipImage = UIImage(named: shipImageName) {
-            shipView.image = shipImage
-            shipView.backgroundColor = .clear
-        }
-        return shipView
-    }()
+    // MARK: - Create a game view
+    init(frame: CGRect, icebergs: [ImageView], ship: ImageView) {
+        self.icebergs = icebergs
+        self.ship = ship
+        super.init(frame: frame)
+        backgroundColor = .oceanBlue
+    }
 
-    private var cancellable = [UIView: Cancellable?]()
-
-    private(set) lazy var icebergs: [ImageView] = {
-        var icebergViewArray = [ImageView]()
-        for _ in 0..<(icebergHorizontalCount * 2) {
-            let icebergView = ImageView()
-            icebergView.image = icebergImage
-            icebergView.backgroundColor = .clear
-            icebergViewArray.append(icebergView)
-        }
-        return icebergViewArray
-    }()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     deinit {
         print("DEINIT GameView")
@@ -114,7 +95,7 @@ extension GameView {
     }
 }
 
- // MARK: - Setting up main view and layout of subviews
+ // MARK: - Set up main view and layout of subviews
 private extension GameView {
 
     /**
@@ -148,7 +129,6 @@ private extension GameView {
         countdownTimerLayout()
         sliderLayout()
         shipLayout()
-        icebergLayout()
     }
 
     /**
@@ -211,36 +191,6 @@ private extension GameView {
     }
 
     /**
-     Setting up Layout and create initial coordinates of icebergs.
-     */
-    private func icebergLayout() {
-        if let iceberg = icebergs.first {
-            let maxIcebergWidth = bounds.width / CGFloat(icebergHorizontalCount)
-            let verticalSpaceBetweenIcebergs = iceberg.imageSize.height + icebergVerticalOffset * ship.imageSize.height
-            let startingXCoordinate = maxIcebergWidth/2 - iceberg.imageSize.width/2
-            var horizontalOffset: CGFloat = 0
-
-            icebergs.enumerated().forEach {iceberg in
-
-                if iceberg.offset.isMultiple(of: icebergHorizontalCount) {
-                    horizontalOffset = 0
-                }
-                let xCoordinate = startingXCoordinate + horizontalOffset
-                //yCoordinates have to be out of visble y Axis
-                let yCoordinate =
-                    -(CGFloat(iceberg.offset) * verticalSpaceBetweenIcebergs) - iceberg.element.imageSize.height
-
-                iceberg.element.frame = CGRect(
-                    x: xCoordinate,
-                    y: yCoordinate,
-                    width: iceberg.element.imageSize.width,
-                    height: iceberg.element.imageSize.height)
-                horizontalOffset += maxIcebergWidth
-            }
-        }
-    }
-
-    /**
      Setting up publishers in order to post Notifications for intersections of ship and iceberg and when an iceberg reached the end of view.
      */
     private func setupIcebergPublisher() {
@@ -275,7 +225,4 @@ extension GameView {
             return 65
         }
     }
-    private var icebergVerticalOffset: CGFloat {1.5}
-    private var shipImageName: String {"ship"}
-    private var icebergImageName: String {"iceberg"}
 }

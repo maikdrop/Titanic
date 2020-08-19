@@ -58,7 +58,7 @@
 		29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */; };
 		29FA73BE24B743ED000F8C8E /* AvoidMassiveVC.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */; };
 		29FA73C024B743FF000F8C8E /* Layout.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73BF24B743FE000F8C8E /* Layout.txt */; };
-		29FA73D124B7798E000F8C8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73D024B7798E000F8C8E /* Main.storyboard */; };
+		29FA73D124B7798E000F8C8E /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73D024B7798E000F8C8E /* Welcome.storyboard */; };
 		29FA73D524B77AB8000F8C8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73D724B77AB8000F8C8E /* Localizable.strings */; };
 		29FA73DC24B78266000F8C8E /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73DB24B78266000F8C8E /* AppIcon.xcassets */; };
 		29FA73DE24B78285000F8C8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73DD24B78285000F8C8E /* Assets.xcassets */; };
@@ -157,7 +157,7 @@
 		29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesViewController.swift; sourceTree = "<group>"; };
 		29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AvoidMassiveVC.txt; sourceTree = "<group>"; };
 		29FA73BF24B743FE000F8C8E /* Layout.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Layout.txt; sourceTree = "<group>"; };
-		29FA73D024B7798E000F8C8E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		29FA73D024B7798E000F8C8E /* Welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
 		29FA73D624B77AB8000F8C8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		29FA73D824B77AC9000F8C8E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		29FA73DB24B78266000F8C8E /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
@@ -356,7 +356,7 @@
 		29824797249D46B3003C7618 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				29FA73D024B7798E000F8C8E /* Main.storyboard */,
+				29FA73D024B7798E000F8C8E /* Welcome.storyboard */,
 				298010A824C3A741006DC917 /* LaunchScreen.storyboard */,
 				29FA73EE24B87D5E000F8C8E /* GameRules.storyboard */,
 				29FA73F224B884F8000F8C8E /* Concept.storyboard */,
@@ -735,7 +735,7 @@
 				29FA73DE24B78285000F8C8E /* Assets.xcassets in Resources */,
 				297CF4E724D46B97007040EE /* HighscoreList.storyboard in Resources */,
 				298010A924C3A741006DC917 /* LaunchScreen.storyboard in Resources */,
-				29FA73D124B7798E000F8C8E /* Main.storyboard in Resources */,
+				29FA73D124B7798E000F8C8E /* Welcome.storyboard in Resources */,
 				29FA73EF24B87D5E000F8C8E /* GameRules.storyboard in Resources */,
 				29379BFC24AAB5F400D38F2B /* AboutTheApp.txt in Resources */,
 				29FA73BE24B743ED000F8C8E /* AvoidMassiveVC.txt in Resources */,

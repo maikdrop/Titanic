@@ -50,6 +50,11 @@ final class WelcomeViewController: UIViewController {
         }
     }
 
+    @IBAction private func startActionBtn(_ sender: UIButton) {
+
+        GameViewPresenter().presentGameView(in: self)
+    }
+
     @IBAction private func rulesBarActionBtn(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
         if let gameRulesVC = storyboard.instantiateViewController(

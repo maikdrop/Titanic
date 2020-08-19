@@ -16,20 +16,22 @@ import Combine
 
 class GameViewController: UIViewController {
 
-     // MARK: - Properties
-    @IBOutlet private weak var gameView: GameView! {
-        didSet {
-             gameView.gameCountdownTimer.delegate = self
-        }
-    }
-    @IBOutlet private weak var gameControlBtn: UIBarButtonItem!
+    // MARK: - Properties
+    private lazy var gameControlBtn = UIBarButtonItem(
+        image: UIImage(systemName: controlBtnName),
+        style: .done,
+        target: self,
+        action: #selector(changeGameStatus))
 
-    private var gameViewPresenter: GameViewPresenter! {
+    var gameViewPresenter: GameViewPresenter! {
         didSet {
-            gameViewPresenter.setGameViewDelegate(gameViewDelegate: self)
             gameViewPresenter.changeGameStatus(to: AppStrings.GameStatus.new)
         }
     }
+    private lazy var gameView: GameView = GameView(frame: view.frame, icebergs: icebergs, ship: ship)
+    private var icebergs: [ImageView]
+    private var ship: ImageView
+
     private lazy var startEndView = StartEndView(frame: gameView.frame)
     private lazy var pauseView = PauseView(frame: gameView.frame)
     private var smokeView: SKView?
@@ -47,7 +49,7 @@ class GameViewController: UIViewController {
     }
 
     // MARK: - Button action to change game status
-    @IBAction private func changeGameStatus(_ sender: UIBarButtonItem) {
+    @objc private func changeGameStatus(_ sender: UIBarButtonItem) {
         if let status = gameViewPresenter.gameStatus {
             NewGameStatusPresenter(status: status) { [unowned self] outcome in
                 switch outcome {
@@ -58,6 +60,17 @@ class GameViewController: UIViewController {
                 }
             }.present(in: self)
         }
+    }
+
+    // MARK: - Create a GameView Controller
+    init(icebergs: [ImageView], ship: ImageView) {
+        self.icebergs = icebergs
+        self.ship = ship
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     deinit {
@@ -73,9 +86,8 @@ extension GameViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        gameView.setupGameView()
-        setupIcebergSubscriber()
-        gameViewPresenter = GameViewPresenter(icebergs: gameView.icebergs)
+        setupGameView()
+        navigationItem.rightBarButtonItem = gameControlBtn
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
 
@@ -293,6 +305,13 @@ extension GameViewController {
         })
     }
 
+    private func setupGameView() {
+        view.addSubview(gameView)
+        gameView.setupGameView()
+        gameView.gameCountdownTimer.delegate = self
+        setupIcebergSubscriber()
+    }
+
     private func invalidateDisplayLink() {
         displayLink?.invalidate()
         displayLink = nil
@@ -368,4 +387,5 @@ extension GameViewController {
     private var interval: Double {1}
     private var reminderCount: Int {10}
     private var one: String {"1"}
+    private var controlBtnName: String {"control"}
 }

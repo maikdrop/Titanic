@@ -19,6 +19,7 @@ class GameViewPresenter {
     // MARK: - Properties
     private var game: TitanicGame!
     private var cancellableObserver: Cancellable?
+    private lazy var icebergImage = UIImage(named: icebergImageName)
     private weak var gameViewDelegate: GameViewDelegate?
 
     private(set) var gameStatus: GameStatus? {
@@ -43,6 +44,26 @@ class GameViewPresenter {
         }
     }
 
+    private lazy var icebergs: [ImageView] = {
+        var icebergViewArray = [ImageView]()
+        for _ in 0..<icebergHorizontalCount * 2 {
+            let icebergView = ImageView()
+            icebergView.image = icebergImage
+            icebergView.backgroundColor = .clear
+            icebergViewArray.append(icebergView)
+        }
+        return icebergViewArray
+    }()
+
+    private(set) lazy var ship: ImageView =  {
+        let shipView = ImageView()
+        if let shipImage = UIImage(named: shipImageName) {
+            shipView.image = shipImage
+            shipView.backgroundColor = .clear
+        }
+        return shipView
+    }()
+
     // MARK: - Access to the Model
     var icebergsToDisplay: [CGPoint] {
         var center = [CGPoint]()
@@ -64,10 +85,11 @@ class GameViewPresenter {
         game.countdownBeginningValue
     }
 
-    // MARK: - Creating a GameView Presenter and Titanic Game Object
-    init(icebergs: [ImageView]) {
-        game = createGameModel(from: icebergs)
+    // MARK: - Creating a GameView Presenter and a game object
+    init() {
+        settingUpIcebergs()
         setupSubscriberForGameEnd()
+        game = createGameModel(from: icebergs)
     }
 
     deinit {
@@ -76,12 +98,8 @@ class GameViewPresenter {
     }
 }
 
-  // MARK: - Public API: Intents
+// MARK: - Public API: Intents
 extension GameViewPresenter {
-
-    func setGameViewDelegate(gameViewDelegate: GameViewDelegate?) {
-        self.gameViewDelegate = gameViewDelegate
-    }
 
     func changeGameStatus(to newStatus: String) {
         gameStatus = GameStatus(string: newStatus)
@@ -135,7 +153,7 @@ extension GameViewPresenter {
     }
 }
 
-// MARK: - Private methods
+// MARK: - Private methods to set up game model
 private extension GameViewPresenter {
 
     /**
@@ -162,7 +180,7 @@ private extension GameViewPresenter {
      - Parameter icebergs: icebergs from game view
      
      - Returns: a titanic game
-    */
+     */
     private func createGameModel(from icebergs: [ImageView]) -> TitanicGame {
         var modelIcebergs = [TitanicGame.Iceberg]()
         icebergs.forEach {icebergView in
@@ -177,4 +195,68 @@ private extension GameViewPresenter {
         }
         return TitanicGame(icebergs: modelIcebergs)
     }
+}
+
+// MARK: - Presenting Game View
+extension GameViewPresenter {
+
+    /**
+     Presenting Game View
+     
+     - Parameter viewController: View Controller which presents GameView
+     */
+    func presentGameView(in viewController: UIViewController) {
+
+        let gameVC = GameViewController(icebergs: icebergs, ship: ship)
+        gameViewDelegate = gameVC
+        gameVC.view.backgroundColor = .white
+        gameVC.gameViewPresenter = self
+
+        if let navigationController = viewController.navigationController {
+            navigationController.pushViewController(gameVC, animated: true)
+
+        } else {
+            let navigationController = UINavigationController(rootViewController: gameVC)
+            viewController.present(navigationController, animated: true)
+        }
+    }
+
+    /**
+     Create initial coordinates of icebergs.
+     */
+    private func settingUpIcebergs() {
+        if let iceberg = icebergs.first, let width = UIApplication.shared.windows.first?.frame.width {
+            let maxIcebergWidth = width / CGFloat(icebergHorizontalCount)
+            let verticalSpaceBetweenIcebergs = iceberg.imageSize.height + icebergVerticalOffset * ship.imageSize.height
+            let startingXCoordinate = maxIcebergWidth/2 - iceberg.imageSize.width/2
+            var horizontalOffset: CGFloat = 0
+
+            icebergs.enumerated().forEach {iceberg in
+
+                if iceberg.offset.isMultiple(of: icebergHorizontalCount) {
+                    horizontalOffset = 0
+                }
+                let xCoordinate = startingXCoordinate + horizontalOffset
+                //yCoordinates have to be out of visble y Axis
+                let yCoordinate =
+                    -(CGFloat(iceberg.offset) * verticalSpaceBetweenIcebergs) - iceberg.element.imageSize.height
+
+                iceberg.element.frame = CGRect(
+                    x: xCoordinate,
+                    y: yCoordinate,
+                    width: iceberg.element.imageSize.width,
+                    height: iceberg.element.imageSize.height)
+                horizontalOffset += maxIcebergWidth
+            }
+        }
+    }
+}
+
+// MARK: - Constants
+extension GameViewPresenter {
+
+    private var icebergImageName: String {"iceberg"}
+    private var shipImageName: String {"ship"}
+    private var icebergHorizontalCount: Int {3}
+    private var icebergVerticalOffset: CGFloat {1.5}
 }

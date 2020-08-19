@@ -16,7 +16,8 @@ final class HighscoreListTableViewController: UITableViewController {
 
     // MARK: - Properties
     private var latestEntry: Int?
-     var player: [TitanicGame.Player] = {
+    //remove private and change let to var for testing purpose
+    private let player: [TitanicGame.Player] = {
         var playerList = [TitanicGame.Player]()
         FileHandler().loadPlayerFile(then: {(result) in
             if case .success(let player) = result {

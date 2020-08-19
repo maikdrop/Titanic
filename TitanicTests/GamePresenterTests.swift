@@ -17,10 +17,11 @@ class GamePresenterTests: XCTestCase {
 
     var sut: GameViewPresenter!
     let icebergs = [ImageView]()
+    let ship = ImageView()
 
     override func setUp() {
         super.setUp()
-        sut = GameViewPresenter(icebergs: icebergs)
+        sut = GameViewPresenter()
     }
 
     override func tearDown() {

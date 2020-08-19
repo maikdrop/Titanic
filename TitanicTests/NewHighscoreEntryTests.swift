@@ -43,7 +43,7 @@ class NewHighscoreEntryTests: XCTestCase {
         let expectedActionTitleFirst = "Done"
         let expectedActionTitleSecond = "Cancel"
         let expectedActionNumber = 2
-        let mockGameViewController = MockGameViewController()
+        let mockGameViewController = MockGameViewController(icebergs: [ImageView](), ship: ImageView())
         var alertController: UIAlertController?
 
         sut.present(in: mockGameViewController)
