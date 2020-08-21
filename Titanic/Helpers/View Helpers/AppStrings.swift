@@ -34,7 +34,7 @@ enum AppStrings {
         static let textFieldPlaceholder = NSLocalizedString("TextField_Placeholder", comment: "")
     }
 
-    enum GameStatus {
+    enum GameState {
         static let new = NSLocalizedString("New", comment: "")
         static let pause = NSLocalizedString("Pause", comment: "")
         static let resume = NSLocalizedString("Resume", comment: "")

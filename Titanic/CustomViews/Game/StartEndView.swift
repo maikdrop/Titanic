@@ -39,7 +39,7 @@ final class StartEndView: UIView {
     }
 }
 
- // MARK: - Private methods for creating and setting up status label
+ // MARK: - Private methods for creating and setting up state label
 private extension StartEndView {
 
     private func createLabel() -> UILabel {

@@ -30,7 +30,7 @@
 "Rules_GoalSectionTitle" = "Goal";
 "Rules_GoalSectionContent" = "Drive as many sea miles as possible!";
 "Rules_UsageSectionTitle" = "Usage";
-"Rules_UsageSectionContent" = "1. during startup contdown boat is looking after a random start position\n2. move boat by moving slider\n3. avoid intersections with icebergs\n4. any intersection will be counted and will slow down your boat\n5. highscore entry is provided if you are in the top ten\n6. game status can be controlled through action button in the upper right corner";
+"Rules_UsageSectionContent" = "1. during startup contdown boat is looking after a random start position\n2. move boat by moving slider\n3. avoid intersections with icebergs\n4. any intersection will be counted and will slow down your boat\n5. highscore entry is provided if you are in the top ten\n6. game state can be controlled through action button in the upper right corner";
 
 //Game
 "GoLbl_Txt" = "GO";
@@ -40,7 +40,7 @@
 "GameOverLbl_Txt" = "GAME OVER";
 "YouWinLbl_Txt" = "YOU WIN";
 
-//Game Status
+//Game State
 "New" = "New";
 "Pause" = "Pause";
 "Resume" = "Resume";

@@ -11,30 +11,52 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 
 import Foundation
-import UIKit
 
-//source: https://www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
-struct NewGameStatusPresenter {
+extension GameViewPresenter {
+
+    enum GameState {
+        case new
+        case running
+        case pause
+        case resume
+        case end
+    }
+}
+
+extension GameViewPresenter.GameState {
+
+    // MARK: - Create a Game State
+    init?(string: String) {
+        switch string {
+        case AppStrings.GameState.new: self = .new
+        case AppStrings.GameState.pause: self = .pause
+        case AppStrings.GameState.resume: self = .resume
+        default: return nil
+        }
+    }
+
+    typealias State = GameViewPresenter.GameState
 
     // MARK: - Properties
-    let status: GameViewPresenter.GameStatus
-    let handler: (Outcome) -> Void
+    static var all: [State] {
+        [GameViewPresenter.GameState.new, .running, .pause, .resume, .end]
+    }
 
-    // MARK: - Public API
-    func present(in viewController: UIViewController) {
-        let alert = UIAlertController(
-            title: AppStrings.GameControlActionSheet.title,
-            message: "",
-            preferredStyle: .actionSheet)
+    var stringValue: String {
+        switch self {
+        case .new: return AppStrings.GameState.new
+        case .pause: return AppStrings.GameState.pause
+        case .resume: return AppStrings.GameState.resume
+        default: return ""
+        }
+    }
 
-        status.list.forEach({status in
-            let defaultStyle = UIAlertAction.Style.default
-
-            alert.addAction(UIAlertAction(title: status.stringValue, style: defaultStyle) {_ in
-                self.handler(.accepted(status.stringValue))
-            })
-        })
-        alert.addAction(UIAlertAction(title: AppStrings.CommonAlertAction.cancel, style: .cancel))
-        viewController.present(alert, animated: true)
+    var list: [GameViewPresenter.GameState] {
+        switch self {
+        case .running: return [.new, .pause]
+        case .pause: return [.resume]
+        case .end: return [.new]
+        default: return []
+        }
     }
 }

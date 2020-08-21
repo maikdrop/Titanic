@@ -29,34 +29,34 @@ class GamePresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testChangeGameStatusToNew() {
+    func testChangeGameStateToNew() {
 
-        let new = AppStrings.GameStatus.new
-        let newStatus = GameViewPresenter.GameStatus.running
+        let new = AppStrings.GameState.new
+        let newState = GameViewPresenter.GameState.running
 
-        sut.changeGameStatus(to: new)
+        sut.changeGameState(to: new)
 
-        XCTAssertEqual(newStatus, sut.gameStatus)
+        XCTAssertEqual(newState, sut.gameState)
     }
 
-    func testChangeGameStatusToPause() {
+    func testChangeGameStateToPause() {
 
-        let pause = AppStrings.GameStatus.pause
-        let newStatus = GameViewPresenter.GameStatus.pause
+        let pause = AppStrings.GameState.pause
+        let newstate = GameViewPresenter.GameState.pause
 
-        sut.changeGameStatus(to: pause)
+        sut.changeGameState(to: pause)
 
-        XCTAssertEqual(newStatus, sut.gameStatus)
+        XCTAssertEqual(newstate, sut.gameState)
     }
 
-    func testChangeGameStatusToResume() {
+    func testChangeGamestateToResume() {
 
-        let resume = AppStrings.GameStatus.resume
-        let newStatus = GameViewPresenter.GameStatus.running
+        let resume = AppStrings.GameState.resume
+        let newState = GameViewPresenter.GameState.running
 
-        sut.changeGameStatus(to: resume)
+        sut.changeGameState(to: resume)
 
-        XCTAssertEqual(newStatus, sut.gameStatus)
+        XCTAssertEqual(newState, sut.gameState)
     }
 
 }

@@ -40,7 +40,7 @@
 "GameOverLbl_Txt" = "SPIEL ZU ENDE";
 "YouWinLbl_Txt" = "GEWONNEN";
 
-//Game Status
+//Game State
 "New" = "Neu";
 "Pause" = "Pause";
 "Resume" = "Fortsetzen";

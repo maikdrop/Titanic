@@ -21,14 +21,10 @@ class GameViewController: UIViewController {
         image: UIImage(systemName: controlBtnName),
         style: .done,
         target: self,
-        action: #selector(changeGameStatus))
+        action: #selector(changeGameState))
 
-    var gameViewPresenter: GameViewPresenter! {
-        didSet {
-            gameViewPresenter.changeGameStatus(to: AppStrings.GameStatus.new)
-        }
-    }
     private lazy var gameView: GameView = GameView(frame: view.frame, icebergs: icebergs, ship: ship)
+    private var gameViewPresenter: GameViewPresenter
     private var icebergs: [ImageView]
     private var ship: ImageView
 
@@ -48,13 +44,13 @@ class GameViewController: UIViewController {
         }
     }
 
-    // MARK: - Button action to change game status
-    @objc private func changeGameStatus(_ sender: UIBarButtonItem) {
-        if let status = gameViewPresenter.gameStatus {
-            NewGameStatusPresenter(status: status) { [unowned self] outcome in
+    // MARK: - Button action to change game state
+    @objc private func changeGameState(_ sender: UIBarButtonItem) {
+        if let state = gameViewPresenter.gameState {
+            NewGameStatePresenter(state: state) { [unowned self] outcome in
                 switch outcome {
-                case .accepted(let newStatus):
-                    self.gameViewPresenter.changeGameStatus(to: newStatus)
+                case .accepted(let newState):
+                    self.gameViewPresenter.changeGameState(to: newState)
                 case .rejected:
                     break
                 }
@@ -63,9 +59,10 @@ class GameViewController: UIViewController {
     }
 
     // MARK: - Create a GameView Controller
-    init(icebergs: [ImageView], ship: ImageView) {
+    init(icebergs: [ImageView], ship: ImageView, gameViewPresenter: GameViewPresenter) {
         self.icebergs = icebergs
         self.ship = ship
+        self.gameViewPresenter = gameViewPresenter
         super.init(nibName: nil, bundle: nil)
     }
 

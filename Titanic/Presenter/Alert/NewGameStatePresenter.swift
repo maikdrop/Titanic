@@ -11,52 +11,30 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 
 import Foundation
+import UIKit
 
-extension GameViewPresenter {
-
-    enum GameStatus {
-        case new
-        case running
-        case pause
-        case resume
-        case end
-    }
-}
-
-extension GameViewPresenter.GameStatus {
-
-    // MARK: - Create a Game Status
-    init?(string: String) {
-        switch string {
-        case AppStrings.GameStatus.new: self = .new
-        case AppStrings.GameStatus.pause: self = .pause
-        case AppStrings.GameStatus.resume: self = .resume
-        default: return nil
-        }
-    }
-
-    typealias Status = GameViewPresenter.GameStatus
+//source: https://www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
+struct NewGameStatePresenter {
 
     // MARK: - Properties
-    static var all: [Status] {
-        [GameViewPresenter.GameStatus.new, .running, .pause, .resume, .end]
-    }
+    let state: GameViewPresenter.GameState
+    let handler: (Outcome) -> Void
 
-    var stringValue: String {
-        switch self {
-        case .new: return AppStrings.GameStatus.new
-        case .pause: return AppStrings.GameStatus.pause
-        case .resume: return AppStrings.GameStatus.resume
-        default: return ""
-        }
-    }
+    // MARK: - Public API
+    func present(in viewController: UIViewController) {
+        let alert = UIAlertController(
+            title: AppStrings.GameControlActionSheet.title,
+            message: "",
+            preferredStyle: .actionSheet)
 
-    var list: [GameViewPresenter.GameStatus] {
-        switch self {
-        case .running: return [.new, .pause]
-        case .pause: return [.resume]
-        case .end: return [.new]
-        default: return []
-        }
+        state.list.forEach({state in
+            let defaultStyle = UIAlertAction.Style.default
+
+            alert.addAction(UIAlertAction(title: state.stringValue, style: defaultStyle) {_ in
+                self.handler(.accepted(state.stringValue))
+            })
+        })
+        alert.addAction(UIAlertAction(title: AppStrings.CommonAlertAction.cancel, style: .cancel))
+        viewController.present(alert, animated: true)
     }
 }

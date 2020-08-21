@@ -29,7 +29,7 @@ class GameControlMenuUITests: XCTestCase {
         super.tearDown()
     }
 
-    func testGameStatusMenu() {
+    func testGameStateMenu() {
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
         let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["control"]
         let newBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
@@ -44,7 +44,7 @@ class GameControlMenuUITests: XCTestCase {
         XCTAssertTrue(cancelBtn.waitForExistence(timeout: 1))
     }
 
-    func testChangeGameStatusToNew() {
+    func testChangeGameStateToNew() {
 
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
         let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["control"]
@@ -59,7 +59,7 @@ class GameControlMenuUITests: XCTestCase {
         XCTAssertTrue(countdownLbl.exists)
     }
 
-    func testChangeGameStatusToPause() {
+    func testChangeGameStateToPause() {
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
         let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["control"]
         let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
@@ -72,7 +72,7 @@ class GameControlMenuUITests: XCTestCase {
         XCTAssertTrue(pauseLbl.exists)
     }
 
-    func testChangeGameStatusToResume() {
+    func testChangeGameStateToResume() {
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
         let controlBtn = sut.navigationBars["Titanic.GameView"].buttons["control"]
         let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]

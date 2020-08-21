@@ -20,13 +20,13 @@ final class PauseView: UIView {
     private lazy var vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
     private lazy var vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
 
-    private lazy var statusLabel: UILabel = {
-        let statusLabel = UILabel()
-        statusLabel.text = pause
-        statusLabel.font = UIFont().scalableFont(forTextStyle: .title1, fontSize: labelPrefferedFontSize)
-        statusLabel.adjustsFontForContentSizeCategory = true
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        return statusLabel
+    private lazy var stateLabel: UILabel = {
+        let stateLabel = UILabel()
+        stateLabel.text = pause
+        stateLabel.font = UIFont().scalableFont(forTextStyle: .title1, fontSize: labelPrefferedFontSize)
+        stateLabel.adjustsFontForContentSizeCategory = true
+        stateLabel.translatesAutoresizingMaskIntoConstraints = false
+        return stateLabel
     }()
 
       // MARK: - Creating a PauseView
@@ -49,7 +49,7 @@ private extension PauseView {
 
     private func setupView() {
         addSubview(blurredEffectView)
-        vibrancyEffectView.contentView.addSubview(statusLabel)
+        vibrancyEffectView.contentView.addSubview(stateLabel)
         blurredEffectView.contentView.addSubview(vibrancyEffectView)
         setupLayout()
     }
@@ -57,8 +57,8 @@ private extension PauseView {
     private func setupLayout() {
         blurredEffectView.frame = frame
         vibrancyEffectView.frame = blurredEffectView.frame
-        statusLabel.centerXAnchor.constraint(equalTo: blurredEffectView.centerXAnchor).isActive = true
-        statusLabel.centerYAnchor.constraint(equalTo: blurredEffectView.centerYAnchor).isActive = true
+        stateLabel.centerXAnchor.constraint(equalTo: blurredEffectView.centerXAnchor).isActive = true
+        stateLabel.centerYAnchor.constraint(equalTo: blurredEffectView.centerYAnchor).isActive = true
     }
 }
 

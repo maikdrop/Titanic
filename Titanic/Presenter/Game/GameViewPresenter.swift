@@ -17,23 +17,27 @@ import UIKit
 class GameViewPresenter {
 
     // MARK: - Properties
-    private var game: TitanicGame!
+    private var game: TitanicGame! {
+        didSet {
+             setupSubscriberForGameEnd()
+        }
+    }
     private var cancellableObserver: Cancellable?
     private lazy var icebergImage = UIImage(named: icebergImageName)
     private weak var gameViewDelegate: GameViewDelegate?
 
-    private(set) var gameStatus: GameStatus? {
+    private(set) var gameState: GameState? {
         didSet {
-            switch gameStatus {
+            switch gameState {
             case .new:
                 game.startNewTitanicGame()
                 gameViewDelegate?.gameDidStart()
-                gameStatus = .running
+                gameState = .running
             case .pause:
                 gameViewDelegate?.gameDidPause()
             case .resume:
                 gameViewDelegate?.gameDidResume()
-                gameStatus = .running
+                gameState = .running
             case .end:
                 gameViewDelegate?.gameDidUpdate()
                 game.drivenSeaMilesInHighscoreList == true ?
@@ -44,16 +48,8 @@ class GameViewPresenter {
         }
     }
 
-    private lazy var icebergs: [ImageView] = {
-        var icebergViewArray = [ImageView]()
-        for _ in 0..<icebergHorizontalCount * 2 {
-            let icebergView = ImageView()
-            icebergView.image = icebergImage
-            icebergView.backgroundColor = .clear
-            icebergViewArray.append(icebergView)
-        }
-        return icebergViewArray
-    }()
+    // MARK: - Objects for GameView
+    private lazy var icebergs = setUpIcebergs()
 
     private(set) lazy var ship: ImageView =  {
         let shipView = ImageView()
@@ -73,7 +69,7 @@ class GameViewPresenter {
         return center
     }
     var knots: Int {
-        gameStatus == .running ? game.knots : 0
+        gameState == .running ? game.knots : 0
     }
     var drivenSeaMiles: Double {
         game.drivenSeaMiles
@@ -85,10 +81,8 @@ class GameViewPresenter {
         game.countdownBeginningValue
     }
 
-    // MARK: - Creating a GameView Presenter and a game object
+    // MARK: - Create a GameView Presenter and game object
     init() {
-        settingUpIcebergs()
-        setupSubscriberForGameEnd()
         game = createGameModel(from: icebergs)
     }
 
@@ -101,15 +95,15 @@ class GameViewPresenter {
 // MARK: - Public API: Intents
 extension GameViewPresenter {
 
-    func changeGameStatus(to newStatus: String) {
-        gameStatus = GameStatus(string: newStatus)
+    func changeGameState(to newState: String) {
+        gameState = GameState(string: newState)
     }
 
     /**
      While game is running iceberg is moving vertically.
      */
     func moveIcebergsVertically() {
-        if gameStatus == .running {
+        if gameState == .running {
             game?.moveIcebergsVertically()
             gameViewDelegate?.gameDidUpdate()
         }
@@ -119,7 +113,7 @@ extension GameViewPresenter {
      While game is running it will be detected that an iceberg reached the end of view.
      */
     func endOfViewReachedFromIceberg(at index: Int) {
-        if gameStatus == .running {
+        if gameState == .running {
             game?.endOfViewReachedFromIceberg(at: index)
             gameViewDelegate?.gameDidUpdate()
         }
@@ -129,7 +123,7 @@ extension GameViewPresenter {
      While game is running it will be detected that there is a collision between ship and iceberg.
      */
     func intersectionOfShipAndIceberg() {
-        if gameStatus == .running {
+        if gameState == .running {
             game.collisionBetweenShipAndIceberg()
             gameViewDelegate?.gameDidUpdate()
         }
@@ -149,26 +143,12 @@ extension GameViewPresenter {
     }
 
     func countdownEnded() {
-        gameStatus = .end
+        gameState = .end
     }
 }
 
-// MARK: - Private methods to set up game model
+// MARK: - Model related
 private extension GameViewPresenter {
-
-    /**
-     Receiving notification when game did end.
-     */
-    private func setupSubscriberForGameEnd() {
-
-        cancellableObserver = NotificationCenter.default.publisher(
-            for: .GameDidEnd,
-            object: game)
-            .sink {[weak self] _ in
-
-                self?.gameStatus = .end
-        }
-    }
 
     typealias Iceberg = TitanicGame.Iceberg
     typealias Point = TitanicGame.Iceberg.Point
@@ -195,22 +175,36 @@ private extension GameViewPresenter {
         }
         return TitanicGame(icebergs: modelIcebergs)
     }
+
+    /**
+     Receiving notification when game did end.
+     */
+    private func setupSubscriberForGameEnd() {
+
+        cancellableObserver = NotificationCenter.default.publisher(
+            for: .GameDidEnd,
+            object: game)
+            .sink {[weak self] _ in
+
+                self?.gameState = .end
+        }
+    }
 }
 
-// MARK: - Presenting Game View
+// MARK: - GameView related
 extension GameViewPresenter {
 
     /**
-     Presenting Game View
+     Creates, presents and set up dependencies in GameViewController.
      
-     - Parameter viewController: View Controller which presents GameView
+     - Parameter viewController: View Controller which presents GameView Controller
      */
     func presentGameView(in viewController: UIViewController) {
 
-        let gameVC = GameViewController(icebergs: icebergs, ship: ship)
-        gameViewDelegate = gameVC
+        let gameVC = GameViewController(icebergs: icebergs, ship: ship, gameViewPresenter: self)
         gameVC.view.backgroundColor = .white
-        gameVC.gameViewPresenter = self
+        gameViewDelegate = gameVC
+        gameState = .new
 
         if let navigationController = viewController.navigationController {
             navigationController.pushViewController(gameVC, animated: true)
@@ -222,33 +216,36 @@ extension GameViewPresenter {
     }
 
     /**
-     Create initial coordinates of icebergs.
+     Create icebergs with initial coordinates.
      */
-    private func settingUpIcebergs() {
-        if let iceberg = icebergs.first, let width = UIApplication.shared.windows.first?.frame.width {
+    private func setUpIcebergs() -> [ImageView] {
+        if let width = UIApplication.shared.windows.first?.frame.width {
             let maxIcebergWidth = width / CGFloat(icebergHorizontalCount)
-            let verticalSpaceBetweenIcebergs = iceberg.imageSize.height + icebergVerticalOffset * ship.imageSize.height
-            let startingXCoordinate = maxIcebergWidth/2 - iceberg.imageSize.width/2
             var horizontalOffset: CGFloat = 0
+            var icebergViewArray = [ImageView]()
 
-            icebergs.enumerated().forEach {iceberg in
+            for index in 0..<icebergHorizontalCount * 2 {
+                let icebergView = ImageView()
+                icebergView.image = icebergImage
+                icebergView.backgroundColor = .clear
 
-                if iceberg.offset.isMultiple(of: icebergHorizontalCount) {
-                    horizontalOffset = 0
-                }
-                let xCoordinate = startingXCoordinate + horizontalOffset
+                let verticalSpaceBetweenIcebergs =
+                    icebergView.imageSize.height + icebergVerticalOffset * ship.imageSize.height
+                if index.isMultiple(of: icebergHorizontalCount) {horizontalOffset = 0}
+
                 //yCoordinates have to be out of visble y Axis
-                let yCoordinate =
-                    -(CGFloat(iceberg.offset) * verticalSpaceBetweenIcebergs) - iceberg.element.imageSize.height
+                icebergView.frame = CGRect(
+                    x: maxIcebergWidth/2 - icebergView.imageSize.width/2 + horizontalOffset,
+                    y: -(CGFloat(index) * verticalSpaceBetweenIcebergs) - icebergView.imageSize.height,
+                    width: icebergView.imageSize.width,
+                    height: icebergView.imageSize.height)
 
-                iceberg.element.frame = CGRect(
-                    x: xCoordinate,
-                    y: yCoordinate,
-                    width: iceberg.element.imageSize.width,
-                    height: iceberg.element.imageSize.height)
                 horizontalOffset += maxIcebergWidth
+                icebergViewArray.append(icebergView)
             }
+            return icebergViewArray
         }
+        return [ImageView]()
     }
 }
 
