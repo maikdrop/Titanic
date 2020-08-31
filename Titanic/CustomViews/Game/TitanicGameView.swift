@@ -12,13 +12,31 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 import Combine
+import SpriteKit
 
-final class GameView: UIView {
+class TitanicGameView: UIView {
 
     // MARK: - Properties
     private var cancellable = [UIView: Cancellable?]()
-    private(set) var icebergs: [ImageView]
-    private(set) var ship: ImageView
+
+    private(set) lazy var icebergs = setUpIcebergs()
+    private(set) lazy var pauseView = PauseView(frame: frame)
+    private(set) var smokeView: SKView? {
+        didSet {
+            if smokeView != nil {
+                addSubview(smokeView!)
+            }
+        }
+    }
+
+    private(set) lazy var ship: ImageView = {
+        let shipView = ImageView()
+        if let shipImage = UIImage(named: shipImageName) {
+            shipView.image = shipImage
+            shipView.backgroundColor = .clear
+        }
+        return shipView
+    }()
 
     private(set) lazy var scoreStackView: ScoreStackView = {
         let scoreStack = ScoreStackView()
@@ -52,10 +70,8 @@ final class GameView: UIView {
         return slider
     }()
 
-    // MARK: - Create a game view
-    init(frame: CGRect, icebergs: [ImageView], ship: ImageView) {
-        self.icebergs = icebergs
-        self.ship = ship
+    // MARK: - Create a GameView
+    override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .oceanBlue
     }
@@ -65,23 +81,26 @@ final class GameView: UIView {
     }
 
     deinit {
-        print("DEINIT GameView")
+        print("DEINIT TitanicGameView")
     }
 }
 
 // MARK: - Default Methods
-extension GameView {
+extension TitanicGameView {
 
     override func willRemoveSubview(_ subview: UIView) {
         super.willRemoveSubview(subview)
         if let observer = cancellable[subview] {
             observer?.cancel()
         }
+        if subview is SmokeView {
+           smokeView = nil
+        }
     }
 }
 
 // MARK: - Public API
-extension GameView {
+extension TitanicGameView {
 
     /**
      Setup all Game View related subviews.
@@ -93,15 +112,19 @@ extension GameView {
         setupLayout()
         setupIcebergPublisher()
     }
+
+    func setSmokeView() {
+        smokeView = SmokeView(frame: frame)
+    }
 }
 
- // MARK: - Set up main view and layout of subviews
-private extension GameView {
+ // MARK: - Set up GameView and layout of subviews
+private extension TitanicGameView {
 
     /**
      Target action from UISlider when value changed.
      
-     - Parameter sender: The sender who is moving the ship.
+     - Parameter sender: Sender who is moving the ship
      */
     @objc private func moveShip(by sender: UISlider) {
         let shipWidth = Float(ship.bounds.size.width)
@@ -191,6 +214,39 @@ private extension GameView {
     }
 
     /**
+     Create icebergs with initial coordinates.
+     */
+    private func setUpIcebergs() -> [ImageView] {
+        var icebergViewArray = [ImageView]()
+        if let width = UIApplication.shared.windows.first?.frame.width {
+            let maxIcebergWidth = width / CGFloat(icebergHorizontalCount)
+            var horizontalOffset: CGFloat = 0
+
+            for index in 0..<icebergHorizontalCount * 2 {
+                let icebergView = ImageView()
+                icebergView.image = UIImage(named: icebergImageName)
+                icebergView.backgroundColor = .clear
+
+                let verticalSpaceBetweenIcebergs =
+                    icebergView.imageSize.height + icebergVerticalOffset * ship.imageSize.height
+                if index.isMultiple(of: icebergHorizontalCount) {horizontalOffset = 0}
+
+                //yCoordinates have to be out of visble y Axis
+                icebergView.frame = CGRect(
+                    x: maxIcebergWidth/2 - icebergView.imageSize.width/2 + horizontalOffset,
+                    y: -(CGFloat(index) * verticalSpaceBetweenIcebergs) - icebergView.imageSize.height,
+                    width: icebergView.imageSize.width,
+                    height: icebergView.imageSize.height)
+
+                horizontalOffset += maxIcebergWidth
+                icebergViewArray.append(icebergView)
+            }
+            return icebergViewArray
+        }
+        return icebergViewArray
+    }
+
+    /**
      Setting up publishers in order to post Notifications for intersections of ship and iceberg and when an iceberg reached the end of view.
      */
     private func setupIcebergPublisher() {
@@ -211,8 +267,12 @@ private extension GameView {
 }
 
 // MARK: - Constants
-extension GameView {
+extension TitanicGameView {
 
+    private var icebergImageName: String {"iceberg"}
+    private var shipImageName: String {"ship"}
+    private var icebergHorizontalCount: Int {3}
+    private var icebergVerticalOffset: CGFloat {1.5}
     private var labelPrefferedFontSize: CGFloat {20}
     private var sliderBottomConstraint: CGFloat {25}
     private var sliderLeadingConstraint: CGFloat {20}

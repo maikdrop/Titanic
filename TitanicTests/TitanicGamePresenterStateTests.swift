@@ -10,13 +10,52 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import Foundation
+import XCTest
+@testable import Titanic
 
-protocol GameViewDelegate: class {
-    func gameDidUpdate()
-    func gameDidStart()
-    func gameDidPause()
-    func gameDidResume()
-    func gameEndedWithHighscore()
-    func gameEndedWithoutHighscore()
+class TitanicGamePresenterStateTests: XCTestCase {
+
+    var sut: TitanicGamePresenter!
+    let icebergs = [ImageView]()
+
+    override func setUp() {
+        super.setUp()
+        sut = TitanicGamePresenter()
+    }
+
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
+
+    func testChangeGameStateToNew() {
+
+        let new = AppStrings.GameState.new
+        let newState = TitanicGamePresenter.GameState.running
+
+        sut.changeGameState(to: new)
+
+        XCTAssertEqual(newState, sut.gameState)
+    }
+
+    func testChangeGameStateToPause() {
+
+        let pause = AppStrings.GameState.pause
+        let newstate = TitanicGamePresenter.GameState.pause
+
+        sut.changeGameState(to: pause)
+
+        XCTAssertEqual(newstate, sut.gameState)
+    }
+
+    func testChangeGamestateToResume() {
+
+        let resume = AppStrings.GameState.resume
+        let newState = TitanicGamePresenter.GameState.running
+
+        sut.changeGameState(to: resume)
+
+        XCTAssertEqual(newState, sut.gameState)
+    }
+
 }

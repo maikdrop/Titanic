@@ -13,9 +13,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
-class MockGameViewController: GameViewController {
+class MockTitanicGameViewController: TitanicGameViewController {
 
     var presentViewControllerTarget: UIViewController?
+    var mockGamePresenter: MockTitanicGamePresenter!
+
+    override init(gamePresenter: TitanicGamePresenter) {
+        super.init(gamePresenter: gamePresenter)
+        mockGamePresenter = gamePresenter as? MockTitanicGamePresenter
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
         presentViewControllerTarget = viewControllerToPresent
@@ -43,10 +53,7 @@ class NewHighscoreEntryTests: XCTestCase {
         let expectedActionTitleFirst = "Done"
         let expectedActionTitleSecond = "Cancel"
         let expectedActionNumber = 2
-        let mockGameViewController = MockGameViewController(
-            icebergs: [ImageView](),
-            ship: ImageView(),
-            gameViewPresenter: GameViewPresenter())
+        let mockGameViewController = MockTitanicGameViewController(gamePresenter: TitanicGamePresenter())
         var alertController: UIAlertController?
 
         sut.present(in: mockGameViewController)

@@ -24,7 +24,12 @@ struct FileHandler {
 
     typealias Handler = (Result<[TitanicGame.Player], Error>) -> Void
 
-    // MARK: - Public API
+    // MARK: - Public API for file loading and saving
+    /**
+    Loads and decodes json file with player as highscore list from Application Support Directory.
+    
+    - Parameter handler: handles success or failure of loading
+    */
     func loadPlayerFile(then handler: Handler) {
         if let url = url {
             if !FileManager.default.fileExists(atPath: url.path) {
@@ -42,6 +47,12 @@ struct FileHandler {
         }
     }
 
+    /**
+    Encodes and saves json file with players as highscore list into Application Support Directory.
+    
+    - Parameter player: highscore list with top ten players
+    - Parameter handler: handles success or failure of saving
+    */
     func savePlayerToFile(player: [TitanicGame.Player], then handler: Handler) {
         if let url = url, let json = try? JSONEncoder().encode(player) {
             do {

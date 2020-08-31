@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-final class ConceptViewController: UIViewController {
+class ConceptViewController: UIViewController {
 
     // MARK: - Properties
     @IBOutlet private weak var designPatternInnerStackView: UIStackView! {

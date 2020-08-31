@@ -29,15 +29,12 @@ class HighscoreListPresenterTests: XCTestCase {
 
     func testPresentHighscoreList() {
         let title = "Top 10"
-        let mockGameViewController = MockGameViewController(
-            icebergs: [ImageView](),
-            ship: ImageView(),
-            gameViewPresenter: GameViewPresenter())
+        let mockTitanicGameViewController = MockTitanicGameViewController(gamePresenter: TitanicGamePresenter())
         let highscoreListVC: HighscoreListTableViewController?
 
-        sut.present(in: mockGameViewController)
+        sut.present(in: mockTitanicGameViewController)
 
-        highscoreListVC = (mockGameViewController.presentViewControllerTarget as? UINavigationController)?
+        highscoreListVC = (mockTitanicGameViewController.presentViewControllerTarget as? UINavigationController)?
             .viewControllers.first as? HighscoreListTableViewController
 
         if let highscoreList = highscoreListVC {

@@ -11,52 +11,26 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 
 import Foundation
+import UIKit
 
-extension GameViewPresenter {
+struct TitanicGameViewPresenter {
 
-    enum GameState {
-        case new
-        case running
-        case pause
-        case resume
-        case end
-    }
-}
+    /**
+     Creates, presents and injects GamePresenter in GameView Controller.
+     
+     - Parameter viewController: View Controller which presents GameView Controller
+     */
+    func presentGameView(in viewController: UIViewController) {
 
-extension GameViewPresenter.GameState {
+        let presenter = TitanicGamePresenter()
+        let gameVC = TitanicGameViewController(gamePresenter: presenter)
 
-    // MARK: - Create a Game State
-    init?(string: String) {
-        switch string {
-        case AppStrings.GameState.new: self = .new
-        case AppStrings.GameState.pause: self = .pause
-        case AppStrings.GameState.resume: self = .resume
-        default: return nil
-        }
-    }
+        if let navigationController = viewController.navigationController {
+            navigationController.pushViewController(gameVC, animated: true)
 
-    typealias State = GameViewPresenter.GameState
-
-    // MARK: - Properties
-    static var all: [State] {
-        [GameViewPresenter.GameState.new, .running, .pause, .resume, .end]
-    }
-
-    var stringValue: String {
-        switch self {
-        case .new: return AppStrings.GameState.new
-        case .pause: return AppStrings.GameState.pause
-        case .resume: return AppStrings.GameState.resume
-        default: return ""
-        }
-    }
-
-    var list: [GameViewPresenter.GameState] {
-        switch self {
-        case .running: return [.new, .pause]
-        case .pause: return [.resume]
-        case .end: return [.new]
-        default: return []
+        } else {
+            let navigationController = UINavigationController(rootViewController: gameVC)
+            viewController.present(navigationController, animated: true)
         }
     }
 }

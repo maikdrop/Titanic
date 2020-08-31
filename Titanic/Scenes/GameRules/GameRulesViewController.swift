@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-final class GameRulesViewController: UIViewController {
+class GameRulesViewController: UIViewController {
 
     // MARK: - Properties
     @IBOutlet private weak var subheadlineLbl: UILabel! {

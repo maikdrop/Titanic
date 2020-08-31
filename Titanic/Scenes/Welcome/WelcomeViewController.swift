@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-final class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController {
 
     // MARK: - Properties
     private let launchImageView = UIImageView(image: UIImage(named: "LaunchImage"))
@@ -52,7 +52,7 @@ final class WelcomeViewController: UIViewController {
 
     @IBAction private func startActionBtn(_ sender: UIButton) {
 
-        GameViewPresenter().presentGameView(in: self)
+        TitanicGameViewPresenter().presentGameView(in: self)
     }
 
     @IBAction private func rulesBarActionBtn(_ sender: UIBarButtonItem) {

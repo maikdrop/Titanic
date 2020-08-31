@@ -42,7 +42,7 @@ class TitanicGame {
         }
     }
 
-     // MARK: - Creating a Titanic Game
+    // MARK: - Creating a Titanic Game
     init(icebergs: [Iceberg]) {
         self.icebergs = icebergs
         self.icebergs.forEach({iceberg in
@@ -55,11 +55,8 @@ class TitanicGame {
     deinit {
         print("DEINIT TitanicGame")
     }
-}
 
-  // MARK: - Public API
-extension TitanicGame {
-
+    // MARK: - Public API
     /**
      Move icebergs vertically and calculate driven sea miles.
      */
@@ -77,6 +74,7 @@ extension TitanicGame {
      - Parameter index: index of iceberg in icebergs array
      */
     func endOfViewReachedFromIceberg(at index: Int) {
+        assert(icebergs.indices.contains(index), "Titanic.endOfViewReachedFromIceberg(at: \(index)): chosen index not available in icebergs")
         if let icebergWithSmallestY = icebergs.min() {
             icebergs[index].origin.yCoordinate =
                 icebergWithSmallestY.origin.yCoordinate - distanceBetweenIcebergs
@@ -216,7 +214,7 @@ private extension TitanicGame {
 // MARK: - Constants
 extension TitanicGame {
 
-    var countdownBeginningValue: Int {20}
+    var countdownBeginningValue: Int {30}
     private var moveFactor: Double {10}
     private var maxCrashs: Int {5}
     private var startKnots: Int {50}

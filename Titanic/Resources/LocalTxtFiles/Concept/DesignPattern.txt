@@ -1,3 +1,3 @@
-- Model-View-Presenter
-- Model-View-Presenter
-- Model-View-Presenter
+MVP stands for Model-View-Presenter. In comparison to the common MVC (Model-View-Controller) pattern MVP offers an additional entity, the Presenter. View and ViewController form together the View entity. There are two differrent versions of MVP: Supervising Controller and Passive View. In Titanic the Passive View was implemented. It means that all data sychronysing between View and Model is organized by the presenter. The view is "dumb" as possible. There is no direct data binding between View and Model or View and Presenter. The View sends Intents via public API to the Presenter, it calls the public API of the Model and talks back the view via delegate methods. The Presenter offers like a front door with a glass hole in the middle a portal for the View to see and get relevant view-formatted model data in order to update it`s UI.
+
+A big benefit of MVP is, that you can avoid a massive ViewController (chapter 2.2) and create a reusable view and view controller.

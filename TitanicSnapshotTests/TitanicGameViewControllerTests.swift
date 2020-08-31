@@ -10,31 +10,22 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import Foundation
-import UIKit
+import SnapshotTesting
+import XCTest
+@testable import Titanic
 
-//source: https://www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
-struct NewGameStatePresenter {
+//SnapshotTesting only works on simulator and 2 test runs needed (for creating and verifing image)
+class TitanicGameViewControllerTests: XCTestCase {
 
-    // MARK: - Properties
-    let state: TitanicGamePresenter.GameState
-    let handler: (Outcome) -> Void
-
-    // MARK: - Public API
-    func present(in viewController: UIViewController) {
-        let alert = UIAlertController(
-            title: AppStrings.TitanicGameControlActionSheet.title,
-            message: "",
-            preferredStyle: .actionSheet)
-
-        state.list.forEach({state in
-            let defaultStyle = UIAlertAction.Style.default
-
-            alert.addAction(UIAlertAction(title: state.stringValue, style: defaultStyle) {_ in
-                self.handler(.accepted(state.stringValue))
-            })
-        })
-        alert.addAction(UIAlertAction(title: AppStrings.CommonAlertAction.cancel, style: .cancel))
-        viewController.present(alert, animated: true)
+    func testGameView() {
+        let storyboard = UIStoryboard(name: "Welcome", bundle: nil)
+        if let welcome = storyboard.instantiateViewController(
+            withIdentifier: "WelcomeViewController") as? WelcomeViewController {
+            TitanicGameViewPresenter().presentGameView(in: welcome)
+            if let gameVc = welcome.presentedViewController {
+                 assertSnapshot(matching: gameVc, as: .image)
+            }
+        }
     }
+
 }

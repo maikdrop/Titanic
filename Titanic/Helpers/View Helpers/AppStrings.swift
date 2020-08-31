@@ -20,8 +20,8 @@ enum AppStrings {
         static let okay = NSLocalizedString("AlertAction_Ok", comment: "")
     }
 
-    enum GameControlActionSheet {
-        static let title = NSLocalizedString("GameControl_Title", comment: "")
+    enum TitanicGameControlActionSheet {
+        static let title = NSLocalizedString("TitanicGameControl_Title", comment: "")
     }
 
     enum ErrorAlert {

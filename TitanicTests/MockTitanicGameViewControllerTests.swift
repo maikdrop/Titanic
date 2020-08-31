@@ -10,31 +10,48 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import Foundation
-import UIKit
+import XCTest
+@testable import Titanic
 
-//source: https://www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
-struct NewGameStatePresenter {
+class MockTitanicGameViewControllerTests: XCTestCase {
 
-    // MARK: - Properties
-    let state: TitanicGamePresenter.GameState
-    let handler: (Outcome) -> Void
+    var sut: MockTitanicGameViewController!
 
-    // MARK: - Public API
-    func present(in viewController: UIViewController) {
-        let alert = UIAlertController(
-            title: AppStrings.TitanicGameControlActionSheet.title,
-            message: "",
-            preferredStyle: .actionSheet)
+    override func setUp() {
+        super.setUp()
+        let mockGamePresenter = MockTitanicGamePresenter()
+        sut = MockTitanicGameViewController(gamePresenter: mockGamePresenter)
+    }
 
-        state.list.forEach({state in
-            let defaultStyle = UIAlertAction.Style.default
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
 
-            alert.addAction(UIAlertAction(title: state.stringValue, style: defaultStyle) {_ in
-                self.handler(.accepted(state.stringValue))
-            })
-        })
-        alert.addAction(UIAlertAction(title: AppStrings.CommonAlertAction.cancel, style: .cancel))
-        viewController.present(alert, animated: true)
+    func testGameViewController() {
+
+        var count = 1
+
+        sut.mockGamePresenter.moveIcebergsVertically()
+
+        XCTAssertEqual(count, sut.mockGamePresenter.count)
+
+        count = 2
+
+        sut.mockGamePresenter.endOfViewReachedFromIceberg(at: 0)
+
+        XCTAssertEqual(count, sut.mockGamePresenter.count)
+
+        count = 3
+
+        sut.mockGamePresenter.intersectionOfShipAndIceberg()
+
+        XCTAssertEqual(count, sut.mockGamePresenter.count)
+
+        count = 4
+
+        sut.mockGamePresenter.nameForHighscoreEntry(userName: "", completion: {_ in})
+
+        XCTAssertEqual(count, sut.mockGamePresenter.count)
     }
 }

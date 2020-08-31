@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-final class StartEndView: UIView {
+final class GameStateView: UIView {
 
      // MARK: - Properties
     private(set) lazy var label: UILabel = {
@@ -35,12 +35,12 @@ final class StartEndView: UIView {
     }
 
     deinit {
-        print("DEINIT StartEndView")
+        print("DEINIT GameStateView")
     }
 }
 
  // MARK: - Private methods for creating and setting up state label
-private extension StartEndView {
+private extension GameStateView {
 
     private func createLabel() -> UILabel {
         let label = UILabel()
@@ -65,7 +65,7 @@ private extension StartEndView {
 }
 
 // MARK: - Constants
-extension StartEndView {
+extension GameStateView {
 
     private struct SizeRatio {
         static let labelFontSizeToBoundsHeight: CGFloat = 0.06

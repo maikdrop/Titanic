@@ -33,11 +33,11 @@ extension TitanicGame {
 // MARK: - Implementation Comparable Protocol
 extension TitanicGame.Player: Comparable {
 
-    static func < (lhs: TitanicGame.Player, rhs: TitanicGame.Player) -> Bool {
+    static func < (lhs: Self, rhs: Self) -> Bool {
         return (lhs.drivenMiles < rhs.drivenMiles)
     }
 
-    static func == (lhs: TitanicGame.Player, rhs: TitanicGame.Player) -> Bool {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.name == rhs.name && lhs.drivenMiles == rhs.drivenMiles
             && lhs.date == rhs.date
     }

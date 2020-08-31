@@ -54,11 +54,11 @@ extension TitanicGame.Iceberg {
 // MARK: - Implementation Comparable Protocol
 extension TitanicGame.Iceberg: Comparable {
 
-    static func < (lhs: TitanicGame.Iceberg, rhs: TitanicGame.Iceberg) -> Bool {
+    static func < (lhs: Self, rhs: Self) -> Bool {
         return (lhs.center.yCoordinate < rhs.center.yCoordinate)
     }
 
-    static func == (lhs: TitanicGame.Iceberg, rhs: TitanicGame.Iceberg) -> Bool {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.center.yCoordinate == rhs.center.yCoordinate
     }
 }

@@ -45,11 +45,3 @@ extension ImageView {
 extension ImageView {
     private var referenceWidth: CGFloat {375}
 }
-
-//var imageSize: CGSize {
-//    if image != nil {
-//        let ratio = bounds.width / referenceWidth
-//        return CGSize(width: image!.size.width * ratio, height: image!.size.height * ratio)
-//    }
-//    return CGSize.zero
-//}

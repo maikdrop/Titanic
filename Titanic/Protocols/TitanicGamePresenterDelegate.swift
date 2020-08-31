@@ -11,30 +11,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 
 import Foundation
-import UIKit
 
-//source: https://www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
-struct NewGameStatePresenter {
-
-    // MARK: - Properties
-    let state: TitanicGamePresenter.GameState
-    let handler: (Outcome) -> Void
-
-    // MARK: - Public API
-    func present(in viewController: UIViewController) {
-        let alert = UIAlertController(
-            title: AppStrings.TitanicGameControlActionSheet.title,
-            message: "",
-            preferredStyle: .actionSheet)
-
-        state.list.forEach({state in
-            let defaultStyle = UIAlertAction.Style.default
-
-            alert.addAction(UIAlertAction(title: state.stringValue, style: defaultStyle) {_ in
-                self.handler(.accepted(state.stringValue))
-            })
-        })
-        alert.addAction(UIAlertAction(title: AppStrings.CommonAlertAction.cancel, style: .cancel))
-        viewController.present(alert, animated: true)
-    }
+protocol TitanicGamePresenterDelegate: class {
+    func gameDidUpdate()
+    func gameDidStart()
+    func gameDidPause()
+    func gameDidResume()
+    func gameEndedWithHighscore()
+    func gameEndedWithoutHighscore()
 }

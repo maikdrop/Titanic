@@ -9,7 +9,7 @@
 //Alert Titles
 "ErrorAlert_Title" = "Fehler aufgetreten";
 "NewHighscoreEntryAlert_Title" = "Gratulation 👏";
-"GameControl_Title" = "Spielsteuerung";
+"TitanicGameControl_Title" = "Spielsteuerung";
 
 //Alert Components
 "NewHighscoreEntry_Message" = "Du bist in den Top 10. Bitte trage deinen Namen ein, um deine Platzierung zu sehen.";

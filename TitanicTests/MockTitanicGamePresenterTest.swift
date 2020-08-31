@@ -13,15 +13,34 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
-class GamePresenterTests: XCTestCase {
+class MockTitanicGamePresenter: TitanicGamePresenter {
 
-    var sut: GameViewPresenter!
-    let icebergs = [ImageView]()
-    let ship = ImageView()
+    var count = 0
+
+    override func moveIcebergsVertically() {
+        count += 1
+    }
+
+    override func endOfViewReachedFromIceberg(at index: Int) {
+        count += 1
+    }
+
+    override func intersectionOfShipAndIceberg() {
+        count += 1
+    }
+
+    override func nameForHighscoreEntry(userName: String, completion: (Error?) -> Void) {
+        count += 1
+    }
+}
+
+class MockTitanicGamePresenterTest: XCTestCase {
+
+    var sut: MockTitanicGamePresenter!
 
     override func setUp() {
         super.setUp()
-        sut = GameViewPresenter()
+        sut = MockTitanicGamePresenter()
     }
 
     override func tearDown() {
@@ -29,34 +48,39 @@ class GamePresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testChangeGameStateToNew() {
+    func testMoveIcebergsVertically() {
 
-        let new = AppStrings.GameState.new
-        let newState = GameViewPresenter.GameState.running
+        let count = 1
 
-        sut.changeGameState(to: new)
+        sut.moveIcebergsVertically()
 
-        XCTAssertEqual(newState, sut.gameState)
+        XCTAssertEqual(count, sut.count)
     }
 
-    func testChangeGameStateToPause() {
+    func testEndOfViewReachedFromIceberg() {
 
-        let pause = AppStrings.GameState.pause
-        let newstate = GameViewPresenter.GameState.pause
+        let count = 1
 
-        sut.changeGameState(to: pause)
+        sut.endOfViewReachedFromIceberg(at: 0)
 
-        XCTAssertEqual(newstate, sut.gameState)
+        XCTAssertEqual(count, sut.count)
     }
 
-    func testChangeGamestateToResume() {
+    func testIntersectionOfShipAndIceberg() {
 
-        let resume = AppStrings.GameState.resume
-        let newState = GameViewPresenter.GameState.running
+        let count = 1
 
-        sut.changeGameState(to: resume)
+        sut.intersectionOfShipAndIceberg()
 
-        XCTAssertEqual(newState, sut.gameState)
+        XCTAssertEqual(count, sut.count)
     }
 
+    func testNameForHighscoreEntry() {
+
+        let count = 1
+
+        sut.nameForHighscoreEntry(userName: "", completion: {_ in})
+
+        XCTAssertEqual(count, sut.count)
+    }
 }

@@ -1,25 +1,24 @@
 1. About the App
 
-
 1.1. Introduction
 
-This app project, a game named Titanic, started in Spring 2020 after finishing my studies in Applied Computer Science at the University of Applied Science Berlin. During my studies I worked on several projects which contained app prototypes for example in public health, professional environment and smaller apps as exersices in different courses. All apps were written in Swift, it started with Swift 2.2 in 2016, and the MVC Pattern was used. The idea of Titanic based on a simple app exersice during a swift course.
+Titanic is a simple game, which development started in Spring 2020 after finishing my studies in Applied Computer Science at the University of Applied Science Berlin. During my studies I worked on several projects which contained app prototypes for example in public health, professional environment and smaller apps as exersices in different courses. All apps were written in Swift (it started with Swift 2.2 in 2016) and used the MVC Pattern. The idea of Titanic based on a simple app exersice during a swift course.
 
     Following chapters documenting the goal, what`s the game about and features to get an insight of the development process. The last chapter is about testing. The documentation is focused on the most important points. It`s an short overview of my work and doesn´t describe every detail.
 
 1.2. Goals
 
-The main goal of the proejct was to gain knowledge about swift and ios development. Therefore different technologies were used to reach same goal but it enbaled to learn more while practicing. For example different package managers like cocoa pods (SRCountdownTimer), homebrew (Swiftlint) and swift package manager (SnapshotTesting) were used to implement third party libraries.
+The main goal of the proejct was to gain knowledge about swift and ios development. Therefore different technologies were used to reach same goal but it enbaled myself to learn more while practicing. For example different package managers like cocoa pods (SRCountdownTimer), homebrew (Swiftlint) and swift package manager (SnapshotTesting) were used to implement third party libraries.
 
 There were three focus points:
 
- - implementing the MVP pattern (see "chapter" Concept)
+ - implementing the MVP pattern (see chapter 2)
  - code and project structure
  - layout
  
 1.3. What`s the game about?
 
-The user moves a ship horizontally to avoid intersections with vertically (top-down) moving icebergs. If time is up or the maximum crashs are reached game ends. The game verifies immediately if the driven sea miles are in the top ten and asks for a name to save new highscore entry.
+Users move a ship horizontally by their thumb to avoid intersections with icebergs, which moving vertically from top to bottom. If the time is up or the maximum crashs are reached the game ends. Immediately after game end driven sea miles will be verified. If they`re in the top ten an alert with a text field shows up in order to entry users`s name.
  
 1.4. Game Features
  
@@ -27,40 +26,4 @@ The user moves a ship horizontally to avoid intersections with vertically (top-d
  - score counter
  - game control options
  - smoke animation when ship and iceberg collide
-
-1.5. Technical Features
-
-- sizeable font for lable texts according to general text size
-- adapting ship and iceberg images according to display size
-- localization of label texts
-- dark mode
-- auto layout for scrollable views with illustrations and texts
-
-1.6 Testing
-
-The testing part is not used to test every unit and every feature. Rather the purpose was using and implementing different kinds of testing technologies:
-
-    - UnitTesting
-    - UI-Testing
-    - SnapshotTesting
-    - testing with mocked objects
-    
-Additionally to the pre-installed UI- and Unit tests possibilities a third party library for SnapshotTesting was installed to verify the init UI state of the game view. This was very useful while adding the creation of the game view through a presenter. Of course unit tests are quicker and doesn`t need as much performance ressources as unit tests, but it was possible to test the responsivity of the UI without needing manually tests every time. Manual UI tests were mainly used to test edge cases.
-
-To avoid retain memory cycles 3 general points were important besides to take care while writing code:
-
-- using structs before classes
-- print statements when class is deinit
-- check for memory leaks with Xcode Intstruments
-
-
-2. MVP Design Pattern
-
-MVP stands for Model-View-Presenter. In comparison to the common MVC (Model-View-Controller) pattern MVP offers an additional entity, the Presenter. View and ViewController form together the View entity. There are two differrent versions of MVP: Supervising Controller and Passive View. In Titanic the Passive View was implemented, because 
-
-
-A big benefit of MVP is, that you avoid a massive ViewController(see chapter 3).
-
-
-
-3. Avoid Massive ViewController
+ - highscore list
