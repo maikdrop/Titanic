@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "AvoidMassiveVClight.pdf",
+      "filename" : "AvoidMassiveVCLight.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "AvoidMassiveVCdark.pdf",
+      "filename" : "AvoidMassiveVCDark.pdf",
       "idiom" : "universal"
     }
   ],
