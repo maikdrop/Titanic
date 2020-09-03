@@ -13,12 +13,30 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import UIKit
 
 extension UIFont {
+    
+    /**
+    Scales font for text style.
+    
+    - Parameter textStyle: text style to scale
+    - Parameter fontSize: font size to scale
+     
+    - Returns: scaled and styled font
+    */
     func scalableFont(forTextStyle textStyle: TextStyle, fontSize: CGFloat) -> UIFont {
         let preferredFont = UIFont.preferredFont(forTextStyle: textStyle).withSize(fontSize)
         return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: preferredFont)
     }
 
-    func scalableWeightFont(forTextStyle textStyle: TextStyle, fontSize: CGFloat, weight: Weight) -> UIFont {
+    /**
+    Scales font weight for text style.
+    
+    - Parameter textStyle: text style to scale
+    - Parameter fontSize: font size to scale
+    - Parameter weight: weight to scale
+     
+    - Returns: scaled and styled font
+    */
+    func scalableFontWeight(forTextStyle textStyle: TextStyle, fontSize: CGFloat, weight: Weight) -> UIFont {
         let font = UIFont.systemFont(ofSize: fontSize, weight: weight)
         return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: font)
     }

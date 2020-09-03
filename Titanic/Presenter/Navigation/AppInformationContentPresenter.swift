@@ -16,6 +16,12 @@ import UIKit
 struct AppInformationContentPresenter {
 
     // MARK: - Public API
+    /**
+     Creates an App Information ViewController.
+     
+     - Paramater viewController: ViewController which presents an App Information ViewController
+     - Parameter cellText: text of cell from presenting table view controller
+     */
     func present(in viewController: UIViewController, for cellText: String) {
         var informationVC: UIViewController?
 

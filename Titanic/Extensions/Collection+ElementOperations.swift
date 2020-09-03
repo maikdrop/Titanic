@@ -13,10 +13,24 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import Foundation
 
 extension Collection where Element: Hashable {
+    
+    /**
+    Creates an array with unique elements
+     
+    - Returns: array with unique elements
+    */
     func uniqued() -> [Element] {
         var seen = Set<Element>()
         return self.filter {seen.insert($0).inserted}
     }
+    
+    /**
+     Verifies if array contains an element at given index.
+     
+    - Parameter index: index to verify
+     
+    - Returns: either element at index or nil
+    */
     subscript(optional index: Index) -> Iterator.Element? {
         return self.indices.contains(index) ? self[index] : nil
     }

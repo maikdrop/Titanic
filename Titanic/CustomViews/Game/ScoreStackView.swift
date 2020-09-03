@@ -54,6 +54,11 @@ extension ScoreStackView {
 // MARK: - Private methods for setting up label layout
 private extension ScoreStackView {
 
+    /**
+     Configure given label.
+     
+     - Parameter label: label to configure
+    */
     private func configureScoreLabel(_ label: UILabel) {
         label.textColor = .white
         label.font = UIFont().scalableFont(forTextStyle: .title3, fontSize: labelPrefferedFontSize)

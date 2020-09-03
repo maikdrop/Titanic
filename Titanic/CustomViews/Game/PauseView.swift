@@ -14,7 +14,7 @@ import UIKit
 
 final class PauseView: UIView {
 
-     // MARK: - Properties
+    // MARK: - Properties
     private let blurEffect = UIBlurEffect(style: .light)
     private lazy var blurredEffectView = UIVisualEffectView(effect: blurEffect)
     private lazy var vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
@@ -29,10 +29,10 @@ final class PauseView: UIView {
         return stateLabel
     }()
 
-      // MARK: - Creating a PauseView
+    // MARK: - Creating a PauseView
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        addSubviews()
     }
 
     required init?(coder: NSCoder) {
@@ -46,14 +46,20 @@ final class PauseView: UIView {
 
 // MARK: - Private methods for setting up view and layout
 private extension PauseView {
-
-    private func setupView() {
+    
+    /**
+     Add subviews to view
+     */
+    private func addSubviews() {
         addSubview(blurredEffectView)
         vibrancyEffectView.contentView.addSubview(stateLabel)
         blurredEffectView.contentView.addSubview(vibrancyEffectView)
         setupLayout()
     }
 
+    /**
+     Setup layout of subviews
+     */
     private func setupLayout() {
         blurredEffectView.frame = frame
         vibrancyEffectView.frame = blurredEffectView.frame

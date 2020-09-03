@@ -66,7 +66,7 @@ extension HighscoreListTableViewController {
         if indexPath.row == latestEntry {
             let attributedString = NSAttributedString(
             string: highscoreEntryText,
-            attributes: [.font: UIFont().scalableWeightFont(
+            attributes: [.font: UIFont().scalableFontWeight(
                 forTextStyle: .body,
                 fontSize: 18,
                 weight: .bold)])

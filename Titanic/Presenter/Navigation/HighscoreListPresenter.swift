@@ -17,6 +17,11 @@ import UIKit
 struct HighscoreListPresenter {
 
     // MARK: - Public API
+    /**
+    Creates a highscore list.
+    
+    - Parameter viewController: View Controller which presents highscore list
+    */
     func present(in viewController: UIViewController) {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
 

@@ -12,12 +12,20 @@ import UIKit
 //source: www.swiftbysundell.com/basics/child-view-controllers
 extension UIViewController {
     
+    /**
+     Adds child view controller.
+     
+     - Parameter child: child view controller to add
+     */
     func add(_ child: UIViewController) {
         addChild(child)
         view.addSubview(child.view)
         child.didMove(toParent: self)
     }
     
+    /**
+     Removes child view controller.
+     */
     func remove() {
         guard parent != nil else {
             return

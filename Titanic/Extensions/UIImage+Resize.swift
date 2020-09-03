@@ -13,6 +13,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import UIKit
 
 extension UIImage {
+    
+    /**
+    Resize Image
+    
+    - Parameter newSize: new size of image
+     
+    - Returns: new image
+    */
     func resizeImage(for newSize: CGSize) -> UIImage? {
         let renderer = UIGraphicsImageRenderer(size: newSize)
         return renderer.image { (_) in

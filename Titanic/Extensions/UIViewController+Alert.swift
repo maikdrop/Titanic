@@ -18,6 +18,12 @@ import UIKit
 
 extension UIViewController {
 
+    /**
+    Presents an Error Alert.
+    
+    - Parameter title: alert title
+    - Paramter message: alert message
+    */
     func alertError(title: String?, message: String?) {
 		let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: AppStrings.CommonAlertAction.okay, style: .default)

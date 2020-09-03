@@ -15,10 +15,11 @@ import UIKit
 
 struct TitanicGameViewPresenter {
 
+    // MARK: - Public API
     /**
-     Creates, presents and injects GamePresenter in GameView Controller.
+     Creates a Game ViewController and injects Game Presenter.
      
-     - Parameter viewController: View Controller which presents GameView Controller
+     - Parameter viewController: ViewController which presents Game ViewController
      */
     func presentGameView(in viewController: UIViewController) {
 

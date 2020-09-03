@@ -42,12 +42,22 @@ final class GameStateView: UIView {
  // MARK: - Private methods for creating and setting up state label
 private extension GameStateView {
 
+    /**
+     Create an UILabel.
+     
+     - Returns: created label
+    */
     private func createLabel() -> UILabel {
         let label = UILabel()
         addSubview(label)
         return label
     }
-
+    
+    /**
+     Configure given label.
+     
+     - Parameter label: label to configure
+    */
     private func configureLabel(_ label: UILabel) {
         label.textColor = .label
         label.numberOfLines = 0
@@ -55,6 +65,11 @@ private extension GameStateView {
         label.adjustsFontForContentSizeCategory = true
     }
 
+    /**
+     Setup layout for label.
+     
+     - Parameter label: label to layout
+    */
     private func layoutForLabel(_ label: UILabel) {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.trailingAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
