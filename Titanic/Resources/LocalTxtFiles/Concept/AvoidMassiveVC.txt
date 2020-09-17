@@ -1,6 +1,8 @@
-In MVC the ViewController implements UI logic and talks to the model. Depending on the complexity of both it can end up in many functions and properties. This makes the ViewController less readable, reusable and gains the complexity. In MVC the View is "general" and the ViewConroller is "special". In MVP both (View and ViewController) are "general" and seen as one part. The presenter is "special" and talks to the model. So you can get rid of all model related stuff in the ViewController. To reduce complexity further, a few more steps were done:
+In MVC the ViewController implements UI logic and communicates to the model. Depending on the complexity it can end up in many functions and properties. This makes the ViewController less readable, reusable and gains the complexity. In MVC the View is "general" and the ViewConroller is "special". In MVP both (View and ViewController) are "general" and seen as one part. The presenter is "special" and communicates to the model. So you can get rid of all model related stuff in the ViewController. To reduce complexity further, a few more steps were done:
 
 - GameView itself is used as a main view and implements the adding and handling of subviews and their layout
-- GameView adds observers to each iceberg which sending notifications when an iceberg and ship intersects or an iceberg reaches the vertical end of screen
-- Lightweight view presenters used to navigate to other view controllers or presenting alerts including the call back handling
-- ChildViewController used to encapsule reusable UI logic which handles UI improvements for the user, for example the animated preparation view
+- GameView adds observers to each iceberg that sends notifications when an iceberg and ship intersects or if an iceberg reaches the vertical end of the screen
+- Lightweight view presenters are used  to navigate to other view controllers or presenting alerts including the call back handling
+- ChildViewController is used to encapsulate reusable UI logic which handles UI improvements for the user, for example the animated preparation view
+
+The graphic below shows the theoretical concept of the implementation in Titanic to avoid a massive GameViewController.

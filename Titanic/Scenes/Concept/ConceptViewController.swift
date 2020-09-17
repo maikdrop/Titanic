@@ -18,8 +18,7 @@ class ConceptViewController: UIViewController {
     @IBOutlet private weak var designPatternInnerStackView: UIStackView! {
         didSet {
             let contentArray = [
-                AppStrings.Concept.designPatternTitle,
-                "",
+                AppStrings.Concept.designPatternTitle + "\n",
                 readTextFromFile(fileName: designPatternFileName, with: txtExt)]
             for index in 0..<designPatternInnerStackView.arrangedSubviews.count {
                 if let label = designPatternInnerStackView.arrangedSubviews[index] as? UILabel {
@@ -32,8 +31,7 @@ class ConceptViewController: UIViewController {
     @IBOutlet private weak var avoidingMassiveVCInnerStackView: UIStackView! {
         didSet {
             let contentArray = [
-                AppStrings.Concept.avoidMassiveVCTitle,
-                "",
+                AppStrings.Concept.avoidMassiveVCTitle + "\n",
                 readTextFromFile(fileName: avoidMassiveVCFileName, with: txtExt)]
             for index in 0..<avoidingMassiveVCInnerStackView.arrangedSubviews.count {
                 if let label = avoidingMassiveVCInnerStackView.arrangedSubviews[index] as? UILabel {
@@ -46,8 +44,7 @@ class ConceptViewController: UIViewController {
     @IBOutlet private weak var layoutInnerStackView: UIStackView! {
         didSet {
             let contentArray = [
-                AppStrings.Concept.layoutTitle,
-                "",
+                "\n" + AppStrings.Concept.layoutTitle + "\n",
                 readTextFromFile(fileName: layoutFileName, with: txtExt)]
             for index in 0..<layoutInnerStackView.arrangedSubviews.count {
                 if let label = layoutInnerStackView.arrangedSubviews[index] as? UILabel {

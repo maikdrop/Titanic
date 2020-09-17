@@ -15,14 +15,14 @@ import Foundation
 class TitanicGame {
 
     // MARK: - Properties
-    private var icebergInitXOrigin = [Double]()
-    private var icebergInitYOrigin = [Double]()
-    private var distanceBetweenIcebergs = 0.0
-    private(set) var icebergs = [Iceberg]()
+    private var icebergInitialXPos = [Double]()
+    private var icebergInitialYPos = [Double]()
     private let fileHandler = FileHandler()
-    private var player: [Player]?
-    private(set) var drivenSeaMiles = 0.0
 
+    private(set) var icebergs: [Iceberg]
+    private var player: [Player]?
+
+    private(set) var drivenSeaMiles = 0.0
     var drivenSeaMilesInHighscoreList: Bool {
            isInHighscoreList()
     }
@@ -45,11 +45,10 @@ class TitanicGame {
     // MARK: - Creating a Titanic Game
     init(icebergs: [Iceberg]) {
         self.icebergs = icebergs
-        self.icebergs.forEach({iceberg in
-            icebergInitXOrigin.append(iceberg.origin.xCoordinate)
-            icebergInitYOrigin.append(iceberg.origin.yCoordinate)
-        })
-        distanceBetweenIcebergs = calculateDistanceBetweenIcebergs()
+        self.icebergs.forEach {iceberg in
+            icebergInitialXPos.append(iceberg.origin.xCoordinate)
+            icebergInitialYPos.append(iceberg.origin.yCoordinate)
+        }
     }
 
     deinit {
@@ -69,35 +68,36 @@ class TitanicGame {
     }
 
     /**
-     When iceberg reaches end of view the postion is reset behind the iceberg with smallest y Value.
+     When iceberg reaches end of view the iceberg is set to a new position.
      
-     - Parameter index: index of iceberg in icebergs array
+     - Parameter index: index of iceberg in iceberg array
      */
     func endOfViewReachedFromIceberg(at index: Int) {
+
         assert(icebergs.indices.contains(index), "Titanic.endOfViewReachedFromIceberg(at: \(index)): chosen index not available in icebergs")
-        if let icebergWithSmallestY = icebergs.min() {
-            icebergs[index].origin.yCoordinate =
-                icebergWithSmallestY.origin.yCoordinate - distanceBetweenIcebergs
-        }
+
+        icebergs[index].origin.yCoordinate = calculateNewYPosForIceberg(at: index) ?? -(icebergs[index].size.height)
+
+        shuffleXPosOfIcebergs(at: [index])
     }
 
     /**
-     When a collision between ship and iceberg is detected crash count increases and alle icebergs were reset to a random position.
+     When a collision between ship and iceberg is detected crash count increases and all icebergs were set to a random position.
      */
     func collisionBetweenShipAndIceberg() {
         crashCount += 1
-        shuffleIcebergs()
+        setStartPosOfIcebergs()
     }
 
     /**
-     Resets scores and shuffles the position of all icebergs.
+     Resets scores and all icebergs were set to a random position.
      
      - Important: should be called always before a new game is started
      */
     func startNewTitanicGame() {
         drivenSeaMiles = 0.0
         crashCount = 0
-        shuffleIcebergs()
+        setStartPosOfIcebergs()
     }
 
     /**
@@ -128,48 +128,60 @@ class TitanicGame {
 private extension TitanicGame {
 
     /**
-     Calculates distance between two icebergs.
+     Calculates vertical distance between two icebergs which follow each other.
      
+     - Parameter index: index of iceberg
      - Returns: distance between two icebergs
      */
-    private func calculateDistanceBetweenIcebergs() -> Double {
+    private func calculateNewYPosForIceberg(at index: Int) -> Double? {
+
         if icebergs.count > 1 {
-            return abs(icebergs[0].origin.yCoordinate.distance(to: icebergs[1].origin.yCoordinate))
+            if let icebergWithSmallestY = icebergs.min() {
+                let indexFollower = index + 1
+                if icebergs[optional:indexFollower] != nil {
+                    return icebergWithSmallestY.origin.yCoordinate -
+                        abs(icebergs[index].origin.yCoordinate.distance(to: icebergs[indexFollower].origin.yCoordinate))
+                } else {
+                    return icebergWithSmallestY.origin.yCoordinate -
+                        abs(icebergs[index].origin.yCoordinate.distance(to: icebergs[0].origin.yCoordinate))
+                }
+            }
         }
-        return 0
+        return nil
     }
 
     /**
-     Calls functions to shuffle iceberg coordinates vertically and horizontally.
+     Set icebergs to a random start position.
      */
-    private func shuffleIcebergs() {
-        shuffleIcebergVertically(at: Array(icebergs.indices))
-        shuffleIcebergHorizontally(at: Array(icebergs.indices))
+    private func setStartPosOfIcebergs() {
+        shuffleXPosOfIcebergs(at: Array(icebergs.indices))
+        setYPosOfIcebergs()
     }
 
     /**
-     Iceberg coordinates will be shuffled vertically.
-     
-     - Parameter indices: indices of icebergs which will be shuffled
+     Set icebergs to initial y position.
      */
-    private func shuffleIcebergVertically(at indices: [Int]) {
-        var yOrigin = icebergInitYOrigin
-        indices.forEach {index in
-            let randomIndex = Int.random(in: 0 ..< yOrigin.count)
-            self.icebergs[index].origin.yCoordinate = yOrigin.remove(at: randomIndex)
+    private func setYPosOfIcebergs() {
+
+        for index in 0..<icebergs.count {
+            icebergs[index].origin.yCoordinate = icebergInitialYPos[index]
         }
     }
 
     /**
-     Iceberg coordinates will be shuffled horizontally.
+      Set icebergs to a random x position.
      
-     - Parameter indices: indices of icebergs which will be shuffled
+     - Parameter indices: indices of icebergs
      */
-    private func shuffleIcebergHorizontally(at indices: [Int]) {
-        var xOrigin = icebergInitXOrigin
+    private func shuffleXPosOfIcebergs(at indices: [Int]) {
+
+        let uniqueXOriginShuffled = Array(
+            repeating: icebergInitialXPos.uniqued().shuffled(),
+            count: TitanicGame.rowsOfIcebergs)
+        let xOriginShuffled = uniqueXOriginShuffled.reduce([]) { (result, element) in result + element}
+
         indices.forEach {index in
-            let randomIndex = Int.random(in: 0 ..< xOrigin.count)
-            icebergs[index].origin.xCoordinate = xOrigin.remove(at: randomIndex)
+            icebergs[index].origin.xCoordinate = xOriginShuffled[index]
         }
     }
 
@@ -214,7 +226,11 @@ private extension TitanicGame {
 // MARK: - Constants
 extension TitanicGame {
 
-    var countdownBeginningValue: Int {30}
+    static var rowsOfIcebergs: Int {2}
+    static var icebergsInARow: Int {3}
+
+    var countdownBeginningValue: Int {60}
+
     private var moveFactor: Double {10}
     private var maxCrashs: Int {5}
     private var startKnots: Int {50}

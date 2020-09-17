@@ -17,7 +17,10 @@ class TitanicGameViewController: UIViewController {
 
     // MARK: - Properties
     private var gamePresenter: TitanicGamePresenter
-    private lazy var gameView: TitanicGameView = TitanicGameView(frame: view.frame)
+    private lazy var gameView: TitanicGameView = TitanicGameView(
+        frame: view.frame,
+        icebergsInARow: gamePresenter.icebergsInARow,
+        rowsOfIcebergs: gamePresenter.rowsOfIcebergs)
 
     private var cancellableObserver = [Cancellable?]()
     private var displayLink: CADisplayLink?
@@ -84,10 +87,14 @@ private extension TitanicGameViewController {
     /**
      When ship and iceberg intersect device vibrates, an intersection animiation is shown and the presenter is called to decide what happens next.
      */
-    private func intersectionOfShipAndIceberg() {
-            UIDevice.vibrate()
-            intersectionAnimation()
-            gamePresenter.intersectionOfShipAndIceberg()
+    //TODO Doku: Parameter
+    private func intersectionOfShipAndIceberg(_ notification: Notification) {
+        UIDevice.vibrate()
+        gamePresenter.intersectionOfShipAndIceberg()
+        if let dict = notification.userInfo as NSDictionary?,
+            let intersectionPoint = dict[AppStrings.UserInfoKey.ship] as? CGPoint {
+            intersectionAnimation(at: intersectionPoint)
+        }
     }
 
     /**
@@ -114,10 +121,10 @@ private extension TitanicGameViewController {
     private func updateViewFromModel() {
 
         let icebergs = gamePresenter.icebergsToDisplay
-        icebergs.enumerated().forEach({iceberg in
+        icebergs.enumerated().forEach {iceberg in
             let center = CGPoint(x: iceberg.element.xCenter, y: iceberg.element.yCenter)
             gameView.icebergs[iceberg.offset].center = center
-        })
+        }
 
         gameView.scoreStackView.knotsLbl.text = AppStrings.Game.knotsLblTxt + gamePresenter.knots.description
         gameView.scoreStackView.drivenSeaMilesLbl.text =
@@ -206,14 +213,16 @@ private extension TitanicGameViewController {
     }
 
     /**
-     Starts game countdown when preparation countdown ends.
+     When preparation countdown ends game countdown starts after 1 second of delay.
     */
     private func preparationCountdownEnded() {
         gameControlBtn.isEnabled = true
-        gameView.gameCountdownTimer.start(
-            beginningValue: gamePresenter.countdownBeginningValue,
-            interval: interval,
-            lastSecondsReminderCount: reminderCount)
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval/2) {
+            self.gameView.gameCountdownTimer.start(
+                beginningValue: self.gamePresenter.countdownBeginningValue,
+                interval: self.interval,
+                lastSecondsReminderCount: self.reminderCount)
+        }
     }
 }
 
@@ -223,13 +232,14 @@ extension TitanicGameViewController {
     /**
      Creates smoke animation when ship and iceberg intersects.
      */
-    private func intersectionAnimation() {
+    //TODO Doku Parameter
+    private func intersectionAnimation(at intersectionPoint: CGPoint) {
 
         guard gameView.smokeView == nil else {
             return
         }
         displayLink?.isPaused = true
-        gameView.setSmokeView()
+        gameView.setSmokeView(at: intersectionPoint)
         DispatchQueue.main.asyncAfter(deadline: .now() + durationOfIntersectionAnimation) {
             self.gameView.smokeView?.removeFromSuperview()
             if !self.gameView.subviews.contains(self.gameView.pauseView) {self.displayLink?.isPaused = false}
@@ -247,8 +257,8 @@ extension TitanicGameViewController {
         })
         cancellableObserver.append(NotificationCenter.default
             .publisher(for: .ShipDidIntersectWithIceberg)
-            .sink {[weak self] _ in
-                self?.intersectionOfShipAndIceberg()
+            .sink {[weak self] notification in
+                self?.intersectionOfShipAndIceberg(notification)
         })
     }
 

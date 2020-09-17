@@ -42,6 +42,7 @@ enum AppStrings {
 
     enum UserInfoKey {
         static let iceberg = "iceberg"
+        static let ship = "ship"
     }
 
     enum Welcome {
@@ -69,7 +70,7 @@ enum AppStrings {
     }
 
     enum AppInformation {
-        static let aboutTheAppLblTxt = NSLocalizedString("AboutTheAppLbl_Txt", comment: "")
+        static let aboutTheGameLblTxt = NSLocalizedString("AboutTheGameLbl_Txt", comment: "")
         static let conceptLblTxt = NSLocalizedString("ConceptLbl_Txt", comment: "")
         static let legalLblTxt = NSLocalizedString("LegalLbl_Txt", comment: "")
     }

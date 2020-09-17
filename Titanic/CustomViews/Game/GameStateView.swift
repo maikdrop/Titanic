@@ -52,7 +52,7 @@ private extension GameStateView {
         addSubview(label)
         return label
     }
-    
+
     /**
      Configure given label.
      

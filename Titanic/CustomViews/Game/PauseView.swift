@@ -46,7 +46,7 @@ final class PauseView: UIView {
 
 // MARK: - Private methods for setting up view and layout
 private extension PauseView {
-    
+
     /**
      Add subviews to view
      */

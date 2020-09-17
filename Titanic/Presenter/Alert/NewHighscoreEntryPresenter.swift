@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import Foundation
 import UIKit
 
-//source: https://www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
+//source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
 struct NewHighscoreEntryPresenter {
 
     // MARK: - Properties

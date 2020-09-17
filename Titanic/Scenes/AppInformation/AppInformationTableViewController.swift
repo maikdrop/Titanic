@@ -16,7 +16,7 @@ class AppInformationTableViewController: UITableViewController {
 
     // MARK: - Properties
     let dataSource = [
-        AppStrings.AppInformation.aboutTheAppLblTxt,
+        AppStrings.AppInformation.aboutTheGameLblTxt,
         AppStrings.AppInformation.conceptLblTxt,
         AppStrings.AppInformation.legalLblTxt]
 

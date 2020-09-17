@@ -17,8 +17,10 @@ import SpriteKit
 class TitanicGameView: UIView {
 
     // MARK: - Properties
-    private var cancellable = [UIView: Cancellable?]()
+    private var icebergsInARow: Int
+    private var rowsOfIcebergs: Int
 
+    private var cancellable = [UIView: Cancellable?]()
     private(set) lazy var icebergs = setUpIcebergs()
     private(set) lazy var pauseView = PauseView(frame: frame)
     private(set) var smokeView: SKView? {
@@ -71,7 +73,9 @@ class TitanicGameView: UIView {
     }()
 
     // MARK: - Create a GameView
-    override init(frame: CGRect) {
+    init(frame: CGRect, icebergsInARow: Int, rowsOfIcebergs: Int) {
+        self.icebergsInARow = icebergsInARow
+        self.rowsOfIcebergs = rowsOfIcebergs
         super.init(frame: frame)
         backgroundColor = .oceanBlue
     }
@@ -113,8 +117,8 @@ extension TitanicGameView {
         setupIcebergPublisher()
     }
 
-    func setSmokeView() {
-        smokeView = SmokeView(frame: frame)
+    func setSmokeView(at intersectionPoint: CGPoint) {
+        smokeView = SmokeView(frame: frame, intersectionPoint: intersectionPoint)
     }
 }
 
@@ -219,17 +223,17 @@ private extension TitanicGameView {
     private func setUpIcebergs() -> [ImageView] {
         var icebergViewArray = [ImageView]()
         if let width = UIApplication.shared.windows.first?.frame.width {
-            let maxIcebergWidth = width / CGFloat(icebergHorizontalCount)
+            let maxIcebergWidth = width / CGFloat(icebergsInARow)
             var horizontalOffset: CGFloat = 0
 
-            for index in 0..<icebergHorizontalCount * 2 {
+            for index in 0..<icebergsInARow * rowsOfIcebergs {
                 let icebergView = ImageView()
                 icebergView.image = UIImage(named: icebergImageName)
                 icebergView.backgroundColor = .clear
 
                 let verticalSpaceBetweenIcebergs =
                     icebergView.imageSize.height + icebergVerticalOffset * ship.imageSize.height
-                if index.isMultiple(of: icebergHorizontalCount) {horizontalOffset = 0}
+                if index.isMultiple(of: icebergsInARow) {horizontalOffset = 0}
 
                 //yCoordinates have to be out of visble y Axis
                 icebergView.frame = CGRect(
@@ -253,8 +257,11 @@ private extension TitanicGameView {
         icebergs.forEach {icebergView in
             cancellable[icebergView] = icebergView.publisher(for: \.center).sink {[unowned self] _ in
                 if icebergView.frame.intersects(self.ship.frame) {
+                    var intersectionRect = icebergView.frame.intersection(self.ship.frame)
+                    intersectionRect.origin.x += self.ship.frame.width/2
                     NotificationCenter.default.post(name: .ShipDidIntersectWithIceberg,
-                                                    object: self)
+                                                    object: self,
+                                                    userInfo: [AppStrings.UserInfoKey.ship: intersectionRect.origin])
                 }
                 if icebergView.frame.origin.y > self.frame.height {
                     NotificationCenter.default.post(name: .IcebergReachedEndOfView,
@@ -271,7 +278,6 @@ extension TitanicGameView {
 
     private var icebergImageName: String {"iceberg"}
     private var shipImageName: String {"ship"}
-    private var icebergHorizontalCount: Int {3}
     private var icebergVerticalOffset: CGFloat {1.5}
     private var labelPrefferedFontSize: CGFloat {20}
     private var sliderBottomConstraint: CGFloat {25}

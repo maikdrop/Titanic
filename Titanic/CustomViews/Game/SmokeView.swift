@@ -15,7 +15,9 @@ import SpriteKit
 
 final class SmokeView: SKView {
 
-     // MARK: - Properties
+    // MARK: - Properties
+    private let intersectionPoint: CGPoint
+
     private lazy var newScene: SKScene = {
         let scene = SKScene(size: frame.size)
         scene.scaleMode = .aspectFit
@@ -25,18 +27,17 @@ final class SmokeView: SKView {
     }()
 
     private lazy var emitterNode: SKEmitterNode? = {
-        if let superView = superview as? TitanicGameView {
-            if let emitterNode = SKEmitterNode(fileNamed: "Smoke.sks") {
-                emitterNode.position.x = superView.ship.frame.midX
-                emitterNode.position.y = superView.ship.frame.size.height * 2
-                return emitterNode
-            }
+        if let emitterNode = SKEmitterNode(fileNamed: "Smoke.sks") {
+            emitterNode.position.x = self.intersectionPoint.x
+            emitterNode.position.y = frame.height - self.intersectionPoint.y
+            return emitterNode
         }
         return nil
     }()
 
     // MARK: - Creating a SmokeView
-    override init(frame: CGRect) {
+    init(frame: CGRect, intersectionPoint: CGPoint) {
+        self.intersectionPoint = intersectionPoint
         super.init(frame: frame)
         backgroundColor = .clear
     }

@@ -67,7 +67,7 @@ private extension AppInformationDetailTableViewController {
 
     private func getDataSource() -> [String] {
         var stringArray = [String]()
-        if cellIdentifierFromParentVC == AppStrings.AppInformation.aboutTheAppLblTxt {
+        if cellIdentifierFromParentVC == AppStrings.AppInformation.aboutTheGameLblTxt {
             stringArray.append(readTextFromFile(fileName: aboutTheAppFileName, with: txtExt))
 
         } else if cellIdentifierFromParentVC == AppStrings.AppInformation.legalLblTxt {

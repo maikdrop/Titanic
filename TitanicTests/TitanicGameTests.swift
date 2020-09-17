@@ -25,7 +25,7 @@ class TitanicGameTests: XCTestCase {
     override func setUp() {
         super.setUp()
         for index in 0..<10 {
-            let point = Point(xCoordinate: Double(index), yCoordinate: Double(index) * size.width)
+            let point = Point(xCoordinate: Double(index), yCoordinate: Double(index) * size.height)
             let iceberg = TitanicGame.Iceberg(origin: point, size: size)
             icebergs += [iceberg]
         }
@@ -52,11 +52,16 @@ class TitanicGameTests: XCTestCase {
 
     func testIcebergReachedEndOfView() {
 
-        let height: Int = 10
+        let height: Double = 10
 
-        for index in 0..<sut.icebergs.count {
+        for index in 0..<sut.icebergs.count - 1 {
             sut.endOfViewReachedFromIceberg(at: index)
-            XCTAssertEqual(sut.icebergs[index].origin.yCoordinate, Double(-((index + 1) * height)))
+            if index == sut.icebergs.count - 1 {
+                let last = Double(index) * height
+                XCTAssertEqual(sut.icebergs[index].origin.yCoordinate, -(2 * last) - sut.icebergs[0].origin.yCoordinate)
+            } else {
+                XCTAssertEqual(sut.icebergs[index].origin.yCoordinate, -(Double((index + 1)) * height))
+            }
         }
     }
 

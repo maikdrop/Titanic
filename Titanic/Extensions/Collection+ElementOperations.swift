@@ -23,15 +23,20 @@ extension Collection where Element: Hashable {
         var seen = Set<Element>()
         return self.filter {seen.insert($0).inserted}
     }
+}
+
+extension Collection {
     
     /**
      Verifies if array contains an element at given index.
      
-    - Parameter index: index to verify
+     - Parameter index: index to verify
      
-    - Returns: either element at index or nil
-    */
+     - Returns: either element at index or nil
+     */
     subscript(optional index: Index) -> Iterator.Element? {
         return self.indices.contains(index) ? self[index] : nil
     }
+    
 }
+

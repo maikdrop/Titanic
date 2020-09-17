@@ -46,11 +46,11 @@
 "Resume" = "Fortsetzen";
 
 //App Information
-"AboutTheAppLbl_Txt" = "Über die App";
+"AboutTheGameLbl_Txt" = "Das Spiel";
 "ConceptLbl_Txt" = "Konzept";
 "LegalLbl_Txt" = "Impressum";
 
 //Concept
 "Concept_DesignPatternTitle" = "MVP Entwurfsmuster";
-"Concept_AvoidMassiveVCTitle" = "Großen VC verhindern";
-"Concept_LayoutTitle" = "Layout";
+"Concept_AvoidMassiveVCTitle" = "Massiven VC verhindern";
+"Concept_LayoutTitle" = "Adaptives Layout";

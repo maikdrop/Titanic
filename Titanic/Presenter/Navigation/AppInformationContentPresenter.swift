@@ -13,6 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import Foundation
 import UIKit
 
+//source: www.swiftbysundell.com/basics/child-view-controllers
 struct AppInformationContentPresenter {
 
     // MARK: - Public API
@@ -25,7 +26,7 @@ struct AppInformationContentPresenter {
     func present(in viewController: UIViewController, for cellText: String) {
         var informationVC: UIViewController?
 
-        if cellText == AppStrings.AppInformation.aboutTheAppLblTxt ||
+        if cellText == AppStrings.AppInformation.aboutTheGameLblTxt ||
             cellText == AppStrings.AppInformation.legalLblTxt {
             informationVC = AppInformationDetailTableViewController()
             if let infoVC = informationVC as? AppInformationDetailTableViewController {

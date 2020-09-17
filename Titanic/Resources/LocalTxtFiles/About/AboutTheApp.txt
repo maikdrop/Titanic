@@ -1,26 +1,22 @@
-1. About the App
+1. Introduction
 
-1.1. Introduction
+Titanic is a simple game where the development started in Spring 2020 after (I finished) finishing my studies in Applied Computer Science at the University of Applied Science Berlin. During my studies I worked on several projects that contained app prototypes about for example public health, professional environment and smaller apps as exercises in different courses. All apps were written in Swift (it started with Swift 2.2 in 2016) and I used the MVC Pattern. The idea of Titanic based on a simple app exercise during a swift course.
 
-Titanic is a simple game, which development started in Spring 2020 after finishing my studies in Applied Computer Science at the University of Applied Science Berlin. During my studies I worked on several projects which contained app prototypes for example in public health, professional environment and smaller apps as exersices in different courses. All apps were written in Swift (it started with Swift 2.2 in 2016) and used the MVC Pattern. The idea of Titanic based on a simple app exersice during a swift course.
+2. Goals
 
-    Following chapters documenting the goal, what`s the game about and features to get an insight of the development process. The last chapter is about testing. The documentation is focused on the most important points. It`s an short overview of my work and doesn´t describe every detail.
+The main goal of the project was to gain knowledge about swift and iOS development. In order to learn more while practicing I used different technologies that offered the same result. For example I used three package managers like Cocoa Pods (SRCountdownTimer), Homebrew (Swiftlint) and Swift Package Manager (SnapshotTesting) to implement third party libraries.
 
-1.2. Goals
+There were three sub goals:
 
-The main goal of the proejct was to gain knowledge about swift and ios development. Therefore different technologies were used to reach same goal but it enbaled myself to learn more while practicing. For example different package managers like cocoa pods (SRCountdownTimer), homebrew (Swiftlint) and swift package manager (SnapshotTesting) were used to implement third party libraries.
+- implementing MVP pattern
+- code and project structure
+- adapting layout
 
-There were three focus points:
-
- - implementing the MVP pattern (see chapter 2)
- - code and project structure
- - layout
- 
-1.3. What`s the game about?
+3. What`s the game about?
 
 Users move a ship horizontally by their thumb to avoid intersections with icebergs, which moving vertically from top to bottom. If the time is up or the maximum crashs are reached the game ends. Immediately after game end driven sea miles will be verified. If they`re in the top ten an alert with a text field shows up in order to entry users`s name.
  
-1.4. Game Features
+4. Game Features
  
  - countdown timer
  - score counter

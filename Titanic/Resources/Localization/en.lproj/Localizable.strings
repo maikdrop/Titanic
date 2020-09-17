@@ -46,11 +46,11 @@
 "Resume" = "Resume";
 
 //App Information
-"AboutTheAppLbl_Txt" = "About The App";
+"AboutTheGameLbl_Txt" = "About The Game";
 "ConceptLbl_Txt" = "Concept";
 "LegalLbl_Txt" = "Legal Notices";
 
 //Concept
 "Concept_DesignPatternTitle" = "MVP Design Pattern";
 "Concept_AvoidMassiveVCTitle" = "Avoiding Massive VC";
-"Concept_LayoutTitle" = "Layout";
+"Concept_LayoutTitle" = "Adapting Layout";

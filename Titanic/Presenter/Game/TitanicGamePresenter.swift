@@ -65,8 +65,15 @@ class TitanicGamePresenter {
     var crashCount: Int {
         game?.crashCount  ?? 0
     }
+
     var countdownBeginningValue: Int {
-        game?.countdownBeginningValue ?? 0
+         game?.countdownBeginningValue ?? 0
+    }
+    var icebergsInARow: Int {
+        TitanicGame.icebergsInARow
+    }
+    var rowsOfIcebergs: Int {
+        TitanicGame.rowsOfIcebergs
     }
 
     deinit {
