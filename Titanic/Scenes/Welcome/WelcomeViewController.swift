@@ -15,18 +15,16 @@ import UIKit
 class WelcomeViewController: UIViewController {
 
     // MARK: - Properties
-    private let launchImageView = UIImageView(image: UIImage(named: "LaunchImage"))
+    private let icebergImageView = UIImageView(image: UIImage(named: "LaunchImage"))
 
     @IBOutlet private weak var appInformationBtn: UIBarButtonItem! {
         didSet {
             appInformationBtn.title = AppStrings.Welcome.leftBarBtnTitle
-            appInformationBtn.isEnabled = false
         }
     }
     @IBOutlet private weak var rulesBtn: UIBarButtonItem! {
         didSet {
             rulesBtn.title = AppStrings.Welcome.rightBarBtnTitle
-            rulesBtn.isEnabled = false
         }
     }
     @IBOutlet private weak var welcomeLabel: UILabel! {
@@ -37,7 +35,6 @@ class WelcomeViewController: UIViewController {
     @IBOutlet private weak var startBtn: UIButton! {
         didSet {
             startBtn.titleLabel?.adjustsFontForContentSizeCategory = true
-            startBtn.isEnabled = false
         }
     }
 
@@ -70,42 +67,82 @@ class WelcomeViewController: UIViewController {
  // MARK: - Default Methods
 extension WelcomeViewController {
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        icebergAnimation()
+    override func viewDidLoad() {
+        setupIcebergLayout()
+        setupIcebergAnimation()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+            setupIcebergLayout()
+            setupIcebergAnimation()
+        }
     }
 }
 
-// MARK: - Private methods for iceberg animation
+// MARK: - Private methods for iceberg constraints and animation
 private extension WelcomeViewController {
 
-    private func icebergAnimation() {
-        launchImageView.center = startBtn.center
-        view.addSubview(launchImageView)
-        let ratio = view.frame.width / launchImageView.frame.width
+    /**
+     Layout for iceberg
+     */
+    private func setupIcebergLayout() {
+        view.addSubview(icebergImageView)
+        icebergImageView.translatesAutoresizingMaskIntoConstraints = false
+        icebergImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        icebergImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+    }
+
+    /**
+     Animation for iceberg
+     */
+    private func setupIcebergAnimation() {
+        actionBtns(enabled: false)
+        let ratio = view.frame.width / icebergImageView.frame.width
         UIView.transition(
-            with: launchImageView,
+            with: icebergImageView,
             duration: transitionAnimationDuration,
             options: [],
             animations: {
-                self.launchImageView.transform = CGAffineTransform.identity.scaledBy(x: ratio, y: ratio)
+                self.icebergImageView.transform = CGAffineTransform.identity.scaledBy(x: ratio, y: ratio)
         }, completion: { _ in
             UIViewPropertyAnimator.runningPropertyAnimator(
                 withDuration: self.propertyAnimationDuration,
                 delay: 0,
                 options: [],
                 animations: {
-                    self.launchImageView.transform = CGAffineTransform.identity.scaledBy(
+                    self.icebergImageView.transform = CGAffineTransform.identity.scaledBy(
                         x: self.scaleFactor,
                         y: self.scaleFactor)
-                    self.launchImageView.alpha = 0
+                    self.icebergImageView.alpha = 0
             }, completion: { _ in
-                self.launchImageView.removeFromSuperview()
-                self.appInformationBtn.isEnabled = true
-                self.rulesBtn.isEnabled = true
-                self.startBtn.isEnabled = true
+                self.cleanUpAfterIcebergAnimation()
             })
         })
+    }
+
+    /**
+     Clean up UI after iceberg animation ends.
+     */
+    private func cleanUpAfterIcebergAnimation() {
+        icebergImageView.removeFromSuperview()
+        icebergImageView.alpha = 1
+        icebergImageView.transform = .identity
+        actionBtns(enabled: true)
+    }
+
+    /**
+     Enable or disbale all action buttons.
+     
+     - Parameter enabled: false or true
+     
+     - Important: Action buttons should be disabled while animation is running and enabled when completed
+     */
+    private func actionBtns(enabled: Bool) {
+        appInformationBtn.isEnabled = enabled
+        rulesBtn.isEnabled = enabled
+        startBtn.isEnabled = enabled
     }
 }
 

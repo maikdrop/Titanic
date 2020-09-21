@@ -16,7 +16,7 @@ class HighscoreListTableViewController: UITableViewController {
 
     // MARK: - Properties
     private var latestEntry: Int?
-    //remove private and change let to var for testing purpose
+    //make player public and change let to var for testing purpose
     private let player: [TitanicGame.Player] = {
         var playerList = [TitanicGame.Player]()
         FileHandler().loadPlayerFile(then: {(result) in
@@ -33,8 +33,8 @@ extension HighscoreListTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let play = player.max(by: {$0.date < $1.date}) {
-            latestEntry = player.firstIndex(of: play)
+        if let loadedPlayer = player.max(by: {$0.date < $1.date}) {
+            latestEntry = player.firstIndex(of: loadedPlayer)
         }
     }
 }

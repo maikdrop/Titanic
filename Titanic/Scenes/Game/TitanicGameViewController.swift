@@ -85,9 +85,10 @@ extension TitanicGameViewController {
 private extension TitanicGameViewController {
 
     /**
-     When ship and iceberg intersect device vibrates, an intersection animiation is shown and the presenter is called to decide what happens next.
+     Notification from game view.
+     
+     - Parameter notification: Notification when ship intersects with iceberg
      */
-    //TODO Doku: Parameter
     private func intersectionOfShipAndIceberg(_ notification: Notification) {
         UIDevice.vibrate()
         gamePresenter.intersectionOfShipAndIceberg()
@@ -101,7 +102,7 @@ private extension TitanicGameViewController {
      Notification from game view.
      
      - Parameter notification: Notification when an iceberg reached end of view
-    */
+     */
     private func icebergReachedEndOfViewNotification(_ notification: Notification) {
         if let dict = notification.userInfo as NSDictionary?,
             let icebergView = dict[AppStrings.UserInfoKey.iceberg] as? ImageView {
@@ -231,8 +232,9 @@ extension TitanicGameViewController {
 
     /**
      Creates smoke animation when ship and iceberg intersects.
+     
+     - Parameter intersectionPoint: coordinates of intersection
      */
-    //TODO Doku Parameter
     private func intersectionAnimation(at intersectionPoint: CGPoint) {
 
         guard gameView.smokeView == nil else {

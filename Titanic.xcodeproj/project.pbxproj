@@ -53,6 +53,9 @@
 		29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */; };
 		29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B98044246092E200D7C302 /* ScoreStackView.swift */; };
 		29B980472461F99400D7C302 /* SRCountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B980462461F99400D7C302 /* SRCountdownTimer.swift */; };
+		29C166092517EC48001D1752 /* AvoidMassiveVC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29C166062517EC47001D1752 /* AvoidMassiveVC.jpg */; };
+		29C1660A2517EC48001D1752 /* Layout.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29C166072517EC47001D1752 /* Layout.jpg */; };
+		29C1660B2517EC48001D1752 /* DesignPattern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29C166082517EC47001D1752 /* DesignPattern.jpg */; };
 		29D6B20124B0EE7800472FC5 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6B20024B0EE7800472FC5 /* PauseView.swift */; };
 		29DDA89F24F05D2B00D5733F /* TitanicGameViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA89E24F05D2B00D5733F /* TitanicGameViewPresenter.swift */; };
 		29DDA8A124F173DD00D5733F /* TitanicGamePresenter+IcebergData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA8A024F173DD00D5733F /* TitanicGamePresenter+IcebergData.swift */; };
@@ -159,6 +162,10 @@
 		29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeView.swift; sourceTree = "<group>"; };
 		29B98044246092E200D7C302 /* ScoreStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStackView.swift; sourceTree = "<group>"; };
 		29B980462461F99400D7C302 /* SRCountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRCountdownTimer.swift; sourceTree = "<group>"; };
+		29C16600251777FB001D1752 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		29C166062517EC47001D1752 /* AvoidMassiveVC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AvoidMassiveVC.jpg; sourceTree = "<group>"; };
+		29C166072517EC47001D1752 /* Layout.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Layout.jpg; sourceTree = "<group>"; };
+		29C166082517EC47001D1752 /* DesignPattern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DesignPattern.jpg; sourceTree = "<group>"; };
 		29D6B20024B0EE7800472FC5 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 		29DDA89E24F05D2B00D5733F /* TitanicGameViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGameViewPresenter.swift; sourceTree = "<group>"; };
 		29DDA8A024F173DD00D5733F /* TitanicGamePresenter+IcebergData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGamePresenter+IcebergData.swift"; sourceTree = "<group>"; };
@@ -287,6 +294,7 @@
 		2978B8A92403D40000798E84 = {
 			isa = PBXGroup;
 			children = (
+				29C16600251777FB001D1752 /* README.md */,
 				297CF4D324CF0F1C007040EE /* .swiftlint.yml */,
 				2978B8B42403D40000798E84 /* Titanic */,
 				2978B8CB2403D40100798E84 /* TitanicTests */,
@@ -311,6 +319,7 @@
 		2978B8B42403D40000798E84 /* Titanic */ = {
 			isa = PBXGroup;
 			children = (
+				29C166012517E818001D1752 /* Images */,
 				29379BEB24AA4EA400D38F2B /* Extensions */,
 				2925B8EB2458A91B000EEB1E /* Presenter */,
 				296C52F324451FA80044401D /* CustomViews */,
@@ -551,6 +560,16 @@
 			path = About;
 			sourceTree = "<group>";
 		};
+		29C166012517E818001D1752 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				29C166062517EC47001D1752 /* AvoidMassiveVC.jpg */,
+				29C166072517EC47001D1752 /* Layout.jpg */,
+				29C166082517EC47001D1752 /* DesignPattern.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		29FA73D424B779E4000F8C8E /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -697,7 +716,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = maikdrop;
 				TargetAttributes = {
 					2978B8B12403D40000798E84 = {
@@ -748,10 +767,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				297CF4D424CF0F1C007040EE /* .swiftlint.yml in Resources */,
+				29C1660B2517EC48001D1752 /* DesignPattern.jpg in Resources */,
 				29FA73D524B77AB8000F8C8E /* Localizable.strings in Resources */,
 				29FA73DC24B78266000F8C8E /* AppIcon.xcassets in Resources */,
 				29FA73F524B885BC000F8C8E /* ContentAppInformation.storyboard in Resources */,
 				29FA73C024B743FF000F8C8E /* Layout.txt in Resources */,
+				29C1660A2517EC48001D1752 /* Layout.jpg in Resources */,
+				29C166092517EC48001D1752 /* AvoidMassiveVC.jpg in Resources */,
 				29379BEA24AA48C400D38F2B /* MIT_License.txt in Resources */,
 				29FA73DE24B78285000F8C8E /* Assets.xcassets in Resources */,
 				297CF4E724D46B97007040EE /* HighscoreList.storyboard in Resources */,
@@ -954,6 +976,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -978,7 +1001,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1015,6 +1038,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1033,7 +1057,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1049,9 +1073,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
 				INFOPLIST_FILE = "Titanic/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1071,9 +1096,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
 				INFOPLIST_FILE = "Titanic/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

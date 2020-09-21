@@ -1,20 +1,20 @@
 1. Introduction
 
-Titanic is a simple game where the development started in Spring 2020 after (I finished) finishing my studies in Applied Computer Science at the University of Applied Science Berlin. During my studies I worked on several projects that contained app prototypes about for example public health, professional environment and smaller apps as exercises in different courses. All apps were written in Swift (it started with Swift 2.2 in 2016) and I used the MVC Pattern. The idea of Titanic based on a simple app exercise during a swift course.
+Titanic is a simple game where the development started in Spring 2020 after I finished my studies in Applied Computer Science at the University of Applied Science Berlin. During my studies I worked on several projects that contained app prototypes about for example public health, professional environment and smaller apps as exercises in different courses. All apps were written in Swift (it started with Swift 2.2 in 2016) and I used the MVC Pattern. The idea of Titanic based on a simple app exercise during a swift course.
 
 2. Goals
 
-The main goal of the project was to gain knowledge about swift and iOS development. In order to learn more while practicing I used different technologies that offered the same result. For example I used three package managers like Cocoa Pods (SRCountdownTimer), Homebrew (Swiftlint) and Swift Package Manager (SnapshotTesting) to implement third party libraries.
+The main goal of the project was to gain knowledge about swift and iOS development. In order to learn more while practicing different technologies were used that offered the same result. For example  several package managers like Cocoa Pods, Homebrew, and Swift Package Manager were used to implement third party libraries.
 
 There were three sub goals:
 
 - implementing MVP pattern
-- code and project structure
-- adapting layout
+- readable code and clear project structure
+- adapting layout for different iPhone screen and text sizes
 
 3. What`s the game about?
 
-Users move a ship horizontally by their thumb to avoid intersections with icebergs, which moving vertically from top to bottom. If the time is up or the maximum crashs are reached the game ends. Immediately after game end driven sea miles will be verified. If they`re in the top ten an alert with a text field shows up in order to entry users`s name.
+Users move a ship horizontally by their thumb to avoid intersections with icebergs, that are moving vertically from top to bottom. If the time is up or the maximum crashes are reached the game ends. Immediately after the game end driven sea miles will be verified. If the user is in the top ten, an alert with a text field shows up in order to enter the name of the user.
  
 4. Game Features
  
@@ -22,4 +22,10 @@ Users move a ship horizontally by their thumb to avoid intersections with iceber
  - score counter
  - game control options
  - smoke animation when ship and iceberg collide
- - highscore list
+ - high score list
+ 
+ 5. Technical Infos
+ 
+ - Deployment Info: iOS 14.0, iPhone
+ - 3pp Libraries: SRCountdownTimer, SwiftLint, SnapshotTesting
+ - Dependency Manager: CocoaPods, Homebrew, SwiftPackageManager

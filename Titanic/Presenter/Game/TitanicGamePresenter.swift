@@ -86,7 +86,7 @@ class TitanicGamePresenter {
      Change state of game.
      
      - Parameter newState: new state of game
-     */
+     */ 
     func changeGameState(to newState: String) {
         gameState = GameState(string: newState)
     }
