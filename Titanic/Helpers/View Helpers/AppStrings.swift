@@ -70,7 +70,7 @@ enum AppStrings {
     }
 
     enum AppInformation {
-        static let aboutTheGameLblTxt = NSLocalizedString("AboutTheGameLbl_Txt", comment: "")
+        static let aboutTheAppLblTxt = NSLocalizedString("AboutTheAppLbl_Txt", comment: "")
         static let conceptLblTxt = NSLocalizedString("ConceptLbl_Txt", comment: "")
         static let legalLblTxt = NSLocalizedString("LegalLbl_Txt", comment: "")
     }

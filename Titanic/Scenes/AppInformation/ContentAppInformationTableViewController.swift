@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-class AppInformationDetailTableViewController: UITableViewController {
+class ContentAppInformationTableViewController: UITableViewController {
 
     // MARK: - Properties
     var cellIdentifierFromParentVC = ""
@@ -25,7 +25,7 @@ class AppInformationDetailTableViewController: UITableViewController {
 }
 
 // MARK: - Default Methods
-extension AppInformationDetailTableViewController {
+extension ContentAppInformationTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ extension AppInformationDetailTableViewController {
 }
 
 // MARK: - DataSource Methods
-extension AppInformationDetailTableViewController {
+extension ContentAppInformationTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -57,7 +57,7 @@ extension AppInformationDetailTableViewController {
 }
 
  // MARK: - Private methods for setting up layout of table view and data source
-private extension AppInformationDetailTableViewController {
+private extension ContentAppInformationTableViewController {
 
     private func setupTableView() {
         tableView = UITableView(frame: CGRect.zero, style: .grouped)
@@ -67,7 +67,7 @@ private extension AppInformationDetailTableViewController {
 
     private func getDataSource() -> [String] {
         var stringArray = [String]()
-        if cellIdentifierFromParentVC == AppStrings.AppInformation.aboutTheGameLblTxt {
+        if cellIdentifierFromParentVC == AppStrings.AppInformation.aboutTheAppLblTxt {
             stringArray.append(readTextFromFile(fileName: aboutTheAppFileName, with: txtExt))
 
         } else if cellIdentifierFromParentVC == AppStrings.AppInformation.legalLblTxt {
@@ -78,7 +78,7 @@ private extension AppInformationDetailTableViewController {
 }
 
 // MARK: - Constants
-extension AppInformationDetailTableViewController {
+extension ContentAppInformationTableViewController {
     private var aboutTheAppFileName: String {"AboutTheApp"}
     private var licenseFileName: String {"MIT_License"}
     private var txtExt: String {"txt"}

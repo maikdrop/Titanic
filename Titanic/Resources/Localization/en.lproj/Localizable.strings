@@ -46,8 +46,8 @@
 "Resume" = "Resume";
 
 //App Information
-"AboutTheGameLbl_Txt" = "About The Game";
-"ConceptLbl_Txt" = "Concept";
+"AboutTheAppLbl_Txt" = "About The App";
+"ConceptLbl_Txt" = "Concept and Implementation";
 "LegalLbl_Txt" = "Legal Notices";
 
 //Concept

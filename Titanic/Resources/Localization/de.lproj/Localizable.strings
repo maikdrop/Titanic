@@ -46,8 +46,8 @@
 "Resume" = "Fortsetzen";
 
 //App Information
-"AboutTheGameLbl_Txt" = "Das Spiel";
-"ConceptLbl_Txt" = "Konzept";
+"AboutTheAppLbl_Txt" = "Über die App";
+"ConceptLbl_Txt" = "Konzept und Implementierung";
 "LegalLbl_Txt" = "Impressum";
 
 //Concept

@@ -18,7 +18,7 @@ struct AppInformationContentPresenter {
 
     // MARK: - Public API
     /**
-     Creates an App Information ViewController.
+     Creates an ViewController that shows informations about the app.
      
      - Paramater viewController: ViewController which presents an App Information ViewController
      - Parameter cellText: text of cell from presenting table view controller
@@ -26,10 +26,10 @@ struct AppInformationContentPresenter {
     func present(in viewController: UIViewController, for cellText: String) {
         var informationVC: UIViewController?
 
-        if cellText == AppStrings.AppInformation.aboutTheGameLblTxt ||
+        if cellText == AppStrings.AppInformation.aboutTheAppLblTxt ||
             cellText == AppStrings.AppInformation.legalLblTxt {
-            informationVC = AppInformationDetailTableViewController()
-            if let infoVC = informationVC as? AppInformationDetailTableViewController {
+            informationVC = ContentAppInformationTableViewController()
+            if let infoVC = informationVC as? ContentAppInformationTableViewController {
                 infoVC.cellIdentifierFromParentVC = cellText
                 infoVC.navigationItem.title = cellText
             }

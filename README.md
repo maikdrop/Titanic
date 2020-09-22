@@ -7,7 +7,7 @@
 ## Table of Contents
 
 //TODO add links
-* [1. Overview]()
+* [1. About the App]()
   * [1.1 Introduction]()
   * [1.2. Goals]()
   * [1.3. What's the game about?]()
@@ -17,8 +17,10 @@
  * [2.1. MVP Design Pattern]()
  * [2.2. Avoid Massive ViewController]()
  * [2.3. Adapting Layout]()
+ * [2.4. Persistence]()
+ * [2.5. Testing]()
 
-## 1. Overview
+## 1. About the App
 
 ### 1.1. Introduction
 
@@ -40,6 +42,8 @@ There were three sub goals:
 
 Users move a ship horizontally by their thumb to avoid intersections with icebergs, that are moving vertically from top to bottom. If the time is up or the maximum crashes are reached the game ends. Immediately after the game end driven sea miles will be verified. If the user is in the top ten, an alert with a text field shows up in order to enter the name of the user.
 
+//TODO image game
+
 ### 1.4. Game Features
 
 * countdown timer
@@ -50,9 +54,13 @@ Users move a ship horizontally by their thumb to avoid intersections with iceber
 
 ### 1.5. Technical Infos
 
+* Development Environment: Xcode
+* Language: Swift
 * Deployment Info: iOS 14.0, iPhone
 * 3pp Libraries: [SRCountdownTimer](https://github.com/rsrbk/SRCountdownTimer), [SwiftLint](https://github.com/realm/SwiftLint), [SnapshotTesting](https://github.com/pointfreeco/swift-snapshot-testing)
-* Dependency Manager: [CocoaPods](https://cocoapods.org), [Homebrew](https://brew.sh), [SwiftPackageManager](https://swift.org/package-manager/)
+* Dependency Manager: [CocoaPods¹](https://cocoapods.org), [Homebrew](https://brew.sh), [SwiftPackageManager](https://swift.org/package-manager/)
+
+¹CocoaPods was used to implement SRCountdownTimer from Github during the first phase of development. Later it was replaced with a customized class of SRCountdownTimer.
 
 ## 2. Concept and Implementation
 
@@ -97,7 +105,7 @@ Titanic uses the default FileManager to save a json formatted file in the Applic
 
 ### 2.5. Testing
 
-The testing part doesn’t focus on every unit and every feature. Rather the purpose was implementing different types of test strategies:
+The testing part doesn’t focus on every unit and every feature. Rather the purpose was to implement different types of test strategies:
 
 * UnitTesting
 * UI-Testing

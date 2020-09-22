@@ -53,6 +53,7 @@
 		29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */; };
 		29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B98044246092E200D7C302 /* ScoreStackView.swift */; };
 		29B980472461F99400D7C302 /* SRCountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B980462461F99400D7C302 /* SRCountdownTimer.swift */; };
+		29BCC2392519789B008B7C64 /* Game.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29BCC2382519789B008B7C64 /* Game.jpg */; };
 		29C166092517EC48001D1752 /* AvoidMassiveVC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29C166062517EC47001D1752 /* AvoidMassiveVC.jpg */; };
 		29C1660A2517EC48001D1752 /* Layout.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29C166072517EC47001D1752 /* Layout.jpg */; };
 		29C1660B2517EC48001D1752 /* DesignPattern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29C166082517EC47001D1752 /* DesignPattern.jpg */; };
@@ -80,7 +81,7 @@
 		29FA73EF24B87D5E000F8C8E /* GameRules.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73EE24B87D5E000F8C8E /* GameRules.storyboard */; };
 		29FA73F324B884F8000F8C8E /* Concept.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73F224B884F8000F8C8E /* Concept.storyboard */; };
 		29FA73F524B885BC000F8C8E /* ContentAppInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73F424B885BC000F8C8E /* ContentAppInformation.storyboard */; };
-		29FA73F924B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73F824B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift */; };
+		29FA73F924B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73F824B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift */; };
 		29FA73FB24B8A4C7000F8C8E /* AppInformationContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA73FA24B8A4C7000F8C8E /* AppInformationContentPresenter.swift */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +163,7 @@
 		29AA4BB3245EDC2500B8CE96 /* SmokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeView.swift; sourceTree = "<group>"; };
 		29B98044246092E200D7C302 /* ScoreStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStackView.swift; sourceTree = "<group>"; };
 		29B980462461F99400D7C302 /* SRCountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRCountdownTimer.swift; sourceTree = "<group>"; };
+		29BCC2382519789B008B7C64 /* Game.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Game.jpg; sourceTree = "<group>"; };
 		29C16600251777FB001D1752 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		29C166062517EC47001D1752 /* AvoidMassiveVC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AvoidMassiveVC.jpg; sourceTree = "<group>"; };
 		29C166072517EC47001D1752 /* Layout.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Layout.jpg; sourceTree = "<group>"; };
@@ -191,7 +193,7 @@
 		29FA73EE24B87D5E000F8C8E /* GameRules.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameRules.storyboard; sourceTree = "<group>"; };
 		29FA73F224B884F8000F8C8E /* Concept.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Concept.storyboard; sourceTree = "<group>"; };
 		29FA73F424B885BC000F8C8E /* ContentAppInformation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContentAppInformation.storyboard; sourceTree = "<group>"; };
-		29FA73F824B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationDetailTableViewController.swift; sourceTree = "<group>"; };
+		29FA73F824B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAppInformationTableViewController.swift; sourceTree = "<group>"; };
 		29FA73FA24B8A4C7000F8C8E /* AppInformationContentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationContentPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -301,7 +303,6 @@
 				2978B8D62403D40100798E84 /* TitanicUITests */,
 				2999A9D424EAADD300C74094 /* TitanicSnapshotTests */,
 				2978B8B32403D40000798E84 /* Products */,
-				88E88C8BE32B71A6C6F2645A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -453,7 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				29379BE524A930B700D38F2B /* AppInformationTableViewController.swift */,
-				29FA73F824B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift */,
+				29FA73F824B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift */,
 			);
 			path = AppInformation;
 			sourceTree = "<group>";
@@ -563,6 +564,7 @@
 		29C166012517E818001D1752 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				29BCC2382519789B008B7C64 /* Game.jpg */,
 				29C166062517EC47001D1752 /* AvoidMassiveVC.jpg */,
 				29C166072517EC47001D1752 /* Layout.jpg */,
 				29C166082517EC47001D1752 /* DesignPattern.jpg */,
@@ -620,13 +622,6 @@
 				29FA73EA24B7F129000F8C8E /* SRCountdownTimerDelegate.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		88E88C8BE32B71A6C6F2645A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -783,6 +778,7 @@
 				29379BFC24AAB5F400D38F2B /* AboutTheApp.txt in Resources */,
 				29FA73BE24B743ED000F8C8E /* AvoidMassiveVC.txt in Resources */,
 				2938C12A24B50A2700174FE4 /* DesignPattern.txt in Resources */,
+				29BCC2392519789B008B7C64 /* Game.jpg in Resources */,
 				29FA73E124B78A5E000F8C8E /* Smoke.sks in Resources */,
 				29FA73F324B884F8000F8C8E /* Concept.storyboard in Resources */,
 			);
@@ -848,7 +844,7 @@
 				29379C0424AD09D400D38F2B /* NewGameStatePresenter.swift in Sources */,
 				29379BF824AA53DD00D38F2B /* UtilityHelpers.swift in Sources */,
 				2978B8BA2403D40000798E84 /* TitanicGameViewController.swift in Sources */,
-				29FA73F924B8A2DB000F8C8E /* AppInformationDetailTableViewController.swift in Sources */,
+				29FA73F924B8A2DB000F8C8E /* ContentAppInformationTableViewController.swift in Sources */,
 				29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */,
 				297CF4E924D46C39007040EE /* HighscoreListTableViewController.swift in Sources */,
 				2978B8EF240C062E00798E84 /* TitanicGame.swift in Sources */,
