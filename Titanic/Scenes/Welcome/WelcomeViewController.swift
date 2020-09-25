@@ -41,7 +41,7 @@ class WelcomeViewController: UIViewController {
     // MARK: - Button Action
     @IBAction private func appInformationBarActionBtn(_ sender: UIBarButtonItem) {
         if let navigator = navigationController {
-            let destinationVC = AppInformationTableViewController()
+            let destinationVC = ChooseAppInformationTableViewController()
             destinationVC.title = appInformationBtn.title
             navigator.pushViewController(destinationVC, animated: true)
         }

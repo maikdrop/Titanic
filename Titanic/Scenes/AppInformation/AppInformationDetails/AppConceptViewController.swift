@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-class ConceptViewController: UIViewController {
+class AppConceptViewController: UIViewController {
 
     // MARK: - Properties
     @IBOutlet private weak var designPatternInnerStackView: UIStackView! {
@@ -55,12 +55,12 @@ class ConceptViewController: UIViewController {
     }
 
     deinit {
-        print("DEINIT ConceptViewController")
+        print("DEINIT AppConceptViewController")
     }
 }
 
 // MARK: - Constants
-extension ConceptViewController {
+extension AppConceptViewController {
     private var designPatternFileName: String {"DesignPattern"}
     private var avoidMassiveVCFileName: String {"AvoidMassiveVC"}
     private var layoutFileName: String {"Layout"}

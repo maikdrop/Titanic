@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-class AppInformationTableViewController: UITableViewController {
+class ChooseAppInformationTableViewController: UITableViewController {
 
     // MARK: - Properties
     let dataSource = [
@@ -26,7 +26,7 @@ class AppInformationTableViewController: UITableViewController {
 }
 
  // MARK: - Default Methods
-extension AppInformationTableViewController {
+extension ChooseAppInformationTableViewController {
 
     override func viewDidLoad() {
         navigationItem.largeTitleDisplayMode = .always
@@ -34,8 +34,8 @@ extension AppInformationTableViewController {
     }
 }
 
-// MARK: - Private methods for setting up layout of table view
-private extension AppInformationTableViewController {
+// MARK: - Setup of table view
+private extension ChooseAppInformationTableViewController {
 
     private func setupTableView() {
         tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
@@ -45,7 +45,7 @@ private extension AppInformationTableViewController {
 }
 
 // MARK: - Delegate and DataSource Methods
-extension AppInformationTableViewController {
+extension ChooseAppInformationTableViewController {
 
     //DataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,7 +70,7 @@ extension AppInformationTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath), let cellText = cell.textLabel?.text {
-            AppInformationContentPresenter().present(in: self, for: cellText)
+            AppInformationDetailsPresenter().present(in: self, for: cellText)
         }
     }
 
@@ -86,16 +86,10 @@ extension AppInformationTableViewController {
 }
 
 // MARK: - Constants
-extension AppInformationTableViewController {
+extension ChooseAppInformationTableViewController {
     private var fontSize: CGFloat {17}
     private var headerHeight: CGFloat {25}
     private var informationCell: String {"informationCell"}
     private var version: String {"Version " + (UIApplication.appVersion ?? "")}
     private var navigationItemTitle: String {"App Information"}
-}
-
-extension UIApplication {
-    static var appVersion: String? {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-    }
 }

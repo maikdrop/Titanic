@@ -12,20 +12,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-class ContentAppInformationTableViewController: UITableViewController {
+class AppInformationTableViewController: UITableViewController {
 
     // MARK: - Properties
-    var cellIdentifierFromParentVC = ""
+    var cellIdentifierFromPresentigVC = ""
     private lazy var dataSource = getDataSource()
 
     deinit {
-        print("DEINIT ContentAppInformationTableViewController")
+        print("DEINIT AppInformationTableViewController")
     }
-
 }
 
 // MARK: - Default Methods
-extension ContentAppInformationTableViewController {
+extension AppInformationTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +33,7 @@ extension ContentAppInformationTableViewController {
 }
 
 // MARK: - DataSource Methods
-extension ContentAppInformationTableViewController {
+extension AppInformationTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -46,7 +45,7 @@ extension ContentAppInformationTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: contentInformationCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: informationCell, for: indexPath)
         cell.selectionStyle = .none
         cell.textLabel?.font = UIFont().scalableFont(forTextStyle: .body, fontSize: 17)
         cell.textLabel?.numberOfLines = 0
@@ -57,20 +56,20 @@ extension ContentAppInformationTableViewController {
 }
 
  // MARK: - Private methods for setting up layout of table view and data source
-private extension ContentAppInformationTableViewController {
+private extension AppInformationTableViewController {
 
     private func setupTableView() {
         tableView = UITableView(frame: CGRect.zero, style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: contentInformationCell)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: informationCell)
         tableView.sectionHeaderHeight = headerHeight
     }
 
     private func getDataSource() -> [String] {
         var stringArray = [String]()
-        if cellIdentifierFromParentVC == AppStrings.AppInformation.aboutTheAppLblTxt {
+        if cellIdentifierFromPresentigVC == AppStrings.AppInformation.aboutTheAppLblTxt {
             stringArray.append(readTextFromFile(fileName: aboutTheAppFileName, with: txtExt))
 
-        } else if cellIdentifierFromParentVC == AppStrings.AppInformation.legalLblTxt {
+        } else if cellIdentifierFromPresentigVC == AppStrings.AppInformation.legalLblTxt {
             stringArray.append(readTextFromFile(fileName: licenseFileName, with: txtExt))
         }
         return stringArray
@@ -78,10 +77,10 @@ private extension ContentAppInformationTableViewController {
 }
 
 // MARK: - Constants
-extension ContentAppInformationTableViewController {
+extension AppInformationTableViewController {
     private var aboutTheAppFileName: String {"AboutTheApp"}
     private var licenseFileName: String {"MIT_License"}
     private var txtExt: String {"txt"}
-    private var contentInformationCell: String {"contentInformationCell"}
+    private var informationCell: String {"informationCell"}
     private var headerHeight: CGFloat {25}
 }
