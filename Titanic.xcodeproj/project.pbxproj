@@ -29,6 +29,7 @@
 		295E4CDE24C4F47200C7A78F /* Double+Round2Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E4CDD24C4F47200C7A78F /* Double+Round2Places.swift */; };
 		295E4CE024C59F5400C7A78F /* MockFileHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E4CDF24C59F5400C7A78F /* MockFileHandlerTests.swift */; };
 		295E4CE224C98D0400C7A78F /* TitanicGamePresenterStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E4CE124C98D0400C7A78F /* TitanicGamePresenterStateTests.swift */; };
+		2973D954251EA7A2004B3109 /* Layout.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2973D953251EA7A2004B3109 /* Layout.pdf */; };
 		2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B52403D40000798E84 /* AppDelegate.swift */; };
 		2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B72403D40000798E84 /* SceneDelegate.swift */; };
 		2978B8BA2403D40000798E84 /* TitanicGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B92403D40000798E84 /* TitanicGameViewController.swift */; };
@@ -133,6 +134,7 @@
 		295E4CDD24C4F47200C7A78F /* Double+Round2Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Round2Places.swift"; sourceTree = "<group>"; };
 		295E4CDF24C59F5400C7A78F /* MockFileHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFileHandlerTests.swift; sourceTree = "<group>"; };
 		295E4CE124C98D0400C7A78F /* TitanicGamePresenterStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGamePresenterStateTests.swift; sourceTree = "<group>"; };
+		2973D953251EA7A2004B3109 /* Layout.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Layout.pdf; sourceTree = "<group>"; };
 		2978B8B22403D40000798E84 /* Titanic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Titanic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2978B8B52403D40000798E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2978B8B72403D40000798E84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 		29C166012517E818001D1752 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2973D953251EA7A2004B3109 /* Layout.pdf */,
 				298C7C41251D484100413DDD /* AvoidMassiveVC.png */,
 				298C7C43251D484200413DDD /* Game.png */,
 				298C7C42251D484200413DDD /* Layout.png */,
@@ -770,6 +773,7 @@
 				29FA73DC24B78266000F8C8E /* AppIcon.xcassets in Resources */,
 				29FA73F524B885BC000F8C8E /* ContentAppInformation.storyboard in Resources */,
 				29FA73C024B743FF000F8C8E /* Layout.txt in Resources */,
+				2973D954251EA7A2004B3109 /* Layout.pdf in Resources */,
 				298C7C46251D484200413DDD /* Layout.png in Resources */,
 				29379BEA24AA48C400D38F2B /* MIT_License.txt in Resources */,
 				29FA73DE24B78285000F8C8E /* Assets.xcassets in Resources */,

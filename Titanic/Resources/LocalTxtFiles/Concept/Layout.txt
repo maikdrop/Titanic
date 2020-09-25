@@ -7,4 +7,4 @@ Different technologies were used to create layouts in Titanic: GameView and Game
 A second challenge was the SRCountdownTimer, which was imported from Github. Originally the circle and the time label were created without any constraints or any consideration of implementing the content size category. The result was that the font size didn’t change when the text size was changed by the user. This was resolved by implementing constraints and setting the „adjustsFontForContentSize Category" property of the time label to true. Additionally dark mode was implemented to improve the UI. The graphic below illustrates the implementation of dark mode and the content size category of the font.
  An extra layout feature is localization. Titanic supports english as default language and german as additional language.
 
-
+The Graphic below shows screenshots of the layout to demonstrate light and dark mode and the change of the content size category.
