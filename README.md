@@ -7,18 +7,18 @@
 ## Table of Contents
 
 //TODO add links
-* [1. About the App](#about-the-app)
-  * [1.1 Introduction](#introduction)
-  * [1.2. Goals](#goals)
-  * [1.3. What's the game about?](#what's-the-game-about?)
-  * [1.4. Game Features](#game-features)
-  * [1.5. Technical Infos](#technical-infos)
-* [2. Concept and Implementation](#concept-and-implmentation)
-  * [2.1. MVP Design Pattern](#mvp-design-pattern)
-  * [2.2. Avoid Massive ViewController](#avoid-massive-viewcontroller)
-  * [2.3. Adapting Layout](#adapting-layout)
-  * [2.4. Persistence](#persistence)
-  * [2.5. Testing](#testing)
+* [1. About the App](#1-about-the-app)
+  * [1.1 Introduction](#11-introduction)
+  * [1.2. Goals](#12-goals)
+  * [1.3. What's the game about?](#13.what's-the-game-about?)
+  * [1.4. Game Features](#14.game-features)
+  * [1.5. Technical Infos](#15-technical-infos)
+* [2. Concept and Implementation](#2-concept-and-implmentation)
+  * [2.1. MVP Design Pattern](#21-mvp-design-pattern)
+  * [2.2. Avoid Massive ViewController](#22-avoid-massive-viewcontroller)
+  * [2.3. Adapting Layout](#23-adapting-layout)
+  * [2.4. Persistence](#24-persistence)
+  * [2.5. Testing](#25-testing)
 
 ## 1. About the App
 
