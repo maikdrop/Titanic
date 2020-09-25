@@ -45,7 +45,7 @@ Users move a ship horizontally by their thumb to avoid intersections with iceber
 
 //TODO image game
 
-![overview](/titanic/images/game.png)
+![overview](/Titanic/Images/Game.png)
 
 ### 1.4. Game Features
 
@@ -75,7 +75,7 @@ MVP stands for Model-View-Presenter. Graphic 1 shows the theoretical concept of 
 
 A big benefit of MVP is that you can avoid a massive ViewController ([chapter 2.2](#22-avoid-massive-viewcontroller)) and create a reusable view and view controller.
 
-![MVP Design](/titanic/images/mvp.png)
+![MVP Design](/Titanic/Images/MVP.png)
 //TODO add links to image: Graphic 1: MVP Design Pattern
 
 ### 2.2. Avoid Massive ViewController
@@ -89,7 +89,7 @@ In MVC the ViewController implements UI logic and communicates to the model. Dep
 
 Graphic 2 shows the theoretical concept of the implementation in Titanic to avoid a massive GameViewController.
 
-![Avoid Massive VC](/titanic/images/avoidmassivevc.png)
+![Avoid Massive VC](/Titanic/Images/AvoidMassiveVC.png)
 //TODO add links to image: Graphic 2: Concept Avoid Massive ViewController
 
 ### 2.3.  Adapting Layout
@@ -102,7 +102,7 @@ Different technologies were used to create layouts in Titanic: GameView and Game
 
 A second challenge was the SRCountdownTimer, that was imported from Github. Originally the circle and the time label were created without any constraints or any consideration of implementing the content size category. The result was that the font size didn’t change when the text size was changed by the user. This was resolved by implementing constraints and setting the „adjustsFontForContentSize Category" property of the time label to true. Additionally dark mode was implemented to improve the UI. Graphic 3 illustrates the implementation of dark mode and the content size category of the font. An extra layout feature is localization. Titanic supports english as default language and german as additional language.
 
-![Layout](/titanic/images/Layout.png)
+![Layout](/Titanic/Images/Layout.png)
 //TODO add links to image: Graphic 3: Dark mode and font size related to content size category
 
 ### 2.4. Persistence
