@@ -19,6 +19,7 @@
   * [2.3. Adapting Layout](#23-adapting-layout)
   * [2.4. Persistence](#24-persistence)
   * [2.5. Testing](#25-testing)
+  * [2.6 Follow Up](#26-follow-up)
 
 ## 1. About the App
 
@@ -34,9 +35,9 @@ There were three sub goals:
 
 //TODO add links for chapter
 
-* implementing MVP pattern ([chapter 2.1](#mvp-design-pattern))
+* implementing MVP pattern ([chapter 2.1](#21-mvp-design-pattern))
 * readable code and clear project structure
-* adapting layout for different iPhone screen and text sizes ([chapter 2.3](#adapting-layout))
+* adapting layout for different iPhone screen and text sizes ([chapter 2.3](#23-adapting-layout))
 
 ### 1.3. What's the game about?
 
@@ -44,7 +45,7 @@ Users move a ship horizontally by their thumb to avoid intersections with iceber
 
 //TODO image game
 
-![overview](/images/game.png)
+![overview](/titanic/images/game.png)
 
 ### 1.4. Game Features
 
@@ -72,9 +73,9 @@ Users move a ship horizontally by their thumb to avoid intersections with iceber
 
 MVP stands for Model-View-Presenter. Graphic 1 shows the theoretical concept of MVP.  In comparison to the common MVC (Model-View-Controller) pattern, MVP offers an additional entity, the Presenter. View and ViewController form the View entity. There are two different versions of MVP: Supervising Controller and Passive View. In Titanic the Passive View was implemented. It means that all data synchronization between View and Model is organised by the Presenter. The view is "dumb" as possible. There is no direct data binding between View and Model or View and Presenter. The View sends Intents via public API to the Presenter, it calls the public API of the Model and communicates back to the view via delegate methods. The Presenter is like a portal for the View to see and get relevant view-formatted model data in order to update their UI. It can be seen as a front door with a glass hole in the middle. It’s to be mentioned that only the Game Scene uses the MVP pattern. All other Scenes use MVC.
 
-A big benefit of MVP is that you can avoid a massive ViewController ([chapter 2.2](#avoid-massive-viewcontroller)) and create a reusable view and view controller.
+A big benefit of MVP is that you can avoid a massive ViewController ([chapter 2.2](#22-avoid-massive-viewcontroller)) and create a reusable view and view controller.
 
-![MVP Design](/images/mvp.png)
+![MVP Design](/titanic/images/mvp.png)
 //TODO add links to image: Graphic 1: MVP Design Pattern
 
 ### 2.2. Avoid Massive ViewController
@@ -88,7 +89,7 @@ In MVC the ViewController implements UI logic and communicates to the model. Dep
 
 Graphic 2 shows the theoretical concept of the implementation in Titanic to avoid a massive GameViewController.
 
-![Avoid Massive VC](/images/avoidmassivevc.png)
+![Avoid Massive VC](/titanic/images/avoidmassivevc.png)
 //TODO add links to image: Graphic 2: Concept Avoid Massive ViewController
 
 ### 2.3.  Adapting Layout
@@ -101,7 +102,7 @@ Different technologies were used to create layouts in Titanic: GameView and Game
 
 A second challenge was the SRCountdownTimer, that was imported from Github. Originally the circle and the time label were created without any constraints or any consideration of implementing the content size category. The result was that the font size didn’t change when the text size was changed by the user. This was resolved by implementing constraints and setting the „adjustsFontForContentSize Category" property of the time label to true. Additionally dark mode was implemented to improve the UI. Graphic 3 illustrates the implementation of dark mode and the content size category of the font. An extra layout feature is localization. Titanic supports english as default language and german as additional language.
 
-![Layout](/images/Layout.png)
+![Layout](/titanic/images/Layout.png)
 //TODO add links to image: Graphic 3: Dark mode and font size related to content size category
 
 ### 2.4. Persistence
