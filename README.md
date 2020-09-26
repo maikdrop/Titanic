@@ -87,7 +87,7 @@ In MVC the ViewController implements UI logic and communicates to the model. Dep
 * Lightweight view presenters are used  to navigate to other view controllers or presenting alerts including the call back handling
 * ChildViewController is used to encapsulate reusable UI logic which handles UI improvements for the user, for example the animated preparation view
 
-Graphic 2 shows the theoretical concept of the implementation in Titanic to avoid a massive GameViewController.
+Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a massive GameViewController.
 
 ![Avoid Massive VC](/Titanic/Images/AvoidMassiveVC.png)
 //TODO add links to image: Graphic 2: Concept Avoid Massive ViewController
