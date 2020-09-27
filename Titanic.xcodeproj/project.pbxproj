@@ -62,10 +62,10 @@
 		29DDA8A724F6F18C00D5733F /* PreparationCountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA8A624F6F18C00D5733F /* PreparationCountdownViewController.swift */; };
 		29DDA8AB24F70A9E00D5733F /* GameEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA8AA24F70A9E00D5733F /* GameEndViewController.swift */; };
 		29DDA8AD24F7105600D5733F /* UIViewController+ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA8AC24F7105600D5733F /* UIViewController+ChildViewController.swift */; };
-		29E374252520F7B500789FF3 /* AvoidMassiveVC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29E374242520F7B500789FF3 /* AvoidMassiveVC.jpg */; };
-		29E3742B2520F7BC00789FF3 /* Game.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29E3742A2520F7BC00789FF3 /* Game.jpg */; };
-		29E374312520F7C300789FF3 /* Layout.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29E374302520F7C300789FF3 /* Layout.jpg */; };
-		29E374372520F7CD00789FF3 /* MVP.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29E374362520F7CD00789FF3 /* MVP.jpg */; };
+		29E3744125211CD600789FF3 /* AvoidMassiveVC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29E3744025211CD600789FF3 /* AvoidMassiveVC.jpg */; };
+		29E3744725211CE400789FF3 /* Game.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29E3744625211CE400789FF3 /* Game.jpg */; };
+		29E3744D25211CEB00789FF3 /* Layout.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29E3744C25211CEB00789FF3 /* Layout.jpg */; };
+		29E3745325211CF200789FF3 /* MVP.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29E3745225211CF200789FF3 /* MVP.jpg */; };
 		29E9004F244CD16D0022BD8F /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9004E244CD16C0022BD8F /* ImageView.swift */; };
 		29F3BC0E2437C6F300FB894E /* GameRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */; };
 		29FA73BE24B743ED000F8C8E /* AvoidMassiveVC.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */; };
@@ -174,10 +174,10 @@
 		29DDA8A624F6F18C00D5733F /* PreparationCountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparationCountdownViewController.swift; sourceTree = "<group>"; };
 		29DDA8AA24F70A9E00D5733F /* GameEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndViewController.swift; sourceTree = "<group>"; };
 		29DDA8AC24F7105600D5733F /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
-		29E374242520F7B500789FF3 /* AvoidMassiveVC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AvoidMassiveVC.jpg; sourceTree = "<group>"; };
-		29E3742A2520F7BC00789FF3 /* Game.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Game.jpg; sourceTree = "<group>"; };
-		29E374302520F7C300789FF3 /* Layout.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Layout.jpg; sourceTree = "<group>"; };
-		29E374362520F7CD00789FF3 /* MVP.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MVP.jpg; sourceTree = "<group>"; };
+		29E3744025211CD600789FF3 /* AvoidMassiveVC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AvoidMassiveVC.jpg; sourceTree = "<group>"; };
+		29E3744625211CE400789FF3 /* Game.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Game.jpg; sourceTree = "<group>"; };
+		29E3744C25211CEB00789FF3 /* Layout.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Layout.jpg; sourceTree = "<group>"; };
+		29E3745225211CF200789FF3 /* MVP.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MVP.jpg; sourceTree = "<group>"; };
 		29E9004E244CD16C0022BD8F /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		29F3BC0D2437C6F200FB894E /* GameRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesViewController.swift; sourceTree = "<group>"; };
 		29FA73BD24B743ED000F8C8E /* AvoidMassiveVC.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AvoidMassiveVC.txt; sourceTree = "<group>"; };
@@ -567,10 +567,10 @@
 		29C166012517E818001D1752 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				29E374242520F7B500789FF3 /* AvoidMassiveVC.jpg */,
-				29E3742A2520F7BC00789FF3 /* Game.jpg */,
-				29E374302520F7C300789FF3 /* Layout.jpg */,
-				29E374362520F7CD00789FF3 /* MVP.jpg */,
+				29E3745225211CF200789FF3 /* MVP.jpg */,
+				29E3744C25211CEB00789FF3 /* Layout.jpg */,
+				29E3744625211CE400789FF3 /* Game.jpg */,
+				29E3744025211CD600789FF3 /* AvoidMassiveVC.jpg */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -765,23 +765,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				297CF4D424CF0F1C007040EE /* .swiftlint.yml in Resources */,
-				29E374372520F7CD00789FF3 /* MVP.jpg in Resources */,
+				29E3745325211CF200789FF3 /* MVP.jpg in Resources */,
 				29FA73D524B77AB8000F8C8E /* Localizable.strings in Resources */,
 				29FA73DC24B78266000F8C8E /* AppIcon.xcassets in Resources */,
 				29FA73F524B885BC000F8C8E /* ContentAppInformation.storyboard in Resources */,
 				29FA73C024B743FF000F8C8E /* Layout.txt in Resources */,
-				29E374252520F7B500789FF3 /* AvoidMassiveVC.jpg in Resources */,
+				29E3744125211CD600789FF3 /* AvoidMassiveVC.jpg in Resources */,
 				29379BEA24AA48C400D38F2B /* MIT_License.txt in Resources */,
 				29FA73DE24B78285000F8C8E /* Assets.xcassets in Resources */,
 				297CF4E724D46B97007040EE /* HighscoreList.storyboard in Resources */,
 				298010A924C3A741006DC917 /* LaunchScreen.storyboard in Resources */,
 				29FA73D124B7798E000F8C8E /* Welcome.storyboard in Resources */,
-				29E3742B2520F7BC00789FF3 /* Game.jpg in Resources */,
+				29E3744725211CE400789FF3 /* Game.jpg in Resources */,
 				29FA73EF24B87D5E000F8C8E /* GameRules.storyboard in Resources */,
 				29379BFC24AAB5F400D38F2B /* AboutTheApp.txt in Resources */,
 				29FA73BE24B743ED000F8C8E /* AvoidMassiveVC.txt in Resources */,
 				2938C12A24B50A2700174FE4 /* DesignPattern.txt in Resources */,
-				29E374312520F7C300789FF3 /* Layout.jpg in Resources */,
+				29E3744D25211CEB00789FF3 /* Layout.jpg in Resources */,
 				29FA73E124B78A5E000F8C8E /* Smoke.sks in Resources */,
 				29FA73F324B884F8000F8C8E /* Concept.storyboard in Resources */,
 			);
