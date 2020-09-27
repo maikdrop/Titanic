@@ -38,7 +38,7 @@ There were three sub goals:
 
 ### 1.3. What's the game about?
 
-Users move a ship horizontally by their thumb to avoid intersections with icebergs, that are moving vertically from top to bottom. If the time is up or the maximum crashes are reached the game ends. Immediately after the game end driven sea miles will be verified. If the user is in the top ten, an alert with a text field shows up in order to enter the name of the user. Image 1 shows a game scene.<br/>
+Users move a ship horizontally by their thumb to avoid intersections with icebergs, that are moving vertically from top to bottom. If the time is up or the maximum crashes are reached the game ends. Immediately after the game end driven sea miles will be verified. If the user is in the top ten, an alert with a text field shows up in order to enter the name of the user. Image 1 shows a game scene.<br />
 
 <figure>
   <p align="center">
@@ -71,9 +71,9 @@ Users move a ship horizontally by their thumb to avoid intersections with iceber
 
 ### 2.1. MVP Design Pattern
 
-MVP stands for Model-View-Presenter. Graphic 1 shows the theoretical concept of MVP.  In comparison to the common MVC (Model-View-Controller) pattern, MVP offers an additional entity, the Presenter. View and ViewController form the View entity. There are two different versions of MVP: Supervising Controller and Passive View. In Titanic the Passive View was implemented. It means that all data synchronization between View and Model is organised by the Presenter. The view is "dumb" as possible. There is no direct data binding between View and Model or View and Presenter. The View sends Intents via public API to the Presenter, it calls the public API of the Model and communicates back to the view via delegate methods. The Presenter is like a portal for the View to see and get relevant view-formatted model data in order to update their UI. It can be seen as a front door with a glass hole in the middle. It’s to be mentioned that only the Game Scene uses the MVP pattern. All other Scenes use MVC.
+MVP stands for Model-View-Presenter. Graphic 1 shows the theoretical concept of MVP.  In comparison to the common MVC (Model-View-Controller) pattern, MVP offers an additional entity, the Presenter. View and ViewController form the View entity. There are two different versions of MVP: Supervising Controller and Passive View. In Titanic the Passive View was implemented. It means that all data synchronization between View and Model is organised by the Presenter. The view is "dumb" as possible. There is no direct data binding between View and Model or View and Presenter. The View sends Intents via public API to the Presenter, it calls the public API of the Model and communicates back to the view via delegate methods. The Presenter is like a portal for the View to see and get relevant view-formatted Model data in order to update their UI. It can be seen as a front door with a glass hole in the middle. It’s to be mentioned that only the Game Scene uses the MVP pattern. All other Scenes use MVC.
 
-A big benefit of MVP is that you can avoid a massive ViewController ([chapter 2.2](#22-avoid-massive-viewcontroller)) and create a reusable view and view controller.<br/>
+A big benefit of MVP is that you can avoid a massive ViewController ([chapter 2.2](#22-avoid-massive-viewcontroller)) and create a reusable View and ViewController.<br />
 
 <figure>
   <p align="center">
@@ -91,7 +91,7 @@ In MVC the ViewController implements UI logic and communicates to the model. Dep
 * Lightweight view presenters are used  to navigate to other view controllers or presenting alerts including the call back handling
 * ChildViewController is used to encapsulate reusable UI logic which handles UI improvements for the user, for example the animated preparation view
 
-Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a massive GameViewController.<br/>
+Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a massive GameViewController.<br />
 
 <figure>
   <p align="center">
@@ -108,7 +108,7 @@ Different technologies were used to create layouts in Titanic: GameView and Game
 * constraints and object coordinates were defined programmatically in GameView
 * iceberg image were created by myself, ship image was created and designed by myself
 
-A second challenge was the SRCountdownTimer, that was imported from Github. Originally the circle and the time label were created without any constraints or any consideration of implementing the content size category. The result was that the font size didn’t change when the text size was changed by the user. This was resolved by implementing constraints and setting the „adjustsFontForContentSize Category" property of the time label to true. Additionally dark mode was implemented to improve the UI. Image 2 illustrates the implementation of dark mode and the content size category of the font. An extra layout feature is localization. Titanic supports english as default language and german as additional language.<br/>
+A second challenge was the SRCountdownTimer, that was imported from Github. Originally the circle and the time label were created without any constraints or any consideration of implementing the content size category. The result was that the font size didn’t change when the text size was changed by the user. This was resolved by implementing constraints and setting the „adjustsFontForContentSize Category" property of the time label to true. Additionally dark mode was implemented to improve the UI. Image 2 illustrates the implementation of dark mode and the content size category of the font. An extra layout feature is localization. Titanic supports english as default language and german as additional language.<br />
 
 <figure>
   <p align="center">
@@ -166,3 +166,4 @@ Currently watching the Stanford Course „Developing Applications for iOS using 
 * [Stanford, CS193p, Developing Applications for iOS using SwiftUI](https://www.youtube.com/playlist?list=PLpGHT1n4-mAtTj9oywMWoBx0dCGd51_yG)
 * [Stanford, CS193p, Developing iOS11 Apps with Swift](https://podcasts.apple.com/de/podcast/developing-ios-11-apps-with-swift/id1315130780?l=en)
 * [Hallo Swift](https://podcasts.apple.com/de/podcast/hallo-swift/id1225721421?l=en)
+
