@@ -38,12 +38,12 @@ There were three sub goals:
 
 ### 1.3. What's the game about?
 
-Users move a ship horizontally by their thumb to avoid intersections with icebergs, that are moving vertically from top to bottom. If the time is up or the maximum crashes are reached the game ends. Immediately after the game end driven sea miles will be verified. If the user is in the top ten, an alert with a text field shows up in order to enter the name of the user. Image 1 shows a game scene
+Users move a ship horizontally by their thumb to avoid intersections with icebergs, that are moving vertically from top to bottom. If the time is up or the maximum crashes are reached the game ends. Immediately after the game end driven sea miles will be verified. If the user is in the top ten, an alert with a text field shows up in order to enter the name of the user. Image 1 shows a game scene.<br/>
 
 <figure>
   <p align="center">
     <img src="/Titanic/Images/Game.jpg" align="center" width="400">
-    <figcaption align="middle">Image 1: Game Scene</figcaption>
+    <p align="center">Image 1: Game Scene
   </p>
 </figure>
 
@@ -73,12 +73,12 @@ Users move a ship horizontally by their thumb to avoid intersections with iceber
 
 MVP stands for Model-View-Presenter. Graphic 1 shows the theoretical concept of MVP.  In comparison to the common MVC (Model-View-Controller) pattern, MVP offers an additional entity, the Presenter. View and ViewController form the View entity. There are two different versions of MVP: Supervising Controller and Passive View. In Titanic the Passive View was implemented. It means that all data synchronization between View and Model is organised by the Presenter. The view is "dumb" as possible. There is no direct data binding between View and Model or View and Presenter. The View sends Intents via public API to the Presenter, it calls the public API of the Model and communicates back to the view via delegate methods. The Presenter is like a portal for the View to see and get relevant view-formatted model data in order to update their UI. It can be seen as a front door with a glass hole in the middle. It’s to be mentioned that only the Game Scene uses the MVP pattern. All other Scenes use MVC.
 
-A big benefit of MVP is that you can avoid a massive ViewController ([chapter 2.2](#22-avoid-massive-viewcontroller)) and create a reusable view and view controller.\
+A big benefit of MVP is that you can avoid a massive ViewController ([chapter 2.2](#22-avoid-massive-viewcontroller)) and create a reusable view and view controller.<br/>
 
 <figure>
   <p align="center">
      <img src="/Titanic/Images/MVP.jpg" align="center" width="450">
-     <figcaption align="middle">Graphic 1: MVP Design Pattern</figcaption>
+     <p align="center">Graphic 1: MVP Design Pattern
   </p>
 </figure>
 
@@ -91,12 +91,12 @@ In MVC the ViewController implements UI logic and communicates to the model. Dep
 * Lightweight view presenters are used  to navigate to other view controllers or presenting alerts including the call back handling
 * ChildViewController is used to encapsulate reusable UI logic which handles UI improvements for the user, for example the animated preparation view
 
-Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a massive GameViewController.\
+Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a massive GameViewController.<br/>
 
 <figure>
   <p align="center">
     <img src="/Titanic/Images/AvoidMassiveVC.jpg" align="center" width="450">
-    <figcaption align="middle">Graphic 2: Avoid Massive ViewController</figcaption>
+    <p align="center">Graphic 2: Avoid Massive ViewController
   </p>
 </figure>
 
@@ -108,12 +108,12 @@ Different technologies were used to create layouts in Titanic: GameView and Game
 * constraints and object coordinates were defined programmatically in GameView
 * iceberg image were created by myself, ship image was created and designed by myself
 
-A second challenge was the SRCountdownTimer, that was imported from Github. Originally the circle and the time label were created without any constraints or any consideration of implementing the content size category. The result was that the font size didn’t change when the text size was changed by the user. This was resolved by implementing constraints and setting the „adjustsFontForContentSize Category" property of the time label to true. Additionally dark mode was implemented to improve the UI. Image 2 illustrates the implementation of dark mode and the content size category of the font. An extra layout feature is localization. Titanic supports english as default language and german as additional language.\
+A second challenge was the SRCountdownTimer, that was imported from Github. Originally the circle and the time label were created without any constraints or any consideration of implementing the content size category. The result was that the font size didn’t change when the text size was changed by the user. This was resolved by implementing constraints and setting the „adjustsFontForContentSize Category" property of the time label to true. Additionally dark mode was implemented to improve the UI. Image 2 illustrates the implementation of dark mode and the content size category of the font. An extra layout feature is localization. Titanic supports english as default language and german as additional language.<br/>
 
 <figure>
   <p align="center">
     <img src="/Titanic/Images/Layout.jpg" align="center" width="450">
-    <figcaption align="middle">Image 2: Dark mode and font size related to content size category</figcaption>
+     <p align="center">Image 2: Dark mode and font size related to content size category
   </p>
 </figure>
 
@@ -166,4 +166,3 @@ Currently watching the Stanford Course „Developing Applications for iOS using 
 * [Stanford, CS193p, Developing Applications for iOS using SwiftUI](https://www.youtube.com/playlist?list=PLpGHT1n4-mAtTj9oywMWoBx0dCGd51_yG)
 * [Stanford, CS193p, Developing iOS11 Apps with Swift](https://podcasts.apple.com/de/podcast/developing-ios-11-apps-with-swift/id1315130780?l=en)
 * [Hallo Swift](https://podcasts.apple.com/de/podcast/hallo-swift/id1225721421?l=en)
-
