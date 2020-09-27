@@ -41,7 +41,7 @@ There were three sub goals:
 Users move a ship horizontally by their thumb to avoid intersections with icebergs, that are moving vertically from top to bottom. If the time is up or the maximum crashes are reached the game ends. Immediately after the game end driven sea miles will be verified. If the user is in the top ten, an alert with a text field shows up in order to enter the name of the user. Image 1 shows a game scene. 
 
 ![overview](/Titanic/Images/Game.jpg)
-Image 1: Game Scene
+                    Image 1: Game Scene
 
 ### 1.4. Game Features
 
@@ -72,7 +72,7 @@ MVP stands for Model-View-Presenter. Graphic 1 shows the theoretical concept of 
 A big benefit of MVP is that you can avoid a massive ViewController ([chapter 2.2](#22-avoid-massive-viewcontroller)) and create a reusable view and view controller.
 
 ![MVP Design](/Titanic/Images/MVP.jpg)
-Graphic 1: MVP Design Pattern
+                      Graphic 1: MVP Design Pattern
 
 ### 2.2. Avoid Massive ViewController
 
@@ -86,7 +86,7 @@ In MVC the ViewController implements UI logic and communicates to the model. Dep
 Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a massive GameViewController.
 
 ![Avoid Massive VC](/Titanic/Images/AvoidMassiveVC.jpg)
-Graphic 2: Concept Avoid Massive ViewController
+                  Graphic 2: Concept Avoid Massive ViewController
 
 ### 2.3.  Adapting Layout
 
@@ -99,7 +99,7 @@ Different technologies were used to create layouts in Titanic: GameView and Game
 A second challenge was the SRCountdownTimer, that was imported from Github. Originally the circle and the time label were created without any constraints or any consideration of implementing the content size category. The result was that the font size didn’t change when the text size was changed by the user. This was resolved by implementing constraints and setting the „adjustsFontForContentSize Category" property of the time label to true. Additionally dark mode was implemented to improve the UI. Image 2 illustrates the implementation of dark mode and the content size category of the font. An extra layout feature is localization. Titanic supports english as default language and german as additional language.
 
 ![Layout](/Titanic/Images/Layout.jpg)
-Image 2: Dark mode and font size related to content size category
+                  Image 2: Dark mode and font size related to content size category
 
 ### 2.4. Persistence
 
