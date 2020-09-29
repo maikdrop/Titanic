@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-final class ScoreStackView: UIStackView {
+class ScoreStackView: UIStackView {
 
     // MARK: - Properties
     private(set) lazy var knotsLbl: UILabel = {
@@ -55,7 +55,7 @@ extension ScoreStackView {
 private extension ScoreStackView {
 
     /**
-     Configure given label.
+     Configure label
      
      - Parameter label: label to configure
     */

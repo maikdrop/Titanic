@@ -30,7 +30,7 @@ class PreparationCountdownViewController: UIViewController {
         }
     }
 
-    // MARK: - Create a GameView PreparationCountdownViewController
+    // MARK: - Create a prepearation countdown
     init(preparationCountdown: Int, animationInterval: Double, completionHandler: @escaping (Int) -> Void) {
         self.preparationCountdown = preparationCountdown
         self.interval = abs(animationInterval)

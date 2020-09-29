@@ -15,12 +15,12 @@ import XCTest
 
 class TitanicGamePresenterStateTests: XCTestCase {
 
-    var sut: TitanicGamePresenter!
+    var sut: TitanicGameViewPresenter!
     let icebergs = [ImageView]()
 
     override func setUp() {
         super.setUp()
-        sut = TitanicGamePresenter()
+        sut = TitanicGameViewPresenter()
     }
 
     override func tearDown() {
@@ -31,7 +31,7 @@ class TitanicGamePresenterStateTests: XCTestCase {
     func testChangeGameStateToNew() {
 
         let new = AppStrings.GameState.new
-        let newState = TitanicGamePresenter.GameState.running
+        let newState = TitanicGameViewPresenter.GameState.running
 
         sut.changeGameState(to: new)
 
@@ -41,7 +41,7 @@ class TitanicGamePresenterStateTests: XCTestCase {
     func testChangeGameStateToPause() {
 
         let pause = AppStrings.GameState.pause
-        let newstate = TitanicGamePresenter.GameState.pause
+        let newstate = TitanicGameViewPresenter.GameState.pause
 
         sut.changeGameState(to: pause)
 
@@ -51,7 +51,7 @@ class TitanicGamePresenterStateTests: XCTestCase {
     func testChangeGamestateToResume() {
 
         let resume = AppStrings.GameState.resume
-        let newState = TitanicGamePresenter.GameState.running
+        let newState = TitanicGameViewPresenter.GameState.running
 
         sut.changeGameState(to: resume)
 

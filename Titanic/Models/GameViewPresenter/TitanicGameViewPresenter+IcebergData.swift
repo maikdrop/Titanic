@@ -12,47 +12,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import Foundation
 
-extension TitanicGamePresenter {
+extension TitanicGameViewPresenter {
 
-    enum GameState {
-        case new
-        case running
-        case pause
-        case resume
-        case end
-    }
-}
-
-extension TitanicGamePresenter.GameState: CaseIterable {
-
-    // MARK: - Create a Game State
-    init?(string: String) {
-        switch string {
-        case AppStrings.GameState.new: self = .new
-        case AppStrings.GameState.pause: self = .pause
-        case AppStrings.GameState.resume: self = .resume
-        default: return nil
-        }
-    }
-
-    typealias State = TitanicGamePresenter.GameState
-
-    // MARK: - Properties
-    var stringValue: String {
-        switch self {
-        case .new: return AppStrings.GameState.new
-        case .pause: return AppStrings.GameState.pause
-        case .resume: return AppStrings.GameState.resume
-        default: return ""
-        }
-    }
-
-    var list: [TitanicGamePresenter.GameState] {
-        switch self {
-        case .running: return [.new, .pause]
-        case .pause: return [.resume]
-        case .end: return [.new]
-        default: return []
-        }
+    struct IcebergData {
+        var xCenter: Double
+        var yCenter: Double
     }
 }

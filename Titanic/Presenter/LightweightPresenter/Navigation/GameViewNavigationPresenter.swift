@@ -10,22 +10,30 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import SnapshotTesting
-import XCTest
-@testable import Titanic
+import Foundation
+import UIKit
 
-//SnapshotTesting only works on simulator and 2 test runs needed (for creating and verifing image)
-class TitanicGameViewControllerTests: XCTestCase {
+//source: www.swiftbysundell.com/basics/child-view-controllers
+struct GameViewNavigationPresenter {
 
-    func testGameView() {
-        let storyboard = UIStoryboard(name: "Welcome", bundle: nil)
-        if let welcome = storyboard.instantiateViewController(
-            withIdentifier: "WelcomeViewController") as? WelcomeViewController {
-            GameViewNavigationPresenter().presentGameView(in: welcome)
-            if let gameVc = welcome.presentedViewController {
-                 assertSnapshot(matching: gameVc, as: .image)
-            }
+    // MARK: - Public API
+    /**
+     Presents the view of the game.
+     
+     - Parameter viewController: presenting ViewController
+     */
+    func presentGameView(in viewController: UIViewController) {
+
+        //View Presenter will be injected in View
+        let presenter = TitanicGameViewPresenter()
+        let gameVC = TitanicGameViewController(gameViewPresenter: presenter)
+
+        if let navigationController = viewController.navigationController {
+            navigationController.pushViewController(gameVC, animated: true)
+
+        } else {
+            let navigationController = UINavigationController(rootViewController: gameVC)
+            viewController.present(navigationController, animated: true)
         }
     }
-
 }

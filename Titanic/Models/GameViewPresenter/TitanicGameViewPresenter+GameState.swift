@@ -11,30 +11,48 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 
 import Foundation
-import UIKit
 
-//source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
-struct NewGameStatePresenter {
+extension TitanicGameViewPresenter {
+
+    enum GameState {
+        case new
+        case running
+        case pause
+        case resume
+        case end
+    }
+}
+
+extension TitanicGameViewPresenter.GameState: CaseIterable {
+
+    // MARK: - Create a Game State
+    init?(string: String) {
+        switch string {
+        case AppStrings.GameState.new: self = .new
+        case AppStrings.GameState.pause: self = .pause
+        case AppStrings.GameState.resume: self = .resume
+        default: return nil
+        }
+    }
+
+    typealias State = TitanicGameViewPresenter.GameState
 
     // MARK: - Properties
-    let state: TitanicGamePresenter.GameState
-    let handler: (Outcome) -> Void
+    var stringValue: String {
+        switch self {
+        case .new: return AppStrings.GameState.new
+        case .pause: return AppStrings.GameState.pause
+        case .resume: return AppStrings.GameState.resume
+        default: return ""
+        }
+    }
 
-    // MARK: - Public API
-    func present(in viewController: UIViewController) {
-        let alert = UIAlertController(
-            title: AppStrings.TitanicGameControlActionSheet.title,
-            message: "",
-            preferredStyle: .actionSheet)
-
-        state.list.forEach({state in
-            let defaultStyle = UIAlertAction.Style.default
-
-            alert.addAction(UIAlertAction(title: state.stringValue, style: defaultStyle) {_ in
-                self.handler(.accepted(state.stringValue))
-            })
-        })
-        alert.addAction(UIAlertAction(title: AppStrings.CommonAlertAction.cancel, style: .cancel))
-        viewController.present(alert, animated: true)
+    var list: [TitanicGameViewPresenter.GameState] {
+        switch self {
+        case .running: return [.new, .pause]
+        case .pause: return [.resume]
+        case .end: return [.new]
+        default: return []
+        }
     }
 }

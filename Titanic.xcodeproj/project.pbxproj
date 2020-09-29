@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2918EE422439120E008EC004 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE412439120E008EC004 /* WelcomeViewController.swift */; };
-		2918EE44243CA85C008EC004 /* TitanicGamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE43243CA85C008EC004 /* TitanicGamePresenter.swift */; };
+		2918EE44243CA85C008EC004 /* TitanicGameViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2918EE43243CA85C008EC004 /* TitanicGameViewPresenter.swift */; };
 		292521C4241291260005D455 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C3241291260005D455 /* AppStrings.swift */; };
 		292521CA241702C60005D455 /* TitanicGame+Iceberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292521C9241702C50005D455 /* TitanicGame+Iceberg.swift */; };
 		29379BE624A930B700D38F2B /* ChooseAppInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29379BE524A930B700D38F2B /* ChooseAppInformationTableViewController.swift */; };
@@ -47,7 +47,7 @@
 		2999A9D624EAADD300C74094 /* HighscoreListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999A9D524EAADD300C74094 /* HighscoreListTests.swift */; };
 		2999A9DF24EAB09400C74094 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2999A9DE24EAB09400C74094 /* SnapshotTesting */; };
 		2999A9E124EAB7DA00C74094 /* TitanicGameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2999A9E024EAB7DA00C74094 /* TitanicGameViewControllerTests.swift */; };
-		299E980E24DF2CCF00847FE9 /* TitanicGamePresenter+GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E980D24DF2CCF00847FE9 /* TitanicGamePresenter+GameState.swift */; };
+		299E980E24DF2CCF00847FE9 /* TitanicGameViewPresenter+GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E980D24DF2CCF00847FE9 /* TitanicGameViewPresenter+GameState.swift */; };
 		299E981324DF347900847FE9 /* TitanicGame+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E981224DF347900847FE9 /* TitanicGame+Player.swift */; };
 		299E981924DF3D8600847FE9 /* Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299E981824DF3D8600847FE9 /* Outcome.swift */; };
 		29A3A0992447C1E400B5983D /* TitanicGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A3A0982447C1E400B5983D /* TitanicGameView.swift */; };
@@ -55,8 +55,8 @@
 		29B98045246092E200D7C302 /* ScoreStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B98044246092E200D7C302 /* ScoreStackView.swift */; };
 		29B980472461F99400D7C302 /* SRCountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B980462461F99400D7C302 /* SRCountdownTimer.swift */; };
 		29D6B20124B0EE7800472FC5 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D6B20024B0EE7800472FC5 /* PauseView.swift */; };
-		29DDA89F24F05D2B00D5733F /* TitanicGameViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA89E24F05D2B00D5733F /* TitanicGameViewPresenter.swift */; };
-		29DDA8A124F173DD00D5733F /* TitanicGamePresenter+IcebergData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA8A024F173DD00D5733F /* TitanicGamePresenter+IcebergData.swift */; };
+		29DDA89F24F05D2B00D5733F /* GameViewNavigationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA89E24F05D2B00D5733F /* GameViewNavigationPresenter.swift */; };
+		29DDA8A124F173DD00D5733F /* TitanicGameViewPresenter+IcebergData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA8A024F173DD00D5733F /* TitanicGameViewPresenter+IcebergData.swift */; };
 		29DDA8A324F1A04300D5733F /* MockTitanicGamePresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA8A224F1A04300D5733F /* MockTitanicGamePresenterTest.swift */; };
 		29DDA8A524F1B57C00D5733F /* MockTitanicGameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA8A424F1B57C00D5733F /* MockTitanicGameViewControllerTests.swift */; };
 		29DDA8A724F6F18C00D5733F /* PreparationCountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA8A624F6F18C00D5733F /* PreparationCountdownViewController.swift */; };
@@ -112,7 +112,7 @@
 
 /* Begin PBXFileReference section */
 		2918EE412439120E008EC004 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		2918EE43243CA85C008EC004 /* TitanicGamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGamePresenter.swift; sourceTree = "<group>"; };
+		2918EE43243CA85C008EC004 /* TitanicGameViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGameViewPresenter.swift; sourceTree = "<group>"; };
 		292521C3241291260005D455 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		292521C9241702C50005D455 /* TitanicGame+Iceberg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGame+Iceberg.swift"; sourceTree = "<group>"; };
 		29379BE524A930B700D38F2B /* ChooseAppInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAppInformationTableViewController.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		2999A9D524EAADD300C74094 /* HighscoreListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoreListTests.swift; sourceTree = "<group>"; };
 		2999A9D724EAADD300C74094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2999A9E024EAB7DA00C74094 /* TitanicGameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGameViewControllerTests.swift; sourceTree = "<group>"; };
-		299E980D24DF2CCF00847FE9 /* TitanicGamePresenter+GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGamePresenter+GameState.swift"; sourceTree = "<group>"; };
+		299E980D24DF2CCF00847FE9 /* TitanicGameViewPresenter+GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGameViewPresenter+GameState.swift"; sourceTree = "<group>"; };
 		299E981224DF347900847FE9 /* TitanicGame+Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGame+Player.swift"; sourceTree = "<group>"; };
 		299E981824DF3D8600847FE9 /* Outcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outcome.swift; sourceTree = "<group>"; };
 		29A3A0982447C1E400B5983D /* TitanicGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGameView.swift; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 		29B980462461F99400D7C302 /* SRCountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRCountdownTimer.swift; sourceTree = "<group>"; };
 		29C16600251777FB001D1752 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		29D6B20024B0EE7800472FC5 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
-		29DDA89E24F05D2B00D5733F /* TitanicGameViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitanicGameViewPresenter.swift; sourceTree = "<group>"; };
-		29DDA8A024F173DD00D5733F /* TitanicGamePresenter+IcebergData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGamePresenter+IcebergData.swift"; sourceTree = "<group>"; };
+		29DDA89E24F05D2B00D5733F /* GameViewNavigationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewNavigationPresenter.swift; sourceTree = "<group>"; };
+		29DDA8A024F173DD00D5733F /* TitanicGameViewPresenter+IcebergData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitanicGameViewPresenter+IcebergData.swift"; sourceTree = "<group>"; };
 		29DDA8A224F1A04300D5733F /* MockTitanicGamePresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTitanicGamePresenterTest.swift; sourceTree = "<group>"; };
 		29DDA8A424F1B57C00D5733F /* MockTitanicGameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTitanicGameViewControllerTests.swift; sourceTree = "<group>"; };
 		29DDA8A624F6F18C00D5733F /* PreparationCountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparationCountdownViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +244,7 @@
 		29252201241999BE0005D455 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				29C166012517E818001D1752 /* Images */,
 				29FA73DA24B78141000F8C8E /* Assets */,
 				29824797249D46B3003C7618 /* Storyboards */,
 				29FA73E024B78A5E000F8C8E /* Smoke.sks */,
@@ -256,9 +257,8 @@
 		2925B8EB2458A91B000EEB1E /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				299E981524DF361D00847FE9 /* Navigation */,
-				299E981624DF365800847FE9 /* Game */,
-				299E981724DF367300847FE9 /* Alert */,
+				29E37494252293E900789FF3 /* LightweightPresenter */,
+				299E981624DF365800847FE9 /* GameView */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -323,7 +323,6 @@
 		2978B8B42403D40000798E84 /* Titanic */ = {
 			isa = PBXGroup;
 			children = (
-				29C166012517E818001D1752 /* Images */,
 				29379BEB24AA4EA400D38F2B /* Extensions */,
 				2925B8EB2458A91B000EEB1E /* Presenter */,
 				296C52F324451FA80044401D /* CustomViews */,
@@ -377,7 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				299E980C24DF2BD800847FE9 /* Game */,
-				299E980B24DF2BBB00847FE9 /* GamePresenter */,
+				299E980B24DF2BBB00847FE9 /* GameViewPresenter */,
 				299E981A24DF3D9100847FE9 /* Alert */,
 			);
 			path = Models;
@@ -470,13 +469,13 @@
 			path = AppInformation;
 			sourceTree = "<group>";
 		};
-		299E980B24DF2BBB00847FE9 /* GamePresenter */ = {
+		299E980B24DF2BBB00847FE9 /* GameViewPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				299E980D24DF2CCF00847FE9 /* TitanicGamePresenter+GameState.swift */,
-				29DDA8A024F173DD00D5733F /* TitanicGamePresenter+IcebergData.swift */,
+				299E980D24DF2CCF00847FE9 /* TitanicGameViewPresenter+GameState.swift */,
+				29DDA8A024F173DD00D5733F /* TitanicGameViewPresenter+IcebergData.swift */,
 			);
-			path = GamePresenter;
+			path = GameViewPresenter;
 			sourceTree = "<group>";
 		};
 		299E980C24DF2BD800847FE9 /* Game */ = {
@@ -508,17 +507,17 @@
 			children = (
 				29FA73FA24B8A4C7000F8C8E /* AppInformationDetailsPresenter.swift */,
 				29379C0B24AE7CF600D38F2B /* HighscoreListPresenter.swift */,
-				29DDA89E24F05D2B00D5733F /* TitanicGameViewPresenter.swift */,
+				29DDA89E24F05D2B00D5733F /* GameViewNavigationPresenter.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
 		};
-		299E981624DF365800847FE9 /* Game */ = {
+		299E981624DF365800847FE9 /* GameView */ = {
 			isa = PBXGroup;
 			children = (
-				2918EE43243CA85C008EC004 /* TitanicGamePresenter.swift */,
+				2918EE43243CA85C008EC004 /* TitanicGameViewPresenter.swift */,
 			);
-			path = Game;
+			path = GameView;
 			sourceTree = "<group>";
 		};
 		299E981724DF367300847FE9 /* Alert */ = {
@@ -573,6 +572,15 @@
 				29E3746E25212CBB00789FF3 /* MVP.jpg */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		29E37494252293E900789FF3 /* LightweightPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				299E981524DF361D00847FE9 /* Navigation */,
+				299E981724DF367300847FE9 /* Alert */,
+			);
+			path = LightweightPresenter;
 			sourceTree = "<group>";
 		};
 		29FA73D424B779E4000F8C8E /* Localization */ = {
@@ -854,7 +862,7 @@
 				29379C0824ADF1EA00D38F2B /* FileHandler.swift in Sources */,
 				29B980472461F99400D7C302 /* SRCountdownTimer.swift in Sources */,
 				29FA73E424B7A097000F8C8E /* UIViewController+Alert.swift in Sources */,
-				299E980E24DF2CCF00847FE9 /* TitanicGamePresenter+GameState.swift in Sources */,
+				299E980E24DF2CCF00847FE9 /* TitanicGameViewPresenter+GameState.swift in Sources */,
 				29FA73E824B7CB6E000F8C8E /* TitanicGamePresenterDelegate.swift in Sources */,
 				29A3A0992447C1E400B5983D /* TitanicGameView.swift in Sources */,
 				29DDA8AB24F70A9E00D5733F /* GameEndViewController.swift in Sources */,
@@ -862,7 +870,7 @@
 				29AA4BB4245EDC2500B8CE96 /* SmokeView.swift in Sources */,
 				298C7C1E251A9DD700413DDD /* UIApplication+AppVersion.swift in Sources */,
 				29FA73E624B7A805000F8C8E /* NotificationName.swift in Sources */,
-				29DDA89F24F05D2B00D5733F /* TitanicGameViewPresenter.swift in Sources */,
+				29DDA89F24F05D2B00D5733F /* GameViewNavigationPresenter.swift in Sources */,
 				29379C0024ABD33000D38F2B /* AppConceptViewController.swift in Sources */,
 				29379C0624AD484000D38F2B /* NewHighscoreEntryPresenter.swift in Sources */,
 				2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */,
@@ -875,10 +883,10 @@
 				29DDA8A724F6F18C00D5733F /* PreparationCountdownViewController.swift in Sources */,
 				297C48472488DFA600944196 /* UIDevice+Vibrate.swift in Sources */,
 				29379BFE24AB873000D38F2B /* GameStateView.swift in Sources */,
-				2918EE44243CA85C008EC004 /* TitanicGamePresenter.swift in Sources */,
+				2918EE44243CA85C008EC004 /* TitanicGameViewPresenter.swift in Sources */,
 				299E981924DF3D8600847FE9 /* Outcome.swift in Sources */,
 				295E4CDE24C4F47200C7A78F /* Double+Round2Places.swift in Sources */,
-				29DDA8A124F173DD00D5733F /* TitanicGamePresenter+IcebergData.swift in Sources */,
+				29DDA8A124F173DD00D5733F /* TitanicGameViewPresenter+IcebergData.swift in Sources */,
 				29FA73EB24B7F129000F8C8E /* SRCountdownTimerDelegate.swift in Sources */,
 				29FA73FB24B8A4C7000F8C8E /* AppInformationDetailsPresenter.swift in Sources */,
 			);
@@ -1120,7 +1128,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
 				INFOPLIST_FILE = TitanicTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1142,7 +1150,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
 				INFOPLIST_FILE = TitanicTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1203,7 +1211,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
 				INFOPLIST_FILE = TitanicSnapshotTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1224,7 +1232,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J7FESQ389Q;
 				INFOPLIST_FILE = TitanicSnapshotTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

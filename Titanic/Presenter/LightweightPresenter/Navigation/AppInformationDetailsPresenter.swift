@@ -18,7 +18,7 @@ struct AppInformationDetailsPresenter {
 
     // MARK: - Public API
     /**
-     Presents a ViewController that contains informations about the app.
+     Presents informations about the app.
      
      - Paramater viewController: presenting ViewController
      - Parameter cellText: text of cell from presenting ViewController
@@ -48,11 +48,11 @@ struct AppInformationDetailsPresenter {
 private extension AppInformationDetailsPresenter {
 
     /**
-     Creates a ViewController that contains informations about the app.
+     Creates a view controller that contains informations about the app.
      
-     - Parameter cellText: text of cell from presenting ViewController
+     - Parameter cellText: text of cell from presenting view controller
      
-     - returns: ViewController that contains informations about the app
+     - returns: view controller that contains informations about the app
      */
     private func createAppInformationVC(from cellText: String) -> AppInformationTableViewController {
 
@@ -64,9 +64,9 @@ private extension AppInformationDetailsPresenter {
     }
 
     /**
-     Creates a ViewController that contains the concept of the app.
+     Creates a view controller that contains the concept of the app.
      
-     - Parameter cellText: text of cell from presenting ViewController
+     - Parameter cellText: text of cell from presenting view controller
      
      - returns: ViewController that contains the concept of the app
      */

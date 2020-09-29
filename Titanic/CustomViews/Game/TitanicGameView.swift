@@ -72,7 +72,7 @@ class TitanicGameView: UIView {
         return slider
     }()
 
-    // MARK: - Create a GameView
+    // MARK: - Create a game view
     init(frame: CGRect, icebergsInARow: Int, rowsOfIcebergs: Int) {
         self.icebergsInARow = icebergsInARow
         self.rowsOfIcebergs = rowsOfIcebergs
@@ -89,7 +89,7 @@ class TitanicGameView: UIView {
     }
 }
 
-// MARK: - Default Methods
+// MARK: - Default methods
 extension TitanicGameView {
 
     override func willRemoveSubview(_ subview: UIView) {
@@ -107,10 +107,10 @@ extension TitanicGameView {
 extension TitanicGameView {
 
     /**
-     Setup all Game View related subviews.
+     Setup all game view related subviews.
      
-     Important: Should be called after Game View was loaded because of the geometry of objects.
-    */
+     Important: Should be called after game view was loaded because of objects geometry.
+     */
     func setupGameView() {
         addSubviews()
         setupLayout()
@@ -122,7 +122,7 @@ extension TitanicGameView {
     }
 }
 
- // MARK: - Set up GameView and layout of subviews
+ // MARK: - Set up game view and layout of subviews
 private extension TitanicGameView {
 
     /**

@@ -49,7 +49,7 @@ class WelcomeViewController: UIViewController {
 
     @IBAction private func startActionBtn(_ sender: UIButton) {
 
-        TitanicGameViewPresenter().presentGameView(in: self)
+        GameViewNavigationPresenter().presentGameView(in: self)
     }
 
     @IBAction private func rulesBarActionBtn(_ sender: UIBarButtonItem) {

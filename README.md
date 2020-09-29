@@ -2,7 +2,7 @@
 
 ## Author
 
-* **Maik Müller** *Applied Computer Science (M. Sc.)* - [LinkedIn](https://www.linkedin.com/in/maik-m-253357107/), [Xing](https://www.xing.com/profile/Maik_Mueller215/cv)
+* **Maik Müller** *Applied Computer Science (M. Sc.)* - [LinkedIn](https://www.linkedin.com/in/maik-m-253357107), [Xing](https://www.xing.com/profile/Maik_Mueller215/cv)
 
 ## Table of Contents
 
@@ -42,7 +42,7 @@ Users move a ship horizontally by their thumb to avoid intersections with iceber
 
 <figure>
   <p align="center">
-    <img src="/Titanic/Images/Game.jpg" align="center" width="400">
+    <img src="/Titanic/Resources/Images/Game.jpg" align="center" width="400">
     <p align="center">Image 1: Game Scene
   </p>
 </figure>
@@ -77,7 +77,7 @@ A big benefit of MVP is that you can avoid a massive ViewController ([chapter 2.
 
 <figure>
   <p align="center">
-     <img src="/Titanic/Images/MVP.jpg" align="center" width="450">
+     <img src="/Titanic/Resources/Images/MVP.jpg" align="center" width="450">
      <p align="center">Graphic 1: MVP Design Pattern
   </p>
 </figure>
@@ -95,7 +95,7 @@ Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a
 
 <figure>
   <p align="center">
-    <img src="/Titanic/Images/AvoidMassiveVC.jpg" align="center" width="450">
+    <img src="/Titanic/Resources/Images/AvoidMassiveVC.jpg" align="center" width="450">
     <p align="center">Graphic 2: Avoid Massive ViewController
   </p>
 </figure>
@@ -112,7 +112,7 @@ A second challenge was the SRCountdownTimer, that was imported from Github. Orig
 
 <figure>
   <p align="center">
-    <img src="/Titanic/Images/Layout.jpg" align="center" width="450">
+    <img src="/Titanic/Resources/Images/Layout.jpg" align="center" width="450">
      <p align="center">Image 2: Dark mode and font size related to content size category
   </p>
 </figure>

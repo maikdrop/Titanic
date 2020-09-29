@@ -104,7 +104,7 @@ class TitanicGame {
      Saving Player into highscore list.
      
      - Parameter userName: name of user
-     - Parameter completion: completion handler when player was saved
+     - Parameter completion: completion handler is called when player was saved
      */
     func savePlayer(userName: String, completion: (Error?) -> Void) {
         guard var newPlayerList = player else {

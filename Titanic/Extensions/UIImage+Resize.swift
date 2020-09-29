@@ -19,7 +19,7 @@ extension UIImage {
     
     - Parameter newSize: new size of image
      
-    - Returns: new image
+    - Returns: resized image
     */
     func resizeImage(for newSize: CGSize) -> UIImage? {
         let renderer = UIGraphicsImageRenderer(size: newSize)

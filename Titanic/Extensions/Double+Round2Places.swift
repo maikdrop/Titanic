@@ -15,10 +15,12 @@ import Foundation
 extension Double {
     
     /**
-    Rounds Double Value
-    
-    - Parameter places: places to round
-    */
+     Rounds Double Value
+     
+     - Parameter places: places to round
+     
+     - Returns: rounded Double value
+     */
     func round(to places: Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor

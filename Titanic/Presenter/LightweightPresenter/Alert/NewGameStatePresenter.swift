@@ -14,41 +14,32 @@ import Foundation
 import UIKit
 
 //source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
-struct HighscoreListPresenter {
+struct NewGameStatePresenter {
+
+    // MARK: - Properties
+    let state: TitanicGameViewPresenter.GameState
+    let handler: (Outcome) -> Void
 
     // MARK: - Public API
     /**
-    Creates a highscore list.
-    
-    - Parameter viewController: View Controller which presents highscore list
-    */
+     Presents an alert in order to choose a new game state.
+     
+     - Parameter viewController: presenting view controller
+     */
     func present(in viewController: UIViewController) {
-        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+        let alert = UIAlertController(
+            title: AppStrings.TitanicGameControlActionSheet.title,
+            message: "",
+            preferredStyle: .actionSheet)
 
-        if let list = storyboard.instantiateViewController(
-            withIdentifier: viewControllerIdentifier) as? HighscoreListTableViewController {
+        state.list.forEach({state in
+            let defaultStyle = UIAlertAction.Style.default
 
-            let navigationController = UINavigationController(rootViewController: list)
-
-            list.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                barButtonSystemItem: .done,
-                target: navigationController,
-                action: #selector(UIViewController.dismissWithAnimation)
-            )
-            list.navigationItem.title = "Top 10"
-            viewController.present(navigationController, animated: true)
-        }
-    }
-}
-
-// MARK: - Constants
-extension HighscoreListPresenter {
-    private var storyboardName: String {"HighscoreList"}
-    private var viewControllerIdentifier: String {"HighscoreListTableViewController"}
-}
-
-extension UIViewController {
-    @objc func dismissWithAnimation() {
-        self.dismiss(animated: true)
+            alert.addAction(UIAlertAction(title: state.stringValue, style: defaultStyle) {_ in
+                self.handler(.accepted(state.stringValue))
+            })
+        })
+        alert.addAction(UIAlertAction(title: AppStrings.CommonAlertAction.cancel, style: .cancel))
+        viewController.present(alert, animated: true)
     }
 }

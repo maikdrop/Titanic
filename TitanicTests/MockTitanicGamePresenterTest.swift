@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
-class MockTitanicGamePresenter: TitanicGamePresenter {
+class MockTitanicGamePresenter: TitanicGameViewPresenter {
 
     var count = 0
 

@@ -18,9 +18,9 @@ class MockTitanicGameViewController: TitanicGameViewController {
     var presentViewControllerTarget: UIViewController?
     var mockGamePresenter: MockTitanicGamePresenter!
 
-    override init(gamePresenter: TitanicGamePresenter) {
-        super.init(gamePresenter: gamePresenter)
-        mockGamePresenter = gamePresenter as? MockTitanicGamePresenter
+    override init(gameViewPresenter: TitanicGameViewPresenter) {
+        super.init(gameViewPresenter: gameViewPresenter)
+        mockGamePresenter = gameViewPresenter as? MockTitanicGamePresenter
     }
 
     required init?(coder: NSCoder) {
@@ -53,7 +53,7 @@ class NewHighscoreEntryTests: XCTestCase {
         let expectedActionTitleFirst = "Done"
         let expectedActionTitleSecond = "Cancel"
         let expectedActionNumber = 2
-        let mockGameViewController = MockTitanicGameViewController(gamePresenter: TitanicGamePresenter())
+        let mockGameViewController = MockTitanicGameViewController(gameViewPresenter: TitanicGameViewPresenter())
         var alertController: UIAlertController?
 
         sut.present(in: mockGameViewController)

@@ -16,11 +16,11 @@ import Combine
 class TitanicGameViewController: UIViewController {
 
     // MARK: - Properties
-    private var gamePresenter: TitanicGamePresenter
+    private var gameViewPresenter: TitanicGameViewPresenter
     private lazy var gameView: TitanicGameView = TitanicGameView(
         frame: view.frame,
-        icebergsInARow: gamePresenter.icebergsInARow,
-        rowsOfIcebergs: gamePresenter.rowsOfIcebergs)
+        icebergsInARow: gameViewPresenter.icebergsInARow,
+        rowsOfIcebergs: gameViewPresenter.rowsOfIcebergs)
 
     private var cancellableObserver = [Cancellable?]()
     private var displayLink: CADisplayLink?
@@ -33,11 +33,11 @@ class TitanicGameViewController: UIViewController {
 
     // MARK: - Button action to change game state
     @objc private func changeGameState(_ sender: UIBarButtonItem) {
-        if let state = gamePresenter.gameState {
+        if let state = gameViewPresenter.gameState {
             NewGameStatePresenter(state: state) { [unowned self] outcome in
                 switch outcome {
                 case .accepted(let newState):
-                    self.gamePresenter.changeGameState(to: newState)
+                    self.gameViewPresenter.changeGameState(to: newState)
                 case .rejected:
                     break
                 }
@@ -45,9 +45,9 @@ class TitanicGameViewController: UIViewController {
         }
     }
 
-    // MARK: - Create a GameView Controller
-    init(gamePresenter: TitanicGamePresenter) {
-        self.gamePresenter = gamePresenter
+    // MARK: - Create a game view
+    init(gameViewPresenter: TitanicGameViewPresenter) {
+        self.gameViewPresenter = gameViewPresenter
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -69,8 +69,8 @@ extension TitanicGameViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGameView()
-        gamePresenter.attachView(self)
-        gamePresenter.gameViewDidLoad(icebergs: gameView.icebergs)
+        gameViewPresenter.attachView(self)
+        gameViewPresenter.gameViewDidLoad(icebergs: gameView.icebergs)
         navigationItem.rightBarButtonItem = gameControlBtn
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
@@ -81,7 +81,7 @@ extension TitanicGameViewController {
     }
 }
 
- // MARK: - Game Intents
+// MARK: - Calling game intents
 private extension TitanicGameViewController {
 
     /**
@@ -91,7 +91,7 @@ private extension TitanicGameViewController {
      */
     private func intersectionOfShipAndIceberg(_ notification: Notification) {
         UIDevice.vibrate()
-        gamePresenter.intersectionOfShipAndIceberg()
+        gameViewPresenter.intersectionOfShipAndIceberg()
         if let dict = notification.userInfo as NSDictionary?,
             let intersectionPoint = dict[AppStrings.UserInfoKey.ship] as? CGPoint {
             intersectionAnimation(at: intersectionPoint)
@@ -107,13 +107,13 @@ private extension TitanicGameViewController {
         if let dict = notification.userInfo as NSDictionary?,
             let icebergView = dict[AppStrings.UserInfoKey.iceberg] as? ImageView {
             if let index = gameView.icebergs.firstIndex(of: icebergView) {
-                gamePresenter.endOfViewReachedFromIceberg(at: index)
+                gameViewPresenter.endOfViewReachedFromIceberg(at: index)
             }
         }
     }
 
     @objc private func moveIcebergs() {
-        gamePresenter.moveIcebergsVertically()
+        gameViewPresenter.moveIcebergsVertically()
     }
 
     /**
@@ -121,17 +121,17 @@ private extension TitanicGameViewController {
      */
     private func updateViewFromModel() {
 
-        let icebergs = gamePresenter.icebergsToDisplay
+        let icebergs = gameViewPresenter.icebergsToDisplay
         icebergs.enumerated().forEach {iceberg in
             let center = CGPoint(x: iceberg.element.xCenter, y: iceberg.element.yCenter)
             gameView.icebergs[iceberg.offset].center = center
         }
 
-        gameView.scoreStackView.knotsLbl.text = AppStrings.Game.knotsLblTxt + gamePresenter.knots.description
+        gameView.scoreStackView.knotsLbl.text = AppStrings.Game.knotsLblTxt + gameViewPresenter.knots.description
         gameView.scoreStackView.drivenSeaMilesLbl.text =
-            AppStrings.Game.drivenSeaMilesLblTxt + gamePresenter.drivenSeaMiles.description
+            AppStrings.Game.drivenSeaMilesLblTxt + gameViewPresenter.drivenSeaMiles.description
         gameView.scoreStackView.crashCountLbl.text =
-            AppStrings.Game.crashesLblTxt + gamePresenter.crashCount.description
+            AppStrings.Game.crashesLblTxt + gameViewPresenter.crashCount.description
     }
 
     /**
@@ -144,7 +144,7 @@ private extension TitanicGameViewController {
             message: AppStrings.NewHighscoreEntryAlert.message) {[unowned self] outcome in
                 switch outcome {
                 case .accepted(let userName):
-                    self.gamePresenter.nameForHighscoreEntry(userName: userName) {error in
+                    self.gameViewPresenter.nameForHighscoreEntry(userName: userName) {error in
                         if let error = error {
                             self.alertError(title: AppStrings.ErrorAlert.title, message: error.localizedDescription)
                             return
@@ -220,7 +220,7 @@ private extension TitanicGameViewController {
         gameControlBtn.isEnabled = true
         DispatchQueue.main.asyncAfter(deadline: .now() + interval/2) {
             self.gameView.gameCountdownTimer.start(
-                beginningValue: self.gamePresenter.countdownBeginningValue,
+                beginningValue: self.gameViewPresenter.countdownBeginningValue,
                 interval: self.interval,
                 lastSecondsReminderCount: self.reminderCount)
         }
@@ -338,7 +338,7 @@ extension TitanicGameViewController: SRCountdownTimerDelegate {
     }
 
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        gamePresenter.countdownEnded()
+        gameViewPresenter.countdownEnded()
     }
 }
 

@@ -13,26 +13,43 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import Foundation
 import UIKit
 
-//source: www.swiftbysundell.com/basics/child-view-controllers
-struct TitanicGameViewPresenter {
+//source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
+struct HighscoreListPresenter {
 
     // MARK: - Public API
     /**
-     Creates a Game ViewController and injects Game Presenter.
+     Presents a highscore list.
      
-     - Parameter viewController: ViewController which presents Game ViewController
+     - Parameter viewController: presenting ViewController
      */
-    func presentGameView(in viewController: UIViewController) {
+    func present(in viewController: UIViewController) {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
 
-        let presenter = TitanicGamePresenter()
-        let gameVC = TitanicGameViewController(gamePresenter: presenter)
+        if let list = storyboard.instantiateViewController(
+            withIdentifier: viewControllerIdentifier) as? HighscoreListTableViewController {
 
-        if let navigationController = viewController.navigationController {
-            navigationController.pushViewController(gameVC, animated: true)
+            let navigationController = UINavigationController(rootViewController: list)
 
-        } else {
-            let navigationController = UINavigationController(rootViewController: gameVC)
+            list.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .done,
+                target: navigationController,
+                action: #selector(UIViewController.dismissWithAnimation)
+            )
+            list.navigationItem.title = highscoreListTitle
             viewController.present(navigationController, animated: true)
         }
+    }
+}
+
+// MARK: - Constants
+extension HighscoreListPresenter {
+    private var highscoreListTitle: String {"Top 10"}
+    private var storyboardName: String {"HighscoreList"}
+    private var viewControllerIdentifier: String {"HighscoreListTableViewController"}
+}
+
+extension UIViewController {
+    @objc func dismissWithAnimation() {
+        self.dismiss(animated: true)
     }
 }

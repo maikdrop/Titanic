@@ -24,6 +24,11 @@ struct NewHighscoreEntryPresenter {
     private let rejectTitle = AppStrings.CommonAlertAction.cancel
 
     // MARK: - Public API
+    /**
+     Presents an alert in order to get the users name.
+     
+     - Parameter viewController: presenting view controller
+     */
     func present(in viewController: UIViewController) {
         var textDidChangeObserver: NSObjectProtocol?
 

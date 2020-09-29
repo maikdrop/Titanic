@@ -20,7 +20,7 @@ class MockTitanicGameViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let mockGamePresenter = MockTitanicGamePresenter()
-        sut = MockTitanicGameViewController(gamePresenter: mockGamePresenter)
+        sut = MockTitanicGameViewController(gameViewPresenter: mockGamePresenter)
     }
 
     override func tearDown() {

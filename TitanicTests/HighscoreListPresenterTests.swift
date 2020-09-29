@@ -29,7 +29,7 @@ class HighscoreListPresenterTests: XCTestCase {
 
     func testPresentHighscoreList() {
         let title = "Top 10"
-        let mockTitanicGameViewController = MockTitanicGameViewController(gamePresenter: TitanicGamePresenter())
+        let mockTitanicGameViewController = MockTitanicGameViewController(gameViewPresenter: TitanicGameViewPresenter())
         let highscoreListVC: HighscoreListTableViewController?
 
         sut.present(in: mockTitanicGameViewController)

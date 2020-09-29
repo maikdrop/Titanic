@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import Foundation
 import Combine
 
-class TitanicGamePresenter {
+class TitanicGameViewPresenter {
 
     // MARK: - Properties
     private var game: TitanicGame? {
@@ -81,9 +81,9 @@ class TitanicGamePresenter {
         print("DEINIT TitanicGamePresenter")
     }
 
-     // MARK: - Public API: - Intents
+     // MARK: - Public Game Intents
     /**
-     Change state of game.
+     Change the state of the game.
      
      - Parameter newState: new state of game
      */ 
@@ -114,7 +114,7 @@ class TitanicGamePresenter {
     }
 
     /**
-     While game is running it will be detected that there is a collision between ship and iceberg.
+     While game is running collisions between ship and iceberg will be detected.
      */
     func intersectionOfShipAndIceberg() {
         if gameState == .running {
@@ -124,10 +124,10 @@ class TitanicGamePresenter {
     }
 
     /**
-     Saving Player with user name for new highscore entry.
+     Saving a player with user name as new highscore entry.
      
      - Parameter userName: name of user
-     - Parameter completion: completion handler with no return value
+     - Parameter completion: completion handler is called when player was saved
      */
     func nameForHighscoreEntry(userName: String, completion: (Error?) -> Void) {
         game?.savePlayer(userName: userName) {error in
@@ -145,17 +145,17 @@ class TitanicGamePresenter {
 }
 
 // MARK: - Public API: View-Presenter Configuration
-extension TitanicGamePresenter {
+extension TitanicGameViewPresenter {
 
     /**
-     Attaches View to GamePresenter for delegate methods.
+     Attaches View to game Presenter for delegate methods.
      */
     func attachView(_ view: TitanicGamePresenterDelegate) {
         titanicGamePresenterDelegate = view
     }
 
     /**
-     When GameView did load game will be created and started.
+     When game view did load game will be created and started.
      
      - Parameter icebergs: icebergs from GameView
      */
@@ -165,8 +165,8 @@ extension TitanicGamePresenter {
     }
 }
 
-// MARK: - Model related private methods
-private extension TitanicGamePresenter {
+// MARK: - Model creation and configuration
+private extension TitanicGameViewPresenter {
 
     typealias Iceberg = TitanicGame.Iceberg
     typealias Point = TitanicGame.Iceberg.Point
