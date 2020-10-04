@@ -17,12 +17,15 @@ class TitanicGame {
     // MARK: - Properties
     private var icebergInitialXPos = [Double]()
     private var icebergInitialYPos = [Double]()
-    private let fileHandler = FileHandler()
+
+    private let playerFetcher: ((Result<[Player], Error>) -> Void) -> Void
+    private let playerSaver: ([Player], (Result<[Player], Error>) -> Void) -> Void
 
     private(set) var icebergs: [Iceberg]
     private var player: [Player]?
 
     private(set) var drivenSeaMiles = 0.0
+
     var drivenSeaMilesInHighscoreList: Bool {
            isInHighscoreList()
     }
@@ -42,9 +45,11 @@ class TitanicGame {
         }
     }
 
-    // MARK: - Creating a Titanic Game
-    init(icebergs: [Iceberg]) {
+    // MARK: - Create a Titanic game
+    init<T: DataHandling>(icebergs: [Iceberg], dataHandler: T) where T.DataTyp == [Player] {
         self.icebergs = icebergs
+        self.playerFetcher = dataHandler.fetch
+        self.playerSaver = dataHandler.save
         self.icebergs.forEach {iceberg in
             icebergInitialXPos.append(iceberg.origin.xCoordinate)
             icebergInitialYPos.append(iceberg.origin.yCoordinate)
@@ -101,10 +106,10 @@ class TitanicGame {
     }
 
     /**
-     Saving Player into highscore list.
+     Saving Players into highscore list.
      
      - Parameter userName: name of user
-     - Parameter completion: completion handler is called when player was saved
+     - Parameter completion: completion handler is called when players were saved
      */
     func savePlayer(userName: String, completion: (Error?) -> Void) {
         guard var newPlayerList = player else {
@@ -114,7 +119,7 @@ class TitanicGame {
         let newPlayer = Player(name: userName, drivenMiles: drivenSeaMiles)
         newPlayerList.append(newPlayer)
         newPlayerList.sort(by: >)
-        fileHandler.savePlayerToFile(player: newPlayerList) {result in
+        playerSaver(newPlayerList) {result in
             if case .failure(let error) = result {
                 completion(error)
             } else {
@@ -186,13 +191,13 @@ private extension TitanicGame {
     }
 
     /**
-     Calls file handler to get saved highscore list.
+     Fetching players
      
-     - Returns: list with saved players
+     -  Returns: players of highscore list
      */
     private func getHighscoreList() -> [Player]? {
         var playerList: [Player]?
-        fileHandler.loadPlayerFile {result in
+        playerFetcher { result in
             if case .success(let player) = result {
                 playerList = player
             } else {

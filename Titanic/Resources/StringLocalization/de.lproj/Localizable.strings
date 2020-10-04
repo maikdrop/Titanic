@@ -1,15 +1,27 @@
-/* 
-  Localizable.strings
-  Titanic
+/*
+ MIT License
 
-  Created by Maik on 09.07.20.
-  Copyright © 2020 maikdrop. All rights reserved.
-*/
+Copyright (c) 2020 Maik Müller (maikdrop) <maik_mueller@me.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+// MARK: - german translation
 
 //Alert Titles
 "ErrorAlert_Title" = "Fehler aufgetreten";
 "NewHighscoreEntryAlert_Title" = "Gratulation 👏";
 "TitanicGameControl_Title" = "Spielsteuerung";
+
+//Error Messages
+"Reading_Error" = "Es gab einen Fehler während des Lesens der Highscoreliste.";
+"Decoding_Error" = "Es gab einen Fehler während des Dekodierens der Highscoreliste.";
+"Writing_Error" = "Es gab einen Fehler während des Schreibens der Highscoreliste.";
+"Encoding_Error" = "Es gab einen Fehler während des Kodierens der Highscoreliste.";
 
 //Alert Components
 "NewHighscoreEntry_Message" = "Du bist in den Top 10. Bitte trage deinen Namen ein, um deine Platzierung zu sehen.";

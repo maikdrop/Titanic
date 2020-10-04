@@ -23,21 +23,21 @@ struct HighscoreListPresenter {
      - Parameter viewController: presenting ViewController
      */
     func present(in viewController: UIViewController) {
-        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
 
-        if let list = storyboard.instantiateViewController(
-            withIdentifier: viewControllerIdentifier) as? HighscoreListTableViewController {
+        let highscoreListTVC = HighscoreListTableViewController(dataHandler: PlayerHandling())
 
-            let navigationController = UINavigationController(rootViewController: list)
+        let navigationController = UINavigationController(rootViewController: highscoreListTVC)
 
-            list.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                barButtonSystemItem: .done,
-                target: navigationController,
-                action: #selector(UIViewController.dismissWithAnimation)
-            )
-            list.navigationItem.title = highscoreListTitle
-            viewController.present(navigationController, animated: true)
-        }
+        highscoreListTVC.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: navigationController,
+            action: #selector(UIViewController.dismissWithAnimation)
+        )
+
+        highscoreListTVC.navigationItem.title = highscoreListTitle
+        highscoreListTVC.navigationItem.largeTitleDisplayMode = .always
+
+        viewController.present(navigationController, animated: true)
     }
 }
 

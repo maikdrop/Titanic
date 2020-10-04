@@ -12,11 +12,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import Foundation
 
-protocol TitanicGamePresenterDelegate: class {
-    func gameDidUpdate()
-    func gameDidStart()
-    func gameDidPause()
-    func gameDidResume()
-    func gameEndedWithHighscore()
-    func gameEndedWithoutHighscore()
+enum DataHandlingError: Error {
+
+    case readingError(message: String)
+    case decodingError(message: String)
+    case writingError(message: String)
+    case encodingError(message: String)
+
+    func getErrorMessage() -> String {
+        switch self {
+        case .readingError(let message):
+            return message
+        case .decodingError(let message):
+            return message
+        case .writingError(let message):
+            return message
+        case .encodingError(let message):
+            return message
+        }
+    }
 }

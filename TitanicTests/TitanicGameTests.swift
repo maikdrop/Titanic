@@ -29,7 +29,7 @@ class TitanicGameTests: XCTestCase {
             let iceberg = TitanicGame.Iceberg(origin: point, size: size)
             icebergs += [iceberg]
         }
-        sut = TitanicGame(icebergs: icebergs)
+        sut = TitanicGame(icebergs: icebergs, dataHandler: PlayerHandling())
     }
 
     override func tearDown() {

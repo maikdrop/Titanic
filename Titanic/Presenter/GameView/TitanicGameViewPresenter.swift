@@ -22,7 +22,7 @@ class TitanicGameViewPresenter {
         }
     }
     private var cancellableObserver: Cancellable?
-    private weak var titanicGamePresenterDelegate: TitanicGamePresenterDelegate?
+    private weak var titanicGamePresenterDelegate: TitanicGameViewPresenterDelegate?
 
     private(set) var gameState: GameState? {
         didSet {
@@ -81,7 +81,25 @@ class TitanicGameViewPresenter {
         print("DEINIT TitanicGamePresenter")
     }
 
-     // MARK: - Public Game Intents
+     // MARK: - Public Intents
+
+    /**
+     Attaches view to game view presenter for delegate methods.
+     */
+    func attachView(_ view: TitanicGameViewPresenterDelegate) {
+        titanicGamePresenterDelegate = view
+    }
+
+    /**
+     When game view did load game will be created and started.
+     
+     - Parameter icebergs: icebergs from GameView
+     */
+    func gameViewDidLoad(icebergs: [ImageView]) {
+        game = createGameModel(from: icebergs)
+        gameState = .new
+    }
+
     /**
      Change the state of the game.
      
@@ -129,7 +147,7 @@ class TitanicGameViewPresenter {
      - Parameter userName: name of user
      - Parameter completion: completion handler is called when player was saved
      */
-    func nameForHighscoreEntry(userName: String, completion: (Error?) -> Void) {
+    func nameForHighscoreEntry(userName: String, completion: @escaping (Error?) -> Void) {
         game?.savePlayer(userName: userName) {error in
             if let error = error {
                 completion(error)
@@ -141,27 +159,6 @@ class TitanicGameViewPresenter {
 
     func countdownEnded() {
         gameState = .end
-    }
-}
-
-// MARK: - Public API: View-Presenter Configuration
-extension TitanicGameViewPresenter {
-
-    /**
-     Attaches View to game Presenter for delegate methods.
-     */
-    func attachView(_ view: TitanicGamePresenterDelegate) {
-        titanicGamePresenterDelegate = view
-    }
-
-    /**
-     When game view did load game will be created and started.
-     
-     - Parameter icebergs: icebergs from GameView
-     */
-    func gameViewDidLoad(icebergs: [ImageView]) {
-        game = createGameModel(from: icebergs)
-        gameState = .new
     }
 }
 
@@ -191,7 +188,7 @@ private extension TitanicGameViewPresenter {
             let iceberg = Iceberg(origin: point, size: size)
             modelIcebergs.append(iceberg)
         }
-        return TitanicGame(icebergs: modelIcebergs)
+        return TitanicGame(icebergs: modelIcebergs, dataHandler: PlayerHandling())
     }
 
     /**

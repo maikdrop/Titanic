@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import Foundation
 
-struct FileHandler {
+struct PlayerHandling: DataHandling {
 
     // MARK: - Properties
     private let url = try? FileManager.default.url(
@@ -22,45 +22,51 @@ struct FileHandler {
                         create: true)
                         .appendingPathComponent("highscore.json")
 
-    typealias Handler = (Result<[TitanicGame.Player], Error>) -> Void
+    typealias DataTyp = [TitanicGame.Player]
 
-    // MARK: - Public API for file loading and saving
+    typealias Handler = (Result<DataTyp, Error>) -> Void
+
     /**
-    Loads and decodes json file with player as highscore list from Application Support Directory.
-    
-    - Parameter handler: handles success or failure of loading
-    */
-    func loadPlayerFile(then handler: Handler) {
+     Fetching players from JSON file.
+     
+     - Parameter completion: completion handler is called when players were fetched
+     */
+    func fetch(then completion: (Handler)) {
         if let url = url {
             if !FileManager.default.fileExists(atPath: url.path) {
-                handler(.success([TitanicGame.Player]()))
+                completion(.success(DataTyp()))
                 return
             }
             if let data = try? Data(contentsOf: url) {
                 do {
-                    let player = try JSONDecoder().decode([TitanicGame.Player].self, from: data)
-                    handler(.success(player))
+                    let player = try JSONDecoder().decode(DataTyp.self, from: data)
+                    completion(.success(player))
                 } catch {
-                    handler(.failure(error))
+                    completion(.failure(DataHandlingError.decodingError(
+                        message: AppStrings.ErrorAlert.decodingErrorMessage)))
                 }
+            } else {
+                completion(.failure(DataHandlingError.readingError(message: AppStrings.ErrorAlert.readingErrorMessage)))
             }
         }
     }
 
     /**
-    Encodes and saves json file with players as highscore list into Application Support Directory.
-    
-    - Parameter player: highscore list with top ten players
-    - Parameter handler: handles success or failure of saving
-    */
-    func savePlayerToFile(player: [TitanicGame.Player], then handler: Handler) {
+     Saving Players in JSON file.
+     
+     - Parameter player: players to save
+     - Parameter completion: completion handler is called when players were saved
+     */
+    func save(player: DataTyp, then completion: (Handler)) {
         if let url = url, let json = try? JSONEncoder().encode(player) {
             do {
                 try json.write(to: url)
-                 handler(.success(player))
+                completion(.success(player))
             } catch {
-                handler(.failure(error))
+                completion(.failure(DataHandlingError.writingError(message: AppStrings.ErrorAlert.writingErrorMessage)))
             }
+        } else {
+            completion(.failure(DataHandlingError.encodingError(message: AppStrings.ErrorAlert.encodingErrorMessage)))
         }
     }
 }

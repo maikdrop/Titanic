@@ -16,16 +16,20 @@ class HighscoreListTableViewController: UITableViewController {
 
     // MARK: - Properties
     private var latestEntry: Int?
-    //make player public and change let to var for testing purpose
-    private let player: [TitanicGame.Player] = {
-        var playerList = [TitanicGame.Player]()
-        FileHandler().loadPlayerFile(then: {(result) in
-            if case .success(let player) = result {
-                playerList = player
-            }
-        })
-        return playerList
-    }()
+    private let playerFetcher: ((Result<[TitanicGame.Player], Error>) -> Void) -> Void
+
+    // make player public for testing purpose
+    private lazy var player = self.fetchPlayer()
+
+    // MARK: - Create a highscore list table
+    init<T: DataHandling>(dataHandler: T) where T.DataTyp == [TitanicGame.Player] {
+        playerFetcher = dataHandler.fetch
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 // MARK: - Default Methods
@@ -33,9 +37,40 @@ extension HighscoreListTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
         if let loadedPlayer = player.max(by: {$0.date < $1.date}) {
             latestEntry = player.firstIndex(of: loadedPlayer)
         }
+    }
+}
+
+private extension HighscoreListTableViewController {
+
+    /**
+     Fetching players
+     
+     -  Returns: players of highscore list
+     */
+    private func fetchPlayer() ->  [TitanicGame.Player] {
+        var playerList = [TitanicGame.Player]()
+        playerFetcher {result in
+            if case .success(let player) = result {
+                   playerList = player
+            }
+            if case .failure(let error) = result {
+                if let dataHandlingError = error as? DataHandlingError {
+                    self.alertError(
+                        title: AppStrings.ErrorAlert.title,
+                        message: dataHandlingError.getErrorMessage())
+                }
+            }
+        }
+        return playerList
+    }
+
+    private func setupTableView() {
+        tableView = UITableView(frame: CGRect.zero, style: .plain)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: highscoreEntryCell)
     }
 }
 

@@ -14,7 +14,7 @@ class GameEndViewController: UIViewController {
     private let statusText: String
     private let interval: Double
 
-    // MARK: - Create a GameEnd ViewController
+    // MARK: - Create a game end view
     init(statusText: String, animationInterval: Double) {
         self.statusText = statusText
         self.interval = animationInterval

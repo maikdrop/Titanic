@@ -145,8 +145,10 @@ private extension TitanicGameViewController {
                 switch outcome {
                 case .accepted(let userName):
                     self.gameViewPresenter.nameForHighscoreEntry(userName: userName) {error in
-                        if let error = error {
-                            self.alertError(title: AppStrings.ErrorAlert.title, message: error.localizedDescription)
+                        if let dataHandlingError = error as? DataHandlingError {
+                            self.alertError(
+                                title: AppStrings.ErrorAlert.title,
+                                message: dataHandlingError.getErrorMessage())
                             return
                         }
                         HighscoreListPresenter().present(in: self)
@@ -278,7 +280,7 @@ extension TitanicGameViewController {
 }
 
 // MARK: - GameViewPresenter Delegate Methods
-extension TitanicGameViewController: TitanicGamePresenterDelegate {
+extension TitanicGameViewController: TitanicGameViewPresenterDelegate {
 
     func gameDidUpdate() {
         updateViewFromModel()

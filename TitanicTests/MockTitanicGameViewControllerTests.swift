@@ -13,13 +13,32 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
+class MockTitanicGameViewController: TitanicGameViewController {
+
+    var presentViewControllerTarget: UIViewController?
+    var mockGamePresenter: MockTitanicGameViewPresenter!
+
+    override init(gameViewPresenter: TitanicGameViewPresenter) {
+        super.init(gameViewPresenter: gameViewPresenter)
+        mockGamePresenter = gameViewPresenter as? MockTitanicGameViewPresenter
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        presentViewControllerTarget = viewControllerToPresent
+    }
+}
+
 class MockTitanicGameViewControllerTests: XCTestCase {
 
     var sut: MockTitanicGameViewController!
 
     override func setUp() {
         super.setUp()
-        let mockGamePresenter = MockTitanicGamePresenter()
+        let mockGamePresenter = MockTitanicGameViewPresenter()
         sut = MockTitanicGameViewController(gameViewPresenter: mockGamePresenter)
     }
 

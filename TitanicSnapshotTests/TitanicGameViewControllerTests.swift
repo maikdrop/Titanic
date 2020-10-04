@@ -18,14 +18,10 @@ import XCTest
 class TitanicGameViewControllerTests: XCTestCase {
 
     func testGameView() {
-        let storyboard = UIStoryboard(name: "Welcome", bundle: nil)
-        if let welcome = storyboard.instantiateViewController(
-            withIdentifier: "WelcomeViewController") as? WelcomeViewController {
-            GameViewNavigationPresenter().presentGameView(in: welcome)
-            if let gameVc = welcome.presentedViewController {
-                 assertSnapshot(matching: gameVc, as: .image)
-            }
-        }
-    }
 
+        let presenter = TitanicGameViewPresenter()
+        let gameVC = TitanicGameViewController(gameViewPresenter: presenter)
+        let navigationC = UINavigationController(rootViewController: gameVC)
+        assertSnapshot(matching: navigationC, as: .image)
+    }
 }

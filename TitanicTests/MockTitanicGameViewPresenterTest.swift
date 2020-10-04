@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
-class MockTitanicGamePresenter: TitanicGameViewPresenter {
+class MockTitanicGameViewPresenter: TitanicGameViewPresenter {
 
     var count = 0
 
@@ -29,18 +29,18 @@ class MockTitanicGamePresenter: TitanicGameViewPresenter {
         count += 1
     }
 
-    override func nameForHighscoreEntry(userName: String, completion: (Error?) -> Void) {
+    override func nameForHighscoreEntry(userName: String, completion: ((Error?) -> Void)?) {
         count += 1
     }
 }
 
-class MockTitanicGamePresenterTest: XCTestCase {
+class MockTitanicGameViewPresenterTest: XCTestCase {
 
-    var sut: MockTitanicGamePresenter!
+    var sut: MockTitanicGameViewPresenter!
 
     override func setUp() {
         super.setUp()
-        sut = MockTitanicGamePresenter()
+        sut = MockTitanicGameViewPresenter()
     }
 
     override func tearDown() {

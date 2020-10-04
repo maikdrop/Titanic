@@ -26,6 +26,10 @@ enum AppStrings {
 
     enum ErrorAlert {
         static let title = NSLocalizedString("ErrorAlert_Title", comment: "")
+        static let readingErrorMessage = NSLocalizedString("Reading_Error", comment: "")
+        static let decodingErrorMessage = NSLocalizedString("Decoding_Error", comment: "")
+        static let writingErrorMessage = NSLocalizedString("Writing_Error", comment: "")
+        static let encodingErrorMessage = NSLocalizedString("Encoding_Error", comment: "")
     }
 
     enum NewHighscoreEntryAlert {
