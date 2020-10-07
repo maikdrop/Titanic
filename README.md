@@ -127,7 +127,7 @@ A second challenge was the SRCountdownTimer, which was imported from Github. Ori
 
 #### 2.3.2. Animation
 
-The goal of animations is to improve the user experience. So, two scenes were chosen to implement animations: welcome and game scene. After starting the app, the WelcomeViewController shows up and animates an iceberg in the middle of the view. At first, the iceberg is scaled to the left and right edge of the view. Afterwards the iceberg scales down and becomes transparent. The animation is called when the view did load or the iOS environment changes e.g. the font size. The following GIF shows the animated iceberg after starting the app.
+The goal of animations is to improve the user experience. So, two scenes were chosen to implement animations: welcome and game scene. After starting the app, the WelcomeViewController shows up and animates an iceberg in the middle of the view. At first, the iceberg is scaled to the left and right edge of the view. Afterwards the iceberg scales down and becomes transparent. The animation is called when the view did load or the iOS environment changes e.g. the font size. The following GIF shows the animated iceberg after starting the app. <br /> <br />
 
 <figure>
   <p align="center">
