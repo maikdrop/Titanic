@@ -18,7 +18,7 @@ import UIKit
 extension UIViewController {
 
     /**
-    Presents an Error Alert.
+    Presents an error alert.
     
     - Parameter title: alert title
     - Paramter message: alert message

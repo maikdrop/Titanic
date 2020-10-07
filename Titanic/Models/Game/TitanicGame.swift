@@ -62,7 +62,7 @@ class TitanicGame {
 
     // MARK: - Public API
     /**
-     Move icebergs vertically and calculate driven sea miles.
+     Moves all icebergs vertically and calculates the driven sea miles.
      */
     func moveIcebergsVertically() {
         drivenSeaMiles += seaMilesPerSecond
@@ -73,7 +73,7 @@ class TitanicGame {
     }
 
     /**
-     When iceberg reaches end of view the iceberg is set to a new position.
+     When an iceberg reaches the end of the view, the iceberg is moved to a new position.
      
      - Parameter index: index of iceberg in iceberg array
      */
@@ -87,7 +87,7 @@ class TitanicGame {
     }
 
     /**
-     When a collision between ship and iceberg is detected crash count increases and all icebergs were set to a random position.
+     When a collision between ship and iceberg is detected, the crash count increases and all icebergs were set to a random position.
      */
     func collisionBetweenShipAndIceberg() {
         crashCount += 1
@@ -106,7 +106,7 @@ class TitanicGame {
     }
 
     /**
-     Saving Players into highscore list.
+     Saves a player with the given name into the highscore list.
      
      - Parameter userName: name of user
      - Parameter completion: completion handler is called when players were saved
@@ -133,7 +133,7 @@ class TitanicGame {
 private extension TitanicGame {
 
     /**
-     Calculates vertical distance between two icebergs which follow each other.
+     Calculates the vertical distance between two icebergs, which follow each other.
      
      - Parameter index: index of iceberg
      - Returns: distance between two icebergs
@@ -156,7 +156,7 @@ private extension TitanicGame {
     }
 
     /**
-     Set icebergs to a random start position.
+     Set all icebergs to a random start position.
      */
     private func setStartPosOfIcebergs() {
         shuffleXPosOfIcebergs(at: Array(icebergs.indices))
@@ -164,7 +164,7 @@ private extension TitanicGame {
     }
 
     /**
-     Set icebergs to initial y position.
+     Set all icebergs to initial y position.
      */
     private func setYPosOfIcebergs() {
 
@@ -174,7 +174,7 @@ private extension TitanicGame {
     }
 
     /**
-      Set icebergs to a random x position.
+      Set all icebergs to a random x position.
      
      - Parameter indices: indices of icebergs
      */
@@ -191,9 +191,9 @@ private extension TitanicGame {
     }
 
     /**
-     Fetching players
+     Fetches all players from the saved highscore list.
      
-     -  Returns: players of highscore list
+     -  Returns: players of the highscore list
      */
     private func getHighscoreList() -> [Player]? {
         var playerList: [Player]?
@@ -208,9 +208,9 @@ private extension TitanicGame {
     }
 
     /**
-    Verification if driven sea miles are valid for a new highscore entry.
+    Verifies the driven sea miles for a new highscore entry.
     
-    - Returns: true when new highscore entry is possible
+    - Returns: true when a new highscore entry is possible
     */
     private func isInHighscoreList() -> Bool {
         player = getHighscoreList()

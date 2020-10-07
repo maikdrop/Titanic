@@ -89,7 +89,7 @@ class TitanicGameView: UIView {
     }
 }
 
-// MARK: - Default methods
+// MARK: - Default Methods
 extension TitanicGameView {
 
     override func willRemoveSubview(_ subview: UIView) {
@@ -126,7 +126,7 @@ extension TitanicGameView {
 private extension TitanicGameView {
 
     /**
-     Target action from UISlider when value changed.
+     Method is called when the slider position changes.
      
      - Parameter sender: Sender who is moving the ship
      */
@@ -138,7 +138,7 @@ private extension TitanicGameView {
     }
 
     /**
-     Adding all subviews to Game View.
+     Adds all subviews to the game view.
      */
     private func addSubviews() {
         addSubview(scoreStackView)
@@ -149,7 +149,7 @@ private extension TitanicGameView {
     }
 
     /**
-     Calls functions to setup layout of all subviews.
+     Calls functions to setup the layout of all subviews.
      */
     private func setupLayout() {
         scoreStackLayout()
@@ -218,7 +218,7 @@ private extension TitanicGameView {
     }
 
     /**
-     Create icebergs with initial coordinates.
+     Creates icebergs with initial coordinates.
      */
     private func setUpIcebergs() -> [ImageView] {
         var icebergViewArray = [ImageView]()
@@ -251,7 +251,7 @@ private extension TitanicGameView {
     }
 
     /**
-     Setting up publishers in order to post Notifications for intersections of ship and iceberg and when an iceberg reached the end of view.
+     Set up publishers to post Notifications for intersections between ship and iceberg, and when an iceberg reaches the end of the view.
      */
     private func setupIcebergPublisher() {
         icebergs.forEach {icebergView in

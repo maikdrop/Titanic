@@ -15,19 +15,22 @@ import Foundation
 struct PlayerHandling: DataHandling {
 
     // MARK: - Properties
-    private let url = try? FileManager.default.url(
+    private var url = try? FileManager.default.url(
                         for: .applicationSupportDirectory,
                         in: .userDomainMask,
                         appropriateFor: nil,
                         create: true)
-                        .appendingPathComponent("highscore.json")
 
     typealias DataTyp = [TitanicGame.Player]
 
     typealias Handler = (Result<DataTyp, Error>) -> Void
 
+    init(fileName: String) {
+        self.url = url?.appendingPathComponent(fileName)
+    }
+
     /**
-     Fetching players from JSON file.
+     Fetches all saved players from JSON file.
      
      - Parameter completion: completion handler is called when players were fetched
      */
@@ -52,7 +55,7 @@ struct PlayerHandling: DataHandling {
     }
 
     /**
-     Saving Players in JSON file.
+     Saves players in a JSON file.
      
      - Parameter player: players to save
      - Parameter completion: completion handler is called when players were saved

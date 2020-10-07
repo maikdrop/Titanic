@@ -43,7 +43,7 @@ final class GameStateView: UIView {
 private extension GameStateView {
 
     /**
-     Create an UILabel.
+     Creates an label.
      
      - Returns: created label
     */
@@ -54,7 +54,7 @@ private extension GameStateView {
     }
 
     /**
-     Configure given label.
+     Configures a given label.
      
      - Parameter label: label to configure
     */
@@ -66,7 +66,7 @@ private extension GameStateView {
     }
 
     /**
-     Setup layout for label.
+     Setup the layout of a given label.
      
      - Parameter label: label to layout
     */

@@ -18,29 +18,30 @@ class TitanicGameViewPresenter {
     // MARK: - Properties
     private var game: TitanicGame? {
         didSet {
+            gameState = .new
             setupSubscriberForGameEnd()
         }
     }
     private var cancellableObserver: Cancellable?
-    private weak var titanicGamePresenterDelegate: TitanicGameViewPresenterDelegate?
+    private weak var titanicGameViewPresenterDelegate: TitanicGameViewPresenterDelegate?
 
     private(set) var gameState: GameState? {
         didSet {
             switch gameState {
             case .new:
                 game?.startNewTitanicGame()
-                titanicGamePresenterDelegate?.gameDidStart()
+                titanicGameViewPresenterDelegate?.gameDidStart()
                 gameState = .running
             case .pause:
-                titanicGamePresenterDelegate?.gameDidPause()
+                titanicGameViewPresenterDelegate?.gameDidPause()
             case .resume:
-                titanicGamePresenterDelegate?.gameDidResume()
+                titanicGameViewPresenterDelegate?.gameDidResume()
                 gameState = .running
             case .end:
-                titanicGamePresenterDelegate?.gameDidUpdate()
+                titanicGameViewPresenterDelegate?.gameDidUpdate()
                 game?.drivenSeaMilesInHighscoreList == true ?
-                    titanicGamePresenterDelegate?.gameEndedWithHighscore() :
-                    titanicGamePresenterDelegate?.gameEndedWithoutHighscore()
+                    titanicGameViewPresenterDelegate?.gameEndedWithHighscore() :
+                    titanicGameViewPresenterDelegate?.gameEndedWithoutHighscore()
             default:
                 break
             }
@@ -84,24 +85,23 @@ class TitanicGameViewPresenter {
      // MARK: - Public Intents
 
     /**
-     Attaches view to game view presenter for delegate methods.
+     Attaches the game view to the game view presenter to use the delegate methods.
      */
     func attachView(_ view: TitanicGameViewPresenterDelegate) {
-        titanicGamePresenterDelegate = view
+        titanicGameViewPresenterDelegate = view
     }
 
     /**
-     When game view did load game will be created and started.
+     When the game view did load, the game will be created and started.
      
      - Parameter icebergs: icebergs from GameView
      */
     func gameViewDidLoad(icebergs: [ImageView]) {
         game = createGameModel(from: icebergs)
-        gameState = .new
     }
 
     /**
-     Change the state of the game.
+     Changes the state of the game.
      
      - Parameter newState: new state of game
      */ 
@@ -110,39 +110,39 @@ class TitanicGameViewPresenter {
     }
 
     /**
-     While game is running iceberg is moving vertically.
+     While the game is running, the icebergs are moving vertically.
      */
     func moveIcebergsVertically() {
         if gameState == .running {
             game?.moveIcebergsVertically()
-            titanicGamePresenterDelegate?.gameDidUpdate()
+            titanicGameViewPresenterDelegate?.gameDidUpdate()
         }
     }
 
     /**
-     While game is running it will be detected that an iceberg reached the end of view.
+     While the game is running, it will be detected that an iceberg reached the end of view.
      
      - Parameter index: index of iceberg in array
      */
     func endOfViewReachedFromIceberg(at index: Int) {
         if gameState == .running {
             game?.endOfViewReachedFromIceberg(at: index)
-            titanicGamePresenterDelegate?.gameDidUpdate()
+            titanicGameViewPresenterDelegate?.gameDidUpdate()
         }
     }
 
     /**
-     While game is running collisions between ship and iceberg will be detected.
+     While the game is running, collisions between ship and icebergs will be detected.
      */
     func intersectionOfShipAndIceberg() {
         if gameState == .running {
             game?.collisionBetweenShipAndIceberg()
-            titanicGamePresenterDelegate?.gameDidUpdate()
+            titanicGameViewPresenterDelegate?.gameDidUpdate()
         }
     }
 
     /**
-     Saving a player with user name as new highscore entry.
+     Saves a player with user name as new highscore entry.
      
      - Parameter userName: name of user
      - Parameter completion: completion handler is called when player was saved
@@ -170,7 +170,7 @@ private extension TitanicGameViewPresenter {
     typealias Size = TitanicGame.Iceberg.Size
 
     /**
-     Creating new game model.
+     Creates a new game model.
      
      - Parameter icebergs: icebergs from game view
      
@@ -188,11 +188,12 @@ private extension TitanicGameViewPresenter {
             let iceberg = Iceberg(origin: point, size: size)
             modelIcebergs.append(iceberg)
         }
-        return TitanicGame(icebergs: modelIcebergs, dataHandler: PlayerHandling())
+        let playerHandler = PlayerHandling(fileName: AppStrings.Highscore.fileName)
+        return TitanicGame(icebergs: modelIcebergs, dataHandler: playerHandler)
     }
 
     /**
-     Receiving notification when game did end.
+     Notifications will be send to the notification center when the game is over.
      */
     private func setupSubscriberForGameEnd() {
 

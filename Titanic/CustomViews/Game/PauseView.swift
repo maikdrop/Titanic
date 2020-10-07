@@ -48,7 +48,7 @@ final class PauseView: UIView {
 private extension PauseView {
 
     /**
-     Add subviews to view
+     Adds subviews to the view.
      */
     private func addSubviews() {
         addSubview(blurredEffectView)
@@ -58,7 +58,7 @@ private extension PauseView {
     }
 
     /**
-     Setup layout of subviews
+     Setup the layout of the subviews.
      */
     private func setupLayout() {
         blurredEffectView.frame = frame

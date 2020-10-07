@@ -22,7 +22,7 @@ struct NewGameStatePresenter {
 
     // MARK: - Public API
     /**
-     Presents an alert in order to choose a new game state.
+     Presents an alert to choose a new game state.
      
      - Parameter viewController: presenting view controller
      */

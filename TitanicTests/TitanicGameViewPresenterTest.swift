@@ -34,7 +34,7 @@ class MockTitanicGameViewPresenter: TitanicGameViewPresenter {
     }
 }
 
-class MockTitanicGameViewPresenterTest: XCTestCase {
+class TitanicGameViewPresenterTest: XCTestCase {
 
     var sut: MockTitanicGameViewPresenter!
 

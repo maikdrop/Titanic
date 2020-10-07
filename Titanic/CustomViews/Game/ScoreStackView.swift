@@ -17,21 +17,21 @@ class ScoreStackView: UIStackView {
     // MARK: - Properties
     private(set) lazy var knotsLbl: UILabel = {
         let knotsLbl = UILabel()
-        knotsLbl.text = AppStrings.Game.knotsLblTxt + "0"
+        knotsLbl.text = AppStrings.Game.knotsLblTxt + ": "
         addArrangedSubview(knotsLbl)
         return knotsLbl
     }()
 
     private(set) lazy var drivenSeaMilesLbl: UILabel = {
         let drivenSeaMilesLbl = UILabel()
-        drivenSeaMilesLbl.text = AppStrings.Game.drivenSeaMilesLblTxt + "0.00"
+        drivenSeaMilesLbl.text = AppStrings.Game.drivenSeaMilesLblTxt + ": "
         addArrangedSubview(drivenSeaMilesLbl)
         return drivenSeaMilesLbl
     }()
 
     private(set) lazy var crashCountLbl: UILabel = {
         let crashCountLbl = UILabel()
-        crashCountLbl.text = AppStrings.Game.crashesLblTxt + "0"
+        crashCountLbl.text = AppStrings.Game.crashesLblTxt + ": "
         addArrangedSubview(crashCountLbl)
         return crashCountLbl
     }()
@@ -55,7 +55,7 @@ extension ScoreStackView {
 private extension ScoreStackView {
 
     /**
-     Configure label
+     Configures a label.
      
      - Parameter label: label to configure
     */

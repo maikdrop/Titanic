@@ -57,9 +57,12 @@ class NavigationPresenterTests: XCTestCase {
 
         if let gameView = gameVC?.view.subviews.first as? TitanicGameView {
 
-            XCTAssertEqual(gameView.scoreStackView.knotsLbl.text, AppStrings.Game.knotsLblTxt + "0")
-            XCTAssertEqual(gameView.scoreStackView.drivenSeaMilesLbl.text, AppStrings.Game.drivenSeaMilesLblTxt + "0.0")
-            XCTAssertEqual(gameView.scoreStackView.crashCountLbl.text, AppStrings.Game.crashesLblTxt + "0")
+            XCTAssertEqual(gameView.scoreStackView.knotsLbl.text,
+                           AppStrings.Game.knotsLblTxt + ": 0")
+            XCTAssertEqual(gameView.scoreStackView.drivenSeaMilesLbl.text,
+                           AppStrings.Game.drivenSeaMilesLblTxt + ": 0.0")
+            XCTAssertEqual(gameView.scoreStackView.crashCountLbl.text,
+                           AppStrings.Game.crashesLblTxt + ": 0")
         }
         XCTAssertNotNil(gameVC)
     }

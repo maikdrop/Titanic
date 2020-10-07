@@ -15,7 +15,7 @@ import Foundation
 extension Collection where Element: Hashable {
     
     /**
-    Creates an array with unique elements
+    Creates an array with unique elements.
      
     - Returns: array with unique elements
     */
@@ -28,7 +28,7 @@ extension Collection where Element: Hashable {
 extension Collection {
     
     /**
-     Verifies if array contains an element at given index.
+     Verifies if an array contains an element at given index.
      
      - Parameter index: index to verify
      

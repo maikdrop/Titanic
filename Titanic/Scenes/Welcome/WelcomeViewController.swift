@@ -85,7 +85,7 @@ extension WelcomeViewController {
 private extension WelcomeViewController {
 
     /**
-     Layout for iceberg
+     Setup the layout of the iceberg in the middle of the view.
      */
     private func setupIcebergLayout() {
         view.addSubview(icebergImageView)
@@ -95,7 +95,7 @@ private extension WelcomeViewController {
     }
 
     /**
-     Animation for iceberg
+     Setup the animation of the iceberg in the middle of the view.
      */
     private func setupIcebergAnimation() {
         actionBtns(enabled: false)
@@ -123,7 +123,7 @@ private extension WelcomeViewController {
     }
 
     /**
-     Clean up UI after iceberg animation ends.
+     Cleans up the UI after the iceberg animation has finished.
      */
     private func cleanUpAfterIcebergAnimation() {
         icebergImageView.removeFromSuperview()
@@ -133,7 +133,7 @@ private extension WelcomeViewController {
     }
 
     /**
-     Enable or disbale all action buttons.
+     Enables or disbales all action buttons.
      
      - Parameter enabled: false or true
      

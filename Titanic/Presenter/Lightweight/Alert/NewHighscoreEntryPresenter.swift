@@ -25,7 +25,7 @@ struct NewHighscoreEntryPresenter {
 
     // MARK: - Public API
     /**
-     Presents an alert in order to get the users name.
+     Presents an alert to get the users name.
      
      - Parameter viewController: presenting view controller
      */

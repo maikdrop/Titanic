@@ -12,6 +12,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import Foundation
 
+/**
+ Reads the text of a text file.
+ 
+ - Parameter fileName: name of the file
+ - Parameter typeExtension: type extension of the file
+ 
+ - Returns: the text of the file
+ */
 func readTextFromFile(fileName: String, with typeExtension: String) -> String {
     var fileContents = ""
     if let resourceUrl = Bundle.main.url(forResource: fileName, withExtension: typeExtension) {

@@ -41,7 +41,7 @@ struct MockPlayerHandling: DataHandling {
     }
 }
 
-class MockPlayerHandlingTests: XCTestCase {
+class PlayerHandlingTests: XCTestCase {
 
     var sut: MockPlayerHandling!
 

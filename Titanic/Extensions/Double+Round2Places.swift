@@ -15,7 +15,7 @@ import Foundation
 extension Double {
     
     /**
-     Rounds Double Value
+     Rounds a Double value.
      
      - Parameter places: places to round
      

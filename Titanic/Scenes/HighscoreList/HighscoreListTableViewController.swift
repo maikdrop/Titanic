@@ -19,7 +19,7 @@ class HighscoreListTableViewController: UITableViewController {
     private let playerFetcher: ((Result<[TitanicGame.Player], Error>) -> Void) -> Void
 
     // make player public for testing purpose
-    private lazy var player = self.fetchPlayer()
+    lazy var player = self.fetchPlayer()
 
     // MARK: - Create a highscore list table
     init<T: DataHandling>(dataHandler: T) where T.DataTyp == [TitanicGame.Player] {
@@ -47,7 +47,7 @@ extension HighscoreListTableViewController {
 private extension HighscoreListTableViewController {
 
     /**
-     Fetching players
+     Fetches all players from the saved highscore list.
      
      -  Returns: players of highscore list
      */
@@ -89,7 +89,7 @@ extension HighscoreListTableViewController {
        let cell = tableView.dequeueReusableCell(withIdentifier: highscoreEntryCell, for: indexPath)
 
         let highscoreEntryText = "\(indexPath.row + 1)" + ". " +
-            player[indexPath.row].name + ": " + "\(player[indexPath.row].drivenMiles)" + " miles"
+            player[indexPath.row].name + ": " + "\(player[indexPath.row].drivenMiles)" + " " + AppStrings.Game.drivenSeaMilesLblTxt.lowercased()
         let attributedString = NSAttributedString(
             string: highscoreEntryText,
             attributes: [.font: UIFont().scalableFont(

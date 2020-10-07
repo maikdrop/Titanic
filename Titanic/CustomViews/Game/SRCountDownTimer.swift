@@ -203,7 +203,6 @@ final class SRCountdownTimer: UIView {
             target: self,
             selector: #selector(SRCountdownTimer.timerFired(_:)),
             userInfo: nil, repeats: true)
-
         RunLoop.main.add(timer!, forMode: .common)
         delegate?.timerDidStart?(sender: self)
     }

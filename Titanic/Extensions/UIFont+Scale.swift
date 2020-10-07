@@ -15,7 +15,7 @@ import UIKit
 extension UIFont {
     
     /**
-    Scales font for text style.
+    Scales the font for text style.
     
     - Parameter textStyle: text style to scale
     - Parameter fontSize: font size to scale

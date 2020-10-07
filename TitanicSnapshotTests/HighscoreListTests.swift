@@ -21,7 +21,8 @@ class HighscoreListTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = HighscoreListTableViewController(dataHandler: PlayerHandling())
+        sut = HighscoreListTableViewController(
+            dataHandler: PlayerHandling(fileName: AppStrings.Highscore.fileName))
     }
 
     override func tearDown() {

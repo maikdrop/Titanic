@@ -46,11 +46,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 //Game
 "GoLbl_Txt" = "LOS";
-"KnotsLbl_Txt" = "Knoten: ";
-"MilesLbl_Txt" = "Meilen: ";
-"CrashesLbl_Txt" = "Kollisionen: ";
+"KnotsLbl_Txt" = "Knoten";
+"MilesLbl_Txt" = "Meilen";
+"CrashesLbl_Txt" = "Kollisionen";
 "GameOverLbl_Txt" = "SPIEL ZU ENDE";
 "YouWinLbl_Txt" = "GEWONNEN";
+
+//Highscore
+"File_Name" = "highscore.json";
 
 //Game State
 "New" = "Neu";

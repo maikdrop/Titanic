@@ -24,7 +24,8 @@ struct HighscoreListPresenter {
      */
     func present(in viewController: UIViewController) {
 
-        let highscoreListTVC = HighscoreListTableViewController(dataHandler: PlayerHandling())
+        let playerHandler = PlayerHandling(fileName: AppStrings.Highscore.fileName)
+        let highscoreListTVC = HighscoreListTableViewController(dataHandler: playerHandler)
 
         let navigationController = UINavigationController(rootViewController: highscoreListTVC)
 

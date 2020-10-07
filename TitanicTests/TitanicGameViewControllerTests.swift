@@ -32,7 +32,7 @@ class MockTitanicGameViewController: TitanicGameViewController {
     }
 }
 
-class MockTitanicGameViewControllerTests: XCTestCase {
+class TitanicGameViewControllerTests: XCTestCase {
 
     var sut: MockTitanicGameViewController!
 

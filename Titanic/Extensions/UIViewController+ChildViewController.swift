@@ -16,7 +16,7 @@ import UIKit
 extension UIViewController {
     
     /**
-     Adds child view controller.
+     Adds a child view controller.
      
      - Parameter child: child view controller to add
      */
@@ -27,7 +27,7 @@ extension UIViewController {
     }
     
     /**
-     Removes child view controller.
+     Removes a child view controller.
      */
     func remove() {
         guard parent != nil else {

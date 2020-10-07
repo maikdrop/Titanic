@@ -24,6 +24,8 @@ class TitanicGameViewController: UIViewController {
 
     private var cancellableObserver = [Cancellable?]()
     private var displayLink: CADisplayLink?
+    private var gameDelayTimer: Timer?
+    private var randomSliderValueAnimator: UIViewPropertyAnimator?
 
     private lazy var gameControlBtn = UIBarButtonItem(
           image: UIImage(systemName: controlBtnName),
@@ -77,7 +79,9 @@ extension TitanicGameViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        randomSliderValueAnimator?.stopAnimation(true)
         gameView.gameCountdownTimer.reset()
+        gameDelayTimer?.invalidate()
     }
 }
 
@@ -85,7 +89,7 @@ extension TitanicGameViewController {
 private extension TitanicGameViewController {
 
     /**
-     Notification from game view.
+     Notification from the game view.
      
      - Parameter notification: Notification when ship intersects with iceberg
      */
@@ -99,7 +103,7 @@ private extension TitanicGameViewController {
     }
 
     /**
-     Notification from game view.
+     Notification from the game view.
      
      - Parameter notification: Notification when an iceberg reached end of view
      */
@@ -120,25 +124,23 @@ private extension TitanicGameViewController {
      Updating iceberg coordinates and score labels from model data.
      */
     private func updateViewFromModel() {
-
         let icebergs = gameViewPresenter.icebergsToDisplay
         icebergs.enumerated().forEach {iceberg in
             let center = CGPoint(x: iceberg.element.xCenter, y: iceberg.element.yCenter)
             gameView.icebergs[iceberg.offset].center = center
         }
 
-        gameView.scoreStackView.knotsLbl.text = AppStrings.Game.knotsLblTxt + gameViewPresenter.knots.description
+        gameView.scoreStackView.knotsLbl.text = AppStrings.Game.knotsLblTxt + ": " + gameViewPresenter.knots.description
         gameView.scoreStackView.drivenSeaMilesLbl.text =
-            AppStrings.Game.drivenSeaMilesLblTxt + gameViewPresenter.drivenSeaMiles.description
+            AppStrings.Game.drivenSeaMilesLblTxt + ": " + gameViewPresenter.drivenSeaMiles.description
         gameView.scoreStackView.crashCountLbl.text =
-            AppStrings.Game.crashesLblTxt + gameViewPresenter.crashCount.description
+            AppStrings.Game.crashesLblTxt + ": " + gameViewPresenter.crashCount.description
     }
 
     /**
-     Shows an alert for highscore entry where an user can enter their name. After accepting the current highscore list shows up.
+     Shows an alert for a highscore entry. The user can enter their name. After accepting, the current highscore list shows up.
      */
     private func showAlertForHighscoreEntry() {
-
         NewHighscoreEntryPresenter(
             title: AppStrings.NewHighscoreEntryAlert.title,
             message: AppStrings.NewHighscoreEntryAlert.message) {[unowned self] outcome in
@@ -160,11 +162,13 @@ private extension TitanicGameViewController {
     }
 }
 
-// MARK: - UI logic to prepare and start the game
+// MARK: - UI logic to prepare, start and, finish the game.
 private extension TitanicGameViewController {
 
     /**
-     Creating and adding preparation view in order to inform user when game will start.
+     Creates and adds the preparation countdown view in order to inform the user when the game will start.
+     
+     - Description: The adding of the preparation view is animated by changing the alpha value.
      */
     private func startPreparationCoutdown() {
         gameControlBtn.isEnabled = false
@@ -173,58 +177,101 @@ private extension TitanicGameViewController {
         let preparationVC = PreparationCountdownViewController(
             preparationCountdown: preparationCountdown,
             animationInterval: interval) { [unowned self] counter in
-                if counter == 0 {
-                    self.animateSettingRandomSliderValue(within: min, and: max)
-                } else {
-                    self.animateSettingSliderValue(to: min, or: max)
-                }
+            if counter == 0 {
+                self.animateSettingRandomSliderValue(within: min, and: max)
+            } else {
+                self.animateSettingSliderValue(to: min, or: max)
+            }
         }
-        add(preparationVC)
+        addViewForPreparationCountdown(preparationVC: preparationVC)
     }
 
     /**
-     Animates setting of random slider value within a range.
+     Animates the setting of the random slider value within a range.
      
      - Parameter min: minimum value
      - Parameter max: maximum value
     */
     private func animateSettingRandomSliderValue(within min: Float, and max: Float) {
-        UIView.animate(
+        randomSliderValueAnimator = UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: interval,
+            delay: 0,
+            options: [],
             animations: {
                 let newSliderValue = Float.random(in: min...max)
                 self.gameView.horizontalSlider.setValue(newSliderValue, animated: true)
                 self.gameView.horizontalSlider.sendActions(for: .valueChanged)
             },
-            completion: {_ in
-                self.preparationCountdownEnded()
-            })
+            completion: {_ in self.preparationCountdownEnded()})
     }
 
     /**
-     Animates setting of slider value to a given value.
+     Animates the setting of the slider value to a given value.
      
      - Parameter min: minimum value
      - Parameter max: maximum value
      */
     private func animateSettingSliderValue(to min: Float, or max: Float) {
-        UIView.animate(withDuration: self.interval, animations: {
+        UIView.animate(withDuration: interval) {
             let newSliderValue = self.gameView.horizontalSlider.value == max ? min : max
             self.gameView.horizontalSlider.setValue(newSliderValue, animated: true)
             self.gameView.horizontalSlider.sendActions(for: .valueChanged)
-        })
+        }
     }
 
     /**
-     When preparation countdown ends game countdown starts after 1 second of delay.
+     When the preparation countdown ends, the game countdown timer starts after a short delay.
     */
     private func preparationCountdownEnded() {
+        gameDelayTimer = Timer.scheduledTimer(
+            timeInterval: interval/2,
+            target: self,
+            selector: #selector(startGameCountdownTimer),
+            userInfo: nil,
+            repeats: false)
+    }
+
+    /**
+     The game countdown timer starts and the game control button will be enabled.
+    */
+    @objc func startGameCountdownTimer() {
         gameControlBtn.isEnabled = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + interval/2) {
-            self.gameView.gameCountdownTimer.start(
-                beginningValue: self.gameViewPresenter.countdownBeginningValue,
-                interval: self.interval,
-                lastSecondsReminderCount: self.reminderCount)
+        gameView.gameCountdownTimer.start(
+            beginningValue: gameViewPresenter.countdownBeginningValue,
+            interval: interval,
+            lastSecondsReminderCount: reminderCount)
+    }
+
+    /**
+     Shows and animates the preparation countdown view before the game starts.
+     
+     - Parameter preparationVC: displayed view controller
+    */
+    private func addViewForPreparationCountdown(preparationVC: PreparationCountdownViewController) {
+        if let last = children.last as? GameEndViewController {
+            preparationVC.view.alpha = last.view.alpha
+        } else {
+            preparationVC.view.alpha = 0
+        }
+        children.forEach({$0.remove()})
+        add(preparationVC)
+        UIView.animate(withDuration: interval) {
+            preparationVC.view.alpha = 0.8
+        }
+    }
+
+    /**
+     Shows and animates the status view after the end of the game.
+     
+     - Parameter statusText: displayed status text
+    */
+    private func addViewForGameEnd(statusText: String) {
+        gameView.gameCountdownTimer.reset()
+        let gameEndVC = GameEndViewController(statusText: statusText, animationInterval: interval)
+        gameEndVC.view.alpha = 0
+        add(gameEndVC)
+        UIView.animate(withDuration: interval) {
+            gameEndVC.view.alpha = 0.8
         }
     }
 }
@@ -233,12 +280,11 @@ private extension TitanicGameViewController {
 extension TitanicGameViewController {
 
     /**
-     Creates smoke animation when ship and iceberg intersects.
+     Creates a smoke animation when the ship and a iceberg intersect.
      
      - Parameter intersectionPoint: coordinates of intersection
      */
     private func intersectionAnimation(at intersectionPoint: CGPoint) {
-
         guard gameView.smokeView == nil else {
             return
         }
@@ -251,7 +297,7 @@ extension TitanicGameViewController {
     }
 
     /**
-     Setting up subscribers to receive notifications when ship and iceberg intersect and when an iceberg reaches the end of view.
+     Setting up the subscribers to receive notifications when ship and iceberg intersect and when an iceberg reaches the end of view.
      */
     private func setupIcebergSubscriber() {
         cancellableObserver.append(NotificationCenter.default
@@ -289,7 +335,6 @@ extension TitanicGameViewController: TitanicGameViewPresenterDelegate {
     func gameDidStart() {
         gameView.gameCountdownTimer.reset()
         gameDidUpdate()
-        children.forEach({$0.remove()})
         startPreparationCoutdown()
     }
 
@@ -303,18 +348,14 @@ extension TitanicGameViewController: TitanicGameViewPresenterDelegate {
         gameView.pauseView.removeFromSuperview()
     }
     func gameEndedWithoutHighscore() {
-        gameView.gameCountdownTimer.reset()
-        let gameEndVC = GameEndViewController(statusText: AppStrings.Game.gameOverLblTxt, animationInterval: interval)
-        add(gameEndVC)
+        addViewForGameEnd(statusText: AppStrings.Game.gameOverLblTxt)
     }
 
     func gameEndedWithHighscore() {
         if presentedViewController is UIAlertController {
             presentedViewController?.dismissWithAnimation()
         }
-        gameView.gameCountdownTimer.reset()
-        let gameEndVC = GameEndViewController(statusText: AppStrings.Game.youWinLblTxt, animationInterval: interval)
-        add(gameEndVC)
+        addViewForGameEnd(statusText: AppStrings.Game.youWinLblTxt)
         showAlertForHighscoreEntry()
     }
 }

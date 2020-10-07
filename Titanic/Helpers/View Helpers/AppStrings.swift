@@ -73,6 +73,10 @@ enum AppStrings {
         static let youWinLblTxt = NSLocalizedString("YouWinLbl_Txt", comment: "")
     }
 
+    enum Highscore {
+        static let fileName = NSLocalizedString("File_Name", comment: "")
+    }
+
     enum AppInformation {
         static let aboutTheAppLblTxt = NSLocalizedString("AboutTheAppLbl_Txt", comment: "")
         static let conceptLblTxt = NSLocalizedString("ConceptLbl_Txt", comment: "")

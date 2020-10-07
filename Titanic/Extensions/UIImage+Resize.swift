@@ -15,7 +15,7 @@ import UIKit
 extension UIImage {
     
     /**
-    Resize Image
+    Resizes an image.
     
     - Parameter newSize: new size of image
      

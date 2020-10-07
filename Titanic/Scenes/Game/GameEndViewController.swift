@@ -30,7 +30,7 @@ class GameEndViewController: UIViewController {
     }
 }
 
-// MARK: Default methods
+// MARK: - Default Methods
 extension GameEndViewController {
 
     override func viewDidLoad() {
@@ -39,11 +39,11 @@ extension GameEndViewController {
     }
 }
 
-// MARK: Private methods for UI Logic
+// MARK: - Private methods for UI Logic
 private extension GameEndViewController {
 
     /**
-     Animates adding of game state view with text.
+     Animates the adding of the game state view with a status text.
      */
     private func addStatusView() {
         view.addSubview(statusView)

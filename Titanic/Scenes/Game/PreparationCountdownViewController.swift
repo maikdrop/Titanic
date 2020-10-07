@@ -52,7 +52,7 @@ extension PreparationCountdownViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addPreparationAnimation()
+        setupPreparationView()
         startPreparationTimer()
     }
 
@@ -66,18 +66,15 @@ extension PreparationCountdownViewController {
 private extension PreparationCountdownViewController {
 
     /**
-     Animates adding of preparation view with preparation count.
+     Setup of the preparation view.
     */
-    private func addPreparationAnimation() {
+    private func setupPreparationView() {
         view.addSubview(preparationView)
         preparationView.label.text = preparationCountdown.description
-        UIView.animate(withDuration: interval) {
-            self.preparationView.alpha = 0.8
-        }
     }
 
     /**
-     Starts preparation timer and reduces preparation count according to chosen interval.
+     Starts the preparation timer and reduces the preparation count.
     */
     private func startPreparationTimer() {
         cancellablePreparationCountdownTimer = Timer.publish(
@@ -91,7 +88,7 @@ private extension PreparationCountdownViewController {
     }
 
     /**
-     Animates removing of preparation view.
+     Animates theremoving of the preparation view.
      */
     private func removePreparationAnimation() {
         UIView.animate(
