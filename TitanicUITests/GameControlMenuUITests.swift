@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
-//UI-Tests done on simulator
+//UI-Tests done on real device: iPhone SE 2
 class GameControlMenuUITests: XCTestCase {
 
     var sut: XCUIApplication!
@@ -37,7 +37,11 @@ class GameControlMenuUITests: XCTestCase {
         let cancelBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Cancel"]
 
         startBtn.tap()
-        controlBtn.tap()
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: controlBtn, handler: nil)
+        waitForExpectations(timeout: 3, handler: {_ in
+            controlBtn.tap()
+        })
 
         XCTAssertTrue(newBtn.waitForExistence(timeout: 1))
         XCTAssertTrue(pauseBtn.waitForExistence(timeout: 1))
@@ -53,7 +57,11 @@ class GameControlMenuUITests: XCTestCase {
 
         startBtn.tap()
 
-        controlBtn.tap()
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: controlBtn, handler: nil)
+        waitForExpectations(timeout: 3, handler: {_ in
+            controlBtn.tap()
+        })
         newBtn.tap()
 
         XCTAssertTrue(countdownLbl.exists)
@@ -66,7 +74,12 @@ class GameControlMenuUITests: XCTestCase {
         let pauseLbl = sut.staticTexts["Pause"]
 
         startBtn.tap()
-        controlBtn.tap()
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: controlBtn, handler: nil)
+        waitForExpectations(timeout: 3, handler: {_ in
+            controlBtn.tap()
+        })
+
         pauseBtn.tap()
 
         XCTAssertTrue(pauseLbl.exists)
@@ -80,7 +93,13 @@ class GameControlMenuUITests: XCTestCase {
         let resumeBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Resume"]
 
         startBtn.tap()
-        controlBtn.tap()
+
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: controlBtn, handler: nil)
+        waitForExpectations(timeout: 3, handler: {_ in
+            controlBtn.tap()
+        })
+
         pauseBtn.tap()
 
         XCTAssertTrue(pauseLbl.exists)

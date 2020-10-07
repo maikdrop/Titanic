@@ -48,9 +48,3 @@ extension HighscoreListPresenter {
     private var storyboardName: String {"HighscoreList"}
     private var viewControllerIdentifier: String {"HighscoreListTableViewController"}
 }
-
-extension UIViewController {
-    @objc func dismissWithAnimation() {
-        self.dismiss(animated: true)
-    }
-}

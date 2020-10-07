@@ -12,34 +12,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-class GameEndViewController: UIViewController {
-
-    private lazy var statusView = GameStateView(frame: view.frame)
-    private let statusText: String
-    private let interval: Double
-
-    // MARK: - Create a game end view
-    init(statusText: String, animationInterval: Double) {
-        self.statusText = statusText
-        self.interval = animationInterval
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    deinit {
-        print("DEINIT GameEndViewController")
-    }
-}
-
-// MARK: - Default Methods
-extension GameEndViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.addSubview(statusView)
-        statusView.label.text = statusText
+extension UIViewController {
+    
+    
+    @objc func dismissWithAnimation() {
+        self.dismiss(animated: true)
     }
 }

@@ -256,7 +256,7 @@ private extension TitanicGameViewController {
         children.forEach({$0.remove()})
         add(preparationVC)
         UIView.animate(withDuration: interval) {
-            preparationVC.view.alpha = 0.8
+            preparationVC.view.alpha = self.alphaValue
         }
     }
 
@@ -271,13 +271,13 @@ private extension TitanicGameViewController {
         gameEndVC.view.alpha = 0
         add(gameEndVC)
         UIView.animate(withDuration: interval) {
-            gameEndVC.view.alpha = 0.8
+            gameEndVC.view.alpha = self.alphaValue
         }
     }
 }
 
 // MARK: - Utility stuff
-extension TitanicGameViewController {
+private extension TitanicGameViewController {
 
     /**
      Creates a smoke animation when the ship and a iceberg intersect.
@@ -386,12 +386,13 @@ extension TitanicGameViewController: SRCountdownTimerDelegate {
 }
 
 // MARK: - Constants
-extension TitanicGameViewController {
+private extension TitanicGameViewController {
 
     private var preparationCountdown: Int {3}
     private var durationOfIntersectionAnimation: Double {1.5}
     private var interval: Double {1}
     private var reminderCount: Int {10}
+    private var alphaValue: CGFloat {0.8}
     private var one: String {"1"}
     private var controlBtnName: String {"control"}
 }

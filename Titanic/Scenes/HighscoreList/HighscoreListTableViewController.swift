@@ -94,7 +94,7 @@ extension HighscoreListTableViewController {
             string: highscoreEntryText,
             attributes: [.font: UIFont().scalableFont(
                 forTextStyle: .body,
-                fontSize: 17)])
+                fontSize: normalFontSize)])
 
         cell.textLabel?.attributedText = attributedString
 
@@ -103,7 +103,7 @@ extension HighscoreListTableViewController {
             string: highscoreEntryText,
             attributes: [.font: UIFont().scalableFontWeight(
                 forTextStyle: .body,
-                fontSize: 18,
+                fontSize: increasedFontSize,
                 weight: .bold)])
 
         cell.textLabel?.attributedText = attributedString
@@ -115,4 +115,6 @@ extension HighscoreListTableViewController {
 // MARK: - Constants
 extension HighscoreListTableViewController {
     private var highscoreEntryCell: String {"highscoreEntryCell"}
+    private var normalFontSize: CGFloat {17}
+    private var increasedFontSize: CGFloat {18}
 }
