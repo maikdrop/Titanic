@@ -45,7 +45,7 @@ There were three subgoals:
 
 <figure>
   <p align="center">
-    <img src="/Titanic/Resources/Images/Game.jpg" align="center" width="400">
+    <img src="/Titanic/Resources/Images/GameScene.jpg" align="center" width="400">
     <p align="center">Image 1: Game Scene; Source: Own Illustration
   </p>
 </figure>
@@ -105,7 +105,7 @@ Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a
 
 <figure>
   <p align="center">
-    <img src="/Titanic/Resources/Images/AvoidMassiveVC.jpg" align="center" width="450">
+    <img src="/Titanic/Resources/Images/AvoidMassiveGameVC.jpg" align="center" width="450">
     <p align="center">Graphic 2: Avoid Massive Game View Controller; Source: Own Illustration
   </p>
 </figure>
@@ -127,7 +127,7 @@ Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a
 
 <figure>
   <p align="center">
-    <img src="/Titanic/Resources/Images/Layout.jpg" align="center" width="450">
+    <img src="/Titanic/Resources/Images/AdaptingLayout.jpg" align="center" width="450">
      <p align="center">Image 2: Dark mode and font size related to content size; Source: Own Illustration
   </p>
 </figure>
