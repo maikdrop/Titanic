@@ -14,7 +14,7 @@
 
 * [1. About the App](#1-about-the-app)
   * [1.1. Goals](#11-goals)
-  * [1.2. What's the Game About?](#12-what's-the-game-about?)
+  * [1.2. What's the Game About?](#12-what's-the-game-about)
   * [1.3. Game Features](#13-game-features)
   * [1.4. Technical Infos](#14-technical-infos)
 * [2. Concept and Implementation](#2-concept-and-implementation)
