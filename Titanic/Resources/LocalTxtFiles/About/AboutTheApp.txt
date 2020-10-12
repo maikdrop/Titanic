@@ -31,6 +31,6 @@ The following list contains the most important technical informations about the 
 - Language: Swift
 - Deployment Info: iOS 14.0, iPhone
 - 3pp Libraries: SRCountdownTimer, SwiftLint, SnapshotTesting
-* Dependency Manager: CocoaPods², Homebrew, SwiftPackageManager
+- Dependency Manager: CocoaPods¹, Homebrew, SwiftPackageManager
 
-²CocoaPods was used to implement SRCountdownTimer from Github during the first phase of development. Later it was replaced with a customized class of SRCountdownTimer.
+¹CocoaPods was used to implement SRCountdownTimer from Github during the first phase of development. Later it was replaced with a customized class of SRCountdownTimer.
