@@ -18,7 +18,7 @@ class AppConceptViewController: UIViewController {
     @IBOutlet private weak var designPatternInnerStackView: UIStackView! {
         didSet {
             let contentArray = [
-                AppStrings.Concept.designPatternTitle + "\n",
+                "1. " + AppStrings.Concept.designPatternTitle + "\n",
                 readTextFromFile(fileName: designPatternFileName, with: txtExt)]
             for index in 0..<designPatternInnerStackView.arrangedSubviews.count {
                 if let label = designPatternInnerStackView.arrangedSubviews[index] as? UILabel {
@@ -31,7 +31,7 @@ class AppConceptViewController: UIViewController {
     @IBOutlet private weak var avoidingMassiveVCInnerStackView: UIStackView! {
         didSet {
             let contentArray = [
-                AppStrings.Concept.avoidMassiveVCTitle + "\n",
+                "2. " + AppStrings.Concept.avoidMassiveVCTitle + "\n",
                 readTextFromFile(fileName: avoidMassiveVCFileName, with: txtExt)]
             for index in 0..<avoidingMassiveVCInnerStackView.arrangedSubviews.count {
                 if let label = avoidingMassiveVCInnerStackView.arrangedSubviews[index] as? UILabel {
@@ -44,8 +44,10 @@ class AppConceptViewController: UIViewController {
     @IBOutlet private weak var layoutInnerStackView: UIStackView! {
         didSet {
             let contentArray = [
-                "\n" + AppStrings.Concept.layoutTitle + "\n",
-                readTextFromFile(fileName: layoutFileName, with: txtExt)]
+                "\n" + "3. " + AppStrings.Concept.layoutTitle + "\n",
+                readTextFromFile(fileName: adaptingLayoutFileName, with: txtExt),
+                "",
+                readTextFromFile(fileName: animationFileName, with: txtExt)]
             for index in 0..<layoutInnerStackView.arrangedSubviews.count {
                 if let label = layoutInnerStackView.arrangedSubviews[index] as? UILabel {
                     label.text = contentArray[optional:index] ?? ""
@@ -60,9 +62,10 @@ class AppConceptViewController: UIViewController {
 }
 
 // MARK: - Constants
-extension AppConceptViewController {
-    private var designPatternFileName: String {"DesignPattern"}
-    private var avoidMassiveVCFileName: String {"AvoidMassiveVC"}
-    private var layoutFileName: String {"Layout"}
+private extension AppConceptViewController {
+    private var designPatternFileName: String {"MVP"}
+    private var avoidMassiveVCFileName: String {"AvoidMassiveGameVC"}
+    private var adaptingLayoutFileName: String {"AdaptingLayout"}
+    private var animationFileName: String {"Animation"}
     private var txtExt: String {"txt"}
 }

@@ -113,7 +113,7 @@ extension HighscoreListTableViewController {
 }
 
 // MARK: - Constants
-extension HighscoreListTableViewController {
+private extension HighscoreListTableViewController {
     private var highscoreEntryCell: String {"highscoreEntryCell"}
     private var normalFontSize: CGFloat {17}
     private var increasedFontSize: CGFloat {18}

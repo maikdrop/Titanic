@@ -42,7 +42,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "Rules_GoalSectionTitle" = "Ziel";
 "Rules_GoalSectionContent" = "Fahre so viele Seemeilen wie möglich!";
 "Rules_UsageSectionTitle" = "Benutzung";
-"Rules_UsageSectionContent" = "1. Während der Startphase sucht das Boot nach einer Startposition.\n2. Beweg das Boot mit dem Slider!\n3. Vermeide Zusammenstöße mit den Eisbergen!\n4. Jeder Zusammenstoß wird gezählt und verlangsamt das Boot.\n5. Ein Highscore Eintrag wird angeboten, wenn die gefahrenen Seemeilen in den Top Zehn sind.\n6. Die Spielsteuerung wird durch den Button in der oberen rechten Ecke aufgerufen.";
+"Rules_UsageSectionContent" = "1. Während der Startphase sucht das Boot nach einer Startposition.\n2. Beweg das Boot mit dem Slider.\n3. Vermeide Kollisionen mit den Eisbergen.\n4. Jede Kollision wird gezählt und verlangsamt das Boot.\n5. Das Spiel ist vorbei, wenn 5 Kollisionen erreicht wurden oder die Spielzeit abgelaufen ist.\n6. Nach Spielende werden die gefahrenen Seemeilen geprüft. Wenn sie in den Top 10 sind, wird ein Highscore-Eintrag angeboten.\n7. Die Spielsteuerung wird durch den Button in der oberen rechten Ecke aufgerufen.";
 
 //Game
 "GoLbl_Txt" = "LOS";

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i5G-G6-beJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i5G-G6-beJ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,7 +32,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="367"/>
                                                             </imageView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="uBj-Mp-HEO" secondAttribute="bottom" id="AXR-zc-S1D"/>
                                                             <constraint firstItem="uBj-Mp-HEO" firstAttribute="top" secondItem="2vY-5i-NfM" secondAttribute="top" id="EIA-7u-WaM"/>
@@ -64,7 +65,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvf-8v-iYK" userLabel="Usage Content Label">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvf-8v-iYK" userLabel="Usage Content Label">
                                                                 <rect key="frame" x="0.0" y="140.5" width="382" height="20.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <nil key="textColor"/>
@@ -75,7 +76,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="uBj-Mp-HEO" firstAttribute="leading" secondItem="2vY-5i-NfM" secondAttribute="leading" id="1cT-2C-nH5"/>
                                             <constraint firstItem="2vY-5i-NfM" firstAttribute="trailing" secondItem="uBj-Mp-HEO" secondAttribute="trailing" id="DWR-KB-g9S"/>
@@ -96,7 +97,8 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="0xP-UQ-gOy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="PAX-Vl-x4a" firstAttribute="top" secondItem="h6G-jI-9Rb" secondAttribute="top" id="6Hj-Qh-7WD"/>
                             <constraint firstItem="PAX-Vl-x4a" firstAttribute="width" secondItem="h6G-jI-9Rb" secondAttribute="width" id="DLN-54-fHE"/>
@@ -104,7 +106,6 @@
                             <constraint firstAttribute="bottom" secondItem="PAX-Vl-x4a" secondAttribute="bottom" id="N02-2F-PJi"/>
                             <constraint firstAttribute="trailing" secondItem="PAX-Vl-x4a" secondAttribute="trailing" id="jEp-33-hM0"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="0xP-UQ-gOy"/>
                     </view>
                     <navigationItem key="navigationItem" title="Rules" largeTitleDisplayMode="always" id="kVB-vp-SvF"/>
                     <connections>
@@ -122,5 +123,8 @@
     </scenes>
     <resources>
         <image name="GameScene" width="375" height="211"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

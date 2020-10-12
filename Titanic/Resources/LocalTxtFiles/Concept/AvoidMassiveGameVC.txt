@@ -1,0 +1,8 @@
+In MVC the view controller implements UI logic and communicates to the model. Depending on the complexity, it can end up in many functions and properties. This makes the view controller less readable, reusable, and gains complexity. In MVC the view is "general" and the view controller is "special". In MVP both (view and view controller) are "general" and seen as one part. The presenter is "special" and communicates to the model. So, you can get rid of all model related code in the view controller. In order to reduce complexity further, a few more steps were done:
+
+- Game view is used as the main view and implements the adding and handling of subviews and their layout
+- Game view adds observers to each iceberg that sends notifications when an iceberg and ship intersect or if an iceberg reaches the vertical end of the screen
+- Lightweight view presenters are used to navigating to other view controllers or presenting alerts including the call back handling
+- Child view controllers are used to encapsulate reusable UI logic which handles UI improvements for the user, e.g. the animated preparation view
+
+The graphic below shows the theoretical concept of implementations in Titanic to avoid a massive game view controller.

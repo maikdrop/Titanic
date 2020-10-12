@@ -86,7 +86,7 @@ extension ChooseAppInformationTableViewController {
 }
 
 // MARK: - Constants
-extension ChooseAppInformationTableViewController {
+private extension ChooseAppInformationTableViewController {
     private var fontSize: CGFloat {17}
     private var headerHeight: CGFloat {25}
     private var informationCell: String {"informationCell"}

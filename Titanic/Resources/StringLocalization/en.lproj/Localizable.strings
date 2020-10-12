@@ -42,7 +42,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "Rules_GoalSectionTitle" = "Goal";
 "Rules_GoalSectionContent" = "Drive as many sea miles as possible!";
 "Rules_UsageSectionTitle" = "Usage";
-"Rules_UsageSectionContent" = "1. during startup contdown boat is looking after a random start position\n2. move boat by moving slider\n3. avoid intersections with icebergs\n4. any intersection will be counted and will slow down your boat\n5. highscore entry is provided if you are in the top ten\n6. game state can be controlled through action button in the upper right corner";
+"Rules_UsageSectionContent" = "1. During the countdown at the beginning, the boat is looking after a random start position.\n2. Move the slider  in order to move the boat.\n3. Avoid collisions with icebergs.\n4. Any collision will increase your crash count, and slow down your boat.\n5. The game is over when you reach 5 crashes or the time is up.\n6. After the end of the game, the driven sea miles will be checked. If they are in the top ten, a highscore entry is provided.\n7. The game state can be controlled with the action button in the upper right corner.";
 
 //Game
 "GoLbl_Txt" = "GO";
@@ -61,11 +61,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "Resume" = "Resume";
 
 //App Information
-"AboutTheAppLbl_Txt" = "About The App";
+"AboutTheAppLbl_Txt" = "About the App";
 "ConceptLbl_Txt" = "Concept and Implementation";
 "LegalLbl_Txt" = "Legal Notices";
 
 //Concept
 "Concept_DesignPatternTitle" = "MVP Design Pattern";
-"Concept_AvoidMassiveVCTitle" = "Avoiding Massive VC";
-"Concept_LayoutTitle" = "Adapting Layout";
+"Concept_AvoidMassiveVCTitle" = "Avoid Massive Game VC";
+"Concept_LayoutTitle" = "Layout";
+

@@ -1,0 +1,5 @@
+Animation:
+
+The goal of animations is to improve the user experience. So, two scenes were chosen to implement animations: welcome and game scene. After starting the app, the welcome view controller shows up and animates an iceberg in the middle of the view. At first, the iceberg is scaled to the left and right edge of the view. Afterwards, the iceberg scales down and becomes transparent. The animation is called when the view did load or the iOS environment changes e.g. the font size.
+
+When the user taps on the start button, the game view controller gets called. There are two other animations before the game is starting. At first, a preparation view with a countdown for the user comes up in order to get ready for the game. The change of the alpha value of the view is animated. Additionally, during the preparation countdown, the slider moves from one side to the other to find a random position.

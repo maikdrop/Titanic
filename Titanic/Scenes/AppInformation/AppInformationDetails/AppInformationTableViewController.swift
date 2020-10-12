@@ -49,7 +49,7 @@ extension AppInformationTableViewController {
         cell.selectionStyle = .none
         cell.textLabel?.font = UIFont().scalableFont(forTextStyle: .body, fontSize: 17)
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.textAlignment = .natural
+        cell.textLabel?.textAlignment = .justified
         cell.textLabel?.text = dataSource[indexPath.row]
         return cell
     }
@@ -77,7 +77,7 @@ private extension AppInformationTableViewController {
 }
 
 // MARK: - Constants
-extension AppInformationTableViewController {
+private extension AppInformationTableViewController {
     private var aboutTheAppFileName: String {"AboutTheApp"}
     private var licenseFileName: String {"MIT_License"}
     private var txtExt: String {"txt"}

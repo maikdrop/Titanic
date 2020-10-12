@@ -1,35 +1,36 @@
-1. Introduction
+1. Goals
 
-Titanic is a simple game where the development started in Spring 2020 after I finished my studies in Applied Computer Science at the University of Applied Science Berlin. During my studies I worked on several projects that contained app prototypes about for example public health, professional environment and smaller apps as exercises in different courses. All apps were written in Swift (it started with Swift 2.2 in 2016) and I used the MVC Pattern. The idea of Titanic based on a simple app exercise during a swift course.
+The main goal of the project was to gain knowledge about Swift and iOS development. In order to learn more while practicing and improve my skills, I've tested different technologies e.g. several package managers. So, I used Cocoa Pods, Homebrew, and Swift Package Manager to implement third-party libraries.
 
-2. Goals
+There were three subgoals:
 
-The main goal of the project was to gain knowledge about swift and iOS development. In order to learn more while practicing different technologies were used that offered the same result. For example  several package managers like Cocoa Pods, Homebrew, and Swift Package Manager were used to implement third party libraries.
+- Implementing the MVP pattern
+- Readable code and clear project structure
+- Adapting layout for different screen and text sizes
 
-There were three sub goals:
+2. What's the Game About?
 
-- implementing MVP pattern
-- readable code and clear project structure
-- adapting layout for different iPhone screen and text sizes
+Users move a boat horizontally by their thumb to avoid collisions with icebergs, which are moving vertically from top to bottom. Any collision will increase the crash count, and slow down the boat. The game is over when the user reaches 5 crashes or the time is up. After the end of the game, the driven sea miles will be checked. If they are in the top ten, a highscore entry is provided. The game state can be controlled with the action button in the upper right corner.
 
-3. What`s the game about?
-
-Users move a ship horizontally by their thumb to avoid intersections with icebergs, that are moving vertically from top to bottom. If the time is up or the maximum crashes are reached the game ends. Immediately after the game end driven sea miles will be verified. If the user is in the top ten, an alert with a text field shows up in order to enter the name of the user.
+3. Game Features
  
-4. Game Features
- 
- - countdown timer
- - score counter
- - game control options
- - smoke animation when ship and iceberg collide
- - high score list
- 
-5. Technical Infos
- 
- - Development Environment: Xcode
- - Language: Swift
- - Deployment Info: iOS 14.0, iPhone
- - 3pp Libraries: SRCountdownTimer, SwiftLint, SnapshotTesting
- - Dependency Manager: CocoaPods¹, Homebrew, SwiftPackageManager
+The following game features haven been implemented:
 
-¹CocoaPods was used to implement SRCountdownTimer from Github during the first phase of development. Later it was replaced with a customized class of SRCountdownTimer.
+- Countdown timer
+- Score counter
+- Game control options
+- Vertically movable ship
+- Horizontally moving icebergs
+- Highscore list
+ 
+4. Technical Infos
+ 
+The following list contains the most important technical informations about the app:
+
+- Development Environment: Xcode
+- Language: Swift
+- Deployment Info: iOS 14.0, iPhone
+- 3pp Libraries: SRCountdownTimer, SwiftLint, SnapshotTesting
+* Dependency Manager: CocoaPods², Homebrew, SwiftPackageManager
+
+²CocoaPods was used to implement SRCountdownTimer from Github during the first phase of development. Later it was replaced with a customized class of SRCountdownTimer.

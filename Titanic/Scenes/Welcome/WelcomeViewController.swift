@@ -15,7 +15,7 @@ import UIKit
 class WelcomeViewController: UIViewController {
 
     // MARK: - Properties
-    private let icebergImageView = UIImageView(image: UIImage(named: "LaunchImage"))
+    private lazy var icebergImageView = UIImageView(image: UIImage(named: launchImageFileName))
 
     @IBOutlet private weak var appInformationBtn: UIBarButtonItem! {
         didSet {
@@ -147,10 +147,11 @@ private extension WelcomeViewController {
 }
 
  // MARK: - Constants
-extension WelcomeViewController {
+private extension WelcomeViewController {
     private var transitionAnimationDuration: Double {0.6}
     private var propertyAnimationDuration: Double {0.75}
     private var scaleFactor: CGFloat {0.1}
     private var storyboardName: String {"GameRules"}
     private var viewControllerIdentifier: String {"GameRulesViewController"}
+    private var launchImageFileName: String {"LaunchImage"}
 }
