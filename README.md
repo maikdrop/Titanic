@@ -128,7 +128,7 @@ Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a
 <figure>
   <p align="center">
     <img src="/Titanic/Resources/Images/AdaptingLayout.jpg" align="center" width="450">
-     <p align="center">Image 2: Dark Mode and Font Size Related to Content Size; Source: Own Illustration
+     <p align="center">Image 2: Dark Mode, and Font Size Related to Content Size Category; Source: Own Illustration
   </p>
 </figure>
 <br />
