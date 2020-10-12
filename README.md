@@ -14,18 +14,18 @@
 
 * [1. About the App](#1-about-the-app)
   * [1.1. Goals](#11-goals)
-  * [1.2. What's the game about?](#12.what's-the-game-about?)
-  * [1.3. Game Features](#13.game-features)
+  * [1.2. What's the Game About?](#12-what's-the-game-about?)
+  * [1.3. Game Features](#13-game-features)
   * [1.4. Technical Infos](#14-technical-infos)
-* [2. Concept and Implementation](#2-concept-and-implmentation)
+* [2. Concept and Implementation](#2-concept-and-implementation)
   * [2.1. MVP Design Pattern](#21-mvp-design-pattern)
-  * [2.2. Avoid Massive ViewController](#22-avoid-massive-viewcontroller)
+  * [2.2. Avoid Massive View Controller](#22-avoid-massive-view-controller)
   * [2.3. Layout](#23-layout)
     * [2.3.1. Adapting Layout](#231-adapting-layout)
     * [2.3.2. Animation](#232-animation)
   * [2.4. Persistence](#24-persistence)
   * [2.5. Testing](#25-testing)
-  * [2.6 Follow Up](#26-follow-up)
+  * [2.6 Follow-Up](#26-follow-up)
 
 ## 1. About the App
 
@@ -82,7 +82,7 @@ The following list contains the most important technical informations about the 
 
 <p align="justify">MVP stands for Model-View-Presenter. Graphic 1 shows the theoretical concept of MVP.  In comparison to the common MVC (Model-View-Controller) pattern, MVP offers an additional entity, the presenter. Furthermore, view and view controller form together the view entity. There are two different versions of MVP: Supervising Controller and Passive View. In Titanic, the Passive View was implemented, so all data synchronization between view and model is organized by the presenter. The view should only implement view logic. There is no direct data binding between view and model or view and presenter. The view sends intents via public API to the presenter, it calls the public API of the model and communicates back to the view via delegate methods. The presenter is like a portal for the view to see and get relevant view-formatted model data to update their UI. It’s to be mentioned that only the game scene uses the MVP pattern. All other Scenes use MVC.</p>
 
-A big benefit of MVP is to avoid a massive view controller ([chapter 2.2](#22-avoid-massive-viewcontroller)) and create a reusable view.  <br /> <br />
+A big benefit of MVP is to avoid a massive view controller ([chapter 2.2](#22-avoid-massive-view-controller)) and create a reusable view.  <br /> <br />
 
 <figure>
   <p align="center">
@@ -169,7 +169,7 @@ There are two other animations before the game is starting. At first, a preparat
 * Print statements when a class is deinitialized
 * Check for memory leaks with Xcode Instruments
 
-### 2.6. Followup
+### 2.6. Follow-Up
 
 <p align="justify">Currently watching the Stanford Course <a href="https://www.youtube.com/playlist?list=PLpGHT1n4-mAtTj9oywMWoBx0dCGd51_yG">Developing Applications for iOS using SwiftUI</a>. So, the next goal is to implement a SwiftUI view in Titanic.</p>
 
