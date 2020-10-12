@@ -128,7 +128,7 @@ Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a
 <figure>
   <p align="center">
     <img src="/Titanic/Resources/Images/AdaptingLayout.jpg" align="center" width="450">
-     <p align="center">Image 2: Dark mode and font size related to content size; Source: Own Illustration
+     <p align="center">Image 2: Dark Mode and Font Size Related to Content Size; Source: Own Illustration
   </p>
 </figure>
 <br />
@@ -140,7 +140,7 @@ Graphic 2 shows the theoretical concept of implementations in Titanic to avoid a
 <figure>
   <p align="center">
     <img src="/Titanic/Resources/Images/Iceberg.gif" align="center" width="200">
-    <p align="center">GIF 1: Animated iceberg in Welcome Scene; Source: Own Illustration
+    <p align="center">GIF 1: Animated Iceberg in Welcome Scene; Source: Own Illustration
   </p>
 </figure>
 <br />
