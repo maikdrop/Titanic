@@ -67,6 +67,8 @@ The following game features haven been implemented:
 The following list contains the most important technical informations about the app:
 
 * Development Environment: Xcode
+* Interface: Storyboard
+* Life Cycle: UIKit App Delegate
 * Language: Swift
 * Deployment Info: iOS 14.0, iPhone
 * 3pp Libraries: [SRCountdownTimer](https://github.com/rsrbk/SRCountdownTimer), [SwiftLint](https://github.com/realm/SwiftLint), [SnapshotTesting](https://github.com/pointfreeco/swift-snapshot-testing)
