@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import Foundation
 
-struct PlayerHandling: DataHandling {
+struct PlayerHandling: FileHandling {
 
     // MARK: - Properties
     private var url = try? FileManager.default.url(
@@ -34,22 +34,28 @@ struct PlayerHandling: DataHandling {
      
      - Parameter completion: completion handler is called when players were fetched
      */
-    func fetch(then completion: (Handler)) {
+    func fetchFromFile(then completion: (Handler)) {
+
+        var data: Data?
+
         if let url = url {
             if !FileManager.default.fileExists(atPath: url.path) {
                 completion(.success(DataTyp()))
                 return
             }
-            if let data = try? Data(contentsOf: url) {
-                do {
-                    let player = try JSONDecoder().decode(DataTyp.self, from: data)
-                    completion(.success(player))
-                } catch {
-                    completion(.failure(DataHandlingError.decodingError(
-                        message: AppStrings.ErrorAlert.decodingErrorMessage)))
-                }
-            } else {
-                completion(.failure(DataHandlingError.readingError(message: AppStrings.ErrorAlert.readingErrorMessage)))
+
+            do {
+                data = try Data(contentsOf: url)
+            } catch {
+                completion(.failure(DataHandlingError.readingError(
+                                        message: AppStrings.ErrorAlert.fileReadingErrorMessage)))
+            }
+            do {
+                let player = try JSONDecoder().decode(DataTyp.self, from: data!)
+                completion(.success(player))
+            } catch {
+                completion(.failure(DataHandlingError.decodingError(
+                                        message: AppStrings.ErrorAlert.jsonDecodingErrorMessage)))
             }
         }
     }
@@ -58,18 +64,26 @@ struct PlayerHandling: DataHandling {
      Saves players in a JSON file.
      
      - Parameter player: players to save
-     - Parameter completion: completion handler is called when players were saved
+     - Parameter completion: completion handler calls back when players were saved
      */
-    func save(player: DataTyp, then completion: (Handler)) {
-        if let url = url, let json = try? JSONEncoder().encode(player) {
+    func saveToFile(data: DataTyp, then completion: (Handler)) {
+
+        var json: Data?
+
+        if let url = url {
             do {
-                try json.write(to: url)
-                completion(.success(player))
+                json = try JSONEncoder().encode(data)
             } catch {
-                completion(.failure(DataHandlingError.writingError(message: AppStrings.ErrorAlert.writingErrorMessage)))
+                completion(.failure(DataHandlingError.encodingError(
+                                        message: AppStrings.ErrorAlert.jsonEncodingErrorMessage)))
             }
-        } else {
-            completion(.failure(DataHandlingError.encodingError(message: AppStrings.ErrorAlert.encodingErrorMessage)))
+            do {
+                try json?.write(to: url)
+                completion(.success(data))
+            } catch {
+                completion(.failure(DataHandlingError.writingError(
+                                        message: AppStrings.ErrorAlert.fileWritingErrorMessage)))
+            }
         }
     }
 }

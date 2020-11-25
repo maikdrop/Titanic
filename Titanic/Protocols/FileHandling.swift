@@ -14,11 +14,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 // source: https://www.swiftbysundell.com/articles/type-erasure-using-closures-in-swift/
 import Foundation
 
-protocol DataHandling {
+protocol FileHandling {
 
     associatedtype DataTyp
 
-    func fetch(then completion: (Result<DataTyp, Error>) -> Void)
+    func fetchFromFile(then completion: (Result<DataTyp, Error>) -> Void)
 
-    func save(player: DataTyp, then completion: (Result<DataTyp, Error>) -> Void)
+    func saveToFile(data: DataTyp, then completion: (Result<DataTyp, Error>) -> Void)
 }

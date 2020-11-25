@@ -18,10 +18,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "TitanicGameControl_Title" = "Spielsteuerung";
 
 //Error Messages
-"Reading_Error" = "Es gab einen Fehler während des Lesens der Highscoreliste.";
-"Decoding_Error" = "Es gab einen Fehler während des Dekodierens der Highscoreliste.";
-"Writing_Error" = "Es gab einen Fehler während des Schreibens der Highscoreliste.";
-"Encoding_Error" = "Es gab einen Fehler während des Kodierens der Highscoreliste.";
+"File_Reading_Error" = "Es gab einen Fehler während des Lesens der Highscoreliste.";
+"JSON_Decoding_Error" = "Es gab einen Fehler während des Dekodierens der Highscoreliste.";
+"File_Writing_Error" = "Es gab einen Fehler während des Schreibens der Highscoreliste.";
+"JSON_Encoding_Error" = "Es gab einen Fehler während des Kodierens der Highscoreliste.";
+"Database_Reading_Error" = "Es gab einen Fehler während des Lesens der Spieldaten";
+"Database_Writing_Error" = "Es gab einen Fehler während der Sicherung der Spieldaten";
+"Database_Deleting_Error" = "Es gab einen Fehler während des Löschens der Spieldaten";
 
 //Alert Components
 "NewHighscoreEntry_Message" = "Du bist in den Top 10. Bitte trage deinen Namen ein, um deine Platzierung zu sehen.";
@@ -59,6 +62,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "New" = "Neu";
 "Pause" = "Pause";
 "Resume" = "Fortsetzen";
+"Save" = "Speichern";
 
 //App Information
 "AboutTheAppLbl_Txt" = "Über die App";

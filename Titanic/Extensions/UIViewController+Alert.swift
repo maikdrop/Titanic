@@ -23,9 +23,9 @@ extension UIViewController {
     - Parameter title: alert title
     - Paramter message: alert message
     */
-    func alertError(title: String?, message: String?) {
+    func infoAlert(title: String?, message: String?) {
 		let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: AppStrings.CommonAlertAction.okay, style: .default)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in self.navigationController?.popViewController(animated: true)}
 		alertController.addAction(okAction)
 		present(alertController, animated: true, completion: nil)
 	}

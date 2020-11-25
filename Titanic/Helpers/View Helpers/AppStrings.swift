@@ -26,10 +26,15 @@ enum AppStrings {
 
     enum ErrorAlert {
         static let title = NSLocalizedString("ErrorAlert_Title", comment: "")
-        static let readingErrorMessage = NSLocalizedString("Reading_Error", comment: "")
-        static let decodingErrorMessage = NSLocalizedString("Decoding_Error", comment: "")
-        static let writingErrorMessage = NSLocalizedString("Writing_Error", comment: "")
-        static let encodingErrorMessage = NSLocalizedString("Encoding_Error", comment: "")
+
+        static let fileReadingErrorMessage = NSLocalizedString("File_Reading_Error", comment: "")
+        static let jsonDecodingErrorMessage = NSLocalizedString("JSON_Decoding_Error", comment: "")
+        static let fileWritingErrorMessage = NSLocalizedString("File_Writing_Error", comment: "")
+        static let jsonEncodingErrorMessage = NSLocalizedString("JSON_Encoding_Error", comment: "")
+
+        static let databaseReadingErrorMessage = NSLocalizedString("Database_Reading_Error", comment: "")
+        static let databaseWritingErrorMessage = NSLocalizedString("Database_Writing_Error", comment: "")
+        static let databaseDeletingErrorMessage = NSLocalizedString("Database_Deleting_Error", comment: "")
     }
 
     enum NewHighscoreEntryAlert {
@@ -42,6 +47,7 @@ enum AppStrings {
         static let new = NSLocalizedString("New", comment: "")
         static let pause = NSLocalizedString("Pause", comment: "")
         static let resume = NSLocalizedString("Resume", comment: "")
+        static let save = NSLocalizedString("Save", comment: "")
     }
 
     enum UserInfoKey {

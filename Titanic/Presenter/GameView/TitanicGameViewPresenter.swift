@@ -22,6 +22,7 @@ class TitanicGameViewPresenter {
             setupSubscriberForGameEnd()
         }
     }
+    private var storingDate: Date?
     private var cancellableObserver: Cancellable?
     private weak var titanicGameViewPresenterDelegate: TitanicGameViewPresenterDelegate?
 
@@ -58,15 +59,14 @@ class TitanicGameViewPresenter {
         return icebergCenter
     }
     var knots: Int {
-        gameState == .running ? (game?.knots ?? 0) : 0
+        gameState == .running ? (game?.score.knots ?? 0) : 0
     }
     var drivenSeaMiles: Double {
-        game?.drivenSeaMiles ?? 0.0
+        game?.score.drivenSeaMiles ?? 0.0
     }
     var crashCount: Int {
-        game?.crashCount  ?? 0
+        game?.score.crashCount ?? 0
     }
-
     var countdownBeginningValue: Int {
          game?.countdownBeginningValue ?? 0
     }
@@ -77,12 +77,16 @@ class TitanicGameViewPresenter {
         TitanicGame.rowsOfIcebergs
     }
 
+    init(storingDate: Date?) {
+        self.storingDate = storingDate
+    }
+
     deinit {
         cancellableObserver?.cancel()
         print("DEINIT TitanicGamePresenter")
     }
 
-     // MARK: - Public Intents
+     // MARK: - Public Usert Intents
 
     /**
      Attaches the game view to the game view presenter to use the delegate methods.
@@ -97,7 +101,7 @@ class TitanicGameViewPresenter {
      - Parameter icebergs: icebergs from GameView
      */
     func gameViewDidLoad(icebergs: [ImageView]) {
-        game = createGameModel(from: icebergs)
+        game = createGameModel(with: icebergs)
     }
 
     /**
@@ -141,14 +145,38 @@ class TitanicGameViewPresenter {
         }
     }
 
+    func getSliderValue(within min: Float, and max: Float) -> Float {
+        game?.getSliderValue(within: min, and: max) ?? 0.0
+    }
+
     /**
      Saves a player with user name as new highscore entry.
      
      - Parameter userName: name of user
-     - Parameter completion: completion handler is called when player was saved
+     - Parameter completion: completion handler calls back when saving the player was successful or not
      */
-    func nameForHighscoreEntry(userName: String, completion: @escaping (Error?) -> Void) {
+    func nameForHighscoreEntry(userName: String, completion: (Error?) -> Void) {
         game?.savePlayer(userName: userName) {error in
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+    /**
+     Saves game and calls back if saving was successful or not.
+     
+     - Parameter sliderValue: slider value
+     - Parameter currentCountdown: current countdown timer count
+     - Parameter completion: completion handler calls back when saving the game was successful or not
+     */
+    func saveGame(sliderValue: Float, currentCountdown: Int, completion: (Error?) -> Void) {
+        gameState = .save
+
+        game?.saveGame(sliderValue: sliderValue, countdownCount: currentCountdown) { error in
+
             if let error = error {
                 completion(error)
             } else {
@@ -176,9 +204,11 @@ private extension TitanicGameViewPresenter {
      
      - Returns: a titanic game
      */
-    private func createGameModel(from icebergs: [ImageView]) -> TitanicGame {
+    private func createGameModel(with icebergs: [ImageView]) -> TitanicGame {
+
         var modelIcebergs = [Iceberg]()
-        icebergs.forEach {icebergView in
+
+        icebergs.forEach { icebergView in
             let point = Point(
                 xCoordinate: Double(icebergView.frame.origin.x),
                 yCoordinate: Double(icebergView.frame.origin.y))
@@ -189,6 +219,10 @@ private extension TitanicGameViewPresenter {
             modelIcebergs.append(iceberg)
         }
         let playerHandler = PlayerHandling(fileName: AppStrings.Highscore.fileName)
+
+        if let date = storingDate {
+            return TitanicGame(icebergs: modelIcebergs, date: date, dataHandler: playerHandler)
+        }
         return TitanicGame(icebergs: modelIcebergs, dataHandler: playerHandler)
     }
 

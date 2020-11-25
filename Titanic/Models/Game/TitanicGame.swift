@@ -15,45 +15,36 @@ import Foundation
 class TitanicGame {
 
     // MARK: - Properties
-    private var icebergInitialXPos = [Double]()
-    private var icebergInitialYPos = [Double]()
-
     private let playerFetcher: ((Result<[Player], Error>) -> Void) -> Void
     private let playerSaver: ([Player], (Result<[Player], Error>) -> Void) -> Void
 
     private(set) var icebergs: [Iceberg]
+    private(set) var score = Score()
     private var player: [Player]?
 
-    private(set) var drivenSeaMiles = 0.0
+    private var icebergInitialXPos = [Double]()
+    private var icebergInitialYPos = [Double]()
+    private var sliderValue: Float?
+    private(set) var countdownBeginningValue = 60
 
     var drivenSeaMilesInHighscoreList: Bool {
            isInHighscoreList()
     }
 
-    private var seaMilesPerSecond: Double {
-        (Double(knots) / 60)/60
-    }
-    var knots: Int {
-        startKnots - crashCount * knotsReducer
-    }
-
-    private(set) var crashCount = 0 {
-        didSet {
-            if crashCount == maxCrashs {
-                 NotificationCenter.default.post(name: .GameDidEnd, object: self)
-            }
-        }
-    }
-
     // MARK: - Create a Titanic game
-    init<T: DataHandling>(icebergs: [Iceberg], dataHandler: T) where T.DataTyp == [Player] {
+    init<T: FileHandling>(icebergs: [Iceberg], dataHandler: T) where T.DataTyp == [Player] {
         self.icebergs = icebergs
-        self.playerFetcher = dataHandler.fetch
-        self.playerSaver = dataHandler.save
-        self.icebergs.forEach {iceberg in
+        self.playerFetcher = dataHandler.fetchFromFile
+        self.playerSaver = dataHandler.saveToFile
+        self.icebergs.forEach { iceberg in
             icebergInitialXPos.append(iceberg.origin.xCoordinate)
             icebergInitialYPos.append(iceberg.origin.yCoordinate)
         }
+    }
+
+    convenience init<T: FileHandling>(icebergs: [Iceberg], date: Date, dataHandler: T) where T.DataTyp == [Player] {
+        self.init(icebergs: icebergs, dataHandler: dataHandler)
+        fetchGame(matching: date)
     }
 
     deinit {
@@ -65,10 +56,9 @@ class TitanicGame {
      Moves all icebergs vertically and calculates the driven sea miles.
      */
     func moveIcebergsVertically() {
-        drivenSeaMiles += seaMilesPerSecond
-        drivenSeaMiles = drivenSeaMiles.round(to: 2)
+        score.increaseDrivenSeaMiles()
         for index in 0..<icebergs.count {
-            icebergs[index].center.yCoordinate += moveFactor - Double(crashCount)/2
+            icebergs[index].center.yCoordinate += moveFactor - Double(score.crashCount)/2
         }
     }
 
@@ -90,7 +80,7 @@ class TitanicGame {
      When a collision between ship and iceberg is detected, the crash count increases and all icebergs were set to a random position.
      */
     func collisionBetweenShipAndIceberg() {
-        crashCount += 1
+        score.crashCount += 1
         setStartPosOfIcebergs()
     }
 
@@ -100,9 +90,21 @@ class TitanicGame {
      - Important: should be called always before a new game is started
      */
     func startNewTitanicGame() {
-        drivenSeaMiles = 0.0
-        crashCount = 0
+        score.drivenSeaMiles = 0.0
+        score.crashCount = 0
         setStartPosOfIcebergs()
+    }
+
+    /**
+     Get a random value for a slider within two values. If a stored game was fetched, you get the stored slider value.
+     
+     - Parameter min: minimum value
+     - Parameter max: maximum value
+     
+     - Returns: a slider value
+     */
+    func getSliderValue(within min: Float, and max: Float) -> Float {
+        sliderValue ?? Float.random(in: min...max)
     }
 
     /**
@@ -116,10 +118,58 @@ class TitanicGame {
             return
         }
         if newPlayerList.count == maxPlayerCount { newPlayerList.removeLast()}
-        let newPlayer = Player(name: userName, drivenMiles: drivenSeaMiles)
+        let newPlayer = Player(name: userName, drivenMiles: score.drivenSeaMiles)
         newPlayerList.append(newPlayer)
         newPlayerList.sort(by: >)
-        playerSaver(newPlayerList) {result in
+        playerSaver(newPlayerList) { result in
+            if case .failure(let error) = result {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+    /**
+     Fetches game and setups new game from fetched data.
+     
+     - Parameter date: date of saved game that is being searched for
+     */
+    private func fetchGame(matching date: Date) {
+        GameHandling().fetchFromDatabase(matching: date) { result in
+            if case .success(let game) = result {
+                if let fetchedGame = game {
+
+                    sliderValue = fetchedGame.sliderValue
+                    countdownBeginningValue = Int(fetchedGame.timerCount)
+
+                    if let fetchedIcebergs = fetchedGame.icebergs?.allObjects as? [IcebergObject] {
+                        setStartPosOfIcebergs(from: fetchedIcebergs)
+                    }
+
+                    if let fetchedScore = fetchedGame.score {
+                        score.crashCount = Int(fetchedScore.crashCount)
+                        score.drivenSeaMiles = fetchedScore.drivenSeaMiles
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     Saves game and calls back if saving was successful or not.
+     
+     - Parameter sliderValue: slider value
+     - Parameter currentCountdown: current countdown timer count
+     - Parameter completion: completion handler calls back when saving the game was successful or not
+     */
+    func saveGame(sliderValue: Float, countdownCount: Int, completion: (Error?) -> Void) {
+
+        GameHandling().updateDatabase(icebergs: icebergs,
+                                      score: score,
+                                      sliderValue: sliderValue,
+                                      currentCountdown: countdownCount) { result in
+
             if case .failure(let error) = result {
                 completion(error)
             } else {
@@ -153,6 +203,23 @@ private extension TitanicGame {
             }
         }
         return nil
+    }
+
+    /**
+     Set all icebergs to a start position from fetched Icebergs.
+     
+     - Parameter fetchedIcebergs: fetched icebergs
+     */
+    private func setStartPosOfIcebergs(from fetchedIcebergs: [IcebergObject]) {
+
+        if fetchedIcebergs.count == self.icebergs.count {
+
+            for index in 0..<self.icebergs.count {
+
+                self.icebergs[index].center.xCoordinate = fetchedIcebergs[index].centerX
+                self.icebergs[index].center.yCoordinate = fetchedIcebergs[index].centerY
+            }
+        }
     }
 
     /**
@@ -220,7 +287,7 @@ private extension TitanicGame {
         if player!.count < maxPlayerCount {
             return true
         } else if player!.count == maxPlayerCount, let drivenSeaMilesOfLastPlayer = player?.last?.drivenMiles {
-            if drivenSeaMilesOfLastPlayer < drivenSeaMiles {
+            if drivenSeaMilesOfLastPlayer < score.drivenSeaMiles {
                 return true
             }
         }
@@ -233,12 +300,6 @@ extension TitanicGame {
 
     static var rowsOfIcebergs: Int {2}
     static var icebergsInARow: Int {3}
-
-    var countdownBeginningValue: Int {60}
-
     private var moveFactor: Double {10}
-    private var maxCrashs: Int {5}
-    private var startKnots: Int {50}
-    private var knotsReducer: Int {5}
     private var maxPlayerCount: Int {10}
 }

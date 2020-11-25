@@ -18,4 +18,10 @@ extension TitanicGameViewPresenter {
         var xCenter: Double
         var yCenter: Double
     }
+
+    struct GameViewData {
+        var timerCount: Int
+        var xCenterShip: Double
+        var yCenterShip: Double
+    }
 }

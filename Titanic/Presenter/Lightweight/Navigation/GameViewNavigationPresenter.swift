@@ -16,6 +16,8 @@ import UIKit
 //source: www.swiftbysundell.com/basics/child-view-controllers
 struct GameViewNavigationPresenter {
 
+    private let storingDate: Date? = nil
+
     // MARK: - Public API
     /**
      Presents the view of the game.
@@ -24,8 +26,9 @@ struct GameViewNavigationPresenter {
      */
     func presentGameView(in viewController: UIViewController) {
 
+        let presenter = TitanicGameViewPresenter(storingDate: storingDate)
+
         //View Presenter will be injected in View
-        let presenter = TitanicGameViewPresenter()
         let gameVC = TitanicGameViewController(gameViewPresenter: presenter)
 
         if let navigationController = viewController.navigationController {

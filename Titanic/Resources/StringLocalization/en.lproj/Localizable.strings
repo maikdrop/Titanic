@@ -18,10 +18,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "TitanicGameControl_Title" = "Game Control";
 
 //Error Messages
-"Reading_Error" = "There was an error while reading highscore list.";
-"Decoding_Error" = "There was an error while decoding highscore list.";
-"Writing_Error" = "There was an error while writing highscore list.";
-"Encoding_Error" = "There was an error while encoding highscore list.";
+"File_Reading_Error" = "There was an error while reading highscore list.";
+"JSON_Decoding_Error" = "There was an error while decoding highscore list.";
+"File_Writing_Error" = "There was an error while writing highscore list.";
+"JSON_Encoding_Error" = "There was an error while encoding highscore list.";
+"Database_Reading_Error" = "There was an error while reading game data";
+"Database_Writing_Error" = "There was an error while saving game data";
+"Database_Deleting_Error" = "There was an error while deleting game data";
 
 //Alert Components
 "NewHighscoreEntry_Message" = "You`re in the Top 10. Please enter your name to see your ranking.";
@@ -59,6 +62,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "New" = "New";
 "Pause" = "Pause";
 "Resume" = "Resume";
+"Save" = "Save";
 
 //App Information
 "AboutTheAppLbl_Txt" = "About the App";

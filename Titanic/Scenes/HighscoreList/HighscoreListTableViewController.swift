@@ -22,8 +22,8 @@ class HighscoreListTableViewController: UITableViewController {
     lazy var player = self.fetchPlayer()
 
     // MARK: - Create a highscore list table
-    init<T: DataHandling>(dataHandler: T) where T.DataTyp == [TitanicGame.Player] {
-        playerFetcher = dataHandler.fetch
+    init<T: FileHandling>(dataHandler: T) where T.DataTyp == [TitanicGame.Player] {
+        playerFetcher = dataHandler.fetchFromFile
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -59,7 +59,7 @@ private extension HighscoreListTableViewController {
             }
             if case .failure(let error) = result {
                 if let dataHandlingError = error as? DataHandlingError {
-                    self.alertError(
+                    self.infoAlert(
                         title: AppStrings.ErrorAlert.title,
                         message: dataHandlingError.getErrorMessage())
                 }

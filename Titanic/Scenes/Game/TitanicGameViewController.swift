@@ -39,7 +39,11 @@ class TitanicGameViewController: UIViewController {
             NewGameStatePresenter(state: state) { [unowned self] outcome in
                 switch outcome {
                 case .accepted(let newState):
-                    self.gameViewPresenter.changeGameState(to: newState)
+                    if newState == TitanicGameViewPresenter.GameState.save.stringValue {
+                        saveGame()
+                    } else {
+                        gameViewPresenter.changeGameState(to: newState)
+                    }
                 case .rejected:
                     break
                 }
@@ -148,7 +152,7 @@ private extension TitanicGameViewController {
                 case .accepted(let userName):
                     self.gameViewPresenter.nameForHighscoreEntry(userName: userName) {error in
                         if let dataHandlingError = error as? DataHandlingError {
-                            self.alertError(
+                            self.infoAlert(
                                 title: AppStrings.ErrorAlert.title,
                                 message: dataHandlingError.getErrorMessage())
                             return
@@ -198,7 +202,7 @@ private extension TitanicGameViewController {
             delay: 0,
             options: [],
             animations: {
-                let newSliderValue = Float.random(in: min...max)
+                let newSliderValue = self.gameViewPresenter.getSliderValue(within: min, and: max)
                 self.gameView.horizontalSlider.setValue(newSliderValue, animated: true)
                 self.gameView.horizontalSlider.sendActions(for: .valueChanged)
             },
@@ -274,6 +278,24 @@ private extension TitanicGameViewController {
             gameEndVC.view.alpha = self.alphaValue
         }
     }
+
+    /**
+     Saves game and shows alert if saving was successful or not. 
+     */
+    private func saveGame() {
+        gameView.gameCountdownTimer.pause()
+
+        self.gameViewPresenter.saveGame(sliderValue: gameView.horizontalSlider.value,
+                                        currentCountdown: gameView.gameCountdownTimer.currentCounterValue) { error in
+            if let dataHandlingError = error as? DataHandlingError {
+                self.infoAlert(
+                    title: AppStrings.ErrorAlert.title,
+                    message: dataHandlingError.getErrorMessage())
+            } else {
+                self.infoAlert(title: "Game Successfully Saved", message: "")
+            }
+        }
+    }
 }
 
 // MARK: - Utility stuff
@@ -292,7 +314,8 @@ private extension TitanicGameViewController {
         gameView.setSmokeView(at: intersectionPoint)
         DispatchQueue.main.asyncAfter(deadline: .now() + durationOfIntersectionAnimation) {
             self.gameView.smokeView?.removeFromSuperview()
-            if !self.gameView.subviews.contains(self.gameView.pauseView) {self.displayLink?.isPaused = false}
+            if !self.gameView.subviews.contains(self.gameView.pauseView) && self.gameViewPresenter.gameState != .save {
+                self.displayLink?.isPaused = false}
         }
     }
 

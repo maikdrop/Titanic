@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GameObject" representedClassName=".GameObject" syncable="YES" codeGenerationType="category">
+        <attribute name="sliderValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="stored" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timerCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="icebergs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="IcebergObject" inverseName="game" inverseEntity="IcebergObject"/>
+        <relationship name="score" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ScoreObject" inverseName="game" inverseEntity="ScoreObject"/>
+    </entity>
+    <entity name="IcebergObject" representedClassName=".IcebergObject" syncable="YES" codeGenerationType="category">
+        <attribute name="centerX" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="centerY" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="GameObject" inverseName="icebergs" inverseEntity="GameObject"/>
+    </entity>
+    <entity name="ScoreObject" representedClassName=".ScoreObject" syncable="YES" codeGenerationType="category">
+        <attribute name="crashCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="drivenSeaMiles" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="GameObject" inverseName="score" inverseEntity="GameObject"/>
+    </entity>
+    <elements>
+        <element name="GameObject" positionX="-200.5848999023438" positionY="-477.5775756835938" width="128" height="104"/>
+        <element name="IcebergObject" positionX="12.8741455078125" positionY="-477.3345642089844" width="128" height="88"/>
+        <element name="ScoreObject" positionX="-201.477783203125" positionY="-623.1996154785156" width="128" height="74"/>
+    </elements>
+</model>

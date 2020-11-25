@@ -112,7 +112,7 @@ final class SRCountdownTimer: UIView {
             constant: viewConstraintToCounterLabel))
     }
 
-    private var currentCounterValue: Int = 0 {
+    private (set) var currentCounterValue: Int = 0 {
         didSet {
             if !isLabelHidden {
                 if let text = timerFinishingText, currentCounterValue == 0 {

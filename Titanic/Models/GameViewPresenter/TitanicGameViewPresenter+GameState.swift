@@ -20,6 +20,7 @@ extension TitanicGameViewPresenter {
         case pause
         case resume
         case end
+        case save
     }
 }
 
@@ -31,6 +32,7 @@ extension TitanicGameViewPresenter.GameState: CaseIterable {
         case AppStrings.GameState.new: self = .new
         case AppStrings.GameState.pause: self = .pause
         case AppStrings.GameState.resume: self = .resume
+        case AppStrings.GameState.save: self = .save
         default: return nil
         }
     }
@@ -43,14 +45,15 @@ extension TitanicGameViewPresenter.GameState: CaseIterable {
         case .new: return AppStrings.GameState.new
         case .pause: return AppStrings.GameState.pause
         case .resume: return AppStrings.GameState.resume
+        case .save: return AppStrings.GameState.save
         default: return ""
         }
     }
 
     var list: [TitanicGameViewPresenter.GameState] {
         switch self {
-        case .running: return [.new, .pause]
-        case .pause: return [.resume]
+        case .running: return [.new, .pause, .save]
+        case .pause: return [.resume, .save]
         case .end: return [.new]
         default: return []
         }
