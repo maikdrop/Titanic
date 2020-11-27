@@ -12,50 +12,26 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import Foundation
 
-extension TitanicGameViewPresenter {
+extension ChooseAppInformationTableViewController {
 
-    enum GameState {
-        case new
-        case running
-        case pause
-        case resume
-        case end
-        case save
+    enum Category {
+        case about
+        case concept
+        case rules
+        case legal
     }
 }
 
-extension TitanicGameViewPresenter.GameState: CaseIterable {
+extension ChooseAppInformationTableViewController.Category {
 
-    // MARK: - Create a Game State
-    init?(string: String) {
-        switch string {
-        case AppStrings.GameState.new: self = .new
-        case AppStrings.GameState.pause: self = .pause
-        case AppStrings.GameState.resume: self = .resume
-        case AppStrings.GameState.save: self = .save
-        default: return nil
-        }
-    }
+    static var all: [Self] = [.about, .concept, .rules, .legal]
 
-    typealias State = TitanicGameViewPresenter.GameState
-
-    // MARK: - Properties
     var stringValue: String {
         switch self {
-        case .new: return AppStrings.GameState.new
-        case .pause: return AppStrings.GameState.pause
-        case .resume: return AppStrings.GameState.resume
-        case .save: return AppStrings.GameState.save
-        default: return ""
-        }
-    }
-
-    var list: [State] {
-        switch self {
-        case .running: return [.new, .pause, .save]
-        case .pause: return [.resume, .save]
-        case .end: return [.new]
-        default: return []
+        case .about: return AppStrings.AppInformation.aboutTheAppLblTxt
+        case .concept: return AppStrings.AppInformation.conceptLblTxt
+        case .rules: return AppStrings.AppInformation.rulesLblTxt
+        case .legal: return AppStrings.AppInformation.legalLblTxt
         }
     }
 }

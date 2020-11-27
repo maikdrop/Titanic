@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 
 //source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
-struct HighscoreListPresenter {
+struct HighscoreListNaviPresenter {
 
     // MARK: - Public API
     /**
@@ -43,7 +43,7 @@ struct HighscoreListPresenter {
 }
 
 // MARK: - Constants
-extension HighscoreListPresenter {
+extension HighscoreListNaviPresenter {
     private var highscoreListTitle: String {"Top 10"}
     private var storyboardName: String {"HighscoreList"}
     private var viewControllerIdentifier: String {"HighscoreListTableViewController"}

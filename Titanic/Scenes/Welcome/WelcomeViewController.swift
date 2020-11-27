@@ -22,11 +22,13 @@ class WelcomeViewController: UIViewController {
             appInformationBtn.title = AppStrings.Welcome.leftBarBtnTitle
         }
     }
-    @IBOutlet private weak var rulesBtn: UIBarButtonItem! {
+
+    @IBOutlet private weak var storedGamesBtn: UIBarButtonItem! {
         didSet {
-            rulesBtn.title = AppStrings.Welcome.rightBarBtnTitle
+            storedGamesBtn.title = AppStrings.Welcome.rightBarBtnTitle
         }
     }
+
     @IBOutlet private weak var welcomeLabel: UILabel! {
         didSet {
             welcomeLabel.text = AppStrings.Welcome.headlineTitle
@@ -48,19 +50,9 @@ class WelcomeViewController: UIViewController {
     }
 
     @IBAction private func startActionBtn(_ sender: UIButton) {
-
-        GameViewNavigationPresenter().presentGameView(in: self)
+        TitanicGameViewNaviPresenter().present(in: self)
     }
-
-    @IBAction private func rulesBarActionBtn(_ sender: UIBarButtonItem) {
-        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-        if let gameRulesVC = storyboard.instantiateViewController(
-            withIdentifier: viewControllerIdentifier) as? GameRulesViewController {
-            gameRulesVC.navigationItem.title = rulesBtn.title
-            if let navigator = navigationController {
-                navigator.pushViewController(gameRulesVC, animated: true)
-            }
-        }
+    @IBAction private func storedGamesActionBtn(_ sender: UIBarButtonItem) {
     }
 }
 
@@ -141,7 +133,7 @@ private extension WelcomeViewController {
      */
     private func actionBtns(enabled: Bool) {
         appInformationBtn.isEnabled = enabled
-        rulesBtn.isEnabled = enabled
+        storedGamesBtn.isEnabled = enabled
         startBtn.isEnabled = enabled
     }
 }
@@ -151,7 +143,5 @@ private extension WelcomeViewController {
     private var transitionAnimationDuration: Double {0.6}
     private var propertyAnimationDuration: Double {0.75}
     private var scaleFactor: CGFloat {0.1}
-    private var storyboardName: String {"GameRules"}
-    private var viewControllerIdentifier: String {"GameRulesViewController"}
     private var launchImageFileName: String {"LaunchImage"}
 }

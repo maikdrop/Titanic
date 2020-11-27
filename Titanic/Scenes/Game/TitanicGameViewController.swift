@@ -157,7 +157,7 @@ private extension TitanicGameViewController {
                                 message: dataHandlingError.getErrorMessage())
                             return
                         }
-                        HighscoreListPresenter().present(in: self)
+                        HighscoreListNaviPresenter().present(in: self)
                     }
                 case .rejected:
                     break

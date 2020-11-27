@@ -14,7 +14,7 @@ import Foundation
 import UIKit
 
 //source: www.swiftbysundell.com/basics/child-view-controllers
-struct GameViewNavigationPresenter {
+struct TitanicGameViewNaviPresenter {
 
     private let storingDate: Date? = nil
 
@@ -24,7 +24,7 @@ struct GameViewNavigationPresenter {
      
      - Parameter viewController: presenting ViewController
      */
-    func presentGameView(in viewController: UIViewController) {
+    func present(in viewController: UIViewController) {
 
         let presenter = TitanicGameViewPresenter(storingDate: storingDate)
 

@@ -56,7 +56,7 @@ enum AppStrings {
     }
 
     enum Welcome {
-        static let headlineTitle = NSLocalizedString("Welcome_HeadLineTitle", comment: "")
+        static let headlineTitle = NSLocalizedString("Welcome_HeadlineTitle", comment: "")
         static let leftBarBtnTitle =  NSLocalizedString("Welcome_LeftBarBtnTitle", comment: "")
         static let rightBarBtnTitle = NSLocalizedString("Welcome_RightBarBtnTitle", comment: "")
     }
@@ -86,6 +86,7 @@ enum AppStrings {
     enum AppInformation {
         static let aboutTheAppLblTxt = NSLocalizedString("AboutTheAppLbl_Txt", comment: "")
         static let conceptLblTxt = NSLocalizedString("ConceptLbl_Txt", comment: "")
+        static let rulesLblTxt = NSLocalizedString("RulesLbl_Txt", comment: "")
         static let legalLblTxt = NSLocalizedString("LegalLbl_Txt", comment: "")
     }
 

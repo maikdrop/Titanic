@@ -15,10 +15,7 @@ import UIKit
 class ChooseAppInformationTableViewController: UITableViewController {
 
     // MARK: - Properties
-    let dataSource = [
-        AppStrings.AppInformation.aboutTheAppLblTxt,
-        AppStrings.AppInformation.conceptLblTxt,
-        AppStrings.AppInformation.legalLblTxt]
+    let dataSource = Category.all
 
     deinit {
         print("DEINIT AppInformationTableViewController")
@@ -56,7 +53,7 @@ extension ChooseAppInformationTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: informationCell, for: indexPath)
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.font = UIFont().scalableFont(forTextStyle: .body, fontSize: fontSize)
-        cell.textLabel?.text = dataSource[indexPath.row]
+        cell.textLabel?.text = dataSource[indexPath.row].stringValue
         return cell
     }
 
@@ -69,9 +66,7 @@ extension ChooseAppInformationTableViewController {
      //Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let cell = tableView.cellForRow(at: indexPath), let cellText = cell.textLabel?.text {
-            AppInformationDetailsPresenter().present(in: self, for: cellText)
-        }
+        AppInformationDetailsNaviPresenter().present(in: self, for: dataSource[indexPath.row])
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

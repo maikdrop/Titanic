@@ -68,16 +68,16 @@
                                 <action selector="appInformationBarActionBtn:" destination="rgE-zM-luI" id="pMf-00-OcR"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Rules" id="aWT-x7-luS">
+                        <barButtonItem key="rightBarButtonItem" title="Storage" id="aWT-x7-luS">
                             <connections>
-                                <action selector="rulesBarActionBtn:" destination="rgE-zM-luI" id="myb-dW-Sf6"/>
+                                <action selector="storedGamesActionBtn:" destination="rgE-zM-luI" id="Je8-QQ-H1M"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="appInformationBtn" destination="cWJ-Ej-BaF" id="9Hs-vs-iHe"/>
-                        <outlet property="rulesBtn" destination="aWT-x7-luS" id="Fpr-BS-CGb"/>
                         <outlet property="startBtn" destination="5yE-Pg-VuO" id="3FK-L3-u9j"/>
+                        <outlet property="storedGamesBtn" destination="aWT-x7-luS" id="iaE-x5-oah"/>
                         <outlet property="welcomeLabel" destination="iAf-Ac-5GQ" id="meX-o3-JaR"/>
                     </connections>
                 </viewController>

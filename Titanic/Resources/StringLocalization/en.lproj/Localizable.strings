@@ -36,8 +36,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "AlertAction_Cancel" = "Cancel";
 
 //Welcome
-"Welcome_HeadLineTitle" = "Welcome To Titanic!";
-"Welcome_RightBarBtnTitle" = "Rules";
+"Welcome_HeadlineTitle" = "Welcome to Titanic!";
+"Welcome_RightBarBtnTitle" = "Storage";
 "Welcome_LeftBarBtnTitle" = "App Information";
 
 //Rules
@@ -68,6 +68,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "AboutTheAppLbl_Txt" = "About the App";
 "ConceptLbl_Txt" = "Concept and Implementation";
 "LegalLbl_Txt" = "Legal Notices";
+"RulesLbl_Txt" = "Rules";
 
 //Concept
 "Concept_DesignPatternTitle" = "MVP Design Pattern";

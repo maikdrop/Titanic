@@ -12,11 +12,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import UIKit
 
-class AppInformationTableViewController: UITableViewController {
+class DynamicInformationTableViewController: UITableViewController {
 
     // MARK: - Properties
-    var cellIdentifierFromPresentigVC = ""
-    private lazy var dataSource = getDataSource()
+    var dataSource = [String]()
 
     deinit {
         print("DEINIT AppInformationTableViewController")
@@ -24,7 +23,7 @@ class AppInformationTableViewController: UITableViewController {
 }
 
 // MARK: - Default Methods
-extension AppInformationTableViewController {
+extension DynamicInformationTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +32,7 @@ extension AppInformationTableViewController {
 }
 
 // MARK: - DataSource Methods
-extension AppInformationTableViewController {
+extension DynamicInformationTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -56,31 +55,17 @@ extension AppInformationTableViewController {
 }
 
  // MARK: - Private methods for setting up layout of table view and data source
-private extension AppInformationTableViewController {
+private extension DynamicInformationTableViewController {
 
     private func setupTableView() {
         tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: informationCell)
         tableView.sectionHeaderHeight = headerHeight
     }
-
-    private func getDataSource() -> [String] {
-        var stringArray = [String]()
-        if cellIdentifierFromPresentigVC == AppStrings.AppInformation.aboutTheAppLblTxt {
-            stringArray.append(readTextFromFile(fileName: aboutTheAppFileName, with: txtExt))
-
-        } else if cellIdentifierFromPresentigVC == AppStrings.AppInformation.legalLblTxt {
-            stringArray.append(readTextFromFile(fileName: licenseFileName, with: txtExt))
-        }
-        return stringArray
-    }
 }
 
 // MARK: - Constants
-private extension AppInformationTableViewController {
-    private var aboutTheAppFileName: String {"AboutTheApp"}
-    private var licenseFileName: String {"MIT_License"}
-    private var txtExt: String {"txt"}
+private extension DynamicInformationTableViewController {
     private var informationCell: String {"informationCell"}
     private var headerHeight: CGFloat {25}
 }
