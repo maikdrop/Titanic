@@ -14,9 +14,9 @@ import Foundation
 import UIKit
 
 //source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
-struct AppInformationDetailsNaviPresenter {
+struct AppInfoDetailsNaviPresenter {
 
-    typealias Category = ChooseAppInformationTableViewController.Category
+    typealias Category = AppInfoViewController.Category
 
     // MARK: - Public API
     /**
@@ -51,7 +51,7 @@ struct AppInformationDetailsNaviPresenter {
     }
 }
 
-private extension AppInformationDetailsNaviPresenter {
+private extension AppInfoDetailsNaviPresenter {
 
     /**
      Creates a view controller that contains informations about the app.
@@ -73,7 +73,7 @@ private extension AppInformationDetailsNaviPresenter {
 }
 
 // MARK: - Constants
-private extension AppInformationDetailsNaviPresenter {
+private extension AppInfoDetailsNaviPresenter {
     private var conceptStoryboard: String {"Concept"}
     private var conceptVcIdentifier: String {"ConceptViewController"}
     private var txtExt: String {"txt"}

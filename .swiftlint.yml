@@ -1,5 +1,6 @@
 excluded:
 - Pods
+- Titanic/SwiftUI/SwipeCell
 - Titanic/Extensions
 - Titanic/Supporting Files/*
 

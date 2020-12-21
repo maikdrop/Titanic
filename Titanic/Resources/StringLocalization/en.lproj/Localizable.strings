@@ -15,7 +15,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 //Alert Titles
 "ErrorAlert_Title" = "Error occurred";
 "NewHighscoreEntryAlert_Title" = "Congratulations 👏";
-"TitanicGameControl_Title" = "Game Control";
+
+//Game Control
+"GameControl_Title" = "Game Control";
+"GameControl_Saved" = "The game was saved successfully.";
 
 //Error Messages
 "File_Reading_Error" = "There was an error while reading highscore list.";
@@ -30,13 +33,21 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "NewHighscoreEntry_Message" = "You`re in the Top 10. Please enter your name to see your ranking.";
 "TextField_Placeholder" = "Your Name";
 
-//Alert Actions
-"AlertAction_Ok" = "OK";
-"AlertAction_Done" = "Done";
-"AlertAction_Cancel" = "Cancel";
+//Action Commands
+"Action_Ok" = "OK";
+"Action_Done" = "Done";
+"Action_Cancel" = "Cancel";
+"Action_Delete" = "Delete";
+"Action_Edit" = "Edit";
+
+//Deletion
+"DeletionConfirmation_Title" = "";
+"SingleDeletionConfirmation_Message" = "This game will be deleted. This action cannot be undone.";
+"MultipleDeletionConfirmation_Message" = "These number games will be deleted. This action cannot been undone.";
+"Number" = "number";
 
 //Welcome
-"Welcome_HeadlineTitle" = "Welcome to Titanic!";
+"Welcome_Title" = "Welcome to Titanic!";
 "Welcome_RightBarBtnTitle" = "Storage";
 "Welcome_LeftBarBtnTitle" = "App Information";
 
@@ -58,15 +69,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 //Highscore
 "File_Name" = "highscore.json";
 
+//Storage
+"Storage_Title" = "Stored Games";
+
 //Game State
 "New" = "New";
 "Pause" = "Pause";
 "Resume" = "Resume";
-"Save" = "Save";
+"Save" = "Save & Quit";
 
 //App Information
+"AppInfoTitle_Txt" = "App Information";
 "AboutTheAppLbl_Txt" = "About the App";
-"ConceptLbl_Txt" = "Concept and Implementation";
+"ConceptLbl_Txt" = "Concept";
 "LegalLbl_Txt" = "Legal Notices";
 "RulesLbl_Txt" = "Rules";
 

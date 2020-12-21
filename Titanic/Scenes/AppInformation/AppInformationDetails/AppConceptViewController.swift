@@ -14,7 +14,7 @@ import UIKit
 
 class AppConceptViewController: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - IBOutlets
     @IBOutlet private weak var designPatternInnerStackView: UIStackView! {
         didSet {
             let contentArray = [
@@ -58,6 +58,15 @@ class AppConceptViewController: UIViewController {
 
     deinit {
         print("DEINIT AppConceptViewController")
+    }
+}
+
+// MARK: - Default Lifecycle Methods
+extension AppConceptViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .always
     }
 }
 

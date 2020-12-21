@@ -10,37 +10,34 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import Foundation
-import UIKit
+import SwiftUI
+import CoreData
 
-//source: www.swiftbysundell.com/basics/child-view-controllers
-struct TitanicGameViewNaviPresenter {
+struct GameChooserView: View {
 
-    private let storingDate: Date?
+    // MARK: - Property wrappers
+    @Environment(\.managedObjectContext) var context
+    @ObservedObject var gamePicker: GamePickerDelegate
+    @State private var editMode: EditMode = .inactive
 
-    init(storingDate: Date? = nil) {
-        self.storingDate = storingDate
+    // MARK: - Properties
+    private var cancelHandler: () -> Void
+
+    // MARK: - Creates a game chooser view.
+    init(gamePicker: GamePickerDelegate, cancelHandler: @escaping () -> Void) {
+        self.gamePicker = gamePicker
+        self.cancelHandler = cancelHandler
     }
+}
 
-    // MARK: - Public API
-    /**
-     Presents the view of the game.
-     
-     - Parameter viewController: presenting ViewController
-     */
-    func present(in viewController: UIViewController) {
+// MARK: - View declaration
+extension GameChooserView {
 
-        let presenter = TitanicGameViewPresenter(storingDate: storingDate)
-
-        //View Presenter will be injected in View
-        let gameVC = TitanicGameViewController(gameViewPresenter: presenter)
-
-        if let navigationController = viewController.navigationController {
-            navigationController.pushViewController(gameVC, animated: true)
-
-        } else {
-            let navigationController = UINavigationController(rootViewController: gameVC)
-            viewController.present(navigationController, animated: true)
+    var body: some View {
+        NavigationView {
+            GameListView(gamePicker: gamePicker, editMode: $editMode, cancelHandler: cancelHandler)
+                .navigationBarTitle(AppStrings.Storage.title)
+                .environment(\.editMode, $editMode)
         }
     }
 }

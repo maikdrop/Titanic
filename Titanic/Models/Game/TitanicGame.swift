@@ -19,7 +19,13 @@ class TitanicGame {
     private let playerSaver: ([Player], (Result<[Player], Error>) -> Void) -> Void
 
     private(set) var icebergs: [Iceberg]
-    private(set) var score = Score()
+    private(set) var score = Score() {
+        didSet {
+            if score.crashCount == maxCrashs {
+                    NotificationCenter.default.post(name: .GameDidEnd, object: self)
+            }
+        }
+    }
     private var player: [Player]?
 
     private var icebergInitialXPos = [Double]()
@@ -65,7 +71,7 @@ class TitanicGame {
     /**
      When an iceberg reaches the end of the view, the iceberg is moved to a new position.
      
-     - Parameter index: index of iceberg in iceberg array
+     - Parameter index: index of iceberg
      */
     func endOfViewReachedFromIceberg(at index: Int) {
 
@@ -90,8 +96,8 @@ class TitanicGame {
      - Important: should be called always before a new game is started
      */
     func startNewTitanicGame() {
-        score.drivenSeaMiles = 0.0
         score.crashCount = 0
+        score.drivenSeaMiles = 0.0
         setStartPosOfIcebergs()
     }
 
@@ -140,17 +146,36 @@ class TitanicGame {
             if case .success(let game) = result {
                 if let fetchedGame = game {
 
+//                    print("FETCH GAME START")
+//                    print("Fetched Slider Value")
+//                    print(fetchedGame.sliderValue)
+//                    print("Fetched Timer Count")
+//                    print(fetchedGame.timerCount)
+
                     sliderValue = fetchedGame.sliderValue
                     countdownBeginningValue = Int(fetchedGame.timerCount)
 
                     if let fetchedIcebergs = fetchedGame.icebergs?.allObjects as? [IcebergObject] {
+//                        print("Fetched Icebergs")
+                        for iceberg in fetchedIcebergs {
+//                            print("Center X")
+                            print(iceberg.centerX)
+//                            print("Center Y")
+                            print(iceberg.centerY)
+
+                        }
                         setStartPosOfIcebergs(from: fetchedIcebergs)
                     }
 
                     if let fetchedScore = fetchedGame.score {
                         score.crashCount = Int(fetchedScore.crashCount)
                         score.drivenSeaMiles = fetchedScore.drivenSeaMiles
+//                        print("Fetched Crash Count")
+//                        print(score.crashCount)
+//                        print("Fetched Driven Sea Miles")
+//                        print(score.drivenSeaMiles)
                     }
+//                    print("FETCHED GAME END")
                 }
             }
         }
@@ -302,4 +327,5 @@ extension TitanicGame {
     static var icebergsInARow: Int {3}
     private var moveFactor: Double {10}
     private var maxPlayerCount: Int {10}
+    private var maxCrashs: Int {5}
 }

@@ -11,12 +11,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 
 import UIKit
+import CoreData
+import SwiftUI
+import Combine
 
 class WelcomeViewController: UIViewController {
 
     // MARK: - Properties
     private lazy var icebergImageView = UIImageView(image: UIImage(named: launchImageFileName))
+    private var gamePicker = GamePickerDelegate()
+    private var cancellableObserver: Cancellable?
+    private var isTransitionInProgress = true
 
+    // MARK: - IBOutlets
     @IBOutlet private weak var appInformationBtn: UIBarButtonItem! {
         didSet {
             appInformationBtn.title = AppStrings.Welcome.leftBarBtnTitle
@@ -31,28 +38,35 @@ class WelcomeViewController: UIViewController {
 
     @IBOutlet private weak var welcomeLabel: UILabel! {
         didSet {
-            welcomeLabel.text = AppStrings.Welcome.headlineTitle
+            welcomeLabel.text = AppStrings.Welcome.title
         }
     }
+
     @IBOutlet private weak var startBtn: UIButton! {
         didSet {
             startBtn.titleLabel?.adjustsFontForContentSizeCategory = true
         }
     }
 
-    // MARK: - Button Action
-    @IBAction private func appInformationBarActionBtn(_ sender: UIBarButtonItem) {
-        if let navigator = navigationController {
-            let destinationVC = ChooseAppInformationTableViewController()
-            destinationVC.title = appInformationBtn.title
-            navigator.pushViewController(destinationVC, animated: true)
-        }
+    // MARK: - IBActions
+    @IBAction private func appInfoActionBtn(_ sender: UIBarButtonItem) {
+        self.navigationController?.pushViewController(AppInfoViewController(), animated: true)
     }
 
     @IBAction private func startActionBtn(_ sender: UIButton) {
         TitanicGameViewNaviPresenter().present(in: self)
     }
+
     @IBAction private func storedGamesActionBtn(_ sender: UIBarButtonItem) {
+        GameChooserNaviPresenter().present(in: self, delegate: gamePicker) {
+            self.storedGamesBtn.isEnabled = self.storedGameIsAvailable()
+            self.presentedViewController?.dismiss(animated: true)
+        }
+    }
+
+    deinit {
+        print("DEINIT TitanicWelcomeViewController")
+        cancellableObserver?.cancel()
     }
 }
 
@@ -60,8 +74,13 @@ class WelcomeViewController: UIViewController {
 extension WelcomeViewController {
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
         setupIcebergLayout()
         setupIcebergAnimation()
+        cancellableObserver = gamePicker.didChange.sink {[weak self] gamePicker in
+            self?.startGame(from: gamePicker.storedGameDate)
+        }
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -70,6 +89,11 @@ extension WelcomeViewController {
             setupIcebergLayout()
             setupIcebergAnimation()
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        storedGamesBtn.isEnabled = !isTransitionInProgress ? storedGameIsAvailable() : false
     }
 }
 
@@ -122,6 +146,7 @@ private extension WelcomeViewController {
         icebergImageView.alpha = 1
         icebergImageView.transform = .identity
         actionBtns(enabled: true)
+        isTransitionInProgress = false
     }
 
     /**
@@ -133,8 +158,40 @@ private extension WelcomeViewController {
      */
     private func actionBtns(enabled: Bool) {
         appInformationBtn.isEnabled = enabled
-        storedGamesBtn.isEnabled = enabled
+        storedGamesBtn.isEnabled = enabled == true ? storedGameIsAvailable() : enabled
         startBtn.isEnabled = enabled
+    }
+}
+
+// MARK: - Private methods for game handling
+private extension WelcomeViewController {
+
+    /**
+     Checks if the database is empty or not
+     
+     - Returns: true if the database is not empty, false if the database is empty
+     */
+    private func storedGameIsAvailable() -> Bool {
+
+        var gameIsAvailable = false
+
+        GameHandling().fetchFromDatabase { result in
+            if case .success(let game) = result, game != nil {
+                gameIsAvailable = true
+            }
+        }
+        return gameIsAvailable
+    }
+
+    /**
+     Starts a stored game from a date.
+     
+     - Parameter date: date of storing
+     */
+    private func startGame(from date: Date?) {
+        self.presentedViewController?.dismiss(animated: true) {
+            TitanicGameViewNaviPresenter(storingDate: date).present(in: self)
+        }
     }
 }
 

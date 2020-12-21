@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9cW-Qa-6Mz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9cW-Qa-6Mz">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +11,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="5XW-QJ-ZrN">
             <objects>
-                <viewController storyboardIdentifier="WelcomeViewController" id="rgE-zM-luI" customClass="WelcomeViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rgE-zM-luI" customClass="WelcomeViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TrD-1R-5H3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -65,7 +65,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="MYD-x1-mvb">
                         <barButtonItem key="leftBarButtonItem" title="App Information" id="cWJ-Ej-BaF">
                             <connections>
-                                <action selector="appInformationBarActionBtn:" destination="rgE-zM-luI" id="pMf-00-OcR"/>
+                                <action selector="appInfoActionBtn:" destination="rgE-zM-luI" id="ecz-Im-1ta"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Storage" id="aWT-x7-luS">
@@ -88,7 +88,7 @@
         <!--Navigation Controller-->
         <scene sceneID="8wi-gQ-Bmx">
             <objects>
-                <navigationController storyboardIdentifier="WelcomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="9cW-Qa-6Mz" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9cW-Qa-6Mz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="lcb-IO-m4b">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>

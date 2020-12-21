@@ -22,25 +22,21 @@ class DynamicInformationTableViewController: UITableViewController {
     }
 }
 
-// MARK: - Default Methods
+// MARK: - Default Lifecycle Methods
 extension DynamicInformationTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .always
         setupTableView()
     }
 }
 
-// MARK: - DataSource Methods
+// MARK: - Default DataSource Methods
 extension DynamicInformationTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: headerHeight))
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,7 +56,8 @@ private extension DynamicInformationTableViewController {
     private func setupTableView() {
         tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: informationCell)
-        tableView.sectionHeaderHeight = headerHeight
+        let customHeaderFrame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: headerHeight)
+        tableView.tableHeaderView = UIView(frame: customHeaderFrame)
     }
 }
 

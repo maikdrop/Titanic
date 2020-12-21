@@ -14,7 +14,7 @@ import UIKit
 
 class GameRulesViewController: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - IBOutlets
     @IBOutlet private weak var subheadlineLbl: UILabel! {
         didSet {
             subheadlineLbl.text = AppStrings.Rules.subheadlineTitle
@@ -45,5 +45,14 @@ class GameRulesViewController: UIViewController {
             usageContentLbl.text = AppStrings.Rules.usageSectionContent
             //.reduce("",+).replacingOccurrences(of: "|", with: "\n")
         }
+    }
+}
+
+// MARK: - Default Lifecycle Methods
+extension GameRulesViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .always
     }
 }

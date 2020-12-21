@@ -19,13 +19,7 @@ extension TitanicGame {
             startKnots - crashCount * knotsReducer
         }
 
-        var crashCount = 0 {
-            didSet {
-                if crashCount == maxCrashs {
-                     NotificationCenter.default.post(name: .GameDidEnd, object: self)
-                }
-            }
-        }
+        var crashCount = 0
 
         private var seaMilesPerSecond: Double {
             (Double(knots) / 60)/60
@@ -34,7 +28,7 @@ extension TitanicGame {
         /**
          Increases driven sea miles by driven sea miles per second.
          
-         - Description: method should be called every second to calculate the right distance
+         - Method should be called every second to calculate the right distance.
         */
         mutating func increaseDrivenSeaMiles() {
             drivenSeaMiles += seaMilesPerSecond
@@ -48,5 +42,4 @@ extension TitanicGame.Score {
 
     private var knotsReducer: Int {5}
     private var startKnots: Int {50}
-    private var maxCrashs: Int {5}
 }

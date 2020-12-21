@@ -58,4 +58,14 @@ extension TitanicGameViewPresenter.GameState: CaseIterable {
         default: return []
         }
     }
+
+    var systemImageName: String {
+        switch self {
+        case .new: return "plus"
+        case .pause: return "pause"
+        case .resume: return "play"
+        case .save: return "square.and.arrow.down"
+        default: return ""
+        }
+    }
 }

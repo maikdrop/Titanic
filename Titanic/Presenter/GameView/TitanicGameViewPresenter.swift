@@ -22,6 +22,7 @@ class TitanicGameViewPresenter {
             setupSubscriberForGameEnd()
         }
     }
+
     private var storingDate: Date?
     private var cancellableObserver: Cancellable?
     private weak var titanicGameViewPresenterDelegate: TitanicGameViewPresenterDelegate?
@@ -30,21 +31,30 @@ class TitanicGameViewPresenter {
         didSet {
             switch gameState {
             case .new:
-                game?.startNewTitanicGame()
-                titanicGameViewPresenterDelegate?.gameDidStart()
                 gameState = .running
+                if storingDate == nil { game?.startNewTitanicGame() }
+                titanicGameViewPresenterDelegate?.gameDidStart()
             case .pause:
                 titanicGameViewPresenterDelegate?.gameDidPause()
             case .resume:
-                titanicGameViewPresenterDelegate?.gameDidResume()
                 gameState = .running
+                titanicGameViewPresenterDelegate?.gameDidResume()
             case .end:
                 titanicGameViewPresenterDelegate?.gameDidUpdate()
                 game?.drivenSeaMilesInHighscoreList == true ?
                     titanicGameViewPresenterDelegate?.gameEndedWithHighscore() :
                     titanicGameViewPresenterDelegate?.gameEndedWithoutHighscore()
+                if let date = storingDate { eraseStoredGame(matching: date) }
             default:
                 break
+            }
+        }
+    }
+
+    private func eraseStoredGame(matching date: Date) {
+        GameHandling().deleteGame(matching: date) { result in
+            if case .success(let game) = result, game != nil {
+                storingDate = nil
             }
         }
     }
@@ -68,7 +78,7 @@ class TitanicGameViewPresenter {
         game?.score.crashCount ?? 0
     }
     var countdownBeginningValue: Int {
-         game?.countdownBeginningValue ?? 0
+        game?.countdownBeginningValue ?? 0
     }
     var icebergsInARow: Int {
         TitanicGame.icebergsInARow

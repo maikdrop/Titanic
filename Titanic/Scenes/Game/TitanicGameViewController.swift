@@ -26,30 +26,11 @@ class TitanicGameViewController: UIViewController {
     private var displayLink: CADisplayLink?
     private var gameDelayTimer: Timer?
     private var randomSliderValueAnimator: UIViewPropertyAnimator?
-
     private lazy var gameControlBtn = UIBarButtonItem(
-          image: UIImage(systemName: controlBtnName),
-          style: .done,
-          target: self,
-          action: #selector(changeGameState))
-
-    // MARK: - Button action to change game state
-    @objc private func changeGameState(_ sender: UIBarButtonItem) {
-        if let state = gameViewPresenter.gameState {
-            NewGameStatePresenter(state: state) { [unowned self] outcome in
-                switch outcome {
-                case .accepted(let newState):
-                    if newState == TitanicGameViewPresenter.GameState.save.stringValue {
-                        saveGame()
-                    } else {
-                        gameViewPresenter.changeGameState(to: newState)
-                    }
-                case .rejected:
-                    break
-                }
-            }.present(in: self)
-        }
-    }
+        title: "",
+        image: UIImage(systemName: systemImageName),
+        primaryAction: nil,
+        menu: menuForControlBtn())
 
     // MARK: - Create a game view
     init(gameViewPresenter: TitanicGameViewPresenter) {
@@ -57,9 +38,7 @@ class TitanicGameViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented")}
 
     deinit {
         print("DEINIT TitanicGameViewController")
@@ -89,13 +68,38 @@ extension TitanicGameViewController {
     }
 }
 
-// MARK: - Calling game intents
+// MARK: - Private game intents
 private extension TitanicGameViewController {
+
+    /**
+     Creates a menu for a button accordingly to the current game state and handles the actions in order to choose a new state.
+     
+     - Returns: the created menu
+     */
+    private func menuForControlBtn() -> UIMenu? {
+
+        if let state = gameViewPresenter.gameState {
+
+            return GameStateMenuPresenter(currentGameState: state, handler: { [weak self] outcome in
+                switch outcome {
+                case .accepted(let newState):
+                    if newState == TitanicGameViewPresenter.GameState.save.stringValue {
+                        self?.saveGame()
+                    } else {
+                        self?.gameViewPresenter.changeGameState(to: newState)
+                    }
+                case .rejected:
+                    break
+                }
+            }).buttonMenu()
+        }
+        return nil
+    }
 
     /**
      Notification from the game view.
      
-     - Parameter notification: Notification when ship intersects with iceberg
+     - Parameter notification: notification when ship intersects with iceberg
      */
     private func intersectionOfShipAndIceberg(_ notification: Notification) {
         UIDevice.vibrate()
@@ -109,7 +113,7 @@ private extension TitanicGameViewController {
     /**
      Notification from the game view.
      
-     - Parameter notification: Notification when an iceberg reached end of view
+     - Parameter notification: Notification when an iceberg reached end of view.
      */
     private func icebergReachedEndOfViewNotification(_ notification: Notification) {
         if let dict = notification.userInfo as NSDictionary?,
@@ -180,11 +184,11 @@ private extension TitanicGameViewController {
         let max = gameView.horizontalSlider.maximumValue
         let preparationVC = PreparationCountdownViewController(
             preparationCountdown: preparationCountdown,
-            animationInterval: interval) { [unowned self] counter in
+            animationInterval: interval) { [weak self] counter in
             if counter == 0 {
-                self.animateSettingRandomSliderValue(within: min, and: max)
+                self?.animateSettingRandomSliderValue(within: min, and: max)
             } else {
-                self.animateSettingSliderValue(to: min, or: max)
+                self?.animateSettingSliderValue(to: min, or: max)
             }
         }
         addViewForPreparationCountdown(preparationVC: preparationVC)
@@ -292,7 +296,7 @@ private extension TitanicGameViewController {
                     title: AppStrings.ErrorAlert.title,
                     message: dataHandlingError.getErrorMessage())
             } else {
-                self.infoAlert(title: "Game Successfully Saved", message: "")
+                self.infoAlert(title: AppStrings.GameControl.savedSuccessfully, message: "")
             }
         }
     }
@@ -315,7 +319,8 @@ private extension TitanicGameViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + durationOfIntersectionAnimation) {
             self.gameView.smokeView?.removeFromSuperview()
             if !self.gameView.subviews.contains(self.gameView.pauseView) && self.gameViewPresenter.gameState != .save {
-                self.displayLink?.isPaused = false}
+                self.displayLink?.isPaused = false
+            }
         }
     }
 
@@ -359,27 +364,31 @@ extension TitanicGameViewController: TitanicGameViewPresenterDelegate {
         gameView.gameCountdownTimer.reset()
         gameDidUpdate()
         startPreparationCoutdown()
+        gameControlBtn.menu = menuForControlBtn()
     }
 
     func gameDidPause() {
         gameView.gameCountdownTimer.pause()
         gameView.addSubview(gameView.pauseView)
+        gameControlBtn.menu = menuForControlBtn()
     }
 
     func gameDidResume() {
         gameView.gameCountdownTimer.resume()
         gameView.pauseView.removeFromSuperview()
+        gameControlBtn.menu = menuForControlBtn()
     }
     func gameEndedWithoutHighscore() {
+        gameControlBtn.menu = nil
         addViewForGameEnd(statusText: AppStrings.Game.gameOverLblTxt)
+        gameControlBtn.menu = menuForControlBtn()
     }
 
     func gameEndedWithHighscore() {
-        if presentedViewController is UIAlertController {
-            presentedViewController?.dismissWithAnimation()
-        }
+        gameControlBtn.menu = nil
         addViewForGameEnd(statusText: AppStrings.Game.youWinLblTxt)
         showAlertForHighscoreEntry()
+        gameControlBtn.menu = menuForControlBtn()
     }
 }
 
@@ -417,5 +426,5 @@ private extension TitanicGameViewController {
     private var reminderCount: Int {10}
     private var alphaValue: CGFloat {0.8}
     private var one: String {"1"}
-    private var controlBtnName: String {"control"}
+    private var systemImageName: String {"gamecontroller"}
 }

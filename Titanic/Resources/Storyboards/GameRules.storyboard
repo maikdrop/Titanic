@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i5G-G6-beJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i5G-G6-beJ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -107,7 +107,6 @@
                             <constraint firstAttribute="trailing" secondItem="PAX-Vl-x4a" secondAttribute="trailing" id="jEp-33-hM0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Rules" largeTitleDisplayMode="always" id="kVB-vp-SvF"/>
                     <connections>
                         <outlet property="goalContentLbl" destination="3Nn-Os-6s7" id="0em-Rd-Y7r"/>
                         <outlet property="goalTitleLbl" destination="LDA-Nc-yG0" id="0Hv-D9-V6F"/>

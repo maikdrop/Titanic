@@ -10,28 +10,38 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import Foundation
+//Source: https://github.com/EnesKaraosman/SwipeCell
+//Customized for project purpose
 
-extension ChooseAppInformationTableViewController {
+import SwiftUI
 
-    enum Category {
-        case about
-        case concept
-        case rules
-        case legal
+struct Slot: Identifiable {
+    
+    // MARK: - Properties
+    let id = UUID()
+    let image: () -> Image
+    let action: () -> Void
+    let style: SlotStyle
+    
+    // MARK: - Creates a Slot.
+    init(image : @escaping () -> Image, action: @escaping () -> Void, style : SlotStyle) {
+        self.image = image
+        self.action = action
+        self.style = style
     }
 }
 
-extension ChooseAppInformationTableViewController.Category {
-
-    static var all: [Self] = [.about, .concept, .rules, .legal]
-
-    var stringValue: String {
-        switch self {
-        case .about: return AppStrings.AppInformation.aboutTheAppLblTxt
-        case .concept: return AppStrings.AppInformation.conceptLblTxt
-        case .rules: return AppStrings.AppInformation.rulesLblTxt
-        case .legal: return AppStrings.AppInformation.legalLblTxt
-        }
+struct SlotStyle {
+ 
+    // MARK: - Properties
+    let background: Color
+    let imageColor: Color
+    let slotWidth: CGFloat
+    
+    // MARK: - Creates a slot style.
+    init(background: Color, imageColor: Color = .white, slotWidth: CGFloat = 60) {
+        self.background = background
+        self.imageColor = imageColor
+        self.slotWidth = slotWidth
     }
 }

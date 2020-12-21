@@ -14,27 +14,35 @@ import Foundation
 
 enum AppStrings {
 
-    enum CommonAlertAction {
-        static let done = NSLocalizedString("AlertAction_Done", comment: "")
-        static let cancel = NSLocalizedString("AlertAction_Cancel", comment: "")
-        static let okay = NSLocalizedString("AlertAction_Ok", comment: "")
+    enum ActionCommand {
+        static let done = NSLocalizedString("Action_Done", comment: "")
+        static let cancel = NSLocalizedString("Action_Cancel", comment: "")
+        static let okay = NSLocalizedString("Action_Ok", comment: "")
+        static let delete = NSLocalizedString("Action_Delete", comment: "")
+        static let edit = NSLocalizedString("Action_Edit", comment: "")
     }
 
-    enum TitanicGameControlActionSheet {
-        static let title = NSLocalizedString("TitanicGameControl_Title", comment: "")
+    enum GameControl {
+        static let title = NSLocalizedString("GameControl_Title", comment: "")
+        static let savedSuccessfully = NSLocalizedString("GameControl_Saved", comment: "")
     }
 
     enum ErrorAlert {
         static let title = NSLocalizedString("ErrorAlert_Title", comment: "")
-
         static let fileReadingErrorMessage = NSLocalizedString("File_Reading_Error", comment: "")
         static let jsonDecodingErrorMessage = NSLocalizedString("JSON_Decoding_Error", comment: "")
         static let fileWritingErrorMessage = NSLocalizedString("File_Writing_Error", comment: "")
         static let jsonEncodingErrorMessage = NSLocalizedString("JSON_Encoding_Error", comment: "")
-
         static let databaseReadingErrorMessage = NSLocalizedString("Database_Reading_Error", comment: "")
         static let databaseWritingErrorMessage = NSLocalizedString("Database_Writing_Error", comment: "")
         static let databaseDeletingErrorMessage = NSLocalizedString("Database_Deleting_Error", comment: "")
+    }
+
+    enum DeletionAction {
+        static let title = NSLocalizedString("DeletionConfirmation_Title", comment: "")
+        static let messageSingle = NSLocalizedString("SingleDeletionConfirmation_Message", comment: "")
+        static let messageMultiple = NSLocalizedString("MultipleDeletionConfirmation_Message", comment: "")
+        static let number = NSLocalizedString("Number", comment: "")
     }
 
     enum NewHighscoreEntryAlert {
@@ -56,7 +64,7 @@ enum AppStrings {
     }
 
     enum Welcome {
-        static let headlineTitle = NSLocalizedString("Welcome_HeadlineTitle", comment: "")
+        static let title = NSLocalizedString("Welcome_Title", comment: "")
         static let leftBarBtnTitle =  NSLocalizedString("Welcome_LeftBarBtnTitle", comment: "")
         static let rightBarBtnTitle = NSLocalizedString("Welcome_RightBarBtnTitle", comment: "")
     }
@@ -83,7 +91,12 @@ enum AppStrings {
         static let fileName = NSLocalizedString("File_Name", comment: "")
     }
 
+    enum Storage {
+        static let title = NSLocalizedString("Storage_Title", comment: "")
+    }
+
     enum AppInformation {
+        static let appInfoTitle = NSLocalizedString("AppInfoTitle_Txt", comment: "")
         static let aboutTheAppLblTxt = NSLocalizedString("AboutTheAppLbl_Txt", comment: "")
         static let conceptLblTxt = NSLocalizedString("ConceptLbl_Txt", comment: "")
         static let rulesLblTxt = NSLocalizedString("RulesLbl_Txt", comment: "")

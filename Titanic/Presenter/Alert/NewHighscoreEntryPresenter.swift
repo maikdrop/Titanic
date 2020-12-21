@@ -20,8 +20,8 @@ struct NewHighscoreEntryPresenter {
     let title: String
     let message: String
     let handler: (Outcome) -> Void
-    private let acceptTitle = AppStrings.CommonAlertAction.done
-    private let rejectTitle = AppStrings.CommonAlertAction.cancel
+    private let acceptTitle = AppStrings.ActionCommand.done
+    private let rejectTitle = AppStrings.ActionCommand.cancel
 
     // MARK: - Public API
     /**

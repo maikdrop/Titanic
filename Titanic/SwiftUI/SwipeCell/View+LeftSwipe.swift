@@ -10,37 +10,24 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import Foundation
-import UIKit
+//Source: https://github.com/EnesKaraosman/SwipeCell
+//Customized for project purpose
 
-//source: www.swiftbysundell.com/basics/child-view-controllers
-struct TitanicGameViewNaviPresenter {
+import SwiftUI
 
-    private let storingDate: Date?
-
-    init(storingDate: Date? = nil) {
-        self.storingDate = storingDate
-    }
-
-    // MARK: - Public API
+extension View {
+    
     /**
-     Presents the view of the game.
+     Creates a view modifier for a left swipe.
      
-     - Parameter viewController: presenting ViewController
+     - Parameter delete: slot type
+     - Parameter editMode: a binding to the edit mode of the list
+     - Parameter showingSlot: a binding to the visual state of the slot
+     - Parameter resetSlot: a binding in order to reset all displayed slots
+     
+     - Returns: a slidable view modfier to delete items from a list
      */
-    func present(in viewController: UIViewController) {
-
-        let presenter = TitanicGameViewPresenter(storingDate: storingDate)
-
-        //View Presenter will be injected in View
-        let gameVC = TitanicGameViewController(gameViewPresenter: presenter)
-
-        if let navigationController = viewController.navigationController {
-            navigationController.pushViewController(gameVC, animated: true)
-
-        } else {
-            let navigationController = UINavigationController(rootViewController: gameVC)
-            viewController.present(navigationController, animated: true)
-        }
+    func onLeftSwipe(delete: Slot, editMode: Binding<EditMode>, showingSlot: Binding<Bool>, resetSlot: Binding<Bool>) -> some View {
+        self.modifier(SlidableSlot(trailing: delete, editMode: editMode, showingSlot: showingSlot, resetSlot: resetSlot))
     }
 }

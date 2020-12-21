@@ -116,7 +116,7 @@ extension PlayerHandlingErrorAlerts {
             title: AppStrings.ErrorAlert.title,
             message: message,
             preferredStyle: .alert)
-        let okAction = UIAlertAction(title: AppStrings.CommonAlertAction.okay, style: .default)
+        let okAction = UIAlertAction(title: AppStrings.ActionCommands.okay, style: .default)
         alertController.addAction(okAction)
         return alertController
     }

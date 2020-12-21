@@ -15,7 +15,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 //Alert Titles
 "ErrorAlert_Title" = "Fehler aufgetreten";
 "NewHighscoreEntryAlert_Title" = "Gratulation 👏";
-"TitanicGameControl_Title" = "Spielsteuerung";
+
+//Game Control
+"GameControl_Title" = "Spielsteuerung";
+"GameControl_Saved" = "Das Spiel wurde erfolgreich gespeichert.";
 
 //Error Messages
 "File_Reading_Error" = "Es gab einen Fehler während des Lesens der Highscoreliste.";
@@ -30,13 +33,21 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "NewHighscoreEntry_Message" = "Du bist in den Top 10. Bitte trage deinen Namen ein, um deine Platzierung zu sehen.";
 "TextField_Placeholder" = "Dein Name";
 
-//Alert Actions
-"AlertAction_Ok" = "OK";
-"AlertAction_Done" = "Fertig";
-"AlertAction_Cancel" = "Abbrechen";
+//Action Commands
+"Action_Ok" = "OK";
+"Action_Done" = "Fertig";
+"Action_Cancel" = "Abbrechen";
+"Action_Delete" = "Löschen";
+"Action_Edit" = "Bearbeiten";
+
+//Delete Game
+"DeletionConfirmation_Title" = "";
+"SingleDeletionConfirmation_Message" = "Dieses Spiel wird endgültig gelöscht. Der Vorgang kann nicht widerruffen werden.";
+"MultipleDeletionConfirmation_Message" = "Diese Anzahl Spiele werden endgültig gelöscht. Der Vorgang kann nicht widerruffen werden.";
+"Number" = "Anzahl";
 
 //Welcome
-"Welcome_HeadlineTitle" = "Willkommen zu Titanic!";
+"Welcome_Title" = "Willkommen zu Titanic!";
 "Welcome_RightBarBtnTitle" = "Speicher";
 "Welcome_LeftBarBtnTitle" = "App Information";
 
@@ -58,15 +69,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 //Highscore
 "File_Name" = "highscore.json";
 
+//Storage
+"Storage_Title" = "Gespeicherte Spiele";
+
 //Game State
 "New" = "Neu";
 "Pause" = "Pause";
 "Resume" = "Fortsetzen";
-"Save" = "Speichern";
+"Save" = "Speichern & Beenden";
 
 //App Information
+"AppInfoTitle_Txt" = "App Information";
 "AboutTheAppLbl_Txt" = "Über die App";
-"ConceptLbl_Txt" = "Konzept und Implementierung";
+"ConceptLbl_Txt" = "Konzept";
 "LegalLbl_Txt" = "Rechtliche Hinweise";
 "RulesLbl_Txt" = "Spielregeln";
 "ImpressumLbl_Txt" = "Impressum";

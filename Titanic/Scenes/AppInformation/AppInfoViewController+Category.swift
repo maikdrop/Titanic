@@ -11,35 +11,27 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 
 import Foundation
-import UIKit
 
-//source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
-struct NewGameStatePresenter {
+extension AppInfoViewController {
 
-    // MARK: - Properties
-    let state: TitanicGameViewPresenter.GameState
-    let handler: (Outcome) -> Void
+    enum Category {
+        case about
+        case concept
+        case rules
+        case legal
+    }
+}
 
-    // MARK: - Public API
-    /**
-     Presents an alert to choose a new game state.
-     
-     - Parameter viewController: presenting view controller
-     */
-    func present(in viewController: UIViewController) {
-        let alert = UIAlertController(
-            title: AppStrings.TitanicGameControlActionSheet.title,
-            message: "",
-            preferredStyle: .actionSheet)
+extension AppInfoViewController.Category {
 
-        state.list.forEach({state in
-            let defaultStyle = UIAlertAction.Style.default
+    static var all: [Self] = [.about, .concept, .rules, .legal]
 
-            alert.addAction(UIAlertAction(title: state.stringValue, style: defaultStyle) {_ in
-                self.handler(.accepted(state.stringValue))
-            })
-        })
-        alert.addAction(UIAlertAction(title: AppStrings.CommonAlertAction.cancel, style: .cancel))
-        viewController.present(alert, animated: true)
+    var stringValue: String {
+        switch self {
+        case .about: return AppStrings.AppInformation.aboutTheAppLblTxt
+        case .concept: return AppStrings.AppInformation.conceptLblTxt
+        case .rules: return AppStrings.AppInformation.rulesLblTxt
+        case .legal: return AppStrings.AppInformation.legalLblTxt
+        }
     }
 }

@@ -10,37 +10,11 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import Foundation
-import UIKit
+extension GameListView {
 
-//source: www.swiftbysundell.com/basics/child-view-controllers
-struct TitanicGameViewNaviPresenter {
-
-    private let storingDate: Date?
-
-    init(storingDate: Date? = nil) {
-        self.storingDate = storingDate
-    }
-
-    // MARK: - Public API
-    /**
-     Presents the view of the game.
-     
-     - Parameter viewController: presenting ViewController
-     */
-    func present(in viewController: UIViewController) {
-
-        let presenter = TitanicGameViewPresenter(storingDate: storingDate)
-
-        //View Presenter will be injected in View
-        let gameVC = TitanicGameViewController(gameViewPresenter: presenter)
-
-        if let navigationController = viewController.navigationController {
-            navigationController.pushViewController(gameVC, animated: true)
-
-        } else {
-            let navigationController = UINavigationController(rootViewController: gameVC)
-            viewController.present(navigationController, animated: true)
-        }
+    enum ActiveAlert {
+        case deleteSingleGame
+        case deleteMultipleGames
+        case error
     }
 }
