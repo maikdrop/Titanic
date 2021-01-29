@@ -1,0 +1,30 @@
+[
+  {
+    "component": "SwiftLint",
+    "licensor": "Realm Inc.",
+    "website": "https://github.com/realm/SwiftLint",
+    "license": "MIT License",
+    "licenseUrl": "https://raw.githubusercontent.com/realm/SwiftLint/master/LICENSE"
+  },
+  {
+    "component": "SnapshotTesting",
+    "licensor": "Point-Free",
+    "website": "https://github.com/pointfreeco/swift-snapshot-testing",
+    "license": "MIT License",
+    "licenseUrl": "https://raw.githubusercontent.com/pointfreeco/swift-snapshot-testing/main/LICENSE"
+  },
+  {
+    "component": "SRCountdownTimer",
+    "licensor": "Ruslan Serebriakov",
+    "website": "https://github.com/rsrbk/SRCountdownTimer",
+    "license": "MIT License",
+    "licenseUrl": "https://raw.githubusercontent.com/rsrbk/SRCountdownTimer/master/LICENSE.txt"
+  },
+  {
+    "component": "SwipeCell",
+    "licensor": "Enes Karaosman",
+    "website": "https://github.com/EnesKaraosman/SwipeCell",
+    "license": "MIT License",
+    "licenseUrl": "https://raw.githubusercontent.com/EnesKaraosman/SwipeCell/master/LICENSE"
+  }
+]
