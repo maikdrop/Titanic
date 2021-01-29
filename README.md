@@ -72,7 +72,7 @@ The following list contains the most important technical informations about the 
 * Life Cycle: UIKit App Delegate
 * Language: Swift
 * Deployment Info: iOS 14.0, iPhone
-* 3pp Libraries/Projects: [SRCountdownTimer](https://github.com/rsrbk/SRCountdownTimer), [SwiftLint](https://github.com/realm/SwiftLint), [SnapshotTesting](https://github.com/pointfreeco/swift-snapshot-testing), [SwipeCell](https://github.com/EnesKaraosman/SwipeCell">SwipeCell)
+* 3pp Libraries/Projects: [SRCountdownTimer](https://github.com/rsrbk/SRCountdownTimer), [SwiftLint](https://github.com/realm/SwiftLint), [SnapshotTesting](https://github.com/pointfreeco/swift-snapshot-testing), [SwipeCell](https://github.com/EnesKaraosman/SwipeCell)
 * Dependency Manager: [CocoaPods²](https://cocoapods.org), [Homebrew](https://brew.sh), [SwiftPackageManager](https://swift.org/package-manager/)
 
 <p align="justify">²CocoaPods was used to implement SRCountdownTimer from Github during the first phase of development. Later it was replaced with a customized class of SRCountdownTimer.</p>
