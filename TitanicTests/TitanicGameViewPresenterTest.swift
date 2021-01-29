@@ -11,76 +11,95 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 
 import XCTest
+import CoreData
 @testable import Titanic
-
-class MockTitanicGameViewPresenter: TitanicGameViewPresenter {
-
-    var count = 0
-
-    override func moveIcebergsVertically() {
-        count += 1
-    }
-
-    override func endOfViewReachedFromIceberg(at index: Int) {
-        count += 1
-    }
-
-    override func intersectionOfShipAndIceberg() {
-        count += 1
-    }
-
-    override func nameForHighscoreEntry(userName: String, completion: ((Error?) -> Void)?) {
-        count += 1
-    }
-}
 
 class TitanicGameViewPresenterTest: XCTestCase {
 
-    var sut: MockTitanicGameViewPresenter!
+    var sut: TitanicGameViewPresenter!
+    var date: Date?
+    let size = 5
+    let slider: Float = 5.0
+    let timer = 10
+    let icebergCount = 6
 
     override func setUp() {
         super.setUp()
-        sut = MockTitanicGameViewPresenter()
+        sut = TitanicGameViewPresenter(storingDate: nil)
     }
 
     override func tearDown() {
         sut = nil
         super.tearDown()
     }
-
-    func testMoveIcebergsVertically() {
-
-        let count = 1
-
-        sut.moveIcebergsVertically()
-
-        XCTAssertEqual(count, sut.count)
+    
+    func testGameEndAfterCrash() {
+        
+        let icebergs = createIcebergImageViews()
+        
+        sut.gameViewDidLoad(icebergs: icebergs)
+        
+        sut.changeGameState(to: .running)
+        
+        XCTAssertTrue(sut.gameState == .running)
+        
+        for _ in 0..<6 {
+            sut.intersectionOfShipAndIceberg()
+        }
+        XCTAssertTrue(sut.gameState == .end)
     }
 
-    func testEndOfViewReachedFromIceberg() {
+    // run testSaveGame() before testFetchGame()
+    func testSaveGame() {
 
-        let count = 1
+        let icebergs = createIcebergImageViews()
+        
+        sut.gameViewDidLoad(icebergs: icebergs)
 
-        sut.endOfViewReachedFromIceberg(at: 0)
-
-        XCTAssertEqual(count, sut.count)
+        sut.saveGame(sliderValue: slider, timerCount: timer, completion: { error in
+            XCTAssertNil(error)
+        })
     }
+    
+    func testFetchGame() {
+        
+        let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+        
+        let request = GameObject.fetchGamesRequest(predicate: nil)
+        
+        do {
+            let matches = try context?.fetch(request)
+            
+            if let lastGame = matches?.first {
+                
+                let array = lastGame.icebergs?.allObjects as? [IcebergObject]
 
-    func testIntersectionOfShipAndIceberg() {
-
-        let count = 1
-
-        sut.intersectionOfShipAndIceberg()
-
-        XCTAssertEqual(count, sut.count)
+                for index in 0..<array!.count {
+                    
+                    let boolCenterX = array?.contains(where: { $0.centerX == Double(index) + Double(size)/2 })
+                    XCTAssertTrue(boolCenterX!)
+                    
+                    let boolCenterY = array?.contains(where: { $0.centerY == Double(index) + Double(size)/2 })
+                    XCTAssertTrue(boolCenterY!)
+                }
+                XCTAssertEqual(lastGame.config?.sliderValue, slider)
+                XCTAssertEqual(Int(lastGame.config!.timerCount), timer)
+            }
+        } catch {
+            XCTAssertTrue(false)
+        }
     }
+    
+    private func createIcebergImageViews() -> [ImageView] {
+        
+        var icebergs = [ImageView]()
 
-    func testNameForHighscoreEntry() {
-
-        let count = 1
-
-        sut.nameForHighscoreEntry(userName: "", completion: {_ in})
-
-        XCTAssertEqual(count, sut.count)
+        for index in 0..<icebergCount {
+            let icebergView = ImageView()
+            icebergView.image = UIImage(named: AppStrings.ImageNames.iceberg)
+            icebergView.frame = CGRect(x: index, y: index, width: size, height: size)
+            icebergs.append(icebergView)
+        }
+        return icebergs
     }
 }

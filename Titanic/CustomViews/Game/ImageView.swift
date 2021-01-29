@@ -43,5 +43,5 @@ extension ImageView {
 
 // MARK: - Constants
 extension ImageView {
-    private var referenceWidth: CGFloat {375}
+    private var referenceWidth: CGFloat { 375 }
 }

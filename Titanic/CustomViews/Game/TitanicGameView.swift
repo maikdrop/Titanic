@@ -22,7 +22,6 @@ class TitanicGameView: UIView {
 
     private var cancellable = [UIView: Cancellable?]()
     private(set) lazy var icebergs = setUpIcebergs()
-    private(set) lazy var pauseView = PauseView(frame: frame)
     private(set) var smokeView: SKView? {
         didSet {
             if smokeView != nil {
@@ -33,7 +32,7 @@ class TitanicGameView: UIView {
 
     private(set) lazy var ship: ImageView = {
         let shipView = ImageView()
-        if let shipImage = UIImage(named: shipImageName) {
+        if let shipImage = UIImage(named: AppStrings.ImageNames.ship) {
             shipView.image = shipImage
             shipView.backgroundColor = .clear
         }
@@ -52,7 +51,7 @@ class TitanicGameView: UIView {
     private(set) lazy var gameCountdownTimer: SRCountdownTimer = {
         let countdownTimer = SRCountdownTimer()
         countdownTimer.backgroundColor = .clear
-        countdownTimer.labelFont = UIFont().scalableFont(forTextStyle: .title3, fontSize: labelPrefferedFontSize)
+        countdownTimer.labelFont = .preferredFont(forTextStyle: .title3)
         countdownTimer.lineColor = .white
         countdownTimer.trailLineColor = .oceanBlue
         countdownTimer.labelTextColor = .white
@@ -62,6 +61,10 @@ class TitanicGameView: UIView {
 
     private(set) lazy var horizontalSlider: UISlider = {
         let slider = UISlider()
+        let config = UIImage.SymbolConfiguration(pointSize: thumbImgSize)
+        let largeCircleImage = UIImage(systemName: AppStrings.ImageNames.circle, withConfiguration: config)
+        slider.setThumbImage(largeCircleImage, for: .normal)
+        slider.thumbTintColor = .white
         slider.minimumValue = 0
         slider.maximumValue = 1
         slider.value = slider.maximumValue/2
@@ -128,7 +131,7 @@ private extension TitanicGameView {
     /**
      Method is called when the slider position changes.
      
-     - Parameter sender: Sender who is moving the ship
+     - Parameter sender: Sender, which is moving the ship.
      */
     @objc private func moveShip(by sender: UISlider) {
         let shipWidth = Float(ship.bounds.size.width)
@@ -228,14 +231,14 @@ private extension TitanicGameView {
 
             for index in 0..<icebergsInARow * rowsOfIcebergs {
                 let icebergView = ImageView()
-                icebergView.image = UIImage(named: icebergImageName)
+                icebergView.image = UIImage(named: AppStrings.ImageNames.iceberg)
                 icebergView.backgroundColor = .clear
 
                 let verticalSpaceBetweenIcebergs =
                     icebergView.imageSize.height + icebergVerticalOffset * ship.imageSize.height
                 if index.isMultiple(of: icebergsInARow) {horizontalOffset = 0}
 
-                //yCoordinates have to be out of visble y Axis
+                // yCoordinates have to be out of visble y Axis
                 icebergView.frame = CGRect(
                     x: maxIcebergWidth/2 - icebergView.imageSize.width/2 + horizontalOffset,
                     y: -(CGFloat(index) * verticalSpaceBetweenIcebergs) - icebergView.imageSize.height,
@@ -276,14 +279,13 @@ private extension TitanicGameView {
 // MARK: - Constants
 extension TitanicGameView {
 
-    private var icebergImageName: String {"iceberg"}
-    private var shipImageName: String {"ship"}
-    private var icebergVerticalOffset: CGFloat {1.5}
-    private var labelPrefferedFontSize: CGFloat {20}
-    private var sliderBottomConstraint: CGFloat {25}
-    private var sliderLeadingConstraint: CGFloat {20}
-    private var subviewConstraintToSuperview: CGFloat {5}
-    private var countdownTimerTrailingConstraintToSuperV: CGFloat {-5}
+    private var thumbImgSize: CGFloat { 40 }
+    private var icebergVerticalOffset: CGFloat { 1.5 }
+    private var labelPrefferedFontSize: CGFloat { 20 }
+    private var sliderBottomConstraint: CGFloat { 25 }
+    private var sliderLeadingConstraint: CGFloat { 5 }
+    private var subviewConstraintToSuperview: CGFloat { 5 }
+    private var countdownTimerTrailingConstraintToSuperV: CGFloat { -5 }
     private var shipOffset: CGFloat {
         if bounds.height > CGFloat(667.0) {
             return 45

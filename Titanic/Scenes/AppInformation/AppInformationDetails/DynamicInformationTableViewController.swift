@@ -22,7 +22,7 @@ class DynamicInformationTableViewController: UITableViewController {
     }
 }
 
-// MARK: - Default Lifecycle Methods
+// MARK: - Default methods
 extension DynamicInformationTableViewController {
 
     override func viewDidLoad() {
@@ -30,11 +30,8 @@ extension DynamicInformationTableViewController {
         navigationItem.largeTitleDisplayMode = .always
         setupTableView()
     }
-}
 
-// MARK: - Default DataSource Methods
-extension DynamicInformationTableViewController {
-
+    // Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -42,7 +39,7 @@ extension DynamicInformationTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: informationCell, for: indexPath)
         cell.selectionStyle = .none
-        cell.textLabel?.font = UIFont().scalableFont(forTextStyle: .body, fontSize: 17)
+        cell.textLabel?.font = .preferredFont(forTextStyle: .body)
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.textAlignment = .justified
         cell.textLabel?.text = dataSource[indexPath.row]
@@ -50,7 +47,7 @@ extension DynamicInformationTableViewController {
     }
 }
 
- // MARK: - Private methods for setting up layout of table view and data source
+ // MARK: - Private setup methods
 private extension DynamicInformationTableViewController {
 
     private func setupTableView() {
@@ -63,6 +60,6 @@ private extension DynamicInformationTableViewController {
 
 // MARK: - Constants
 private extension DynamicInformationTableViewController {
-    private var informationCell: String {"informationCell"}
-    private var headerHeight: CGFloat {25}
+    private var informationCell: String { "informationCell" }
+    private var headerHeight: CGFloat { 25 }
 }

@@ -15,13 +15,17 @@ import Foundation
 extension TitanicGameViewPresenter {
 
     struct IcebergData {
+
+        // MARK: - Properties
         var xCenter: Double
         var yCenter: Double
     }
 
-    struct GameViewData {
+    struct GameConfig {
+
+        // MARK: - Properties
         var timerCount: Int
-        var xCenterShip: Double
-        var yCenterShip: Double
+        var speedFactor: Int
+        var sliderValue: Float?
     }
 }

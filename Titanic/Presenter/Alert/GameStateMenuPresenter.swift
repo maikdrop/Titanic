@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import Foundation
 import UIKit
 
-//source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
+// source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
 struct GameStateMenuPresenter {
 
     // MARK: - Properties
@@ -24,7 +24,7 @@ struct GameStateMenuPresenter {
     /**
      Presents an alert to choose a new game state.
      
-     - Parameter viewController: presenting view controller
+     - Parameter viewController: The presenting view controller.
      */
     func present(in viewController: UIViewController) {
         let alert = UIAlertController(

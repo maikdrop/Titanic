@@ -11,12 +11,15 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    private let userDefaults = UserDefaults.standard
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         if (ProcessInfo.processInfo.environment["UITEST_DISABLE_ANIMATIONS"] == "YES") {
             UIView.setAnimationsEnabled(false)
         }
+        checkForDefaultSpeedOption()
         return true
     }
 
@@ -79,5 +82,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-
+    private func checkForDefaultSpeedOption() {
+        let speedKey = AppStrings.UserDefaultKeys.speed
+        guard let _ = userDefaults.value(forKey: speedKey) as? Int else {
+            let defaultSpeed = TitanicGame.SpeedOption.medium.rawValue
+            userDefaults.setValue(defaultSpeed, forKey: speedKey)
+            return
+        }
+    }
 }

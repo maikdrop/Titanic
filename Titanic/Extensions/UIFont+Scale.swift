@@ -15,10 +15,10 @@ import UIKit
 extension UIFont {
     
     /**
-    Scales the font for text style.
+    Scales the font for a text style.
     
-    - Parameter textStyle: text style to scale
-    - Parameter fontSize: font size to scale
+    - Parameter textStyle: The text style to scale.
+    - Parameter fontSize: The font size to scale.
      
     - Returns: scaled and styled font
     */
@@ -28,11 +28,11 @@ extension UIFont {
     }
 
     /**
-    Scales font weight for text style.
+    Scales font weight for a text style.
     
-    - Parameter textStyle: text style to scale
-    - Parameter fontSize: font size to scale
-    - Parameter weight: weight to scale
+    - Parameter textStyle: The text style to scale.
+    - Parameter fontSize: The font size to scale.
+    - Parameter weight: The weight to scale.
      
     - Returns: scaled and styled font
     */

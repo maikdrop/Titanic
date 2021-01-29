@@ -40,15 +40,35 @@ class GameRulesViewController: UIViewController {
             [.underlineStyle: NSUnderlineStyle.single.rawValue])
         }
     }
-    @IBOutlet private weak var usageContentLbl: UILabel! {
+
+    @IBOutlet private weak var firstRuleLbl: UILabel! {
         didSet {
-            usageContentLbl.text = AppStrings.Rules.usageSectionContent
-            //.reduce("",+).replacingOccurrences(of: "|", with: "\n")
+            firstRuleLbl.text = AppStrings.Rules.firstRule
+        }
+    }
+    @IBOutlet private weak var secondRuleLbl: UILabel! {
+        didSet {
+            secondRuleLbl.text = AppStrings.Rules.secondRule
+        }
+    }
+    @IBOutlet private weak var thirdRuleLbl: UILabel! {
+        didSet {
+            thirdRuleLbl.text = AppStrings.Rules.thirdRule
+        }
+    }
+    @IBOutlet private weak var fourthRuleLbl: UILabel! {
+        didSet {
+            fourthRuleLbl.text = AppStrings.Rules.fourthRule
+        }
+    }
+    @IBOutlet private weak var fifthRuleLbl: UILabel! {
+        didSet {
+            fifthRuleLbl.text = AppStrings.Rules.fifthRule
         }
     }
 }
 
-// MARK: - Default Lifecycle Methods
+// MARK: - Default methods
 extension GameRulesViewController {
 
     override func viewDidLoad() {

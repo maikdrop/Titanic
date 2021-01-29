@@ -14,12 +14,14 @@ import UIKit
 
 class AppConceptViewController: UIViewController {
 
+    typealias FileNames = AppStrings.FileNames
+
     // MARK: - IBOutlets
     @IBOutlet private weak var designPatternInnerStackView: UIStackView! {
         didSet {
             let contentArray = [
                 "1. " + AppStrings.Concept.designPatternTitle + "\n",
-                readTextFromFile(fileName: designPatternFileName, with: txtExt)]
+                readTextFromFile(fileName: FileNames.designPatternFileName, with: FileNames.txtExt)]
             for index in 0..<designPatternInnerStackView.arrangedSubviews.count {
                 if let label = designPatternInnerStackView.arrangedSubviews[index] as? UILabel {
                     label.text = contentArray[optional:index] ?? ""
@@ -32,7 +34,7 @@ class AppConceptViewController: UIViewController {
         didSet {
             let contentArray = [
                 "2. " + AppStrings.Concept.avoidMassiveVCTitle + "\n",
-                readTextFromFile(fileName: avoidMassiveVCFileName, with: txtExt)]
+                readTextFromFile(fileName: FileNames.avoidMassiveVCFileName, with: FileNames.txtExt)]
             for index in 0..<avoidingMassiveVCInnerStackView.arrangedSubviews.count {
                 if let label = avoidingMassiveVCInnerStackView.arrangedSubviews[index] as? UILabel {
                     label.text = contentArray[optional:index] ?? ""
@@ -45,9 +47,9 @@ class AppConceptViewController: UIViewController {
         didSet {
             let contentArray = [
                 "\n" + "3. " + AppStrings.Concept.layoutTitle + "\n",
-                readTextFromFile(fileName: adaptingLayoutFileName, with: txtExt),
+                readTextFromFile(fileName: FileNames.adaptingLayoutFileName, with: FileNames.txtExt),
                 "",
-                readTextFromFile(fileName: animationFileName, with: txtExt)]
+                readTextFromFile(fileName: FileNames.animationFileName, with: FileNames.txtExt)]
             for index in 0..<layoutInnerStackView.arrangedSubviews.count {
                 if let label = layoutInnerStackView.arrangedSubviews[index] as? UILabel {
                     label.text = contentArray[optional:index] ?? ""
@@ -61,20 +63,11 @@ class AppConceptViewController: UIViewController {
     }
 }
 
-// MARK: - Default Lifecycle Methods
+// MARK: - Default methods
 extension AppConceptViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .always
     }
-}
-
-// MARK: - Constants
-private extension AppConceptViewController {
-    private var designPatternFileName: String {"MVP"}
-    private var avoidMassiveVCFileName: String {"AvoidMassiveGameVC"}
-    private var adaptingLayoutFileName: String {"AdaptingLayout"}
-    private var animationFileName: String {"Animation"}
-    private var txtExt: String {"txt"}
 }

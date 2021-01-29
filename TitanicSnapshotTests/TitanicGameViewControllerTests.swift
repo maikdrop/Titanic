@@ -14,12 +14,12 @@ import SnapshotTesting
 import XCTest
 @testable import Titanic
 
-//SnapshotTesting only works on simulator and 2 test runs needed (for creating and verifing image)
+// SnapshotTesting only works on simulator and 2 test runs needed (for creating and verifing image)
 class TitanicGameViewControllerTests: XCTestCase {
 
     func testGameView() {
 
-        let presenter = TitanicGameViewPresenter()
+        let presenter = TitanicGameViewPresenter(storingDate: nil)
         let gameVC = TitanicGameViewController(gameViewPresenter: presenter)
         let navigationC = UINavigationController(rootViewController: gameVC)
         assertSnapshot(matching: navigationC, as: .image)

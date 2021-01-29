@@ -13,12 +13,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
-//UI-Tests done on real device: iPhone SE 2
+// UI-Tests done on real device: iPhone SE 2
 class GameControlMenuUITests: XCTestCase {
 
     var sut: XCUIApplication!
 
     override func setUp() {
+        UserDefaults.standard.set(true, forKey: "rules")
         sut = XCUIApplication()
         sut.launch()
         continueAfterFailure = false
@@ -30,11 +31,13 @@ class GameControlMenuUITests: XCTestCase {
     }
 
     func testGameStateMenu() {
+
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
-        let controlBtn = sut.navigationBars["Titanic.TitanicGameView"].buttons["control"]
-        let newBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
-        let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
-        let cancelBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Cancel"]
+        let controlBtn =
+            sut.navigationBars["Titanic.TitanicGameView"].children(matching: .button).element(boundBy: 1)
+        let newBtn = sut.collectionViews.buttons["New"]
+        let pauseBtn = sut.collectionViews.buttons["Pause"]
+        let cancelBtn = sut.collectionViews.buttons["Save & Quit"]
 
         startBtn.tap()
         let exists = NSPredicate(format: "exists == 1")
@@ -51,8 +54,9 @@ class GameControlMenuUITests: XCTestCase {
     func testChangeGameStateToNew() {
 
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
-        let controlBtn = sut.navigationBars["Titanic.TitanicGameView"].buttons["control"]
-        let newBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["New"]
+        let controlBtn =
+            sut.navigationBars["Titanic.TitanicGameView"].children(matching: .button).element(boundBy: 1)
+        let newBtn = sut.collectionViews.buttons["New"]
         let countdownLbl = sut.staticTexts["3"]
 
         startBtn.tap()
@@ -69,8 +73,9 @@ class GameControlMenuUITests: XCTestCase {
 
     func testChangeGameStateToPause() {
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
-        let controlBtn = sut.navigationBars["Titanic.TitanicGameView"].buttons["control"]
-        let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
+        let controlBtn =
+            sut.navigationBars["Titanic.TitanicGameView"].children(matching: .button).element(boundBy: 1)
+        let pauseBtn = sut.collectionViews.buttons["Pause"]
         let pauseLbl = sut.staticTexts["Pause"]
 
         startBtn.tap()
@@ -87,10 +92,11 @@ class GameControlMenuUITests: XCTestCase {
 
     func testChangeGameStateToResume() {
         let startBtn = sut.buttons["Start"].staticTexts["Start"]
-        let controlBtn = sut.navigationBars["Titanic.TitanicGameView"].buttons["control"]
-        let pauseBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Pause"]
+        let controlBtn =
+            sut.navigationBars["Titanic.TitanicGameView"].children(matching: .button).element(boundBy: 1)
+        let pauseBtn = sut.collectionViews.buttons["Pause"]
         let pauseLbl = sut.staticTexts["Pause"]
-        let resumeBtn = sut.sheets["Game Control"].scrollViews.otherElements.buttons["Resume"]
+        let resumeBtn = sut.collectionViews.buttons["Resume"]
 
         startBtn.tap()
 
@@ -108,5 +114,25 @@ class GameControlMenuUITests: XCTestCase {
         resumeBtn.tap()
 
         XCTAssertFalse(pauseLbl.exists)
+    }
+
+    func testSaveGame() {
+        let startBtn = sut.buttons["Start"].staticTexts["Start"]
+        let controlBtn =
+            sut.navigationBars["Titanic.TitanicGameView"].children(matching: .button).element(boundBy: 1)
+        let saveBtn = sut.collectionViews.buttons["Save & Quit"]
+        let okBtn = sut.alerts["The game was saved successfully."].scrollViews.otherElements.buttons["Ok"]
+
+        startBtn.tap()
+
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: controlBtn, handler: nil)
+        waitForExpectations(timeout: 3, handler: {_ in
+            controlBtn.tap()
+        })
+
+        saveBtn.tap()
+
+        XCTAssertTrue(okBtn.exists)
     }
 }

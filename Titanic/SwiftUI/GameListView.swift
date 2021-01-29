@@ -41,7 +41,7 @@ struct GameListView: View {
     }
 }
 
-// MARK: - View declarations
+// MARK: - View declaration
 extension GameListView {
 
     var body: some View {
@@ -58,6 +58,10 @@ extension GameListView {
             }
         }
     }
+}
+
+// MARK: - View elements
+extension GameListView {
 
     private var forEachGame: some View {
         ForEach(games.indices, id: \.self) { index in
@@ -83,29 +87,43 @@ extension GameListView {
     // MARK: - Buttons
     private var editBtn: some View {
         if editMode == .inactive {
-            return Button(AppStrings.ActionCommand.edit,
-                          action: { editBtnAction() })
-                .disabled(games.isEmpty)
+            return Button(action: { editBtnAction() }, label: {
+                VStack(alignment: .trailing) {
+                    Text(AppStrings.ActionCommand.edit)
+                        .font(.body)
+                        .fontWeight(.regular)
+                }
+            })
+            .disabled(games.isEmpty)
         } else {
-            return Button(AppStrings.ActionCommand.done,
-                          action: { withAnimation(.linear) { editMode = .inactive }})
-                .disabled(games.isEmpty)
+            return Button(action: { withAnimation(.linear) { editMode = .inactive }}, label: {
+                VStack(alignment: .trailing) {
+                    Text(AppStrings.ActionCommand.done)
+                        .font(.body)
+                        .fontWeight(.semibold)
+                }
+            })
+            .disabled(games.isEmpty)
         }
     }
 
     private var deleteBtn: some View {
         if editMode == .inactive {
             return Button(AppStrings.ActionCommand.cancel,
-                          action: cancelHandler).disabled(false)
+                          action: cancelHandler)
+                .font(.body)
+                .disabled(false)
         } else {
             return Button(AppStrings.ActionCommand.delete,
                           action: deleteBtnAction)
+                .font(.body)
                 .disabled(selectedRows.isEmpty)
         }
     }
 
     private var cancelBtn: some View {
         Button(AppStrings.ActionCommand.cancel, action: cancelHandler)
+            .font(.body)
     }
 
     // MARK: - Alerts
@@ -144,6 +162,8 @@ private extension GameListView {
     // MARK: - Slot action
     /**
      Prepares an alert in order to delete a single game.
+     
+     - Parameter index: The index of a row in the list.
      */
     private func deleteSlotAction(for index: Int) {
         activeAlert = .deleteSingleGame
@@ -208,7 +228,7 @@ private extension GameListView {
     /**
      Deletes a game from the database.
      
-     - Parameter indexSet: set of game indices that will be deleted
+     - Parameter indexSet: A set of game indices that will be deleted.
      */
     private func deleteGame(at index: Set<Int>) {
         var gamesArray = [GameObject]()
@@ -232,7 +252,7 @@ private extension GameListView {
     /**
     Creates a slot in order to delete an item from a row.
      
-     - Parameter index: index of row
+     - Parameter index: The index of a row in the list.
      */
     private func createDeleteSlot(for index: Int) -> Slot {
         Slot(image: { Image(systemName: trashImageName) },

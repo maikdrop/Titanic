@@ -14,7 +14,7 @@ import XCTest
 import SnapshotTesting
 @testable import Titanic
 
-//SnapshotTesting only works on simulator and 2 test runs needed (for creating and verifing image)
+// SnapshotTesting only works on simulator and 2 test runs needed (for creating and verifing image)
 class HighscoreListTests: XCTestCase {
 
     var sut: HighscoreListTableViewController!
@@ -39,7 +39,7 @@ class HighscoreListTests: XCTestCase {
             players.append(player)
         }
         // MARK: - uncomment next line and remove private from player for testing purpose in HighscoreListTableViewController
-        sut.player = players
+//        sut.player = players
         assertSnapshot(matching: sut, as: .image)
     }
 }

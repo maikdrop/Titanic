@@ -1,10 +1,14 @@
-//
-//  GameHandling.swift
-//  Titanic
-//
-//  Created by Maik on 17.11.20.
-//  Copyright © 2020 maikdrop. All rights reserved.
-//
+/*
+ MIT License
+
+Copyright (c) 2020 Maik Müller (maikdrop) <maik_mueller@me.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 import Foundation
 import UIKit
@@ -18,10 +22,10 @@ struct GameHandling {
     typealias Handler = (Result<GameObject?, Error>) -> Void
 
     /**
-     Fetches game data from the database that is based on a date.
+     Fetches game data from the database based on a date.
      
-     - Parameter date: date of a saved game
-     - Parameter completion: completion handler calls back when a game was fetched or if an error occurred
+     - Parameter date: The date of a saved game.
+     - Parameter completion: The completion handler that calls back when a game was fetched or if an error occurred.
      */
     func fetchFromDatabase(matching date: Date, then completion: (Handler)) {
 
@@ -39,7 +43,7 @@ struct GameHandling {
     /**
      Fetches game data from the database.
      
-     - Parameter completion: completion handler calls back when a game was fetched or if an error occurred
+     - Parameter completion: The completion handler that calls back when a game was fetched or if an error occurred.
      
      - Use this function if you want to check out that the database is empty or not.
      */
@@ -58,46 +62,24 @@ struct GameHandling {
     /**
      Updates the database.
      
-     - Parameter icebergs: icebergs to save
-     - Parameter score: score to save
-     - Parameter sliderValue: slider value to save
-     - Parameter currentCountdown: timer countdown count to save
-     - Parameter completion: completion handler calls back when data was saved or if an error occurred
+     - Parameter icebergs: The icebergs of the game.
+     - Parameter score: The game`s score.
+     - Parameter gameConfig: The game`s configuration.
+     - Parameter completion: The completion handler that calls back when a game was saved or if an error occurred.
      */
     func updateDatabase(icebergs: [TitanicGame.Iceberg],
                         score: TitanicGame.Score,
-                        sliderValue: Float,
-                        currentCountdown: Int,
+                        gameConfig: TitanicGameViewPresenter.GameConfig,
                         then completion: (Handler)) {
-
-//        print("SAVE GAME START")
-//        print("Save Icebergs")
-//        for iceberg in icebergs {
-//            print("Center X")
-//            print(iceberg.center.xCoordinate)
-//            print("Center Y")
-//            print(iceberg.center.yCoordinate)
-//        }
-//        print("Save Slider Value")
-//        print(sliderValue)
-//        print("Current Countdown")
-//        print(currentCountdown)
-//        print("Driven Sea Miles")
-//        print(score.drivenSeaMiles)
-//        print("Knots")
-//        print(score.knots)
-//        print("CrashCount")
-//        print(score.crashCount)
-//        print("SAVE GAME END")
 
         if let context = container?.viewContext {
 
             do {
-                let game = GameObject.createAndStoreGame(icebergs: icebergs,
-                                                         score: score,
-                                                         sliderValue: sliderValue,
-                                                         currentCountdown: currentCountdown,
-                                                         in: context)
+                let game = GameObject.createGame(
+                    icebergs: icebergs,
+                    score: score,
+                    gameConfig: gameConfig,
+                    in: context)
                 try context.save()
                 completion(.success(game))
             } catch {
@@ -108,10 +90,10 @@ struct GameHandling {
     }
 
     /**
-     Delete a game from the database.
+     Delete games from the database.
      
-     - Parameter game: game object
-     - Parameter completion: completion handler calls back when the game was deleted from the database or if an error occurred
+     - Parameter games: The games to delete.
+     - Parameter completion: The completion handler that calls back when the games were deleted or if an error occurred.
      */
     func delete(games: [GameObject], then completion: (Handler)) {
 
@@ -132,24 +114,25 @@ struct GameHandling {
     }
 
     /**
-     Delete a game from the database.
+     Deletes a game from the database based on a date.
      
-     - Parameter date: date of saved game that will be deleted
-     - Parameter completion: completion handler calls back when the game was deleted from the database or if an error occurred
+     - Parameter date: The storage date of the game that will be deleted.
+     - Parameter completion: The completion handler that calls back when a game was deleted or if an error occurred.
      */
-    func deleteGame(matching date: Date, then completion: (Handler)) {
+    func deleteGame(matching date: Date, then completion: (Handler?)) {
 
         if let context = container?.viewContext {
             do {
                 if let game = try GameObject.findGame(matching: date, in: context) {
                     context.delete(game)
                     try context.save()
-                    completion(.success(game))
+                    if completion != nil {completion!(.success(game))}
                 }
             } catch {
-                completion(.failure(DataHandlingError.writingError(
-                                message: AppStrings.ErrorAlert
-                                    .databaseDeletingErrorMessage)))
+                if completion != nil {
+                    completion!(.failure(DataHandlingError
+                                            .writingError(message: AppStrings.ErrorAlert.databaseDeletingErrorMessage)))
+                }
             }
         }
     }

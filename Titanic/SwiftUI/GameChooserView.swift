@@ -36,7 +36,8 @@ extension GameChooserView {
     var body: some View {
         NavigationView {
             GameListView(gamePicker: gamePicker, editMode: $editMode, cancelHandler: cancelHandler)
-                .navigationBarTitle(AppStrings.Storage.title)
+                .navigationTitle(AppStrings.Storage.title)
+                .navigationBarTitleDisplayMode(.large)
                 .environment(\.editMode, $editMode)
         }
     }

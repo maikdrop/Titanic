@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import Foundation
 import UIKit
 
-//source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
+// source: www.swiftbysundell.com/articles/lightweight-presenters-in-swift/
 struct NewHighscoreEntryPresenter {
 
     // MARK: - Properties
@@ -27,7 +27,7 @@ struct NewHighscoreEntryPresenter {
     /**
      Presents an alert to get the users name.
      
-     - Parameter viewController: presenting view controller
+     - Parameter viewController: The presenting view controller.
      */
     func present(in viewController: UIViewController) {
         var textDidChangeObserver: NSObjectProtocol?

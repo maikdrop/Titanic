@@ -22,9 +22,25 @@ enum AppStrings {
         static let edit = NSLocalizedString("Action_Edit", comment: "")
     }
 
-    enum GameControl {
-        static let title = NSLocalizedString("GameControl_Title", comment: "")
-        static let savedSuccessfully = NSLocalizedString("GameControl_Saved", comment: "")
+    enum AppInformation {
+        static let appInfoTitle = NSLocalizedString("AppInfoTitle_Txt", comment: "")
+        static let aboutTheAppLblTxt = NSLocalizedString("AboutTheAppLbl_Txt", comment: "")
+        static let conceptLblTxt = NSLocalizedString("ConceptLbl_Txt", comment: "")
+        static let rulesLblTxt = NSLocalizedString("RulesLbl_Txt", comment: "")
+        static let legalLblTxt = NSLocalizedString("LegalLbl_Txt", comment: "")
+    }
+
+    enum Concept {
+        static let designPatternTitle = NSLocalizedString("Concept_DesignPatternTitle", comment: "")
+        static let avoidMassiveVCTitle = NSLocalizedString("Concept_AvoidMassiveVCTitle", comment: "")
+        static let layoutTitle = NSLocalizedString("Concept_LayoutTitle", comment: "")
+    }
+
+    enum DeletionAction {
+        static let title = NSLocalizedString("DeletionConfirmation_Title", comment: "")
+        static let messageSingle = NSLocalizedString("SingleDeletionConfirmation_Message", comment: "")
+        static let messageMultiple = NSLocalizedString("MultipleDeletionConfirmation_Message", comment: "")
+        static let number = NSLocalizedString("Number", comment: "")
     }
 
     enum ErrorAlert {
@@ -38,43 +54,25 @@ enum AppStrings {
         static let databaseDeletingErrorMessage = NSLocalizedString("Database_Deleting_Error", comment: "")
     }
 
-    enum DeletionAction {
-        static let title = NSLocalizedString("DeletionConfirmation_Title", comment: "")
-        static let messageSingle = NSLocalizedString("SingleDeletionConfirmation_Message", comment: "")
-        static let messageMultiple = NSLocalizedString("MultipleDeletionConfirmation_Message", comment: "")
-        static let number = NSLocalizedString("Number", comment: "")
+    enum FileNames {
+        static let aboutFileName = "AboutTheApp"
+        static let legalNotices = "LegalNotices"
+        static let designPatternFileName = "MVP"
+        static let avoidMassiveVCFileName = "AvoidMassiveGameVC"
+        static let adaptingLayoutFileName = "AdaptingLayout"
+        static let animationFileName = "Animation"
+        static let txtExt = "txt"
     }
 
-    enum NewHighscoreEntryAlert {
-        static let title = NSLocalizedString("NewHighscoreEntryAlert_Title", comment: "")
-        static let message = NSLocalizedString("NewHighscoreEntry_Message", comment: "")
-        static let textFieldPlaceholder = NSLocalizedString("TextField_Placeholder", comment: "")
-    }
-
-    enum GameState {
-        static let new = NSLocalizedString("New", comment: "")
-        static let pause = NSLocalizedString("Pause", comment: "")
-        static let resume = NSLocalizedString("Resume", comment: "")
-        static let save = NSLocalizedString("Save", comment: "")
-    }
-
-    enum UserInfoKey {
-        static let iceberg = "iceberg"
-        static let ship = "ship"
-    }
-
-    enum Welcome {
-        static let title = NSLocalizedString("Welcome_Title", comment: "")
-        static let leftBarBtnTitle =  NSLocalizedString("Welcome_LeftBarBtnTitle", comment: "")
-        static let rightBarBtnTitle = NSLocalizedString("Welcome_RightBarBtnTitle", comment: "")
-    }
-
-    enum Rules {
-        static let subheadlineTitle = NSLocalizedString("Rules_SubheadlineTitle", comment: "")
-        static let goalSectionTitle = NSLocalizedString("Rules_GoalSectionTitle", comment: "")
-        static let goalSectionContent = NSLocalizedString("Rules_GoalSectionContent", comment: "")
-        static let usageSectionTitle = NSLocalizedString("Rules_UsageSectionTitle", comment: "")
-        static let usageSectionContent = NSLocalizedString("Rules_UsageSectionContent", comment: "")
+    enum HowToPlay {
+        static let hideNxtTimeLblTxt = NSLocalizedString("FirstUseInstructions_Hide", comment: "")
+        static let buttonSectionTitle = "Buttons"
+        static let storedGamesBtn = NSLocalizedString("FirstUseInstructions_Stored_Games_Btn", comment: "")
+        static let speedOptionBtn = NSLocalizedString("FirstUseInstructions_Speed_Options_Btn", comment: "")
+        static let ctrlGameBtn = NSLocalizedString("FirstUseInstructions_Ctrl_Game_Btn", comment: "")
+        static let rulesSectionTitle = NSLocalizedString("FirstUseInstructions_Rules_Section", comment: "")
+        static let rulesSectionFooter = NSLocalizedString("FirstUseInstructions_Rules_Footer", comment: "")
+        static let title = NSLocalizedString("FirstUseInstructions_Title", comment: "")
     }
 
     enum Game {
@@ -87,25 +85,85 @@ enum AppStrings {
         static let youWinLblTxt = NSLocalizedString("YouWinLbl_Txt", comment: "")
     }
 
+    enum GameControl {
+        static let title = NSLocalizedString("GameControl_Title", comment: "")
+        static let savedSuccessfully = NSLocalizedString("GameControl_Saved", comment: "")
+    }
+
+    enum GameState {
+        static let new = NSLocalizedString("New", comment: "")
+        static let pause = NSLocalizedString("Pause", comment: "")
+        static let resume = NSLocalizedString("Resume", comment: "")
+        static let save = NSLocalizedString("Save", comment: "")
+    }
+
     enum Highscore {
         static let fileName = NSLocalizedString("File_Name", comment: "")
+        static let listTitle = "Top 10"
+        static let storyboardName = "HighscoreList"
+    }
+
+    enum ImageNames {
+        static let circle = "circle.fill"
+        static let iceberg = "iceberg"
+        static let ship = "ship"
+        static let slow = "tortoise.fill"
+        static let medium = "figure.walk"
+        static let fast = "hare.fill"
+        static let launch = "LaunchImage"
+        static let storedGames = "list.bullet"
+        static let speedometer = "speedometer"
+        static let gameController = "gamecontroller"
+    }
+
+    enum NewHighscoreEntryAlert {
+        static let title = NSLocalizedString("NewHighscoreEntryAlert_Title", comment: "")
+        static let message = NSLocalizedString("NewHighscoreEntry_Message", comment: "")
+        static let textFieldPlaceholder = NSLocalizedString("TextField_Placeholder", comment: "")
+    }
+
+    enum Rules {
+        static let subheadlineTitle = NSLocalizedString("Rules_SubheadlineTitle", comment: "")
+        static let goalSectionTitle = NSLocalizedString("Rules_GoalSectionTitle", comment: "")
+        static let goalSectionContent = NSLocalizedString("Rules_GoalSectionContent", comment: "")
+        static let usageSectionTitle = NSLocalizedString("Rules_UsageSectionTitle", comment: "")
+        static let firstRule = NSLocalizedString("Rules_UsageSectionContent_Rule1", comment: "")
+        static let secondRule = NSLocalizedString("Rules_UsageSectionContent_Rule2", comment: "")
+        static let thirdRule = NSLocalizedString("Rules_UsageSectionContent_Rule3", comment: "")
+        static let fourthRule = NSLocalizedString("Rules_UsageSectionContent_Rule4", comment: "")
+        static let fifthRule = NSLocalizedString("Rules_UsageSectionContent_Rule5", comment: "")
+    }
+
+    enum SpeedOption {
+        static let slow = NSLocalizedString("SpeedOption_Slow", comment: "")
+        static let medium = NSLocalizedString("SpeedOption_Medium", comment: "")
+        static let fast = NSLocalizedString("SpeedOption_Fast", comment: "")
     }
 
     enum Storage {
         static let title = NSLocalizedString("Storage_Title", comment: "")
     }
 
-    enum AppInformation {
-        static let appInfoTitle = NSLocalizedString("AppInfoTitle_Txt", comment: "")
-        static let aboutTheAppLblTxt = NSLocalizedString("AboutTheAppLbl_Txt", comment: "")
-        static let conceptLblTxt = NSLocalizedString("ConceptLbl_Txt", comment: "")
-        static let rulesLblTxt = NSLocalizedString("RulesLbl_Txt", comment: "")
-        static let legalLblTxt = NSLocalizedString("LegalLbl_Txt", comment: "")
+    enum Storyboard {
+        static let concept = "Concept"
+        static let conceptVcIdentifier = "ConceptViewController"
+        static let gameRules = "GameRules"
+        static let gameRulesVcIdentifier = "GameRulesViewController"
     }
 
-    enum Concept {
-        static let designPatternTitle = NSLocalizedString("Concept_DesignPatternTitle", comment: "")
-        static let avoidMassiveVCTitle = NSLocalizedString("Concept_AvoidMassiveVCTitle", comment: "")
-        static let layoutTitle = NSLocalizedString("Concept_LayoutTitle", comment: "")
+    enum UserDefaultKeys {
+        static let rules = "rules"
+        static let speed = "speed"
+    }
+
+    enum UserInfoKey {
+        static let iceberg = "iceberg"
+        static let ship = "ship"
+    }
+
+    enum Welcome {
+        static let title = NSLocalizedString("Welcome_Title", comment: "")
+        static let appInfoBtnTitle =  "App Information"
+        static let rightBarBtnTitle = NSLocalizedString("Welcome_RightBarBtnTitle", comment: "")
     }
 }

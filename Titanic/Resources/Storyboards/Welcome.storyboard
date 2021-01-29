@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9cW-Qa-6Mz">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,39 +13,30 @@
             <objects>
                 <viewController id="rgE-zM-luI" customClass="WelcomeViewController" customModule="Titanic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TrD-1R-5H3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Titanic!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAf-Ac-5GQ">
-                                <rect key="frame" x="16" y="138" width="382" height="41"/>
+                                <rect key="frame" x="16" y="138" width="358" height="40.666666666666657"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="80" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0SS-g3-Krz">
-                                <rect key="frame" x="0.0" y="826" width="414" height="16"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2020 maikdrop. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CUF-Zk-yT2">
-                                        <rect key="frame" x="19" y="0.0" width="376" height="16"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="CUF-Zk-yT2" firstAttribute="width" secondItem="0SS-g3-Krz" secondAttribute="width" multiplier="0.907813" id="oS0-3q-XsF"/>
-                                </constraints>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yE-Pg-VuO">
-                                <rect key="frame" x="178" y="452" width="58" height="46"/>
+                                <rect key="frame" x="166" y="426" width="58" height="46"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="startActionBtn:" destination="rgE-zM-luI" eventType="touchUpInside" id="Cdz-5t-Sz9"/>
+                                    <action selector="startActionBtn:" destination="rgE-zM-luI" eventType="touchUpInside" id="vxM-sJ-4G4"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wu9-Kk-gXg">
+                                <rect key="frame" x="0.0" y="800" width="390" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items/>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9zB-SD-zce"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -53,37 +44,21 @@
                             <constraint firstItem="iAf-Ac-5GQ" firstAttribute="centerX" secondItem="9zB-SD-zce" secondAttribute="centerX" id="9xe-WB-ExH"/>
                             <constraint firstItem="iAf-Ac-5GQ" firstAttribute="leading" relation="lessThanOrEqual" secondItem="9zB-SD-zce" secondAttribute="leading" constant="16" id="Az8-SU-SmB"/>
                             <constraint firstItem="9zB-SD-zce" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iAf-Ac-5GQ" secondAttribute="trailing" constant="16" id="Jq8-RX-dSF"/>
-                            <constraint firstItem="9zB-SD-zce" firstAttribute="bottom" secondItem="0SS-g3-Krz" secondAttribute="bottom" constant="20" id="MN4-g2-UiO"/>
-                            <constraint firstItem="0SS-g3-Krz" firstAttribute="leading" secondItem="9zB-SD-zce" secondAttribute="leading" id="MWT-8P-dOd"/>
                             <constraint firstItem="5yE-Pg-VuO" firstAttribute="centerY" secondItem="9zB-SD-zce" secondAttribute="centerY" id="U9N-67-KjC"/>
                             <constraint firstItem="5yE-Pg-VuO" firstAttribute="centerX" secondItem="9zB-SD-zce" secondAttribute="centerX" id="VPf-rh-P30"/>
-                            <constraint firstItem="9zB-SD-zce" firstAttribute="trailing" secondItem="0SS-g3-Krz" secondAttribute="trailing" id="bnj-d3-xrJ"/>
                             <constraint firstItem="iAf-Ac-5GQ" firstAttribute="top" secondItem="9zB-SD-zce" secondAttribute="top" constant="50" id="gjC-pU-cjU"/>
-                            <constraint firstItem="0SS-g3-Krz" firstAttribute="centerX" secondItem="9zB-SD-zce" secondAttribute="centerX" id="guX-fL-VMX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="MYD-x1-mvb">
-                        <barButtonItem key="leftBarButtonItem" title="App Information" id="cWJ-Ej-BaF">
-                            <connections>
-                                <action selector="appInfoActionBtn:" destination="rgE-zM-luI" id="ecz-Im-1ta"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Storage" id="aWT-x7-luS">
-                            <connections>
-                                <action selector="storedGamesActionBtn:" destination="rgE-zM-luI" id="Je8-QQ-H1M"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="MYD-x1-mvb"/>
                     <connections>
-                        <outlet property="appInformationBtn" destination="cWJ-Ej-BaF" id="9Hs-vs-iHe"/>
-                        <outlet property="startBtn" destination="5yE-Pg-VuO" id="3FK-L3-u9j"/>
-                        <outlet property="storedGamesBtn" destination="aWT-x7-luS" id="iaE-x5-oah"/>
+                        <outlet property="startBtn" destination="5yE-Pg-VuO" id="iSg-5W-ttF"/>
+                        <outlet property="toolbar" destination="wu9-Kk-gXg" id="hlO-UN-fOc"/>
                         <outlet property="welcomeLabel" destination="iAf-Ac-5GQ" id="meX-o3-JaR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BY-O0-m3X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="781" y="-85"/>
+            <point key="canvasLocation" x="786" y="-85"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8wi-gQ-Bmx">
@@ -91,7 +66,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9cW-Qa-6Mz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="lcb-IO-m4b">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="390" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" systemColor="systemBackgroundColor"/>
                     </navigationBar>

@@ -17,6 +17,7 @@ class TitanicGameTests: XCTestCase {
 
     typealias Point = TitanicGame.Iceberg.Point
     typealias Size =  TitanicGame.Iceberg.Size
+    typealias Score = TitanicGame.Score
 
     var sut: TitanicGame!
     var icebergs = [TitanicGame.Iceberg]()
@@ -29,19 +30,27 @@ class TitanicGameTests: XCTestCase {
             let iceberg = TitanicGame.Iceberg(origin: point, size: size)
             icebergs += [iceberg]
         }
-        sut = TitanicGame(icebergs: icebergs, dataHandler: PlayerHandling(fileName: ""))
+        let score = Score(beginningKnots: 120)
+        sut = TitanicGame(initialIcebergs: icebergs, score: score, dataHandler: PlayerHandling(fileName: ""))
     }
 
     override func tearDown() {
         sut = nil
         super.tearDown()
     }
+    
+    func testCrashCountIncrease() {
+        for _ in 0..<3 {
+            sut.collisionBetweenShipAndIceberg()
+        }
+        XCTAssertEqual(sut.score.crashCount, 3)
+    }
 
     func testMoveIcebergVertically() {
 
         let factor = 10.0
 
-        sut.moveIcebergsVertically()
+        sut.moveIcebergsVertically(with: Int(factor))
 
         let sortedIcebergs = sut.icebergs.sorted(by: <)
 
@@ -52,7 +61,7 @@ class TitanicGameTests: XCTestCase {
 
     func testIcebergReachedEndOfView() {
 
-        let height: Double = 10
+        let height = 10.0
 
         for index in 0..<sut.icebergs.count - 1 {
             sut.endOfViewReachedFromIceberg(at: index)
@@ -74,15 +83,22 @@ class TitanicGameTests: XCTestCase {
         XCTAssertEqual(sortedIcebergs, icebergs)
     }
 
-    func testStartNewTitanicGame() {
-        let miles = 0.0
-        let crashCount = 0
-        let knots = 50
+    func testIncreaseDrivenSeaMiles() {
 
-        sut.startNewTitanicGame()
+        var scoreSlow = Score(beginningKnots: 90)
+        var scoreMedium = Score(beginningKnots: 120)
+        var scoreFast = Score(beginningKnots: 150)
 
-        XCTAssertEqual(sut.drivenSeaMiles, miles)
-        XCTAssertEqual(sut.crashCount, crashCount)
-        XCTAssertEqual(sut.knots, knots)
+        scoreSlow.increaseDrivenSeaMiles()
+        scoreMedium.increaseDrivenSeaMiles()
+        scoreFast.increaseDrivenSeaMiles()
+
+        //60 frames per second * 10sec game time = driven sea miles in 10sec real play time
+        let milesSlow = scoreSlow.drivenSeaMiles * 60 * 10
+        let milesMedium = scoreMedium.drivenSeaMiles * 60 * 10
+        let milesFast = scoreFast.drivenSeaMiles * 60 * 10
+
+        XCTAssertLessThan(milesSlow, milesMedium)
+        XCTAssertLessThan(milesMedium, milesFast)
     }
 }

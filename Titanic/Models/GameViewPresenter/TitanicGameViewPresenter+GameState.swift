@@ -16,6 +16,7 @@ extension TitanicGameViewPresenter {
 
     enum GameState {
         case new
+        case preparation
         case running
         case pause
         case resume
@@ -26,7 +27,7 @@ extension TitanicGameViewPresenter {
 
 extension TitanicGameViewPresenter.GameState: CaseIterable {
 
-    // MARK: - Create a Game State
+    // MARK: - Create a game state
     init?(string: String) {
         switch string {
         case AppStrings.GameState.new: self = .new

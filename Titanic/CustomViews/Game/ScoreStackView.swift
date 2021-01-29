@@ -61,12 +61,7 @@ private extension ScoreStackView {
     */
     private func configureScoreLabel(_ label: UILabel) {
         label.textColor = .white
-        label.font = UIFont().scalableFont(forTextStyle: .title3, fontSize: labelPrefferedFontSize)
+        label.font = .preferredFont(forTextStyle: .title3)
         label.adjustsFontForContentSizeCategory = true
     }
-}
-
-// MARK: - Constants
-extension ScoreStackView {
-    private var labelPrefferedFontSize: CGFloat {20}
 }

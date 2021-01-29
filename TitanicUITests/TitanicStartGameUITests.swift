@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
-//UI-Tests done on simulator
+// UI-Tests done on real device: iPhone SE 2
 class TitanicStartGameUITests: XCTestCase {
 
     var sut: XCUIApplication!
@@ -32,7 +32,7 @@ class TitanicStartGameUITests: XCTestCase {
 
     func testStartGame() {
 
-        let welcomeLbl = sut.staticTexts["Welcome To Titanic!"]
+        let welcomeLbl = sut.staticTexts["Welcome to Titanic!"]
         let startBtn = sut.buttons["Start"]
         let startLbl = sut.staticTexts["Start"]
         let knotsLbl = sut.staticTexts["Knots: 0"]

@@ -1,18 +1,17 @@
 excluded:
 - Pods
-- Titanic/SwiftUI/SwipeCell
 - Titanic/Extensions
 - Titanic/Supporting Files/*
+- TitanicTests/*
 
 opt_in_rules:
 - empty_string
 - empty_count
 - file_name
 - modifier_order
-- ignores_comments
 - private_action
 - private_outlet
-- unused_private_declaration
+
 
 line_length:
     warning: 120

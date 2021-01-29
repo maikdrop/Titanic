@@ -26,10 +26,11 @@ class NavigationPresenterTests: XCTestCase {
 
     func testPresentHighscoreList() {
 
-        let sut = HighscoreListPresenter()
+        let sut = HighscoreListNaviPresenter()
 
         let title = "Top 10"
-        let mockTitanicGameViewController = MockTitanicGameViewController(gameViewPresenter: TitanicGameViewPresenter())
+        let mockTitanicGameViewController =
+            MockTitanicGameViewController(gameViewPresenter: TitanicGameViewPresenter(storingDate: nil))
         let highscoreListVC: HighscoreListTableViewController?
 
         sut.present(in: mockTitanicGameViewController)
@@ -45,12 +46,12 @@ class NavigationPresenterTests: XCTestCase {
 
     func testPresentGameView() {
 
-        let sut = GameViewNavigationPresenter()
+        let sut = TitanicGameViewNaviPresenter()
         let gameVC: TitanicGameViewController?
 
         let mockWelcomeViewController = MockWelcomeViewController()
 
-        sut.presentGameView(in: mockWelcomeViewController)
+        sut.present(in: mockWelcomeViewController)
 
         gameVC = (mockWelcomeViewController.presentViewControllerTarget as? UINavigationController)?
             .viewControllers.first as? TitanicGameViewController

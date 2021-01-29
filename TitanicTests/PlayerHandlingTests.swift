@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import XCTest
 @testable import Titanic
 
-struct MockPlayerHandling: DataHandling {
+struct MockPlayerHandling: FileHandling {
 
     var fetchingError = false
 
@@ -21,19 +21,19 @@ struct MockPlayerHandling: DataHandling {
 
     typealias Handler = (Result<DataTyp, Error>) -> Void
 
-    func save(player: DataTyp, then completion: Handler) {
-        if player.contains(where: {player in
+    func saveToFile(data: DataTyp, then completion: Handler) {
+        if data.contains(where: { player in
             player.name == "maikdrop"}) {
-                completion(.success(player))
+                completion(.success(data))
         } else {
-            completion(.failure(DataHandlingError.writingError(message: AppStrings.ErrorAlert.writingErrorMessage)))
+            completion(.failure(DataHandlingError.writingError(message: AppStrings.ErrorAlert.fileWritingErrorMessage)))
         }
     }
 
-    func fetch(then completion: Handler) {
+    func fetchFromFile(then completion: Handler) {
 
         if fetchingError {
-            completion(.failure(DataHandlingError.readingError(message: AppStrings.ErrorAlert.readingErrorMessage)))
+            completion(.failure(DataHandlingError.readingError(message: AppStrings.ErrorAlert.fileReadingErrorMessage)))
         } else {
             let player = [TitanicGame.Player(name: "maikdrop", drivenMiles: 0)]
             completion(.success(player))
@@ -59,7 +59,7 @@ class PlayerHandlingTests: XCTestCase {
 
         let playerToTest = TitanicGame.Player(name: "maikdrop", drivenMiles: 0)
 
-        sut.fetch {result in
+        sut.fetchFromFile { result in
             if case .success(let player) = result {
                 XCTAssertEqual(playerToTest.name, player.first?.name)
                 XCTAssertEqual(playerToTest.drivenMiles, player.first?.drivenMiles)
@@ -73,10 +73,10 @@ class PlayerHandlingTests: XCTestCase {
 
         sut.fetchingError = true
 
-        sut.fetch {result in
+        sut.fetchFromFile { result in
             if case .failure(let error) = result {
                 if let dataHandlingError = error as? DataHandlingError {
-                    XCTAssertEqual(dataHandlingError.getErrorMessage(), AppStrings.ErrorAlert.readingErrorMessage)
+                    XCTAssertEqual(dataHandlingError.getErrorMessage(), AppStrings.ErrorAlert.fileReadingErrorMessage)
                 } else {
                     XCTAssertTrue(false)
                 }
@@ -90,7 +90,7 @@ class PlayerHandlingTests: XCTestCase {
 
         let playerToTest = [TitanicGame.Player(name: "maikdrop", drivenMiles: 0)]
 
-        sut.save(player: playerToTest) {result in
+        sut.saveToFile(data: playerToTest) { result in
             if case .success(let loadedPlayer) = result {
                 XCTAssertEqual(playerToTest.first?.name, loadedPlayer.first?.name)
                 XCTAssertEqual(playerToTest.first?.drivenMiles, loadedPlayer.first?.drivenMiles)
@@ -104,10 +104,10 @@ class PlayerHandlingTests: XCTestCase {
 
         let playerToTest = [TitanicGame.Player(name: "noName", drivenMiles: 0)]
 
-        sut.save(player: playerToTest) {result in
+        sut.saveToFile(data: playerToTest) { result in
             if case .failure(let error) = result {
                 if let dataHandlingError = error as? DataHandlingError {
-                    XCTAssertEqual(dataHandlingError.getErrorMessage(), AppStrings.ErrorAlert.writingErrorMessage)
+                    XCTAssertEqual(dataHandlingError.getErrorMessage(), AppStrings.ErrorAlert.fileWritingErrorMessage)
                 } else {
                     XCTAssertTrue(false)
                 }

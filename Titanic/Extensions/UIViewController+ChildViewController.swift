@@ -18,7 +18,7 @@ extension UIViewController {
     /**
      Adds a child view controller.
      
-     - Parameter child: child view controller to add
+     - Parameter child: The child view controller to add.
      */
     func add(_ child: UIViewController) {
         addChild(child)

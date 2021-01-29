@@ -49,14 +49,31 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 //Welcome
 "Welcome_Title" = "Willkommen zu Titanic!";
 "Welcome_RightBarBtnTitle" = "Speicher";
-"Welcome_LeftBarBtnTitle" = "App Information";
 
 //Rules
 "Rules_SubheadlineTitle" = "Lass uns Spaß haben!";
 "Rules_GoalSectionTitle" = "Ziel";
 "Rules_GoalSectionContent" = "Fahre so viele Seemeilen wie möglich!";
 "Rules_UsageSectionTitle" = "Benutzung";
-"Rules_UsageSectionContent" = "1. Während der Startphase sucht das Boot nach einer Startposition.\n2. Beweg das Boot mit dem Slider.\n3. Vermeide Kollisionen mit den Eisbergen.\n4. Jede Kollision wird gezählt und verlangsamt das Boot.\n5. Das Spiel ist vorbei, wenn 5 Kollisionen erreicht wurden oder die Spielzeit abgelaufen ist.\n6. Nach Spielende werden die gefahrenen Seemeilen geprüft. Wenn sie in den Top 10 sind, wird ein Highscore-Eintrag angeboten.\n7. Die Spielsteuerung wird durch den Button in der oberen rechten Ecke aufgerufen.";
+"Rules_UsageSectionContent_Rule1" =
+        "In der Willkommens-Ansicht kannst du entweder ein neues Spiel starten oder ein zuvor gespeichertes fortsetzen.";
+"Rules_UsageSectionContent_Rule2" =
+        "Während der Startphase sucht das Boot nach einer zufälligen oder der gespeicherten Startposition.";
+"Rules_UsageSectionContent_Rule3" =
+        "Beweg das Boot mit dem Slider am Boden, um Kollisionen mit den Eisbergen zu verhindern. Jede Kollision erhöht die Anzahl deiner Crashs und verlangsamt das Boot.";
+"Rules_UsageSectionContent_Rule4" =
+        "Nach Spielende werden die gefahrenen Seemeilen überprüft. Wenn sie in den Top 10 sind, wird ein Highscore-Eintrag angeboten.";
+        "The game is over when you reach 5 crashes or the time is up. After the end of the game, the driven sea miles will be checked. If they are in the top ten, a highscore entry is provided";
+"Rules_UsageSectionContent_Rule5" =
+        "Das Spiel wird durch den Button in der oberen rechten Ecke gesteuert. Ein laufendes Spiel kann zusätzlich durch ein zweimaliges Tippen auf den Bildschirm pausiert werden.";
+
+"FirstUseInstructions_Stored_Games_Btn" = "Gespeicherte Spiele";
+"FirstUseInstructions_Speed_Options_Btn" = "Geschwindigkeits-Optionen";
+"FirstUseInstructions_Ctrl_Game_Btn" = "Spielsteuerung";
+"FirstUseInstructions_Hide" = "Hinweis nächstes Mal ausblenden?";
+"FirstUseInstructions_Rules_Section" = "Regeln";
+"FirstUseInstructions_Rules_Footer" = "Regeln sind im App-Informations Menü zu finden.";
+"FirstUseInstructions_Title" = "Spielanweisung";
 
 //Game
 "GoLbl_Txt" = "LOS";
@@ -90,3 +107,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "Concept_DesignPatternTitle" = "MVP Entwurfsmuster";
 "Concept_AvoidMassiveVCTitle" = "Massiven VC verhindern";
 "Concept_LayoutTitle" = "Adaptives Layout";
+
+//SpeedOptions
+"SpeedOption_Slow" = "Langsam";
+"SpeedOption_Medium" = "Mittel";
+"SpeedOption_Fast" = "Schnell";

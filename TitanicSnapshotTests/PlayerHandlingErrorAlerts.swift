@@ -14,7 +14,7 @@ import SnapshotTesting
 import XCTest
 @testable import Titanic
 
-struct MockPlayerHandling: DataHandling {
+struct MockPlayerHandling: FileHandling {
 
     var fetchingError = false
 
@@ -22,14 +22,14 @@ struct MockPlayerHandling: DataHandling {
 
     typealias Handler = (Result<DataTyp, Error>) -> Void
 
-    func save(player: DataTyp, then completion: Handler) {
+    func saveToFile(data: DataTyp, then completion: (Result<DataTyp, Error>) -> Void) {
 
-        completion(.failure(DataHandlingError.writingError(message: AppStrings.ErrorAlert.writingErrorMessage)))
+        completion(.failure(DataHandlingError.writingError(message: AppStrings.ErrorAlert.fileWritingErrorMessage)))
     }
 
-    func fetch(then completion: Handler) {
+    func fetchFromFile(then completion: (Result<[TitanicGame.Player], Error>) -> Void) {
         if fetchingError {
-            completion(.failure(DataHandlingError.readingError(message: AppStrings.ErrorAlert.readingErrorMessage)))
+            completion(.failure(DataHandlingError.readingError(message: AppStrings.ErrorAlert.fileReadingErrorMessage)))
         } else {
             let player = Array(repeating: TitanicGame.Player(name: "maikdrop", drivenMiles: 0.0), count: 5)
             completion(.success(player))
@@ -39,14 +39,17 @@ struct MockPlayerHandling: DataHandling {
 
 class MockGameViewPresenter: TitanicGameViewPresenter {
 
+    typealias Score = TitanicGame.Score
+
     var game: TitanicGame!
 
     override func gameViewDidLoad(icebergs: [ImageView]) {
 
-        game = TitanicGame(icebergs: [TitanicGame.Iceberg](), dataHandler: MockPlayerHandling())
+        let score = Score(beginningKnots: 120)
+        game = TitanicGame(initialIcebergs: [TitanicGame.Iceberg](), score: score, dataHandler: MockPlayerHandling())
     }
 
-    override func nameForHighscoreEntry(userName: String, completion: @escaping (Error?) -> Void) {
+    override func nameForHighscoreEntry(userName: String, completion: (Error?) -> Void) {
         game?.savePlayer(userName: userName) {error in
             if let error = error {
                 completion(error)
@@ -66,12 +69,12 @@ class MockHigscoreListTVC: HighscoreListTableViewController {
     }
 }
 
-//SnapshotTesting only works on simulator and 2 test runs needed (for creating and verifing image)
+// SnapshotTesting only works on simulator and 2 test runs needed (for creating and verifing image)
 class PlayerHandlingErrorAlerts: XCTestCase {
 
     func testHighscoreListWritingErrorAlert() {
 
-        let mockedGameViewPresenter = MockGameViewPresenter()
+        let mockedGameViewPresenter = MockGameViewPresenter(storingDate: nil)
 
         let sut = TitanicGameViewController(gameViewPresenter: mockedGameViewPresenter)
 
@@ -116,7 +119,7 @@ extension PlayerHandlingErrorAlerts {
             title: AppStrings.ErrorAlert.title,
             message: message,
             preferredStyle: .alert)
-        let okAction = UIAlertAction(title: AppStrings.ActionCommands.okay, style: .default)
+        let okAction = UIAlertAction(title: AppStrings.ActionCommand.okay, style: .default)
         alertController.addAction(okAction)
         return alertController
     }
@@ -133,7 +136,7 @@ extension PlayerHandlingErrorAlerts {
 }
 
 // MARK: - extension in order to allow snapshots at window level because "alerts dont`t render in the view controller that presents them."
-//source: https://www.pointfree.co/episodes/ep86-swiftui-snapshot-testing#t657
+// source: https://www.pointfree.co/episodes/ep86-swiftui-snapshot-testing#t657
 extension Snapshotting where Value: UIViewController, Format == UIImage {
   static var windowedImage: Snapshotting {
     return Snapshotting<UIImage, UIImage>.image.asyncPullback { viewController in

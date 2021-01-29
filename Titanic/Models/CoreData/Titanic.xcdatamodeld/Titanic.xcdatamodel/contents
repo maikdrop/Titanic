@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="GameObject" representedClassName=".GameObject" syncable="YES" codeGenerationType="category">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ConfigObject" representedClassName=".ConfigObject" syncable="YES" codeGenerationType="category">
+        <attribute name="moveFactor" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="sliderValue" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="stored" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="timerCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameObject" inverseName="config" inverseEntity="GameObject"/>
+    </entity>
+    <entity name="GameObject" representedClassName=".GameObject" syncable="YES" codeGenerationType="category">
+        <attribute name="stored" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="config" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ConfigObject" inverseName="game" inverseEntity="ConfigObject"/>
         <relationship name="icebergs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="IcebergObject" inverseName="game" inverseEntity="IcebergObject"/>
         <relationship name="score" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ScoreObject" inverseName="game" inverseEntity="ScoreObject"/>
     </entity>
@@ -18,7 +23,8 @@
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="GameObject" inverseName="score" inverseEntity="GameObject"/>
     </entity>
     <elements>
-        <element name="GameObject" positionX="-200.5848999023438" positionY="-477.5775756835938" width="128" height="104"/>
+        <element name="ConfigObject" positionX="-414.821533203125" positionY="-447.900390625" width="128" height="89"/>
+        <element name="GameObject" positionX="-200.5848999023438" positionY="-477.5775756835938" width="128" height="103"/>
         <element name="IcebergObject" positionX="12.8741455078125" positionY="-477.3345642089844" width="128" height="88"/>
         <element name="ScoreObject" positionX="-201.477783203125" positionY="-623.1996154785156" width="128" height="74"/>
     </elements>

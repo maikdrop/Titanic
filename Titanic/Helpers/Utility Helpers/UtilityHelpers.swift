@@ -15,8 +15,8 @@ import Foundation
 /**
  Reads the text of a text file.
  
- - Parameter fileName: name of the file
- - Parameter typeExtension: type extension of the file
+ - Parameter fileName: The name of the file.
+ - Parameter typeExtension: The type extension of the file.
  
  - Returns: the text of the file
  */

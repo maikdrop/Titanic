@@ -19,7 +19,7 @@ class HighscoreListTableViewController: UITableViewController {
     private let playerFetcher: ((Result<[TitanicGame.Player], Error>) -> Void) -> Void
 
     // make player public for testing purpose
-    lazy var player = self.fetchPlayer()
+    private lazy var player = self.fetchPlayer()
 
     // MARK: - Create a highscore list table
     init<T: FileHandling>(dataHandler: T) where T.DataTyp == [TitanicGame.Player] {
@@ -42,14 +42,59 @@ extension HighscoreListTableViewController {
             latestEntry = player.firstIndex(of: loadedPlayer)
         }
     }
+
+    // Table view data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
+       1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      player.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: highscoreEntryCell, for: indexPath)
+
+        let highscoreEntryText = "\(indexPath.row + 1)" + ". " +
+            player[indexPath.row].name + ": " + "\(player[indexPath.row].drivenMiles)" + " " + AppStrings.Game.drivenSeaMilesLblTxt.lowercased()
+        let attributedString = NSAttributedString(
+            string: highscoreEntryText,
+            attributes: [.font: UIFont().scalableFont(
+                            forTextStyle: .body,
+                            fontSize: normalFontSize)])
+
+        cell.textLabel?.attributedText = attributedString
+
+        if indexPath.row == latestEntry {
+            let attributedString = NSAttributedString(
+                string: highscoreEntryText,
+                attributes: [.font: UIFont().scalableFontWeight(
+                                forTextStyle: .body,
+                                fontSize: increasedFontSize,
+                                weight: .bold)])
+
+            cell.textLabel?.attributedText = attributedString
+        }
+        return cell
+    }
 }
 
+// MARK: - Private setup methods
+private extension HighscoreListTableViewController {
+
+    private func setupTableView() {
+        tableView = UITableView(frame: CGRect.zero, style: .plain)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: highscoreEntryCell)
+    }
+}
+
+// MARK: - Private utility methods
 private extension HighscoreListTableViewController {
 
     /**
      Fetches all players from the saved highscore list.
      
-     -  Returns: players of highscore list
+     -  Returns: players of the highscore list
      */
     private func fetchPlayer() ->  [TitanicGame.Player] {
         var playerList = [TitanicGame.Player]()
@@ -67,54 +112,11 @@ private extension HighscoreListTableViewController {
         }
         return playerList
     }
-
-    private func setupTableView() {
-        tableView = UITableView(frame: CGRect.zero, style: .plain)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: highscoreEntryCell)
-    }
-}
-
-// MARK: - Table view data source
-extension HighscoreListTableViewController {
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-       1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      player.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       let cell = tableView.dequeueReusableCell(withIdentifier: highscoreEntryCell, for: indexPath)
-
-        let highscoreEntryText = "\(indexPath.row + 1)" + ". " +
-            player[indexPath.row].name + ": " + "\(player[indexPath.row].drivenMiles)" + " " + AppStrings.Game.drivenSeaMilesLblTxt.lowercased()
-        let attributedString = NSAttributedString(
-            string: highscoreEntryText,
-            attributes: [.font: UIFont().scalableFont(
-                forTextStyle: .body,
-                fontSize: normalFontSize)])
-
-        cell.textLabel?.attributedText = attributedString
-
-        if indexPath.row == latestEntry {
-            let attributedString = NSAttributedString(
-            string: highscoreEntryText,
-            attributes: [.font: UIFont().scalableFontWeight(
-                forTextStyle: .body,
-                fontSize: increasedFontSize,
-                weight: .bold)])
-
-        cell.textLabel?.attributedText = attributedString
-        }
-        return cell
-    }
 }
 
 // MARK: - Constants
 private extension HighscoreListTableViewController {
-    private var highscoreEntryCell: String {"highscoreEntryCell"}
-    private var normalFontSize: CGFloat {17}
-    private var increasedFontSize: CGFloat {18}
+    private var highscoreEntryCell: String { "highscoreEntryCell" }
+    private var normalFontSize: CGFloat { 17 }
+    private var increasedFontSize: CGFloat { 18 }
 }

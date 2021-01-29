@@ -20,7 +20,7 @@ class AppInfoViewController: UIViewController {
     }
 }
 
-// MARK: - Default Lifecycle Methods
+// MARK: - Default methods
 extension AppInfoViewController {
 
     override func viewDidLoad() {
@@ -39,7 +39,40 @@ extension AppInfoViewController {
     }
 }
 
-// MARK: - Private methods for setting up table view
+// MARK: - Table view delegate and data source methods
+extension AppInfoViewController: UITableViewDelegate, UITableViewDataSource {
+
+    // Data source
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dataSource.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: informationCell, for: indexPath)
+        cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.font = .preferredFont(forTextStyle: .body)
+        cell.textLabel?.text = dataSource[indexPath.row].stringValue
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+       version
+    }
+
+     // Delegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        AppInfoDetailsNaviPresenter().present(in: self, for: dataSource[indexPath.row])
+    }
+
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if let footer = view as? UITableViewHeaderFooterView {
+            footer.textLabel?.textAlignment = .center
+        }
+    }
+}
+
+// MARK: - Private setup methods
 private extension AppInfoViewController {
 
     private func setupTableViewConstraints() {
@@ -63,42 +96,10 @@ private extension AppInfoViewController {
     }
 }
 
-// MARK: - Delegate and data source methods
-extension AppInfoViewController: UITableViewDelegate, UITableViewDataSource {
-
-    //DataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSource.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: informationCell, for: indexPath)
-        cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.font = UIFont().scalableFont(forTextStyle: .body, fontSize: fontSize)
-        cell.textLabel?.text = dataSource[indexPath.row].stringValue
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-       version
-    }
-
-     //Delegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        AppInfoDetailsNaviPresenter().present(in: self, for: dataSource[indexPath.row])
-    }
-
-    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        if let footer = view as? UITableViewHeaderFooterView {
-            footer.textLabel?.textAlignment = .center
-        }
-    }
-}
-
+// MARK: - Constants
 private extension AppInfoViewController {
     private var fontSize: CGFloat {17}
     private var headerHeight: CGFloat {25}
-    private var informationCell: String {"informationCell"}
+    private var informationCell: String { "informationCell" }
     private var version: String {"Version " + (UIApplication.appVersion ?? "")}
 }

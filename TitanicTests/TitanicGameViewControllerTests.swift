@@ -38,7 +38,7 @@ class TitanicGameViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let mockGamePresenter = MockTitanicGameViewPresenter()
+        let mockGamePresenter = MockTitanicGameViewPresenter(storingDate: nil)
         sut = MockTitanicGameViewController(gameViewPresenter: mockGamePresenter)
     }
 

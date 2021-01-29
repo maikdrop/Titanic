@@ -20,7 +20,7 @@ class TitanicGamePresenterStateTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = TitanicGameViewPresenter()
+        sut = TitanicGameViewPresenter(storingDate: nil)
     }
 
     override func tearDown() {
@@ -31,7 +31,7 @@ class TitanicGamePresenterStateTests: XCTestCase {
     func testChangeGameStateToNew() {
 
         let new = AppStrings.GameState.new
-        let newState = TitanicGameViewPresenter.GameState.running
+        let newState = TitanicGameViewPresenter.GameState.preparation
 
         sut.changeGameState(to: new)
 
@@ -54,6 +54,16 @@ class TitanicGamePresenterStateTests: XCTestCase {
         let newState = TitanicGameViewPresenter.GameState.running
 
         sut.changeGameState(to: resume)
+
+        XCTAssertEqual(newState, sut.gameState)
+    }
+
+    func testChangeGamestateToEnd() {
+
+        let end = TitanicGameViewPresenter.GameState.end
+        let newState = TitanicGameViewPresenter.GameState.end
+
+        sut.changeGameState(to: end)
 
         XCTAssertEqual(newState, sut.gameState)
     }

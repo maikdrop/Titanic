@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import Foundation
 import UIKit
 
-//source: www.swiftbysundell.com/basics/child-view-controllers
+// source: www.swiftbysundell.com/basics/child-view-controllers
 struct TitanicGameViewNaviPresenter {
 
     private let storingDate: Date?
@@ -26,13 +26,13 @@ struct TitanicGameViewNaviPresenter {
     /**
      Presents the view of the game.
      
-     - Parameter viewController: presenting ViewController
+     - Parameter viewController: The presenting view controller.
      */
     func present(in viewController: UIViewController) {
 
         let presenter = TitanicGameViewPresenter(storingDate: storingDate)
 
-        //View Presenter will be injected in View
+        // View Presenter will be injected in View
         let gameVC = TitanicGameViewController(gameViewPresenter: presenter)
 
         if let navigationController = viewController.navigationController {

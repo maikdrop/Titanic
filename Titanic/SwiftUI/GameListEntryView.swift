@@ -36,12 +36,9 @@ extension GameListEntryView {
                 if let date = game.stored {
                     Text(date, formatter: taskDateFormat)
                         .font(.headline)
+                        .lineLimit(1)
                     Spacer()
-                    HStack {
-                        Text(crashTxt)
-                        Text(milesTxt)
-                        Text(timerTxt)
-                    }
+                    Text(crashTxt + " " + milesTxt + " " + timerTxt)
                     .foregroundColor(Color(.secondaryLabel))
                     .font(.callout)
                 }
@@ -52,7 +49,6 @@ extension GameListEntryView {
         }
         .foregroundColor(Color(.label))
         .padding(paddingLength)
-        .lineLimit(1)
     }
 }
 
@@ -63,7 +59,7 @@ private extension GameListEntryView {
         AppStrings.Game.crashesLblTxt + ": " + String(game.score?.crashCount ?? 0) + "," }
     private var milesTxt: String {
         AppStrings.Game.drivenSeaMilesLblTxt + ": " + String(game.score?.drivenSeaMiles ?? 0.0) + ","}
-    private var timerTxt: String { "Timer: " + String(game.timerCount) }
+    private var timerTxt: String { "Timer: " + String(game.config?.timerCount ?? 0) }
     private var chevronImageName: String { "chevron.right" }
     private var paddingLength: CGFloat { 10 }
 }

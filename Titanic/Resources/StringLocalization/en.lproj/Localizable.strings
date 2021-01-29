@@ -49,14 +49,30 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 //Welcome
 "Welcome_Title" = "Welcome to Titanic!";
 "Welcome_RightBarBtnTitle" = "Storage";
-"Welcome_LeftBarBtnTitle" = "App Information";
 
 //Rules
 "Rules_SubheadlineTitle" = "Let`s have fun!";
 "Rules_GoalSectionTitle" = "Goal";
 "Rules_GoalSectionContent" = "Drive as many sea miles as possible!";
 "Rules_UsageSectionTitle" = "Usage";
-"Rules_UsageSectionContent" = "1. During the countdown at the beginning, the boat is looking after a random start position.\n2. Move the slider  in order to move the boat.\n3. Avoid collisions with icebergs.\n4. Any collision will increase your crash count, and slow down your boat.\n5. The game is over when you reach 5 crashes or the time is up.\n6. After the end of the game, the driven sea miles will be checked. If they are in the top ten, a highscore entry is provided.\n7. The game state can be controlled with the action button in the upper right corner.";
+"Rules_UsageSectionContent_Rule1" =
+        "In the welcome view you can either start a new game with your chosen speed or continue a stored game.";
+"Rules_UsageSectionContent_Rule2" =
+        "During the countdown at the beginning of a game, the boat is looking after a random or the stored position.";
+"Rules_UsageSectionContent_Rule3" =
+        "Move the boat with the slider at the bottom in order to avoid collisions with icebergs. Any collision will increase your crash count, and slow down your boat.";
+"Rules_UsageSectionContent_Rule4" =
+        "The game is over when you reach 5 crashes or the time is up. After the end of the game, the driven sea miles will be checked. If they are in the top ten, a highscore entry is provided.";
+"Rules_UsageSectionContent_Rule5" =
+        "The game can be controlled with the button in the upper right corner. Additionally, a running game can paused with a double tap on the screen.";
+
+"FirstUseInstructions_Stored_Games_Btn" = "Stored Games";
+"FirstUseInstructions_Speed_Options_Btn" = "Speed Options";
+"FirstUseInstructions_Ctrl_Game_Btn" = "Game Control";
+"FirstUseInstructions_Hide" = "Hide next time?";
+"FirstUseInstructions_Rules_Section" = "Rules";
+"FirstUseInstructions_Rules_Footer" = "Rules can be found in the App Information menu.";
+"FirstUseInstructions_Title" = "How to Play?";
 
 //Game
 "GoLbl_Txt" = "GO";
@@ -90,3 +106,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 "Concept_AvoidMassiveVCTitle" = "Avoid Massive Game VC";
 "Concept_LayoutTitle" = "Layout";
 
+//SpeedOptions
+"SpeedOption_Slow" = "Slow";
+"SpeedOption_Medium" = "Medium";
+"SpeedOption_Fast" = "Fast";

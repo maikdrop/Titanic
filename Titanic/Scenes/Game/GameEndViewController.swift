@@ -34,7 +34,7 @@ class GameEndViewController: UIViewController {
     }
 }
 
-// MARK: - Default Methods
+// MARK: - Default methods
 extension GameEndViewController {
 
     override func viewDidLoad() {

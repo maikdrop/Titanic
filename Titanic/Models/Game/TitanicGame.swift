@@ -19,59 +19,65 @@ class TitanicGame {
     private let playerSaver: ([Player], (Result<[Player], Error>) -> Void) -> Void
 
     private(set) var icebergs: [Iceberg]
-    private(set) var score = Score() {
+    private(set) var score = Score(beginningKnots: TitanicGame.SpeedOption.medium.knots) {
         didSet {
             if score.crashCount == maxCrashs {
-                    NotificationCenter.default.post(name: .GameDidEnd, object: self)
+                NotificationCenter.default.post(name: .GameDidEnd, object: self)
             }
         }
     }
-    private var player: [Player]?
 
+    private var player: [Player]?
     private var icebergInitialXPos = [Double]()
     private var icebergInitialYPos = [Double]()
-    private var sliderValue: Float?
-    private(set) var countdownBeginningValue = 60
 
     var drivenSeaMilesInHighscoreList: Bool {
            isInHighscoreList()
     }
 
     // MARK: - Create a Titanic game
-    init<T: FileHandling>(icebergs: [Iceberg], dataHandler: T) where T.DataTyp == [Player] {
-        self.icebergs = icebergs
-        self.playerFetcher = dataHandler.fetchFromFile
-        self.playerSaver = dataHandler.saveToFile
+    init<T: FileHandling>(initialIcebergs: [Iceberg], score: Score, dataHandler: T) where T.DataTyp == [Player] {
+        self.icebergs = initialIcebergs
+        self.score = score
+        playerFetcher = dataHandler.fetchFromFile
+        playerSaver = dataHandler.saveToFile
         self.icebergs.forEach { iceberg in
             icebergInitialXPos.append(iceberg.origin.xCoordinate)
             icebergInitialYPos.append(iceberg.origin.yCoordinate)
         }
+        setStartPosOfIcebergs()
     }
 
-    convenience init<T: FileHandling>(icebergs: [Iceberg], date: Date, dataHandler: T) where T.DataTyp == [Player] {
-        self.init(icebergs: icebergs, dataHandler: dataHandler)
-        fetchGame(matching: date)
+    convenience init<T: FileHandling>(initialIcebergs: [Iceberg], score: Score, dataHandler: T, fetchedCenterPos: [Iceberg.Point]) where T.DataTyp == [Player] {
+        self.init(initialIcebergs: initialIcebergs, score: score, dataHandler: dataHandler)
+        setStartPosOfIcebergs(from: fetchedCenterPos)
     }
 
     deinit {
         print("DEINIT TitanicGame")
     }
+}
 
-    // MARK: - Public API
+// MARK: - Public API
+extension TitanicGame {
+
     /**
      Moves all icebergs vertically and calculates the driven sea miles.
+     
+     - Parameter speedFactor: The factor how far the icebergs will be moved.
      */
-    func moveIcebergsVertically() {
-        score.increaseDrivenSeaMiles()
+    func moveIcebergsVertically(with speed: Int = SpeedOption.medium.rawValue) {
+        let moveFactor = Double(speed) - Double(score.crashCount)/2
         for index in 0..<icebergs.count {
-            icebergs[index].center.yCoordinate += moveFactor - Double(score.crashCount)/2
+            icebergs[index].center.yCoordinate += moveFactor
         }
+        score.increaseDrivenSeaMiles()
     }
 
     /**
      When an iceberg reaches the end of the view, the iceberg is moved to a new position.
      
-     - Parameter index: index of iceberg
+     - Parameter index: The index of the iceberg in the array.
      */
     func endOfViewReachedFromIceberg(at index: Int) {
 
@@ -91,33 +97,10 @@ class TitanicGame {
     }
 
     /**
-     Resets scores and all icebergs were set to a random position.
-     
-     - Important: should be called always before a new game is started
-     */
-    func startNewTitanicGame() {
-        score.crashCount = 0
-        score.drivenSeaMiles = 0.0
-        setStartPosOfIcebergs()
-    }
-
-    /**
-     Get a random value for a slider within two values. If a stored game was fetched, you get the stored slider value.
-     
-     - Parameter min: minimum value
-     - Parameter max: maximum value
-     
-     - Returns: a slider value
-     */
-    func getSliderValue(within min: Float, and max: Float) -> Float {
-        sliderValue ?? Float.random(in: min...max)
-    }
-
-    /**
      Saves a player with the given name into the highscore list.
      
-     - Parameter userName: name of user
-     - Parameter completion: completion handler is called when players were saved
+     - Parameter userName: The user`s name.
+     - Parameter completion: The completion handler that calls back when saving the player was successful or not.
      */
     func savePlayer(userName: String, completion: (Error?) -> Void) {
         guard var newPlayerList = player else {
@@ -134,73 +117,7 @@ class TitanicGame {
                 completion(nil)
             }
         }
-    }
-
-    /**
-     Fetches game and setups new game from fetched data.
-     
-     - Parameter date: date of saved game that is being searched for
-     */
-    private func fetchGame(matching date: Date) {
-        GameHandling().fetchFromDatabase(matching: date) { result in
-            if case .success(let game) = result {
-                if let fetchedGame = game {
-
-//                    print("FETCH GAME START")
-//                    print("Fetched Slider Value")
-//                    print(fetchedGame.sliderValue)
-//                    print("Fetched Timer Count")
-//                    print(fetchedGame.timerCount)
-
-                    sliderValue = fetchedGame.sliderValue
-                    countdownBeginningValue = Int(fetchedGame.timerCount)
-
-                    if let fetchedIcebergs = fetchedGame.icebergs?.allObjects as? [IcebergObject] {
-//                        print("Fetched Icebergs")
-                        for iceberg in fetchedIcebergs {
-//                            print("Center X")
-                            print(iceberg.centerX)
-//                            print("Center Y")
-                            print(iceberg.centerY)
-
-                        }
-                        setStartPosOfIcebergs(from: fetchedIcebergs)
-                    }
-
-                    if let fetchedScore = fetchedGame.score {
-                        score.crashCount = Int(fetchedScore.crashCount)
-                        score.drivenSeaMiles = fetchedScore.drivenSeaMiles
-//                        print("Fetched Crash Count")
-//                        print(score.crashCount)
-//                        print("Fetched Driven Sea Miles")
-//                        print(score.drivenSeaMiles)
-                    }
-//                    print("FETCHED GAME END")
-                }
-            }
-        }
-    }
-
-    /**
-     Saves game and calls back if saving was successful or not.
-     
-     - Parameter sliderValue: slider value
-     - Parameter currentCountdown: current countdown timer count
-     - Parameter completion: completion handler calls back when saving the game was successful or not
-     */
-    func saveGame(sliderValue: Float, countdownCount: Int, completion: (Error?) -> Void) {
-
-        GameHandling().updateDatabase(icebergs: icebergs,
-                                      score: score,
-                                      sliderValue: sliderValue,
-                                      currentCountdown: countdownCount) { result in
-
-            if case .failure(let error) = result {
-                completion(error)
-            } else {
-                completion(nil)
-            }
-        }
+        score.drivenSeaMiles = 0.0
     }
 }
 
@@ -210,8 +127,9 @@ private extension TitanicGame {
     /**
      Calculates the vertical distance between two icebergs, which follow each other.
      
-     - Parameter index: index of iceberg
-     - Returns: distance between two icebergs
+     - Parameter index: The index of the iceberg in the array.
+     
+     - Returns: The distance between the coordinates of two icebergs.
      */
     private func calculateNewYPosForIceberg(at index: Int) -> Double? {
 
@@ -231,19 +149,18 @@ private extension TitanicGame {
     }
 
     /**
-     Set all icebergs to a start position from fetched Icebergs.
+     Set all icebergs to a start position that based on the coordinates of the fetched Icebergs.
      
-     - Parameter fetchedIcebergs: fetched icebergs
+     - Parameter fetchedIcebergs: The fetched icebergs from the data base.
      */
-    private func setStartPosOfIcebergs(from fetchedIcebergs: [IcebergObject]) {
+    private func setStartPosOfIcebergs(from fetchedCenterPos: [Iceberg.Point]) {
 
-        if fetchedIcebergs.count == self.icebergs.count {
-
-            for index in 0..<self.icebergs.count {
-
-                self.icebergs[index].center.xCoordinate = fetchedIcebergs[index].centerX
-                self.icebergs[index].center.yCoordinate = fetchedIcebergs[index].centerY
+        if fetchedCenterPos.count == icebergs.count {
+            for index in 0..<icebergs.count {
+                icebergs[index].center.xCoordinate = fetchedCenterPos[index].xCoordinate
+                icebergs[index].center.yCoordinate = fetchedCenterPos[index].yCoordinate
             }
+            icebergs.sort(by: { $0.center.yCoordinate > $1.center.yCoordinate })
         }
     }
 
@@ -256,7 +173,7 @@ private extension TitanicGame {
     }
 
     /**
-     Set all icebergs to initial y position.
+     Set all icebergs to the initial y position.
      */
     private func setYPosOfIcebergs() {
 
@@ -268,7 +185,7 @@ private extension TitanicGame {
     /**
       Set all icebergs to a random x position.
      
-     - Parameter indices: indices of icebergs
+     - Parameter indices: The indices of the icebergs in the array.
      */
     private func shuffleXPosOfIcebergs(at indices: [Int]) {
 
@@ -277,7 +194,7 @@ private extension TitanicGame {
             count: TitanicGame.rowsOfIcebergs)
         let xOriginShuffled = uniqueXOriginShuffled.reduce([]) { (result, element) in result + element}
 
-        indices.forEach {index in
+        indices.forEach { index in
             icebergs[index].origin.xCoordinate = xOriginShuffled[index]
         }
     }
@@ -323,9 +240,8 @@ private extension TitanicGame {
 // MARK: - Constants
 extension TitanicGame {
 
-    static var rowsOfIcebergs: Int {2}
-    static var icebergsInARow: Int {3}
-    private var moveFactor: Double {10}
-    private var maxPlayerCount: Int {10}
-    private var maxCrashs: Int {5}
+    static var rowsOfIcebergs: Int { 2 }
+    static var icebergsInARow: Int { 3 }
+    private var maxPlayerCount: Int { 10 }
+    private var maxCrashs: Int { 5 }
 }

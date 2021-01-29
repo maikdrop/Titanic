@@ -18,27 +18,42 @@ import Combine
 class WelcomeViewController: UIViewController {
 
     // MARK: - Properties
-    private lazy var icebergImageView = UIImageView(image: UIImage(named: launchImageFileName))
+    private let icebergImageView = UIImageView(image: UIImage(named: AppStrings.ImageNames.launch))
     private var gamePicker = GamePickerDelegate()
     private var cancellableObserver: Cancellable?
     private var isTransitionInProgress = true
 
+    // Buttons
+    private lazy var appInfoBtn = UIBarButtonItem(
+        title: AppStrings.Welcome.appInfoBtnTitle,
+        style: .plain,
+        target: self,
+        action: #selector(appInfoBtnTapped))
+
+    private lazy var storedGamesBtn = UIBarButtonItem(
+        image: UIImage(systemName: AppStrings.ImageNames.storedGames),
+        style: .plain,
+        target: self,
+        action: #selector(storedGamesBtnTapped))
+
+    private lazy var speedBtn = UIBarButtonItem(
+        image: UIImage(systemName: AppStrings.ImageNames.speedometer),
+        style: .plain,
+        target: self,
+        action: #selector(speedBtnTapped))
+
     // MARK: - IBOutlets
-    @IBOutlet private weak var appInformationBtn: UIBarButtonItem! {
-        didSet {
-            appInformationBtn.title = AppStrings.Welcome.leftBarBtnTitle
-        }
-    }
-
-    @IBOutlet private weak var storedGamesBtn: UIBarButtonItem! {
-        didSet {
-            storedGamesBtn.title = AppStrings.Welcome.rightBarBtnTitle
-        }
-    }
-
     @IBOutlet private weak var welcomeLabel: UILabel! {
         didSet {
             welcomeLabel.text = AppStrings.Welcome.title
+        }
+    }
+
+    @IBOutlet private weak var toolbar: UIToolbar! {
+        didSet {
+            let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let buttonItems = [storedGamesBtn, space, speedBtn]
+            toolbar.setItems(buttonItems, animated: false)
         }
     }
 
@@ -49,19 +64,8 @@ class WelcomeViewController: UIViewController {
     }
 
     // MARK: - IBActions
-    @IBAction private func appInfoActionBtn(_ sender: UIBarButtonItem) {
-        self.navigationController?.pushViewController(AppInfoViewController(), animated: true)
-    }
-
     @IBAction private func startActionBtn(_ sender: UIButton) {
         TitanicGameViewNaviPresenter().present(in: self)
-    }
-
-    @IBAction private func storedGamesActionBtn(_ sender: UIBarButtonItem) {
-        GameChooserNaviPresenter().present(in: self, delegate: gamePicker) {
-            self.storedGamesBtn.isEnabled = self.storedGameIsAvailable()
-            self.presentedViewController?.dismiss(animated: true)
-        }
     }
 
     deinit {
@@ -76,6 +80,7 @@ extension WelcomeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = appInfoBtn
         setupIcebergLayout()
         setupIcebergAnimation()
         cancellableObserver = gamePicker.didChange.sink {[weak self] gamePicker in
@@ -83,17 +88,59 @@ extension WelcomeViewController {
         }
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if previousTraitCollection?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
-            setupIcebergLayout()
-            setupIcebergAnimation()
-        }
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         storedGamesBtn.isEnabled = !isTransitionInProgress ? storedGameIsAvailable() : false
+    }
+
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        if viewControllerToPresent.modalPresentationStyle != .popover {
+            viewControllerToPresent.modalPresentationStyle = .fullScreen
+        }
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
+}
+
+// MARK: - Popover delegation methods
+extension WelcomeViewController: UIPopoverPresentationControllerDelegate {
+
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
+
+// MARK: - Private on tap button actions
+private extension WelcomeViewController {
+
+    /**
+     The action of the info button, that shows the app informations.
+     */
+    @objc private func appInfoBtnTapped() {
+        self.navigationController?.pushViewController(AppInfoViewController(), animated: true)
+    }
+
+    /**
+     The action of the stored button, that shows the stored games.
+     */
+    @objc private func storedGamesBtnTapped() {
+
+        GameChooserNaviPresenter().present(in: self, delegate: gamePicker, cancelHandler: {
+            self.storedGamesBtn.isEnabled = self.storedGameIsAvailable()
+            self.presentedViewController?.dismiss(animated: true)
+        })
+    }
+
+    /**
+     The action of the speed button, that shows the speed options.
+     */
+    @objc private func speedBtnTapped() {
+        let chooseSpeedTVC = ChooseSpeedTableViewController()
+        chooseSpeedTVC.modalPresentationStyle = .popover
+        chooseSpeedTVC.popoverPresentationController?.permittedArrowDirections = .down
+        chooseSpeedTVC.popoverPresentationController?.delegate = self
+        chooseSpeedTVC.popoverPresentationController?.barButtonItem = speedBtn
+        chooseSpeedTVC.preferredContentSize = CGSize(width: 200, height: 150)
+        self.present(chooseSpeedTVC, animated: true)
     }
 }
 
@@ -101,7 +148,24 @@ extension WelcomeViewController {
 private extension WelcomeViewController {
 
     /**
-     Setup the layout of the iceberg in the middle of the view.
+     Presents the first use instructions.
+     */
+    private func showFirstUseInstructions() {
+        if let hideNextTime = UserDefaults.standard.value(forKey: AppStrings.UserDefaultKeys.rules) as? Bool {
+            if !hideNextTime {
+                FirstUseInstructionsNaviPresenter().present(in: self, doneHandler: {
+                    self.presentedViewController?.dismiss(animated: true)
+                })
+            }
+        } else {
+            FirstUseInstructionsNaviPresenter().present(in: self, doneHandler: {
+                self.presentedViewController?.dismiss(animated: true)
+            })
+        }
+    }
+
+    /**
+     Setup the layout of the iceberg at the middle of the view.
      */
     private func setupIcebergLayout() {
         view.addSubview(icebergImageView)
@@ -134,6 +198,7 @@ private extension WelcomeViewController {
                     self.icebergImageView.alpha = 0
             }, completion: { _ in
                 self.cleanUpAfterIcebergAnimation()
+                self.showFirstUseInstructions()
             })
         })
     }
@@ -157,9 +222,10 @@ private extension WelcomeViewController {
      - Important: Action buttons should be disabled while animation is running and enabled when completed
      */
     private func actionBtns(enabled: Bool) {
-        appInformationBtn.isEnabled = enabled
-        storedGamesBtn.isEnabled = enabled == true ? storedGameIsAvailable() : enabled
+        appInfoBtn.isEnabled = enabled
         startBtn.isEnabled = enabled
+        speedBtn.isEnabled = enabled
+        storedGamesBtn.isEnabled = enabled == true ? storedGameIsAvailable() : enabled
     }
 }
 
@@ -200,5 +266,4 @@ private extension WelcomeViewController {
     private var transitionAnimationDuration: Double {0.6}
     private var propertyAnimationDuration: Double {0.75}
     private var scaleFactor: CGFloat {0.1}
-    private var launchImageFileName: String {"LaunchImage"}
 }

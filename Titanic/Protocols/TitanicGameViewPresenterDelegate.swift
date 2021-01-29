@@ -14,6 +14,7 @@ import Foundation
 
 protocol TitanicGameViewPresenterDelegate: class {
     func gameDidUpdate()
+    func gameDidPrepare()
     func gameDidStart()
     func gameDidPause()
     func gameDidResume()

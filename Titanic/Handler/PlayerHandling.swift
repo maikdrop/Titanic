@@ -32,7 +32,7 @@ struct PlayerHandling: FileHandling {
     /**
      Fetches all saved players from JSON file.
      
-     - Parameter completion: completion handler is called when players were fetched
+     - Parameter completion: The completion handler that calls back when the players were fetched.
      */
     func fetchFromFile(then completion: (Handler)) {
 
@@ -63,8 +63,8 @@ struct PlayerHandling: FileHandling {
     /**
      Saves players in a JSON file.
      
-     - Parameter player: players to save
-     - Parameter completion: completion handler calls back when players were saved
+     - Parameter player: The players to save.
+     - Parameter completion: The completion handler that calls back when the players were saved.
      */
     func saveToFile(data: DataTyp, then completion: (Handler)) {
 
