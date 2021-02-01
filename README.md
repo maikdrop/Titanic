@@ -226,11 +226,11 @@ GIF 4 shows the "How to Play?" overview.</p><br/>
 
 3 different technologies were used to persist data:
 
-* <a href="https://developer.apple.com/documentation/foundation/userdefaults">UserDefaults</a>
-* <a href="https://developer.apple.com/documentation/foundation/filemanager">FileManager:</a> PlayerHandling
-* <a href="https://developer.apple.com/documentation/coredata">Core Data:</a> GameObject, GameHandling
+* <a href="https://developer.apple.com/documentation/foundation/userdefaults">UserDefaults:</a> storing of key value pairs
+* <a href="https://developer.apple.com/documentation/foundation/filemanager">FileManager:</a> convenient interface to the file system
+* <a href="https://developer.apple.com/documentation/coredata">Core Data:</a> a framework, that manages an object oriented database 
 
-<p align="justify">The UserDefaults store the information if after the start of the app a "How to Play?" overview will be shown or not. Furthermore the previous chosen boat speed is stored, too.</p>
+<p align="justify">The UserDefaults store the information if after the start of the app a "How to Play?" overview will be shown or not. Furthermore, the previous chosen boat speed is stored, too.</p>
 <p align="justify">Titanic uses the FileManager to save a JSON formatted file in the application support directory. The file contains the top ten players with names and ordered by their driven sea miles.</p>
 <p align="justify">Core Data was implemented in order to store and continue a game. It's possible to show a list of all stored games. The user can pick and continue or delete a game.</p>
 
