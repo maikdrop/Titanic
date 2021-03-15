@@ -48,6 +48,7 @@
 		296B2D0725AF99E600433C1C /* View+EqualWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296B2D0625AF99E600433C1C /* View+EqualWidth.swift */; };
 		296B2D0E25AF9B7D00433C1C /* EqualWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296B2D0D25AF9B7D00433C1C /* EqualWidth.swift */; };
 		296B2D1825AF9C6200433C1C /* WidthPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296B2D1725AF9C6200433C1C /* WidthPreferenceKey.swift */; };
+		2976B48C25FFC85D00591305 /* GameStart.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2976B48B25FFC85D00591305 /* GameStart.gif */; };
 		2978B8B62403D40000798E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B52403D40000798E84 /* AppDelegate.swift */; };
 		2978B8B82403D40000798E84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B72403D40000798E84 /* SceneDelegate.swift */; };
 		2978B8BA2403D40000798E84 /* TitanicGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2978B8B92403D40000798E84 /* TitanicGameViewController.swift */; };
@@ -191,6 +192,7 @@
 		296B2D0625AF99E600433C1C /* View+EqualWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EqualWidth.swift"; sourceTree = "<group>"; };
 		296B2D0D25AF9B7D00433C1C /* EqualWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualWidth.swift; sourceTree = "<group>"; };
 		296B2D1725AF9C6200433C1C /* WidthPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthPreferenceKey.swift; sourceTree = "<group>"; };
+		2976B48B25FFC85D00591305 /* GameStart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = GameStart.gif; sourceTree = "<group>"; };
 		2978B8B22403D40000798E84 /* Titanic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Titanic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2978B8B52403D40000798E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2978B8B72403D40000798E84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 		29C166012517E818001D1752 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2976B48B25FFC85D00591305 /* GameStart.gif */,
 				293B050225BF7B1D0088D14B /* HowToPlay.gif */,
 				293B04F825BF74C30088D14B /* StoredGames.gif */,
 				293B04E825BF727D0088D14B /* Iceberg.gif */,
@@ -963,6 +966,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				297CF4D424CF0F1C007040EE /* .swiftlint.yml in Resources */,
+				2976B48C25FFC85D00591305 /* GameStart.gif in Resources */,
 				29E3746F25212CBB00789FF3 /* MVP.jpg in Resources */,
 				29A863FB25B8DD2D0069F5A7 /* licenses.json in Resources */,
 				29FA73D524B77AB8000F8C8E /* Localizable.strings in Resources */,
