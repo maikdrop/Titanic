@@ -24,7 +24,6 @@ struct GameListEntryView: View {
         formatter.dateFormat = "dd. MMMM yyyy HH:mm:ss"
         return formatter
     }()
-
 }
 
 // MARK: - View declaration

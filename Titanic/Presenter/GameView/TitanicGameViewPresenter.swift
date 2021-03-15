@@ -22,7 +22,7 @@ class TitanicGameViewPresenter {
     private var game: TitanicGame?
     private var initialModelIcebergs: [Iceberg]?
     private var cancellableObserver: Cancellable?
-    private let dbHandler = GameHandling()
+    private static let dbHandler = GameHandling()
     private var storingDate: Date?
     private(set) var gameConfig: GameConfig!
 
@@ -204,7 +204,7 @@ class TitanicGameViewPresenter {
         gameConfig.sliderValue = sliderValue
         gameConfig.timerCount = timerCount
         if let gameToSave = game {
-            dbHandler.updateDatabase(icebergs: gameToSave.icebergs,
+            TitanicGameViewPresenter.dbHandler.updateDatabase(icebergs: gameToSave.icebergs,
                                      score: gameToSave.score,
                                      gameConfig: gameConfig) { result in
                 if case .failure(let error) = result {
@@ -257,7 +257,7 @@ private extension TitanicGameViewPresenter {
             if let date = storingDate {
                 storingDate = nil
                 game = createGameModel(at: date, from: modelIcebergs, playerHandler: playerHandler)
-                dbHandler.deleteGame(matching: date, then: nil)
+                TitanicGameViewPresenter.dbHandler.deleteGame(matching: date, then: nil)
             } else {
                 game = createGameModel(from: modelIcebergs, playerHandler: playerHandler)
             }
@@ -317,7 +317,7 @@ private extension TitanicGameViewPresenter {
      */
     private func fetchGame(matching date: Date) -> GameObject? {
         var fetchedGame: GameObject?
-        dbHandler.fetchFromDatabase(matching: date) { result in
+        TitanicGameViewPresenter.dbHandler.fetchFromDatabase(matching: date) { result in
             if case .success(let game) = result {
                 fetchedGame = game
             }

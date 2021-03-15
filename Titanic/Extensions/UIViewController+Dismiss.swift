@@ -14,8 +14,7 @@ import UIKit
 
 extension UIViewController {
     
-    
     @objc func dismissWithAnimation() {
-        self.dismiss(animated: true)
+        presentingViewController?.dismiss(animated: true)
     }
 }
